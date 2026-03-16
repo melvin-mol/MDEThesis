@@ -10,23 +10,6 @@ This repository contains the code associated with the Master's thesis titled **"
 * **ETL Inheritance:** A method for implementing inheritance within UPPAAL ETL transformations to increase code reuse.
 * **UppaalEMF Extension:** Functional additions and improvements to the existing [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF).
 
-
-## Code Duplication Scripts
-These Node.js scripts measure and inspect line-based code duplication in ANIMO.
-
-* `duplication-collector.js <N>`: Scans files (default: `./src/main`) and writes duplicate groups to `duplicationDirectory<N>lines.json`.
-* `duplication-analyser.js <N>`: Reads that JSON, shows the most frequent duplicates, and exports snippets.
-* `duplication-reconstructor.js <N>`: Generates per-file annotated outputs in `DuplicationOutput<N>Lines/`.
-* `duplication-collect-analyser.js <N>`: Spot-check tool for one known duplication location.
-* `compare-two-files.js <fileA> <fileB> <outputFile>`: Standalone line-based diff report.
-
-Typical flow:
-1. `node "Code Duplication Scripts/duplication-collector.js" 10`
-2. `node "Code Duplication Scripts/duplication-analyser.js" 10`
-3. `node "Code Duplication Scripts/duplication-reconstructor.js" 10`
-
-Note: `duplication-collector.js` and `duplication-collect-analyser.js` import `./file-counter.js`.
-
 ## UPPAAL STD Files
 Writing UPPAAL ETL transformations directly is verbose, because you often have to build abstract syntax tree structures node by node. In practice, this can require many lines of ETL code. The UPPAAL STD Files provide reusable helper functions that make transformations read more like regular code. This significantly reduces boilerplate, improves readability, and makes transformations easier to maintain. These files are used in the UppaalEMF extension based on the [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF). For example, a simple expression can take many lines when written manually, but only a single line when using the UPPAAL STD Files. An example is shown below.
 
@@ -65,3 +48,19 @@ Writing UPPAAL ETL transformations directly is verbose, because you often have t
     // Transformation for: areCoordinatesValid = x == 25 and y > 100;
     var statement = assign("areCoordinatesValid", and_(equal("x", "25"), greater("y", "100")));
 ```
+
+## Code Duplication Scripts
+These Node.js scripts measure and inspect line-based code duplication in ANIMO.
+
+* `duplication-collector.js <N>`: Scans files (default: `./src/main`) and writes duplicate groups to `duplicationDirectory<N>lines.json`.
+* `duplication-analyser.js <N>`: Reads that JSON, shows the most frequent duplicates, and exports snippets.
+* `duplication-reconstructor.js <N>`: Generates per-file annotated outputs in `DuplicationOutput<N>Lines/`.
+* `duplication-collect-analyser.js <N>`: Spot-check tool for one known duplication location.
+* `compare-two-files.js <fileA> <fileB> <outputFile>`: Standalone line-based diff report.
+
+Typical flow:
+1. `node "Code Duplication Scripts/duplication-collector.js" 10`
+2. `node "Code Duplication Scripts/duplication-analyser.js" 10`
+3. `node "Code Duplication Scripts/duplication-reconstructor.js" 10`
+
+Note: `duplication-collector.js` and `duplication-collect-analyser.js` import `./file-counter.js`.
