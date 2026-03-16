@@ -33,7 +33,7 @@ Writing UPPAAL ETL transformations directly is verbose, because you often have t
 **UPPAAL ETL transformation**
 
 ``` javascript
-// Transformation for: areCoordinatesValid = x == 25 and y > 100;
+    // Transformation for: areCoordinatesValid = x == 25 and y > 100;
     var statement = new Uppaal!ExpressionStatement();
     statement.expression = new Uppaal!AssignmentExpression();
 	statement.expression.firstExpr = new Uppaal!LiteralExpression();
@@ -62,6 +62,6 @@ Writing UPPAAL ETL transformations directly is verbose, because you often have t
 **UPPAAL ETL transformation with UPPAAL STD files**
 
 ``` javascript
-// Transformation for: areCoordinatesValid = x == 25 and y > 100;
+    // Transformation for: areCoordinatesValid = x == 25 and y > 100;
     var statement = assign("areCoordinatesValid", and_(equal("x", "25"), greater("y", "100")));
 ```
