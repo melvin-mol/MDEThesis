@@ -11,7 +11,7 @@ This repository contains the code associated with the Master's thesis titled **"
 * **UppaalEMF Extension:** Functional additions and improvements to the existing [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF).
 
 ## UPPAAL STD Files
-Writing UPPAAL ETL transformations directly is verbose, because you often have to build abstract syntax tree structures node by node. In practice, this can require many lines of ETL code. The UPPAAL STD Files provide reusable helper functions that make transformations read more like regular code. This significantly reduces boilerplate, improves readability, and makes transformations easier to maintain. These files are used in the UppaalEMF extension based on the [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF). For example, a simple expression can take many lines when written manually, but only a single line when using the UPPAAL STD Files. An example is shown below.
+Writing UPPAAL ETL transformations directly is verbose, because you often have to build abstract syntax tree structures node by node. In practice, this can require many lines of ETL code. The UPPAAL STD Files provide reusable helper functions that make transformations read more like regular code. This significantly reduces boilerplate, improves readability, and makes transformations easier to maintain. These files are used in the UppaalEMF extension. For example, a simple expression can take many lines when written manually, but only a single line when using the UPPAAL STD Files. An example is shown below.
 
 **UPPAAL ETL transformation**
 
@@ -48,6 +48,24 @@ Writing UPPAAL ETL transformations directly is verbose, because you often have t
     // Transformation for: areCoordinatesValid = x == 25 and y > 100;
     var statement = assign("areCoordinatesValid", and_(equal("x", "25"), greater("y", "100")));
 ```
+
+## Extended UppaalEMF project
+ 
+The extended UppaalEMF project addresses several shortcomings in the original [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF). The extension includes the following improvements.
+
+**New features**
+
+- Changed transition guards to standalone objects, enabling their position (x, y) to be set.
+- Added the ability to set the position (x, y) of transition selection labels.
+- Changed transition assignments to standalone objects, enabling their position (x, y) to be set.
+- Added the ability to set the position (x, y) of transition synchronization labels.
+- Added the ability to set the position (x, y) of transition names.
+- Added the ability to set the position (x, y) of location names.
+- Changed location invariants to standalone objects, enabling their position (x, y) to be set.
+
+**Fixed bugs**
+
+- Fixed a NullPointerException thrown by `RangeTypeSpecification`.
 
 ## Code Duplication Scripts
 These Node.js scripts measure and inspect line-based code duplication in ANIMO.
