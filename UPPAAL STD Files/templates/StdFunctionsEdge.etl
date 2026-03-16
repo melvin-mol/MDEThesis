@@ -1,0 +1,20 @@
+operation edge(
+	source: Uppaal!Location,
+	target: Uppaal!Location,
+	synchronization: Uppaal!Synchronization,
+	points: Sequence(Uppaal!Point),
+	guard_: Uppaal!Guard,
+	update: Uppaal!Update,
+	selections: Sequence(Uppaal!Selection)
+): Uppaal!Edge {
+	var edge = new Uppaal!Edge;
+	edge.source = source;
+	edge.target = target;
+	edge.synchronization = synchronization;
+	edge.bendPoint.addAll(points);
+	edge.eSet(edge.eClass().getEStructuralFeature("guard"), guard_);
+	edge.update = update;
+	edge.selection.addAll(selections);
+
+	return edge;
+}

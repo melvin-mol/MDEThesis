@@ -1,0 +1,3 @@
+operation Uppaal!GlobalDeclarations getDeclaredType(name: String): Uppaal!Type {
+	return self.declaration.select(d | d.eClass.name = "TypeDeclaration" and d.type.exists(t | t.name = name)).first().type.select(t | t.name = name).first();
+}

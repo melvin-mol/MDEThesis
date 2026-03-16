@@ -1,0 +1,12 @@
+operation selection(typeDefinition: Uppaal!TypeDefinition, variables: Sequence(Uppaal!Variable)): Uppaal!Selection {
+    var selection = new Uppaal!Selection;
+    selection.typeDefinition = typeDefinition;
+    selection.variable.addAll(variables);
+    return selection;
+}
+
+operation selection(typeDefinition: Uppaal!TypeDefinition, variables: Sequence(Uppaal!Variable), point: Uppaal!Point): Uppaal!Selection {
+    var selection_ = selection(typeDefinition, variables);
+    selection_.position = point;
+    return selection_;
+}

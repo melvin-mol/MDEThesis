@@ -1,0 +1,28 @@
+operation synchronization(kind: String, name: String): Uppaal!Synchronization {
+	var synchronization = new Uppaal!Synchronization;
+	synchronization = new Uppaal!Synchronization;
+	if (kind == "send") {
+		synchronization.kind = Uppaal!SynchronizationKind#SEND;	
+	} else {
+		synchronization.kind = Uppaal!SynchronizationKind#RECEIVE;	
+	}
+	synchronization.channelExpression = new Uppaal!IdentifierExpression;
+	synchronization.channelExpression.identifier = new Uppaal!Variable;
+	synchronization.channelExpression.identifier.name = name;
+	return synchronization;
+}
+
+operation synchronization(kind: String, name: String, point: Uppaal!Point): Uppaal!Synchronization {
+	var synchronization = new Uppaal!Synchronization;
+	synchronization = new Uppaal!Synchronization;
+	if (kind == "send") {
+		synchronization.kind = Uppaal!SynchronizationKind#SEND;	
+	} else {
+		synchronization.kind = Uppaal!SynchronizationKind#RECEIVE;	
+	}
+	synchronization.channelExpression = new Uppaal!IdentifierExpression;
+	synchronization.channelExpression.identifier = new Uppaal!Variable;
+	synchronization.channelExpression.identifier.name = name;
+	synchronization.position = point;
+	return synchronization;
+}

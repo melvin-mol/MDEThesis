@@ -1,0 +1,67 @@
+operation function_(type: Uppaal!Type, name: String, parameters: Sequence(Uppaal!Parameter)): Tuple {
+	var functionDeclaration = new Uppaal!FunctionDeclaration();
+	var function_ = new Uppaal!Function();
+	function_.name = name;
+	
+	function_.returnType = new Uppaal!TypeReference();
+	function_.returnType.referredType = type;
+
+	function_.parameter.addAll(parameters);	
+
+	function_.block = new Uppaal!Block();
+	function_.block.declarations = new Uppaal!LocalDeclarations();
+
+	functionDeclaration.eSet(functionDeclaration.eClass().getEStructuralFeature("function"), function_);
+	
+	return new Tuple(declaration = functionDeclaration, block = function_.block);
+}
+
+operation function_(type: String, name: String, parameters: Sequence(Uppaal!Parameter)): Tuple {
+	var functionDeclaration = new Uppaal!FunctionDeclaration();
+	var function_ = new Uppaal!Function();
+	function_.name = name;
+	
+	function_.returnType = new Uppaal!TypeReference();
+	function_.returnType.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+
+	function_.parameter.addAll(parameters);	
+
+	function_.block = new Uppaal!Block();
+	function_.block.declarations = new Uppaal!LocalDeclarations();
+
+	functionDeclaration.eSet(functionDeclaration.eClass().getEStructuralFeature("function"), function_);
+	
+	return new Tuple(declaration = functionDeclaration, block = function_.block);
+}
+
+operation function_(type: Uppaal!Type, name: String): Tuple {
+	var functionDeclaration = new Uppaal!FunctionDeclaration();
+	var function_ = new Uppaal!Function();
+	function_.name = name;
+	
+	function_.returnType = new Uppaal!TypeReference();
+	function_.returnType.referredType = type;
+
+	function_.block = new Uppaal!Block();
+	function_.block.declarations = new Uppaal!LocalDeclarations();
+
+	functionDeclaration.eSet(functionDeclaration.eClass().getEStructuralFeature("function"), function_);
+	
+	return new Tuple(declaration = functionDeclaration, block = function_.block);
+}
+
+operation function_(type: String, name: String): Tuple {
+	var functionDeclaration = new Uppaal!FunctionDeclaration();
+	var function_ = new Uppaal!Function();
+	function_.name = name;
+	
+	function_.returnType = new Uppaal!TypeReference();
+	function_.returnType.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+
+	function_.block = new Uppaal!Block();
+	function_.block.declarations = new Uppaal!LocalDeclarations();
+
+	functionDeclaration.eSet(functionDeclaration.eClass().getEStructuralFeature("function"), function_);
+	
+	return new Tuple(declaration = functionDeclaration, block = function_.block);
+}

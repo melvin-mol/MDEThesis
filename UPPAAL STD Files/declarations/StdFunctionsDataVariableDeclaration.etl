@@ -1,0 +1,163 @@
+operation dataVariableDeclaration(prefix: String, type: String, name: String, value: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    if (prefix == "CONST") {
+    	declaration.prefix = Uppaal!DataVariablePrefix#CONST;
+    } else if (prefix == "META") {
+        declaration.prefix = Uppaal!DataVariablePrefix#META;
+    }
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+    declaration.variable.first().initializer = new Uppaal!ExpressionInitializer;
+	declaration.variable.first().initializer.expression = new Uppaal!LiteralExpression();
+	declaration.variable.first().initializer.expression.text = value;
+	
+	return declaration;
+}
+
+operation dataVariableDeclaration(prefix: String, type: Uppaal!Type, name: String, value: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    if (prefix == "CONST") {
+    	declaration.prefix = Uppaal!DataVariablePrefix#CONST;
+    } else if (prefix == "META") {
+        declaration.prefix = Uppaal!DataVariablePrefix#META;
+    }
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+    
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	declaration.variable.first().initializer = new Uppaal!ExpressionInitializer;
+	declaration.variable.first().initializer.expression = new Uppaal!LiteralExpression();
+	declaration.variable.first().initializer.expression.text = value;
+	
+	return declaration;
+}
+
+operation dataVariableDeclaration(prefix: String, type: Uppaal!Type, variables: Sequence(Uppaal!Variable)): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    if (prefix == "CONST") {
+    	declaration.prefix = Uppaal!DataVariablePrefix#CONST;
+    } else if (prefix == "META") {
+        declaration.prefix = Uppaal!DataVariablePrefix#META;
+    }
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+
+    declaration.variable.addAll(variables);
+	
+	return declaration;
+}
+
+operation dataVariableDeclaration(type: String, name: String, value: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	declaration.variable.first().initializer = new Uppaal!ExpressionInitializer;
+	declaration.variable.first().initializer.expression = new Uppaal!LiteralExpression();
+	declaration.variable.first().initializer.expression.text = value;
+
+	return declaration;
+}
+
+operation dataVariableDeclaration(type: Uppaal!Type, name: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	return declaration;
+}
+
+operation dataVariableDeclaration(type: Uppaal!Type, name: String, value: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	declaration.variable.first().initializer = new Uppaal!ExpressionInitializer;
+	declaration.variable.first().initializer.expression = new Uppaal!LiteralExpression();
+	declaration.variable.first().initializer.expression.text = value;
+	return declaration;
+}
+
+operation dataVariableDeclaration(type: Uppaal!Type, variableNames: Sequence(String)): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+	
+	for (name : String in variableNames) {
+		declaration.variable.add(new Uppaal!Variable(name = name));
+	}
+	
+	return declaration;
+}
+
+operation dataVariableDeclarationWithVariables(type: Uppaal!Type, variables: Sequence(Uppaal!Variable)): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+	declaration.variable.addAll(variables);
+	
+	return declaration;
+}
+
+operation dataVariableDeclarationWithVariables(type: String, variables: Sequence(Uppaal!Variable)): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	
+	declaration.variable.addAll(variables);
+	
+	return declaration;
+}
+
+operation dataVariableDeclaration(typeSpecification: Uppaal!TypeSpecification, name: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = typeSpecification;
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	return declaration;
+}
+
+operation dataVariableDeclaration(typeSpecification: Uppaal!TypeSpecification, name: String, value: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = typeSpecification;
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	declaration.variable.first().initializer = new Uppaal!ExpressionInitializer;
+	declaration.variable.first().initializer.expression = new Uppaal!LiteralExpression();
+	declaration.variable.first().initializer.expression.text = value;
+	return declaration;
+}
+
+operation dataVariableDeclaration(type: Uppaal!Type, name: String, expression: Uppaal!Expression): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = type;
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	declaration.variable.first().initializer = new Uppaal!ExpressionInitializer;
+	declaration.variable.first().initializer.expression = expression;
+	return declaration;
+}
+
+operation dataVariableDeclaration(type: String, name: String): Uppaal!DataVariableDeclaration {
+    var declaration = new Uppaal!DataVariableDeclaration();
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	
+    declaration.variable.add(new Uppaal!Variable());
+	declaration.variable.first().name = name;
+	return declaration;
+}

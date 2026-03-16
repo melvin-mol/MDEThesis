@@ -1,0 +1,8 @@
+operation increment(variable: Uppaal!Variable): Uppaal!IncrementDecrementExpression {
+	var expression = new Uppaal!IncrementDecrementExpression();
+    expression.expression = new Uppaal!IdentifierExpression();
+    expression.expression.identifier = variable;
+	expression.operator = Uppaal!IncrementDecrementOperator#INCREMENT;
+	expression.position = Uppaal!IncrementDecrementPosition#POST;
+	return expression;
+}

@@ -1,0 +1,8 @@
+operation clock(name: String): Uppaal!ClockVariableDeclaration {
+	var clock = new Uppaal!ClockVariableDeclaration();
+    clock.variable.add(new Uppaal!Variable());
+    clock.variable.first().name = name;
+    clock.typeDefinition = new Uppaal!TypeReference();
+	clock.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = "clock").first();
+	return clock;
+}

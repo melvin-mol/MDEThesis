@@ -1,0 +1,40 @@
+operation variable(name: String): Uppaal!Variable {
+	var variable = new Uppaal!Variable();
+	variable.name = name;
+	return variable;
+}
+
+operation variable(name: String, value: String): Uppaal!Variable {
+	var variable = new Uppaal!Variable();
+	variable.name = name;
+	variable.initializer = new Uppaal!ExpressionInitializer;
+	variable.initializer.expression = new Uppaal!LiteralExpression();
+	variable.initializer.expression.text = value;
+	return variable;
+}
+
+operation variableList(name: String, variableList: Uppaal!Variable, value: String): Uppaal!Variable {
+	var variable = new Uppaal!Variable();
+	variable.name = name;
+	
+	variable.index.add(new Uppaal!ValueIndex());
+	variable.index.first().sizeExpression = new Uppaal!IdentifierExpression();
+	variable.index.first().sizeExpression.identifier = variableList;
+
+	variable.initializer = new Uppaal!ExpressionInitializer;
+	variable.initializer.expression = new Uppaal!LiteralExpression();
+	variable.initializer.expression.text = value;
+	return variable;
+}
+
+operation Uppaal!GlobalDeclarations findVariable(varName : String) : Uppaal!Variable {
+    var decl = self.declaration.select(d |
+		d.isKindOf(Uppaal!DataVariableDeclaration)
+		and d.variable.exists(v | v.name = varName)
+	).first();
+    return decl.variable.select(v | v.name = varName).first();
+}
+
+operation getField(type : Uppaal!DeclaredType, fieldName : String) : Uppaal!Variable {
+	return type.typeDeclaration.typeDefinition.declaration.select(d | d.variable.exists(v | v.name = fieldName)).first().variable.first();
+}

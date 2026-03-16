@@ -1,0 +1,71 @@
+operation and_(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = firstExpression;
+	expression.operator = Uppaal!LogicalOperator#AND;
+	expression.secondExpr = secondExpression;
+	return expression;
+}
+
+operation and_(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = new Uppaal!LiteralExpression;
+	expression.firstExpr.text = firstLiteral;
+	expression.operator = Uppaal!LogicalOperator#AND;
+	expression.secondExpr = secondExpression;
+	return expression;
+}
+
+operation and_(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = firstExpression;
+	expression.operator = Uppaal!LogicalOperator#AND;
+	expression.secondExpr = new Uppaal!LiteralExpression;
+	expression.secondExpr.text = secondLiteral;
+	return expression;
+}
+
+operation and_(firstLiteral: String, secondLiteral: String): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = new Uppaal!LiteralExpression;
+	expression.firstExpr.text = firstLiteral;
+	expression.operator = Uppaal!LogicalOperator#AND;
+	expression.secondExpr = new Uppaal!LiteralExpression;
+	expression.secondExpr.text = secondLiteral;
+	return expression;
+}
+
+operation or_(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = firstExpression;
+	expression.operator = Uppaal!LogicalOperator#OR;
+	expression.secondExpr = secondExpression;
+	return expression;
+}
+
+operation or_(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = new Uppaal!LiteralExpression;
+	expression.firstExpr.text = firstLiteral;
+	expression.operator = Uppaal!LogicalOperator#OR;
+	expression.secondExpr = secondExpression;
+	return expression;
+}
+
+operation or_(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = firstExpression;
+	expression.operator = Uppaal!LogicalOperator#OR;
+	expression.secondExpr = new Uppaal!LiteralExpression;
+	expression.secondExpr.text = secondLiteral;
+	return expression;
+}
+
+operation or_(firstLiteral: String, secondLiteral: String): Uppaal!LogicalExpression {
+	var expression = new Uppaal!LogicalExpression();
+	expression.firstExpr = new Uppaal!LiteralExpression;
+	expression.firstExpr.text = firstLiteral;
+	expression.operator = Uppaal!LogicalOperator#OR;
+	expression.secondExpr = new Uppaal!LiteralExpression;
+	expression.secondExpr.text = secondLiteral;
+	return expression;
+}

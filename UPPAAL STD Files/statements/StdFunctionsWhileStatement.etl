@@ -1,0 +1,6 @@
+operation while_(expression: Uppaal!Expression): Uppaal!WhileLoop {
+	var loop = new Uppaal!WhileLoop();
+	loop.expression = expression;
+	loop.statement = new Uppaal!Block;
+	return loop;
+}

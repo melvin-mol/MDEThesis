@@ -1,0 +1,42 @@
+operation if_(firstLiteral: String, secondLiteral: String): Uppaal!IfStatement {
+	var ifStatement = new Uppaal!IfStatement();
+	ifStatement.ifExpression = new Uppaal!CompareExpression();
+	ifStatement.ifExpression.firstExpr = new Uppaal!LiteralExpression();
+	ifStatement.ifExpression.firstExpr.text = firstLiteral;
+	ifStatement.ifExpression.secondExpr = new Uppaal!LiteralExpression();
+	ifStatement.ifExpression.secondExpr.text = secondLiteral; 
+	ifStatement.thenStatement = new Uppaal!Block();
+	return ifStatement;
+}
+
+operation if_(variableName: String): Uppaal!IfStatement {
+	var ifStatement = new Uppaal!IfStatement();
+	ifStatement.ifExpression = new Uppaal!LiteralExpression();
+	ifStatement.ifExpression.text = variableName;
+	ifStatement.thenStatement = new Uppaal!Block();
+	return ifStatement;
+}
+
+operation if_(expression: Uppaal!Expression): Uppaal!IfStatement {
+	var ifStatement = new Uppaal!IfStatement();
+	ifStatement.ifExpression = expression;
+	ifStatement.thenStatement = new Uppaal!Block();
+	return ifStatement;
+}
+
+operation ifElse(expression: Uppaal!Expression): Uppaal!IfStatement {
+	var ifStatement = new Uppaal!IfStatement();
+	ifStatement.ifExpression = expression;
+	ifStatement.thenStatement = new Uppaal!Block();
+	ifStatement.elseStatement = new Uppaal!Block();
+	return ifStatement;
+}
+
+operation ifElse(variableName: String): Uppaal!IfStatement {
+	var ifStatement = new Uppaal!IfStatement();
+	ifStatement.ifExpression = new Uppaal!LiteralExpression();
+	ifStatement.ifExpression.text = variableName;
+	ifStatement.thenStatement = new Uppaal!Block();
+	ifStatement.elseStatement = new Uppaal!Block();
+	return ifStatement;
+}

@@ -1,0 +1,46 @@
+operation parameter(type: Uppaal!Type, name: String): Uppaal!Parameter {
+   	var parameter = new Uppaal!Parameter();
+  	parameter.variableDeclaration = new Uppaal!DataVariableDeclaration();
+    parameter.variableDeclaration.variable.add(new Uppaal!Variable());
+    parameter.variableDeclaration.variable.first().name = name;
+    parameter.variableDeclaration.typeDefinition = new Uppaal!TypeReference();
+	parameter.variableDeclaration.typeDefinition.referredType = type;
+	return parameter;
+}
+
+operation parameter(type: String, name: String): Uppaal!Parameter {
+   	var parameter = new Uppaal!Parameter();
+  	parameter.variableDeclaration = new Uppaal!DataVariableDeclaration();
+    parameter.variableDeclaration.variable.add(new Uppaal!Variable());
+    parameter.variableDeclaration.variable.first().name = name;
+    parameter.variableDeclaration.typeDefinition = new Uppaal!TypeReference();
+	parameter.variableDeclaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	return parameter;
+}
+
+operation parameter(prefix: String, type: String, name: String): Uppaal!Parameter {
+   	var parameter = new Uppaal!Parameter();
+  	parameter.variableDeclaration = new Uppaal!DataVariableDeclaration();
+    if (prefix == "CONST") {
+    	parameter.variableDeclaration.prefix = Uppaal!DataVariablePrefix#CONST;
+    } else if (prefix == "META") {
+        parameter.variableDeclaration.prefix = Uppaal!DataVariablePrefix#META;
+    }
+    parameter.variableDeclaration.variable.add(new Uppaal!Variable());
+    parameter.variableDeclaration.variable.first().name = name;
+    parameter.variableDeclaration.typeDefinition = new Uppaal!TypeReference();
+	parameter.variableDeclaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	return parameter;
+}
+
+operation parameterCallByReference(type: String, name: String): Uppaal!Parameter {
+   	var parameter = new Uppaal!Parameter();
+  	parameter.variableDeclaration = new Uppaal!DataVariableDeclaration();
+    parameter.variableDeclaration.variable.add(new Uppaal!Variable());
+    parameter.variableDeclaration.variable.first().name = name;
+    parameter.variableDeclaration.typeDefinition = new Uppaal!TypeReference();
+	parameter.variableDeclaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	parameter.callType = Uppaal!CallType#CALL_BY_REFERENCE;
+	
+	return parameter;
+}

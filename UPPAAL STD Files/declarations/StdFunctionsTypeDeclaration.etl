@@ -1,0 +1,21 @@
+operation rangeTypeDeclaration(lowerBound: String, upperBound: String, name: String): Uppaal!TypeDeclaration {
+	var typeDeclaration = new Uppaal!TypeDeclaration();
+	typeDeclaration.type.add(new Uppaal!DeclaredType());
+    typeDeclaration.type.first().name = name;
+	typeDeclaration.typeDefinition = new Uppaal!RangeTypeSpecification();
+	typeDeclaration.typeDefinition.bounds = new Uppaal!IntegerBounds();
+	typeDeclaration.typeDefinition.bounds.lowerBound = new Uppaal!LiteralExpression();
+	typeDeclaration.typeDefinition.bounds.lowerBound.text = lowerBound;
+	typeDeclaration.typeDefinition.bounds.upperBound  = new Uppaal!LiteralExpression();
+	typeDeclaration.typeDefinition.bounds.upperBound.text = upperBound;
+	return typeDeclaration;
+}
+
+operation structTypeDeclaration(variableDeclarations: Sequence(Uppaal!DataVariableDeclaration), name: String): Uppaal!TypeDeclaration {
+	var typeDeclaration = new Uppaal!TypeDeclaration();
+	typeDeclaration.type.add(new Uppaal!DeclaredType());
+    typeDeclaration.type.first().name = name;
+	typeDeclaration.typeDefinition = new Uppaal!StructTypeSpecification();
+	typeDeclaration.typeDefinition.declaration.addAll(variableDeclarations);
+	return typeDeclaration;
+}

@@ -1,0 +1,127 @@
+operation add(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#ADD;
+	return arithmetic;
+}
+
+operation add(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#ADD;
+	return arithmetic;
+}
+
+operation add(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#ADD;
+	return arithmetic;
+}
+
+operation add(firstExpression: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#ADD;
+	return arithmetic;
+}
+
+operation add(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#ADD;
+	return arithmetic;
+}
+
+operation subtract(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#SUBTRACT;
+	return arithmetic;
+}
+
+operation subtract(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#SUBTRACT;
+	return arithmetic;
+}
+
+operation subtract(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#SUBTRACT;
+	return arithmetic;
+}
+
+operation subtract(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#SUBTRACT;
+	return arithmetic;
+}
+
+operation divide(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#DIVIDE;
+	return arithmetic;
+}
+
+operation divide(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#DIVIDE;
+	return arithmetic;
+}
+
+operation multiplicate(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MULTIPLICATE;
+	return arithmetic;
+}
+
+operation multiplicate(firstLiteral: String, secondExpresion: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondExpresion);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MULTIPLICATE;
+	return arithmetic;
+}
+
+operation multiplicate(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MULTIPLICATE;
+	return arithmetic;
+}
+
+operation multiplicate(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MULTIPLICATE;
+	return arithmetic;
+}
+
+operation modulo(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MODULO;
+	return arithmetic;
+}
+
+operation createArithmetic(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = new Uppaal!ArithmeticExpression();
+	arithmetic.firstExpr = new Uppaal!LiteralExpression();
+	arithmetic.firstExpr.text = firstLiteral;
+	arithmetic.secondExpr = new Uppaal!LiteralExpression();
+	arithmetic.secondExpr.text = secondLiteral;
+	return arithmetic;
+}
+
+operation createArithmetic(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = new Uppaal!ArithmeticExpression();
+	arithmetic.firstExpr = firstExpression;
+	arithmetic.secondExpr = new Uppaal!LiteralExpression();
+	arithmetic.secondExpr.text = secondLiteral;
+	return arithmetic;
+}
+
+operation createArithmetic(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = new Uppaal!ArithmeticExpression();
+	arithmetic.firstExpr = new Uppaal!LiteralExpression();
+	arithmetic.firstExpr.text = firstLiteral;
+	arithmetic.secondExpr = secondExpression;
+	return arithmetic;
+}
+
+operation createArithmetic(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = new Uppaal!ArithmeticExpression();
+	arithmetic.firstExpr = firstExpression;
+	arithmetic.secondExpr = secondExpression;
+	return arithmetic;
+}

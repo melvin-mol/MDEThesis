@@ -1,0 +1,20 @@
+operation Uppaal!NSTA setupBuiltInTypes(): Uppaal!NSTA {
+    self.int = new Uppaal!PredefinedType();
+    self.int.name = "int";
+    self.int.type = Uppaal!BuiltInType#INT;
+    self.chan  = new Uppaal!PredefinedType();
+    self.chan.name = "chan";
+    self.chan.type = Uppaal!BuiltInType#CHAN;
+    self.bool  = new Uppaal!PredefinedType();
+    self.bool.name = "bool";
+    self.bool.type = Uppaal!BuiltInType#BOOL;
+    self.void  = new Uppaal!PredefinedType();
+    self.void.name = "void";
+    self.void.type = Uppaal!BuiltInType#VOID;
+    self.clock  = new Uppaal!PredefinedType();
+    self.clock.name = "clock";
+    self.clock.type = Uppaal!BuiltInType#CLOCK;
+    self.double = new Uppaal!DoubleType();
+    self.double.name = "double";
+    return self;
+}

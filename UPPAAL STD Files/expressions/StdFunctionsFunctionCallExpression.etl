@@ -1,0 +1,18 @@
+operation functionCall(name: String, arguments: Sequence): Uppaal!FunctionCallExpression {
+	var call = new Uppaal!FunctionCallExpression();
+	for (argument in arguments) {
+		if (argument.isKindOf(String)) {
+			call.argument.add(new Uppaal!LiteralExpression(text = argument));				
+		} else if (argument.isKindOf(Uppaal!Expression)) {
+			call.argument.add(argument);		
+		}
+	}
+	call.eSet(call.eClass().getEStructuralFeature("function"), Uppaal!Function.allInstances().select(f | f.name = name).first());
+	return call;
+}
+
+operation functionCall(name: String): Uppaal!FunctionCallExpression {
+	var call = new Uppaal!FunctionCallExpression();
+	call.eSet(call.eClass().getEStructuralFeature("function"), Uppaal!Function.allInstances().select(f | f.name = name).first());
+	return call;
+}

@@ -1,0 +1,6 @@
+operation template(name: String, parameters: Sequence(Uppaal!Parameter)): Uppaal!Template {
+	var template = new Uppaal!Template;
+	template.name = name;
+	template.parameter.addAll(parameters);
+	return template;
+}

@@ -1,0 +1,17 @@
+operation channelVariableDeclaration(broadcast: Boolean, type: String, variable: Uppaal!Variable): Uppaal!ChannelVariableDeclaration {
+    var declaration = new Uppaal!ChannelVariableDeclaration();
+    declaration.broadcast = broadcast;
+    declaration.variable.add(variable);
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	return declaration;
+}
+
+operation channelVariableDeclaration(broadcast: Boolean, type: String, variables: Sequence(Uppaal!Variable)): Uppaal!ChannelVariableDeclaration {
+    var declaration = new Uppaal!ChannelVariableDeclaration();
+    declaration.broadcast = broadcast;
+    declaration.variable.addAll(variables);
+    declaration.typeDefinition = new Uppaal!TypeReference();
+	declaration.typeDefinition.referredType = Uppaal!PredefinedType.allInstances().select(t | t.name = type).first();
+	return declaration;
+}

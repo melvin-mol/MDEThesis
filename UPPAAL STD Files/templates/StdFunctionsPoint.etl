@@ -1,0 +1,6 @@
+operation point(x: Integer, y: Integer): Uppaal!Point {
+	var point = new Uppaal!Point;
+	point.x = x;
+	point.y = y;
+	return point;
+}
