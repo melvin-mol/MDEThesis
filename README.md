@@ -33,35 +33,35 @@ Writing UPPAAL ETL transformations directly is verbose, because you often have t
 **UPPAAL ETL transformation**
 
 ``` javascript
-	// Transformation for: areCoordinatesValid = x == 25 and y > 100;
-    var areCoordinatesValid = new Uppaal!ExpressionStatement();
-    areCoordinatesValid.expression = new Uppaal!AssignmentExpression();
-	areCoordinatesValid.expression.firstExpr = new Uppaal!LiteralExpression();
-	areCoordinatesValid.expression.firstExpr.text = "areCoordinatesValid";
+// Transformation for: areCoordinatesValid = x == 25 and y > 100;
+    var statement = new Uppaal!ExpressionStatement();
+    statement.expression = new Uppaal!AssignmentExpression();
+	statement.expression.firstExpr = new Uppaal!LiteralExpression();
+	statement.expression.firstExpr.text = "areCoordinatesValid";
 
-	areCoordinatesValid.expression.operator = Uppaal!AssignmentOperator#EQUAL;
+	statement.expression.operator = Uppaal!AssignmentOperator#EQUAL;
 
-    areCoordinatesValid.expression.secondExpr = new Uppaal!LogicalExpression();
-	areCoordinatesValid.expression.secondExpr.firstExpr = new Uppaal!CompareExpression();
-	areCoordinatesValid.expression.secondExpr.firstExpr.firstExpr = new Uppaal!LiteralExpression();
-    areCoordinatesValid.expression.secondExpr.firstExpr.firstExpr.text = "x";
-    areCoordinatesValid.expression.secondExpr.firstExpr.operator = Uppaal!CompareOperator#EQUAL;
-    areCoordinatesValid.expression.secondExpr.firstExpr.secondExpr = new Uppaal!LiteralExpression();
-    areCoordinatesValid.expression.secondExpr.firstExpr.secondExpr.text = "25";
+    statement.expression.secondExpr = new Uppaal!LogicalExpression();
+	statement.expression.secondExpr.firstExpr = new Uppaal!CompareExpression();
+	statement.expression.secondExpr.firstExpr.firstExpr = new Uppaal!LiteralExpression();
+    statement.expression.secondExpr.firstExpr.firstExpr.text = "x";
+    statement.expression.secondExpr.firstExpr.operator = Uppaal!CompareOperator#EQUAL;
+    statement.expression.secondExpr.firstExpr.secondExpr = new Uppaal!LiteralExpression();
+    statement.expression.secondExpr.firstExpr.secondExpr.text = "25";
 
-	areCoordinatesValid.expression.secondExpr.operator = Uppaal!LogicalOperator#AND;
+	statement.expression.secondExpr.operator = Uppaal!LogicalOperator#AND;
 
-	areCoordinatesValid.expression.secondExpr.secondExpr = new Uppaal!CompareExpression();
-	areCoordinatesValid.expression.secondExpr.secondExpr.firstExpr = new Uppaal!LiteralExpression();
-    areCoordinatesValid.expression.secondExpr.secondExpr.firstExpr.text = "y";
-    areCoordinatesValid.expression.secondExpr.secondExpr.operator = Uppaal!CompareOperator#GREATER;
-    areCoordinatesValid.expression.secondExpr.secondExpr.secondExpr = new Uppaal!LiteralExpression();
-    areCoordinatesValid.expression.secondExpr.secondExpr.secondExpr.text = "100";
+	statement.expression.secondExpr.secondExpr = new Uppaal!CompareExpression();
+	statement.expression.secondExpr.secondExpr.firstExpr = new Uppaal!LiteralExpression();
+    statement.expression.secondExpr.secondExpr.firstExpr.text = "y";
+    statement.expression.secondExpr.secondExpr.operator = Uppaal!CompareOperator#GREATER;
+    statement.expression.secondExpr.secondExpr.secondExpr = new Uppaal!LiteralExpression();
+    statement.expression.secondExpr.secondExpr.secondExpr.text = "100";
 ```
 
 **UPPAAL ETL transformation with UPPAAL STD files**
 
 ``` javascript
-	// Transformation for: areCoordinatesValid = x == 25 and y > 100;
-	var areCoordinatesValid = assign("areCoordinatesValid", and_(equal("x", "25"), greater("y", "100")));
+// Transformation for: areCoordinatesValid = x == 25 and y > 100;
+    var statement = assign("areCoordinatesValid", and_(equal("x", "25"), greater("y", "100")));
 ```
