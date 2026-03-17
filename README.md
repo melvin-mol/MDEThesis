@@ -13,5 +13,5 @@ This repository contains the code associated with the Master's thesis titled **"
 ## Directories
 
 * **[Code Duplication Scripts/](Code%20Duplication%20Scripts/)** - Scripts used in the thesis to measure duplication in the [ANIMO](https://apps.cytoscape.org/apps/animo) codebase to identify transformation logic that can be generalized.
-* **[Uppaal Code Syntax/](UPPAAL%20STD%20Files/)** - A shared standard library for writing UPPAAL ETL transformations in a more easier to read and reusable, code-like style.
+* **[Uppaal Code Syntax/](UPPAAL%20Code%20Syntax/)** - A shared standard library for writing UPPAAL ETL transformations in a more easier to read and reusable, code-like style.
 * **[UppaalEMF Extension/](UppaalEMF%20Extension/)** - An extension of the original [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF) that resolves bugs and adds additional features.
