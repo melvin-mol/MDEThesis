@@ -2,7 +2,7 @@
 
 This repository contains the code associated with the Master's thesis titled **"Improving ANIMO's Extensibility through Model-Driven Engineering."** This research applies Model-Driven Engineering (MDE) to make the ANIMO framework more modular and easier to extend.
 
-**Key Contributions**
+## Key Contributions
 
 * **UPPAAL STD Files:** A dedicated directory providing a standardized foundation to simplify writing UPPAAL ETL transformations.
 * **New File Structure:** An architecture for setting up and organizing UPPAAL ETL transformations.
@@ -10,7 +10,7 @@ This repository contains the code associated with the Master's thesis titled **"
 * **ETL Inheritance:** A method for implementing inheritance within UPPAAL ETL transformations to increase code reuse.
 * **UppaalEMF Extension:** Functional additions and improvements to the existing [UppaalEMF project](https://github.com/utwente-fmt/attop/tree/master/UppaalEMF).
 
-**Directories**
+## Directories
 
 * **[Code Duplication Scripts/](Code%20Duplication%20Scripts/)** - Scripts used in the thesis to measure duplication in the [ANIMO](https://apps.cytoscape.org/apps/animo) codebase to identify transformation logic that can be generalized.
 * **[UPPAAL STD Files/](UPPAAL%20STD%20Files/)** - A shared standard library for writing UPPAAL ETL transformations in a more easier to read and reusable, code-like style.
