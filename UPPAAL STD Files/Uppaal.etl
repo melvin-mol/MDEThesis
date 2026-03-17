@@ -1,6 +1,0 @@
-import "./StdFunctionsNSTA.etl";
-import "./expressions/StdFunctionsExpression.etl";
-import "./statements/StdFunctionsStatement.etl";
-import "./declarations/StdFunctionsDeclaration.etl";
-import "./templates/StdFunctionsTemplates.etl";
-import "./types/StdFunctionsType.etl";

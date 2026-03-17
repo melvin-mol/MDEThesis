@@ -1,0 +1,7 @@
+import "ChannelVariableDeclaration.etl";
+import "ClockVariableDeclaration.etl";
+import "DataVariableDeclaration.etl";
+import "FunctionDeclaration.etl";
+import "Parameter.etl";
+import "TypeDeclaration.etl";
+import "Variable.etl";

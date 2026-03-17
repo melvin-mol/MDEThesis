@@ -1,7 +1,0 @@
-import "StdFunctionsChannelVariableDeclaration.etl";
-import "StdFunctionsClockVariableDeclaration.etl";
-import "StdFunctionsDataVariableDeclaration.etl";
-import "StdFunctionsFunctionDeclaration.etl";
-import "StdFunctionsParameter.etl";
-import "StdFunctionsTypeDeclaration.etl";
-import "StdFunctionsVariable.etl";

@@ -1,7 +1,0 @@
-import "StdFunctionsArithmeticExpression.etl";
-import "StdFunctionsCompareExpression.etl";
-import "StdFunctionsFunctionCallExpression.etl";
-import "StdFunctionsIncrementDecrementExpression.etl";
-import "StdFunctionsLogicalExpression.etl";
-import "StdFunctionsMinusExpression.etl";
-import "StdFunctionsNegationExpression.etl";

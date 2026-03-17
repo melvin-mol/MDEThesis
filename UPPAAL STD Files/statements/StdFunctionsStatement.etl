@@ -1,4 +1,0 @@
-import "StdFunctionsExpressionStatement.etl";
-import "StdFunctionsIfStatement.etl";
-import "StdFunctionsReturnStatement.etl";
-import "StdFunctionsWhileStatement.etl";
