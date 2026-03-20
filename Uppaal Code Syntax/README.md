@@ -45,7 +45,7 @@ Writing Uppaal ETL transformations directly is verbose, because you often have t
 Use `and_` to create a logical AND expression.
 The resulting expression evaluates to true only when both operands evaluate to true.
 
-Signature:
+Signatures:
 `and_(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -75,7 +75,7 @@ Examples:
 Use `or_` to create a logical OR expression.
 The resulting expression evaluates to true when at least one operand evaluates to true.
 
-Signature:
+Signatures:
 `or_(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -106,7 +106,7 @@ Examples:
 Use `add` to create an arithmetic addition (`+`) expression.
 The resulting expression adds two values together.
 
-Signature:
+Signatures:
 `add(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -136,7 +136,7 @@ Examples:
 Use `subtract` to create an arithmetic subtraction (`-`) expression.
 The resulting expression subtracts the second value from the first value.
 
-Signature:
+Signatures:
 `subtract(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -166,7 +166,7 @@ Examples:
 Use `divide` to create an arithmetic division (`/`) expression.
 The resulting expression divides the first value by the second value.
 
-Signature:
+Signatures:
 `divide(first: String, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -193,7 +193,7 @@ Examples:
 Use `multiplicate` to create an arithmetic multiplication (`*`) expression.
 The resulting expression multiplies two values.
 
-Signature:
+Signatures:
 `multiplicate(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -223,7 +223,7 @@ Examples:
 Use `modulo` to create an arithmetic modulo (`%`) expression.
 The resulting expression returns the remainder of dividing the first value by the second value.
 
-Signature:
+Signatures:
 `modulo(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -254,7 +254,7 @@ Examples:
 Use `greaterOrEqual` to create a greater-than-or-equal (`>=`) comparison expression.
 The resulting expression is true when the first value is greater than or equal to the second value.
 
-Signature:
+Signatures:
 `greaterOrEqual(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -284,7 +284,7 @@ Examples:
 Use `equal` to create an equality (`==`) comparison expression.
 The resulting expression is true when both values are equal.
 
-Signature:
+Signatures:
 `equal(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -311,7 +311,7 @@ Examples:
 Use `greater` to create a greater-than (`>`) comparison expression.
 The resulting expression is true when the first value is greater than the second value.
 
-Signature:
+Signatures:
 `greater(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -341,7 +341,7 @@ Examples:
 Use `less` to create a less-than (`<`) comparison expression.
 The resulting expression is true when the first value is less than the second value.
 
-Signature:
+Signatures:
 `less(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -371,7 +371,7 @@ Examples:
 Use `lessOrEqual` to create a less-than-or-equal (`<=`) comparison expression.
 The resulting expression is true when the first value is less than or equal to the second value.
 
-Signature:
+Signatures:
 `lessOrEqual(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -398,7 +398,7 @@ Examples:
 Use `not_` to create an inequality (`!=`) comparison expression.
 The resulting expression is true when the two values are different.
 
-Signature:
+Signatures:
 `not_(first: String | Uppaal!Expression, second: String | Uppaal!Expression)`
 
 Parameters:
@@ -430,9 +430,9 @@ Use `functionCall` to create a function call expression.
 You can call a function with no arguments, or with an argument sequence.
 The resulting expression represents a function invocation with resolved function reference and provided arguments.
 
-Signature:
-`functionCall(name: String, arguments: Sequence)`
-`functionCall(name: String)`
+Signatures:
+- `functionCall(name: String, arguments: Sequence)` — Call function with arguments
+- `functionCall(name: String)` — Call function without arguments
 
 Parameters:
 - `name`: The function name.
@@ -459,7 +459,7 @@ Examples:
 Use `increment` to create a post-increment (`++`) expression.
 The resulting expression increments the provided variable by 1 as a post-increment operation.
 
-Signature:
+Signatures:
 `increment(variable: Uppaal!Variable)`
 
 Parameters:
@@ -482,7 +482,7 @@ Examples:
 Use `preIncrement` to create a pre-increment (`++`) expression.
 The resulting expression increments the provided variable by 1 as a pre-increment operation.
 
-Signature:
+Signatures:
 `preIncrement(variable: Uppaal!Variable)`
 
 Parameters:
@@ -505,7 +505,7 @@ Examples:
 Use `decrement` to create a post-decrement (`--`) expression.
 The resulting expression decrements the provided variable by 1 as a post-decrement operation.
 
-Signature:
+Signatures:
 `decrement(variable: Uppaal!Variable)`
 
 Parameters:
@@ -528,7 +528,7 @@ Examples:
 Use `preDecrement` to create a pre-decrement (`--`) expression.
 The resulting expression decrements the provided variable by 1 as a pre-decrement operation.
 
-Signature:
+Signatures:
 `preDecrement(variable: Uppaal!Variable)`
 
 Parameters:
@@ -546,18 +546,18 @@ Examples:
     preDecrement(index);
 ```
 
-## Unary expressions
+## Minus expressions
 ### minus
 
 Use `minus` to create a unary minus (`-`) expression.
 The resulting expression negates the provided value.
 
-Signature:
-`minus(literal: String)`
-`minus(expression: Uppaal!Expression)`
+Signatures:
+- `minus(text: String)` — Negate a string literal
+- `minus(expression: Uppaal!Expression)` — Negate an expression
 
 Parameters:
-- `literal`: The value to negate as a `String`.
+- `text`: The value to negate as a `String`.
 - `expression`: The expression to negate as an existing `Uppaal!Expression`.
 
 Returns:
@@ -577,12 +577,12 @@ Examples:
 Use `not_` to create a unary logical negation (`not`) expression.
 The resulting expression negates the provided condition, returning true only when the condition is false.
 
-Signature:
-`not_(literal: String)`
-`not_(expression: Uppaal!Expression)`
+Signatures:
+- `not_(text: String)` — Negate a string literal
+- `not_(expression: Uppaal!Expression)` — Negate an expression
 
 Parameters:
-- `literal`: The condition to negate as a `String`.
+- `text`: The condition to negate as a `String`.
 - `expression`: The expression to negate as an existing `Uppaal!Expression`.
 
 Returns:
@@ -601,4 +601,387 @@ Examples:
 
     // not ((valueA == 25) and (valueB > 100))
     not_(and_(equal("valueA", "25"), greater("valueB", "100")));
+```
+
+## Channel variable declarations
+### channelVariableDeclaration
+
+Use `channelVariableDeclaration` to create a channel variable declaration.
+The resulting declaration declares one or more variables as communication channels, optionally marked as broadcast channels.
+
+Signatures:
+- `channelVariableDeclaration(broadcast: Boolean, type: String, variable: Uppaal!Variable)` — Declare single channel
+- `channelVariableDeclaration(broadcast: Boolean, type: String, variables: Sequence(Uppaal!Variable))` — Declare multiple channels
+
+Parameters:
+- `broadcast`: Whether the channel is a broadcast channel. Set to `true` for broadcast channels, `false` for regular channels.
+- `type`: The predefined type name, typically `"chan"` for channels.
+- `variable`: A single variable to declare as a channel.
+- `variables`: A sequence of variables to declare together as channels.
+
+Returns:
+`Uppaal!ChannelVariableDeclaration`
+
+Examples:
+``` javascript
+    // chan request;
+    channelVariableDeclaration(false, "chan", request);
+
+    // broadcast chan signal;
+    channelVariableDeclaration(true, "chan", signal);
+
+    // chan send, receive;
+    channelVariableDeclaration(false, "chan", Sequence { send, receive });
+
+    // broadcast chan eventOne, eventTwo;
+    channelVariableDeclaration(true, "chan", Sequence { eventOne, eventTwo });
+```
+
+## Clock variable declarations
+## clock
+
+Use `clock` to create a clock variable declaration.
+The resulting declaration creates a single clock variable with the predefined clock type.
+
+Signatures:
+`clock(name: String)`
+
+Parameters:
+- `name`: The name of the clock variable to declare.
+
+Returns:
+`Uppaal!ClockVariableDeclaration`
+
+Examples:
+``` javascript
+    // clock x;
+    clock("x");
+
+    // clock timer;
+    clock("timer");
+
+    // clock t1;
+    clock("t1");
+```
+
+## Data variable declarations
+### dataVariableDeclaration
+
+Use `dataVariableDeclaration` to create a data variable declaration with optional prefix and initializer.
+The resulting declaration declares one or more variables with a specified type, optionally marked with a prefix (CONST or META) and initialized with a value.
+
+Signatures:
+
+**With prefix (CONST/META):**
+- `dataVariableDeclaration(prefix: String, type: String, name: String, value: String)` — Single variable with String type
+- `dataVariableDeclaration(prefix: String, type: Uppaal!Type, name: String, value: String)` — Single variable with Uppaal!Type
+- `dataVariableDeclaration(prefix: String, type: Uppaal!Type, variables: Sequence(Uppaal!Variable))` — Multiple variables
+
+**Without prefix:**
+- `dataVariableDeclaration(type: String, name: String, value: String)` — Single variable with String type and initializer
+- `dataVariableDeclaration(type: Uppaal!Type, name: String)` — Single variable without initializer
+- `dataVariableDeclaration(type: Uppaal!Type, name: String, value: String)` — Single variable with initializer
+- `dataVariableDeclaration(type: Uppaal!Type, variableNames: Sequence(String))` — Multiple variables by names
+
+Parameters:
+- `prefix`: Optional prefix, either `"CONST"` for constant variables or `"META"` for metadata variables.
+- `type`: The data type as a `String` (predefined type name) or as an `Uppaal!Type`.
+- `name`: The name of the variable to declare.
+- `variables`: A sequence of variables to declare together.
+- `variableNames`: A sequence of variable names to declare together.
+- `value`: Optional initializer value as a `String`.
+
+Returns:
+`Uppaal!DataVariableDeclaration`
+
+Examples:
+``` javascript
+    // int x = 5;
+    dataVariableDeclaration("int", "x", "5");
+
+    // const int MAX = 100;
+    dataVariableDeclaration("CONST", "int", "MAX", "100");
+
+    // custom_type a, b, c;
+    dataVariableDeclaration(customType, Sequence { "a", "b", "c" });
+
+    // meta bool flag = false;
+    dataVariableDeclaration("META", "bool", "flag", "false");
+
+    // double value;
+    dataVariableDeclaration(doubleType, "value");
+```
+
+## Function declarations
+### function_
+
+Use `function_` to create a function declaration with an optional parameter list.
+The resulting declaration creates a function with a specified return type and name, optionally with parameters.
+This operation returns a tuple containing both the declaration and the function block, allowing statements to be added to the function body.
+
+Signatures:
+
+**With parameters:**
+- `function_(type: Uppaal!Type, name: String, parameters: Sequence(Uppaal!Parameter))` — Function with Uppaal!Type return type
+- `function_(type: String, name: String, parameters: Sequence(Uppaal!Parameter))` — Function with String return type
+
+**Without parameters:**
+- `function_(type: Uppaal!Type, name: String)` — Function with Uppaal!Type return type, no parameters
+- `function_(type: String, name: String)` — Function with String return type, no parameters
+
+Parameters:
+- `type`: The return type as an `Uppaal!Type` or as a `String` (predefined type name).
+- `name`: The name of the function to declare.
+- `parameters`: Optional sequence of function parameters.
+
+Returns:
+`Tuple` with:
+- `declaration`: The `Uppaal!FunctionDeclaration`
+- `block`: The `Uppaal!Block` where statements can be added to the function body
+
+Examples:
+``` javascript
+    // int add(int a, int b) { }
+    var func = function_("int", "add", Sequence { paramA, paramB });
+
+    // void update() { }
+    var func = function_("void", "update");
+
+    // custom_type isValid(bool condition) { }
+    var func = function_(customType, "isValid", Sequence { conditionParam });
+
+    // double calculate() { }
+    var func = function_(doubleType, "calculate");
+    // func.block can now be used to add statements to the function body
+```
+
+## Parameter declarations
+### parameter
+
+Use `parameter` to create a function parameter declaration.
+The resulting parameter declares a typed parameter that can be used in a function signature.
+Parameters can optionally include a prefix (CONST or META).
+
+Signatures:
+
+**Basic parameters:**
+- `parameter(type: Uppaal!Type, name: String)` — Parameter with Uppaal!Type
+- `parameter(type: String, name: String)` — Parameter with String type
+
+**With prefix:**
+- `parameter(prefix: String, type: String, name: String)` — Parameter with CONST or META prefix
+
+Parameters:
+- `type`: The parameter type as an `Uppaal!Type` or as a `String` (predefined type name).
+- `name`: The name of the parameter.
+- `prefix`: Optional prefix, either `"CONST"` for constant parameters or `"META"` for metadata parameters.
+
+Returns:
+`Uppaal!Parameter`
+
+Examples:
+``` javascript
+    // int x
+    parameter("int", "x");
+
+    // double value
+    parameter(doubleType, "value");
+
+    // const int MAX
+    parameter("CONST", "int", "MAX");
+
+    // Sequence of parameters for use in function_()
+    var params = Sequence { parameter("int", "a"), parameter("int", "b") };
+    
+    // void add(int a, int b) {}
+    function_("int", "add", params);
+```
+
+### parameterCallByReference
+
+Use `parameterCallByReference` to create a call-by-reference function parameter declaration.
+The resulting parameter passes its value by reference, meaning changes made inside the function affect the original variable.
+
+Signatures:
+`parameterCallByReference(type: String, name: String)`
+
+Parameters:
+- `type`: The parameter type as a `String` (predefined type name).
+- `name`: The name of the parameter.
+
+Returns:
+`Uppaal!Parameter`
+
+Examples:
+``` javascript
+    // int& reference
+    parameterCallByReference("int", "reference");
+
+    // Sequence of parameters combining value and reference parameters
+    var params = Sequence { parameter("int", "a"), parameterCallByReference("int", "b") };
+    
+    // void swap(int a, int& b) {}
+    function_("void", "swap", params);
+```
+
+## Type declarations
+### rangeTypeDeclaration
+
+Use `rangeTypeDeclaration` to create a range type declaration.
+The resulting declaration defines a named integer type constrained to a specific range between a lower and upper bound.
+
+Signatures:
+`rangeTypeDeclaration(lowerBound: String, upperBound: String, name: String)`
+
+Parameters:
+- `lowerBound`: The lower bound of the range as a `String`.
+- `upperBound`: The upper bound of the range as a `String`.
+- `name`: The name of the type to declare.
+
+Returns:
+`Uppaal!TypeDeclaration`
+
+Examples:
+``` javascript
+    // typedef int[0, 10] rangedInt;
+    rangeTypeDeclaration("0", "10", "rangedInt");
+
+    // typedef int[MIN, MAX] bounded;
+    rangeTypeDeclaration("MIN", "MAX", "bounded");
+
+    // typedef int[0, N-1] index;
+    rangeTypeDeclaration("0", "N-1", "index");
+```
+
+### structTypeDeclaration
+
+Use `structTypeDeclaration` to create a struct type declaration.
+The resulting declaration defines a named struct type containing the provided data variable declarations as fields.
+
+Signatures:
+`structTypeDeclaration(variableDeclarations: Sequence(Uppaal!DataVariableDeclaration), name: String)`
+
+Parameters:
+- `variableDeclarations`: A sequence of data variable declarations that form the struct fields.
+- `name`: The name of the struct type to declare.
+
+Returns:
+`Uppaal!TypeDeclaration`
+
+Examples:
+``` javascript
+    // typedef struct { int x; int y; } Point;
+    var fields = Sequence {
+        dataVariableDeclaration(intType, "x"),
+        dataVariableDeclaration(intType, "y")
+    };
+    structTypeDeclaration(fields, "Point");
+
+    // typedef struct { bool active; int count; } State;
+    var fields = Sequence {
+        dataVariableDeclaration(boolType, "active"),
+        dataVariableDeclaration(intType, "count")
+    };
+    structTypeDeclaration(fields, "State");
+```
+
+## Variables
+### variable
+
+Use `variable` to create a variable with an optional initial value.
+The resulting variable can be used in declarations such as `dataVariableDeclaration` or `channelVariableDeclaration`.
+
+Signatures:
+- `variable(name: String)` — Variable without initializer
+- `variable(name: String, value: String)` — Variable with initializer
+
+Parameters:
+- `name`: The name of the variable.
+- `value`: Optional initial value as a `String`.
+
+Returns:
+`Uppaal!Variable`
+
+Examples:
+``` javascript
+    // x
+    variable("x");
+
+    // count = 0
+    variable("count", "0");
+
+    // flag = false
+    variable("flag", "false");
+```
+
+### variableList
+
+Use `variableList` to create a variable declaration for an array variable, where the array size is defined by an existing variable.
+The resulting variable uses the provided size variable as its index and sets an initial value.
+
+Signatures:
+`variableList(name: String, sizeVariable: Uppaal!Variable, value: String)`
+
+Parameters:
+- `name`: The name of the variable to declare.
+- `sizeVariable`: An `Uppaal!Variable` used as the size expression for the array index.
+- `value`: The initial value for the variable as a `String`.
+
+Returns:
+`Uppaal!Variable`
+
+Examples:
+``` javascript
+    // items[N] = 0
+    variableList("items", n, "0");
+
+    // slots[capacity] = -1
+    variableList("slots", capacity, "-1");
+```
+
+### findVariable
+
+Use `findVariable` to look up an existing variable by name from a `Uppaal!GlobalDeclarations` object.
+The resulting variable can be passed to other operations that require an `Uppaal!Variable`.
+
+Signatures:
+`globalDeclarations.findVariable(varName: String)`
+
+Parameters:
+- `varName`: The name of the variable to find.
+
+Returns:
+`Uppaal!Variable`
+
+Examples:
+``` javascript
+    // Find a variable named "count" from global declarations
+    var count = globalDeclarations.findVariable("count");
+
+    // Use found variable in another operation
+    increment(globalDeclarations.findVariable("index"));
+```
+
+### getField
+
+Use `getField` to retrieve a specific field variable from a struct type.
+The resulting variable is the field with the given name inside the struct type definition.
+
+Signatures:
+`getField(type: Uppaal!DeclaredType, fieldName: String)`
+
+Parameters:
+- `type`: The `Uppaal!DeclaredType` referencing the struct type.
+- `fieldName`: The name of the field to retrieve.
+
+Returns:
+`Uppaal!Variable`
+
+Examples:
+``` javascript
+    // Get the "x" field from a Point struct type
+    var xField = getField(pointType, "x");
+
+    // Get the "count" field from a State struct type
+    var countField = getField(stateType, "count");
 ```
