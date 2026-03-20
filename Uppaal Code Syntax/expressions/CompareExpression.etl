@@ -17,6 +17,23 @@ operation greaterOrEqual(firstLiteral: String, secondLiteral: String): Uppaal!Co
 	return compare;
 }
 
+operation greaterOrEqual(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = new Uppaal!LiteralExpression();
+	compare.firstExpr.text = firstLiteral;
+	compare.operator = Uppaal!CompareOperator#GREATER_OR_EQUAL;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
+operation greaterOrEqual(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#GREATER_OR_EQUAL;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
 operation equal(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!CompareExpression {
 	var compare = new Uppaal!CompareExpression();
 	compare.firstExpr = firstExpression;
@@ -45,6 +62,14 @@ operation equal(firstLiteral: String, secondExpression: Uppaal!Expression): Uppa
 	return compare;
 }
 
+operation equal(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#EQUAL;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
 operation greater(firstLiteral: String, secondLiteral: String): Uppaal!CompareExpression {
 	var compare = new Uppaal!CompareExpression();
 	compare.firstExpr = new Uppaal!LiteralExpression();
@@ -64,6 +89,23 @@ operation greater(firstExpression: Uppaal!Expression, secondLiteral: String): Up
 	return compare;
 }
 
+operation greater(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = new Uppaal!LiteralExpression();
+	compare.firstExpr.text = firstLiteral;
+	compare.operator = Uppaal!CompareOperator#GREATER;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
+operation greater(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#GREATER;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
 operation less(firstLiteral: String, secondLiteral: String): Uppaal!CompareExpression {
 	var compare = new Uppaal!CompareExpression();
 	compare.firstExpr = new Uppaal!LiteralExpression();
@@ -80,6 +122,23 @@ operation less(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaa
 	compare.operator = Uppaal!CompareOperator#LESS;
 	compare.secondExpr = new Uppaal!LiteralExpression();
 	compare.secondExpr.text = secondLiteral;
+	return compare;
+}
+
+operation less(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = new Uppaal!LiteralExpression();
+	compare.firstExpr.text = firstLiteral;
+	compare.operator = Uppaal!CompareOperator#LESS;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
+operation less(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#LESS;
+	compare.secondExpr = secondExpression;
 	return compare;
 }
 
@@ -111,6 +170,14 @@ operation lessOrEqual(firstLiteral: String, secondExpression: Uppaal!Expression)
 	return compare;
 }
 
+operation lessOrEqual(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#LESS_OR_EQUAL;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
 operation not_(firstLiteral: String, secondLiteral: String): Uppaal!CompareExpression {
 	var compare = new Uppaal!CompareExpression();
 	compare.firstExpr = new Uppaal!LiteralExpression();
@@ -118,5 +185,31 @@ operation not_(firstLiteral: String, secondLiteral: String): Uppaal!CompareExpre
 	compare.operator = Uppaal!CompareOperator#UNEQUAL;
 	compare.secondExpr = new Uppaal!LiteralExpression();
 	compare.secondExpr.text = secondLiteral;
+	return compare;
+}
+
+operation not_(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#UNEQUAL;
+	compare.secondExpr = new Uppaal!LiteralExpression();
+	compare.secondExpr.text = secondLiteral;
+	return compare;
+}
+
+operation not_(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = new Uppaal!LiteralExpression();
+	compare.firstExpr.text = firstLiteral;
+	compare.operator = Uppaal!CompareOperator#UNEQUAL;
+	compare.secondExpr = secondExpression;
+	return compare;
+}
+
+operation not_(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!CompareExpression {
+	var compare = new Uppaal!CompareExpression();
+	compare.firstExpr = firstExpression;
+	compare.operator = Uppaal!CompareOperator#UNEQUAL;
+	compare.secondExpr = secondExpression;
 	return compare;
 }
