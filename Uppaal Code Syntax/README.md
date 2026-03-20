@@ -422,3 +422,183 @@ Examples:
     // (valueA - 1) != (valueB + 1)
     not_(subtract("valueA", "1"), add("valueB", "1"));
 ```
+
+## Function call expressions
+### functionCall
+
+Use `functionCall` to create a function call expression.
+You can call a function with no arguments, or with an argument sequence.
+The resulting expression represents a function invocation with resolved function reference and provided arguments.
+
+Signature:
+`functionCall(name: String, arguments: Sequence)`
+`functionCall(name: String)`
+
+Parameters:
+- `name`: The function name.
+- `arguments`: Optional sequence of arguments. Each argument can be a `String` or a `Uppaal!Expression`.
+
+Returns:
+`Uppaal!FunctionCallExpression`
+
+Examples:
+``` javascript
+    // update()
+    functionCall("update");
+
+    // setValues(valueA, valueB)
+    functionCall("setValues", Sequence { "valueA", "valueB" });
+
+    // process(valueA, valueB + 1)
+    functionCall("process", Sequence { "valueA", add("valueB", "1") });
+```
+
+## Increment/decrement expressions
+### increment
+
+Use `increment` to create a post-increment (`++`) expression.
+The resulting expression increments the provided variable by 1 as a post-increment operation.
+
+Signature:
+`increment(variable: Uppaal!Variable)`
+
+Parameters:
+- `variable`: The variable to increment.
+
+Returns:
+`Uppaal!IncrementDecrementExpression`
+
+Examples:
+``` javascript
+    // counter++
+    increment(counter);
+
+    // index++
+    increment(index);
+```
+
+### preIncrement
+
+Use `preIncrement` to create a pre-increment (`++`) expression.
+The resulting expression increments the provided variable by 1 as a pre-increment operation.
+
+Signature:
+`preIncrement(variable: Uppaal!Variable)`
+
+Parameters:
+- `variable`: The variable to increment.
+
+Returns:
+`Uppaal!IncrementDecrementExpression`
+
+Examples:
+``` javascript
+    // ++counter
+    preIncrement(counter);
+
+    // ++index
+    preIncrement(index);
+```
+
+### decrement
+
+Use `decrement` to create a post-decrement (`--`) expression.
+The resulting expression decrements the provided variable by 1 as a post-decrement operation.
+
+Signature:
+`decrement(variable: Uppaal!Variable)`
+
+Parameters:
+- `variable`: The variable to decrement.
+
+Returns:
+`Uppaal!IncrementDecrementExpression`
+
+Examples:
+``` javascript
+    // counter--
+    decrement(counter);
+
+    // index--
+    decrement(index);
+```
+
+### preDecrement
+
+Use `preDecrement` to create a pre-decrement (`--`) expression.
+The resulting expression decrements the provided variable by 1 as a pre-decrement operation.
+
+Signature:
+`preDecrement(variable: Uppaal!Variable)`
+
+Parameters:
+- `variable`: The variable to decrement.
+
+Returns:
+`Uppaal!IncrementDecrementExpression`
+
+Examples:
+``` javascript
+    // --counter
+    preDecrement(coutner);
+
+    // --index
+    preDecrement(index);
+```
+
+## Unary expressions
+### minus
+
+Use `minus` to create a unary minus (`-`) expression.
+The resulting expression negates the provided value.
+
+Signature:
+`minus(literal: String)`
+`minus(expression: Uppaal!Expression)`
+
+Parameters:
+- `literal`: The value to negate as a `String`.
+- `expression`: The expression to negate as an existing `Uppaal!Expression`.
+
+Returns:
+`Uppaal!MinusExpression`
+
+Examples:
+``` javascript
+    // -valueA
+    minus("valueA");
+
+    // -(valueA + 1)
+    minus(add("valueA", "1"));
+```
+
+### not_
+
+Use `not_` to create a unary logical negation (`not`) expression.
+The resulting expression negates the provided condition, returning true only when the condition is false.
+
+Signature:
+`not_(literal: String)`
+`not_(expression: Uppaal!Expression)`
+
+Parameters:
+- `literal`: The condition to negate as a `String`.
+- `expression`: The expression to negate as an existing `Uppaal!Expression`.
+
+Returns:
+`Uppaal!NegationExpression`
+
+Examples:
+``` javascript
+    // not conditionA
+    not_("conditionA");
+
+    // not (valueA == 25)
+    not_(equal("valueA", "25"));
+
+    // not (valueA > 100)
+    not_(greater("valueA", "100"));
+
+    // not ((valueA == 25) and (valueB > 100))
+    not_(and_(equal("valueA", "25"), greater("valueB", "100")));
+```
