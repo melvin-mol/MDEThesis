@@ -39,6 +39,64 @@ Writing Uppaal ETL transformations directly is verbose, because you often have t
     var statement = assign("areCoordinatesValid", and_(equal("x", "25"), greater("y", "100")));
 ```
 
+## Table of contents
+- [Built In Types Setup](#built-in-types-setup)
+- [Logical expressions](#logical-expressions)
+- [Arithmetic expressions](#arithmetic-expressions)
+- [Compare expressions](#compare-expressions)
+- [Function call expressions](#function-call-expressions)
+- [Increment/decrement expressions](#incrementdecrement-expressions)
+- [Minus expressions](#minus-expressions)
+- [Channel variable declarations](#channel-variable-declarations)
+- [Clock variable declarations](#clock-variable-declarations)
+- [Data variable declarations](#data-variable-declarations)
+- [Function declarations](#function-declarations)
+- [Parameter declarations](#parameter-declarations)
+- [Type declarations](#type-declarations)
+- [Type specifications](#type-specifications)
+- [Variables](#variables)
+- [Expression statements](#expression-statements)
+- [If statements](#if-statements)
+- [Return statements](#return-statements)
+- [While statements](#while-statements)
+- [Templates](#templates)
+- [Points](#points)
+- [Edges](#edges)
+- [Chance edges](#chance-edges)
+- [Updates](#updates)
+- [Synchronizations](#synchronizations)
+- [Selections](#selections)
+- [Guards](#guards)
+- [Locations](#locations)
+- [Chance nodes](#chance-nodes)
+- [Invariants](#invariants)
+
+## Built In Types Setup
+### setupBuiltInTypes
+
+Use `setupBuiltInTypes` to initialize built-in types on an `Uppaal!NSTA` model.
+
+Important:
+This operation is needed before using built-in types and must be called at the start of a transformation.
+
+Signatures:
+- `nsta.setupBuiltInTypes()` - Initialize built-in types on an NSTA model
+
+Parameters:
+- None.
+
+Returns:
+`Uppaal!NSTA`
+
+Examples:
+``` javascript
+    // Initialize built-in types at the start of the transformation
+    nsta.setupBuiltInTypes();
+
+    // After setup, built-in types like int/bool/chan/void/clock/double are available
+    var intType = nsta.int;
+```
+
 ## Logical expressions
 ### and_
 
@@ -638,7 +696,7 @@ Examples:
 ```
 
 ## Clock variable declarations
-## clock
+### clock
 
 Use `clock` to create a clock variable declaration.
 The resulting declaration creates a single clock variable with the predefined clock type.
@@ -710,6 +768,37 @@ Examples:
 
     // double value;
     dataVariableDeclaration(doubleType, "value");
+```
+
+### dataVariableDeclarationWithVariables
+
+Use `dataVariableDeclarationWithVariables` to create a data variable declaration from an existing sequence of `Uppaal!Variable` objects.
+The resulting declaration adds all provided variables under a single type.
+
+Signatures:
+- `dataVariableDeclarationWithVariables(type: Uppaal!Type, variables: Sequence(Uppaal!Variable))` - With Uppaal type
+- `dataVariableDeclarationWithVariables(type: String, variables: Sequence(Uppaal!Variable))` - With predefined type name
+
+Parameters:
+- `type`: The data type as an `Uppaal!Type` or as a `String` (predefined type name).
+- `variables`: A sequence of variables to add to the declaration.
+
+Returns:
+`Uppaal!DataVariableDeclaration`
+
+Examples:
+``` javascript
+    // int a = 1, b = 2;
+    dataVariableDeclarationWithVariables("int", Sequence {
+        variable("a", "1"),
+        variable("b", "2")
+    });
+
+    // custom_type left, right;
+    dataVariableDeclarationWithVariables(customType, Sequence {
+        variable("left"),
+        variable("right")
+    });
 ```
 
 ## Function declarations
@@ -871,18 +960,67 @@ Returns:
 Examples:
 ``` javascript
     // typedef struct { int x; int y; } Point;
-    var fields = Sequence {
-        dataVariableDeclaration(intType, "x"),
-        dataVariableDeclaration(intType, "y")
-    };
-    structTypeDeclaration(fields, "Point");
+    structTypeDeclaration(Sequence {
+        dataVariableDeclaration("int", "x"),
+        dataVariableDeclaration("int", "y")
+    }, "Point");
 
     // typedef struct { bool active; int count; } State;
-    var fields = Sequence {
-        dataVariableDeclaration(boolType, "active"),
-        dataVariableDeclaration(intType, "count")
-    };
-    structTypeDeclaration(fields, "State");
+    structTypeDeclaration(Sequence {
+        dataVariableDeclaration("bool", "active"),
+        dataVariableDeclaration("int", "count")
+    }, "State");
+```
+
+## Type specifications
+### rangeType
+
+Use `rangeType` to create a range type specification.
+The resulting type specification defines integer bounds and can be used where a `Uppaal!RangeTypeSpecification` is required.
+
+Signatures:
+`rangeType(lowerBound: String, upperBound: String)`
+
+Parameters:
+- `lowerBound`: The lower bound of the range as a `String`.
+- `upperBound`: The upper bound of the range as a `String`.
+
+Returns:
+`Uppaal!RangeTypeSpecification`
+
+Examples:
+``` javascript
+    // int[0, 10]
+    rangeType("0", "10");
+
+    // int[MIN, MAX]
+    rangeType("MIN", "MAX");
+
+    // int[0, N-1]
+    rangeType("0", "N-1");
+```
+
+### getDeclaredType
+
+Use `getDeclaredType` to retrieve a previously declared type by name from global declarations.
+The resulting type can be reused in operations that require an existing `Uppaal!Type`.
+
+Signatures:
+`globalDeclarations.getDeclaredType(name: String)`
+
+Parameters:
+- `name`: The name of the declared type to retrieve.
+
+Returns:
+`Uppaal!Type`
+
+Examples:
+``` javascript
+    // Look up type "Point"
+    var pointType = globalDeclarations.getDeclaredType("Point");
+
+    // Reuse looked up type in another declaration
+    dataVariableDeclaration(pointType, "position");
 ```
 
 ## Variables
@@ -1184,4 +1322,375 @@ Examples:
     // }
     var loop = while_(less("i", "N"));
     loop.statement.statement.add(statement(increment(i)));
+```
+
+## Templates
+### template
+
+Use `template` to create a template with a name and parameters.
+The resulting template can be used as the container for locations and edges.
+
+Signatures:
+- `template(name: String, parameters: Sequence(Uppaal!Parameter))` - Create template with parameters
+
+Parameters:
+- `name`: The template name.
+- `parameters`: Sequence of template parameters.
+
+Returns:
+`Uppaal!Template`
+
+Examples:
+``` javascript
+    // Template without parameters
+    template("Controller", Sequence {});
+
+    // Template with one parameter
+    template("Worker", Sequence { parameter("int", "id") });
+
+    // Template with multiple parameters
+    template(
+        "Plant",
+        Sequence { parameter("int", "maxLoad"), parameterCallByReference("int", "sharedCounter") }
+    );
+```
+
+## Points
+### point
+
+Use `point` to create a coordinate point.
+The resulting point can be used as label positions for guards, updates, synchronizations, selections, invariants, and other positioned elements.
+
+Signatures:
+- `point(x: Integer, y: Integer)` - Create a point from x/y coordinates
+
+Parameters:
+- `x`: X coordinate.
+- `y`: Y coordinate.
+
+Returns:
+`Uppaal!Point`
+
+Examples:
+``` javascript
+    // Point at x=100, y=-200
+    point(100, -200);
+
+    // Use point in positioned labels
+    guard_(less("x", "10"), point(100, -200));
+    update(functionCall("syncCounters"), point(100, -200));
+```
+
+## Edges
+### edge
+
+Use `edge` to create a transition edge between two locations.
+The resulting edge can include synchronization, bend points, guard, update, and selections.
+
+Signatures:
+- `edge(source: Uppaal!Location, target: Uppaal!Location, synchronization: Uppaal!Synchronization, points: Sequence(Uppaal!Point), guard_: Uppaal!Guard, update: Uppaal!Update, selections: Sequence(Uppaal!Selection))` - Create edge with transition labels and bend points
+
+Parameters:
+- `source`: The source location.
+- `target`: The target location.
+- `synchronization`: The synchronization label.
+- `points`: Bend points of the edge path.
+- `guard_`: The guard label.
+- `update`: The update label.
+- `selections`: Selection labels.
+
+Returns:
+`Uppaal!Edge`
+
+Examples:
+``` javascript
+    // Edge with guard, sync, update, selections, and one bend point
+    edge(
+        sourceLocation,
+        targetLocation,
+        synchronization("send", "tick", point(120, -180)),
+        Sequence { point(150, -120) },
+        guard_(less("x", "10"), point(120, -220)),
+        update(assign("x", "0").expression, point(120, -160)),
+        Sequence { selection(rangeType("0", "N-1"), Sequence { variable("i") }, point(120, -200)) }
+    );
+
+    // Minimal labels still passed through helper arguments
+    edge(
+        sourceLocation,
+        targetLocation,
+        synchronization("receive", "ack"),
+        Sequence {},
+        guard_(lessOrEqual("t", "maxT")),
+        update(functionCall("syncCounters"), point(200, -120)),
+        Sequence {}
+    );
+```
+
+## Chance edges
+### chanceEdge
+
+Use `chanceEdge` to create a probabilistic transition edge between two locations.
+The resulting edge can include probability, bend points, guard, update, and selections.
+
+Note:
+`chanceEdge` can only be used with the `uppaalSMC.ecore` metamodel, and not with the `uppaal.ecore` metamodel.
+
+Signatures:
+- `chanceEdge(source: Uppaal!Location, target: Uppaal!Location, probability: Tuple, points: Sequence(Uppaal!Point), guard_: Uppaal!Guard, update: Uppaal!Update, selections: Sequence(Uppaal!Selection))` - Create chance edge with probability and transition labels
+
+Parameters:
+- `source`: The source location.
+- `target`: The target location.
+- `probability`: A tuple with `weight` and `position` for the probability label.
+- `points`: Bend points of the edge path.
+- `guard_`: The guard label.
+- `update`: The update label.
+- `selections`: Selection labels.
+
+Returns:
+`Uppaal!ChanceEdge`
+
+Examples:
+``` javascript
+    // Chance edge with probability 0.7
+    var probability = Tuple { weight = "0.7", position = point(180, -160) };
+    chanceEdge(
+        sourceLocation,
+        targetLocation,
+        probability,
+        Sequence { point(170, -120) },
+        guard_(less("x", "10")),
+        update(assign("x", "0").expression, point(180, -140)),
+        Sequence {}
+    );
+
+    // Chance edge with selections
+    var probability = Tuple { weight = "p", position = point(260, -160) };
+    chanceEdge(
+        sourceLocation,
+        targetLocation,
+        probability,
+        Sequence {},
+        guard_(greaterOrEqual("energy", "minEnergy")),
+        update(functionCall("syncCounters"), point(260, -140)),
+        Sequence { selection(rangeType("0", "N-1"), Sequence { variable("i") }, point(260, -180)) }
+    );
+```
+
+## Updates
+### update
+
+Use `update` to create an update label with one or more expressions at a specific position.
+The resulting update can be attached to a transition to define assignments executed on that transition.
+
+Signatures:
+- `update(expressions: Sequence(Uppaal!Expression), position: Uppaal!Point)` - Update with multiple expressions
+- `update(expression: Uppaal!Expression, position: Uppaal!Point)` - Update with a single expression
+
+Parameters:
+- `expressions`: A sequence of expressions to place in the update label.
+- `expression`: A single expression to place in the update label.
+- `position`: The label position as an existing `Uppaal!Point`.
+
+Returns:
+`Uppaal!Update`
+
+Examples:
+``` javascript
+    // x = 0
+    update(assign("x", "0").expression, point(100, -200));
+
+    // syncCounters()
+    update(functionCall("syncCounters"), point(100, -200));
+
+    // x = 0, y = y + 1
+    update(Sequence {
+        assign("x", "0").expression,
+        assign("y", add("y", "1")).expression
+    }, point(100, -200));
+```
+
+## Synchronizations
+### synchronization
+
+Use `synchronization` to create a transition synchronization label.
+The resulting synchronization can be configured as send or receive on a channel name, optionally with an explicit label position.
+
+Signatures:
+- `synchronization(kind: String, name: String)` - Synchronization without position
+- `synchronization(kind: String, name: String, point: Uppaal!Point)` - Synchronization with position
+
+Parameters:
+- `kind`: Synchronization direction. Use `"send"` for send (`!`), any other value results in receive (`?`).
+- `name`: Channel name used by the synchronization label.
+- `point`: Optional label position.
+
+Returns:
+`Uppaal!Synchronization`
+
+Examples:
+``` javascript
+    // c!
+    synchronization("send", "c");
+
+    // c?
+    synchronization("receive", "c");
+
+    // tick!
+    synchronization("send", "tick", point(100, -200));
+
+    // ack?
+    synchronization("receive", "ack", point(100, -200));
+```
+
+## Selections
+### selection
+
+Use `selection` to create a transition selection label.
+The resulting selection assigns one or more variables over a type definition, optionally with an explicit label position.
+
+Signatures:
+- `selection(typeDefinition: Uppaal!TypeDefinition, variables: Sequence(Uppaal!Variable))` - Selection without position
+- `selection(typeDefinition: Uppaal!TypeDefinition, variables: Sequence(Uppaal!Variable), point: Uppaal!Point)` - Selection with position
+
+Parameters:
+- `typeDefinition`: The type definition used for the selection domain.
+- `variables`: The selected variables.
+- `point`: Optional label position.
+
+Returns:
+`Uppaal!Selection`
+
+Examples:
+``` javascript
+    // i : int[0, N-1]
+    selection(rangeType("0", "N-1"), Sequence { variable("i") });
+
+    // i, j : int[0, N-1]
+    selection(
+        rangeType("0", "N-1"),
+        Sequence { variable("i"), variable("j") },
+        point(100, -200)
+    );
+```
+
+## Guards
+### guard_
+
+Use `guard_` to create a transition guard label.
+The resulting guard defines the condition that must evaluate to true for the transition to be taken.
+
+Signatures:
+- `guard_(expression: Uppaal!Expression, position: Uppaal!Point)` - Guard with expression and label position
+- `guard_(expression: Uppaal!Expression)` - Guard without explicit position
+
+Parameters:
+- `expression`: The guard condition expression.
+- `position`: Optional label position.
+
+Returns:
+`Uppaal!Guard`
+
+Examples:
+``` javascript
+    // x < 10
+    guard_(less("x", "10"));
+
+    // x < 10
+    guard_(less("x", "10"), point(100, -200));
+
+    // (value >= min) and (value <= max)
+    guard_(and_(greaterOrEqual("value", "min"), lessOrEqual("value", "max")), point(100, -200));
+```
+
+## Locations
+### location
+
+Use `location` to create a template location.
+The resulting location can be created as normal, with an invariant, or with a location time kind (`committed` or `urgent`).
+
+Signatures:
+- `location(parentTemplate: Uppaal!Template, name: Tuple, locationTimeKind: String, point: Uppaal!Point)` - Location with time kind
+- `location(parentTemplate: Uppaal!Template, name: Tuple, point: Uppaal!Point)` - Location without invariant
+- `location(parentTemplate: Uppaal!Template, name: Tuple, point: Uppaal!Point, invariant: Uppaal!Invariant)` - Location with invariant
+
+Parameters:
+- `parentTemplate`: The template that owns the location.
+- `name`: A tuple with `name` and `position` for the location label.
+- `locationTimeKind`: Optional location kind string. Use `"committed"` or `"urgent"`.
+- `point`: The location position.
+- `invariant`: Optional location invariant.
+
+Returns:
+`Uppaal!Location`
+
+Examples:
+``` javascript
+    // Normal location
+    var idleName = Tuple { name = "Idle", position = point(80, -120) };
+    location(template, idleName, point(100, -100));
+
+    // Urgent location
+    var urgentName = Tuple { name = "UrgentState", position = point(180, -120) };
+    location(template, urgentName, "urgent", point(200, -100));
+
+    // Location with invariant
+    var timedName = Tuple { name = "Timed", position = point(280, -120) };
+    location(template, timedName, point(300, -100), invariant(lessOrEqual("t", "10")));
+```
+
+## Chance nodes
+### chanceNode
+
+Use `chanceNode` to create a chance node inside a template.
+The resulting node can be used in probabilistic model structures.
+
+Note:
+`chanceNode` can only be used with the `uppaalSMC.ecore` metamodel, and not with the `uppaal.ecore` metamodel.
+
+Signatures:
+- `chanceNode(parentTemplate: Uppaal!Template, name: String, point: Uppaal!Point)` - Create chance node with name and position
+
+Parameters:
+- `parentTemplate`: The template that owns the chance node.
+- `name`: The chance node name.
+- `point`: The chance node position.
+
+Returns:
+`Uppaal!ChanceNode`
+
+Examples:
+``` javascript
+    // Chance node at (200, -100)
+    chanceNode(template, "C1", point(200, -100));
+
+    // Another chance node
+    chanceNode(template, "RetryChoice", point(320, -100));
+```
+
+## Invariants
+### invariant
+
+Use `invariant` to create a location invariant label.
+The resulting invariant constrains how long a location may be active.
+
+Signatures:
+- `invariant(expression: Uppaal!Expression, position: Uppaal!Point)` - Invariant with position
+- `invariant(expression: Uppaal!Expression)` - Invariant without explicit position
+
+Parameters:
+- `expression`: The invariant condition expression.
+- `position`: Optional label position.
+
+Returns:
+`Uppaal!Invariant`
+
+Examples:
+``` javascript
+    // x <= 10
+    invariant(lessOrEqual("x", "10"));
+
+    // t <= maxTime
+    invariant(lessOrEqual("t", "maxTime"), point(100, -200));
 ```
