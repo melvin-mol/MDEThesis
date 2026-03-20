@@ -985,3 +985,203 @@ Examples:
     // Get the "count" field from a State struct type
     var countField = getField(stateType, "count");
 ```
+
+## Expression statements
+### assign
+
+Use `assign` to create assignment expression statements.
+The resulting statement can represent simple assignments, nested chained assignments, or assignments to multiple variables.
+
+Signatures:
+- `assign(firstLiteral: String, secondLiteral: String)` - Assign literal to literal target
+- `assign(firstLiteral: String, secondExpression: Uppaal!Expression)` - Assign expression to literal target
+- `assign(firstLiteral: String, secondLiteral: String, thirdLiteral: String)` - Create chained assignment for three literals
+- `assign(variableNames: Sequence(String), valueLiteral: String)` - Assign one literal value to multiple variables
+- `assign(variableNames: Sequence(String), valueExpression: Uppaal!Expression)` - Assign one expression value to multiple variables
+
+Parameters:
+- `firstLiteral`: The assignment target as a `String` in single-target overloads.
+- `secondLiteral`: The assigned value as a `String`, or the nested target in chained form.
+- `secondExpression`: The assigned value as an `Uppaal!Expression`.
+- `thirdLiteral`: The final literal value in a three-part chained assignment.
+- `variableNames`: A sequence of variable names to assign in chained form.
+- `valueLiteral`: The literal value assigned to all variables in the sequence.
+- `valueExpression`: The expression value assigned to all variables in the sequence.
+
+Returns:
+`Uppaal!ExpressionStatement`
+
+Examples:
+``` javascript
+    // x = 5;
+    assign("x", "5");
+
+    // x = y + 1;
+    assign("x", add("y", "1"));
+
+    // x = y = 0;
+    assign("x", "y", "0");
+
+    // a = b = c = 1;
+    assign(Sequence { "a", "b", "c" }, "1");
+```
+
+### statement
+
+Use `statement` to wrap an expression as an expression statement.
+The resulting statement is useful when you already built an expression and want to place it in a statement context.
+
+Signatures:
+`statement(expression: Uppaal!Expression)`
+
+Parameters:
+- `expression`: The expression to wrap.
+
+Returns:
+`Uppaal!ExpressionStatement`
+
+Examples:
+``` javascript
+    // Wrap increment as statement: counter++;
+    statement(increment(counter));
+
+    // Wrap function call as statement: update();
+    statement(functionCall("update"));
+```
+
+## If statements
+### if_
+
+Use `if_` to create an if statement with an initialized `then` block.
+The resulting statement can be created from two literals, a variable name, or a full expression.
+
+Signatures:
+- `if_(firstLiteral: String, secondLiteral: String)` - If statement with compare expression from two literals
+- `if_(variableName: String)` - If statement with variable-name condition
+- `if_(expression: Uppaal!Expression)` - If statement with expression condition
+
+Parameters:
+- `firstLiteral`: The left operand literal used in the two-literal overload.
+- `secondLiteral`: The right operand literal used in the two-literal overload.
+- `variableName`: The condition variable name for a literal-condition if statement.
+- `expression`: The condition expression for the if statement.
+
+Returns:
+`Uppaal!IfStatement`
+
+Examples:
+``` javascript
+    // if (x == 0) { }
+    if_("x", "0");
+
+    // if (isActive) { }
+    if_("isActive");
+
+    // if (value > limit) { }
+    if_(greater("value", "limit"));
+
+    // if (ready) { 
+    // 
+    // } else if (value > limit) {
+    //
+    // }
+    var ifElseChain = ifElse("ready");
+    ifElseChain.elseStatement = if_(greater("value", "limit"));
+```
+
+### ifElse
+
+Use `ifElse` to create an if statement with both `then` and `else` blocks.
+The resulting statement can be created from a variable name or a full expression condition.
+
+Signatures:
+- `ifElse(expression: Uppaal!Expression)` - If/else statement with expression condition
+- `ifElse(variableName: String)` - If/else statement with variable-name condition
+
+Parameters:
+- `expression`: The condition expression for the if/else statement.
+- `variableName`: The condition variable name for a literal-condition if/else statement.
+
+Returns:
+`Uppaal!IfStatement`
+
+Examples:
+``` javascript
+    // if (ready) { 
+    // 
+    // } else {
+    //
+    // }
+    ifElse("ready");
+
+    // if (x <= 10) { 
+    // 
+    // } else {
+    // 
+    // }
+    ifElse(lessOrEqual("x", "10"));
+```
+
+## Return statements
+### return_
+
+Use `return_` to create a return statement.
+The resulting statement can return an existing variable, a variable name, or any expression.
+
+Signatures:
+- `return_(variable: Uppaal!Variable)` - Return an existing variable
+- `return_(name: String)` - Return by variable name
+- `return_(expression: Uppaal!Expression)` - Return an expression
+
+Parameters:
+- `variable`: The variable to return.
+- `name`: The name of the variable to return.
+- `expression`: The expression to return.
+
+Returns:
+`Uppaal!ReturnStatement`
+
+Examples:
+``` javascript
+    // return result;
+    return_(result);
+
+    // return count;
+    return_("count");
+
+    // return a + b;
+    return_(add("a", "b"));
+
+    // return value > threshold;
+    return_(greater("value", "threshold"));
+```
+
+## While statements
+### while_
+
+Use `while_` to create a while loop statement.
+The resulting loop evaluates the condition expression before each iteration and executes a block as the loop body.
+
+Signatures:
+`while_(expression: Uppaal!Expression)`
+
+Parameters:
+- `expression`: The loop condition as an existing `Uppaal!Expression`.
+
+Returns:
+`Uppaal!WhileLoop`
+
+Examples:
+``` javascript
+    // while (x < 10) { }
+    while_(less("x", "10"));
+
+    // while ((value < max) and isActive) { }
+    while_(and_(less("value", "max"), "isActive"));
+
+    // while (i < N) {
+    //      i++;
+    // }
+    var loop = while_(less("i", "N"));
+    loop.statement.statement.add(statement(increment(i)));
+```
