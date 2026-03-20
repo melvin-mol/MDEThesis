@@ -94,6 +94,24 @@ operation modulo(firstLiteral: String, secondLiteral: String): Uppaal!Arithmetic
 	return arithmetic;
 }
 
+operation modulo(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MODULO;
+	return arithmetic;
+}
+
+operation modulo(firstExpression: Uppaal!Expression, secondLiteral: String): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondLiteral);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MODULO;
+	return arithmetic;
+}
+
+operation modulo(firstExpression: Uppaal!Expression, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstExpression, secondExpression);
+	arithmetic.operator = Uppaal!ArithmeticOperator#MODULO;
+	return arithmetic;
+}
+
 operation createArithmetic(firstLiteral: String, secondLiteral: String): Uppaal!ArithmeticExpression {
 	var arithmetic = new Uppaal!ArithmeticExpression();
 	arithmetic.firstExpr = new Uppaal!LiteralExpression();
