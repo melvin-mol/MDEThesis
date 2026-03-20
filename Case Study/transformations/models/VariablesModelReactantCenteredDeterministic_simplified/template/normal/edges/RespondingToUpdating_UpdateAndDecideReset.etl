@@ -1,0 +1,13 @@
+operation Uppaal!Template setupRespondingToUpdating_UpdateAndDecideReset(): Uppaal!Template {
+	// responding, --> updating
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "responding"),
+		self.location.selectOne(r | r.name = "updating"),
+		null,
+		Sequence {},
+		null,
+		update(Sequence {functionCall("update"), functionCall("decide_reset") }, point(-1793, -629)),
+		Sequence {}
+	));
+	return self;
+}

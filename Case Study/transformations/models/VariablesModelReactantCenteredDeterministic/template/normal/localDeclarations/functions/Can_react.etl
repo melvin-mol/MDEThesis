@@ -1,0 +1,23 @@
+operation Uppaal!LocalDeclarations setupCan_react(): Uppaal!LocalDeclarations {
+	// bool can_react() {
+	var function_ = function_("bool", "can_react");
+
+	// return minCrit == N_REACTANTS && (tL != INFINITE_TIME && ((delta >= 0 && R < MAX) || (delta < 0 && R > 0)));
+	function_.block.statement.add(
+		return_(
+			and_(
+				equal("minCrit", "N_REACTANTS"),
+				and_(
+					"TL != INFINITE_TIME",
+					or_(
+						and_(greaterOrEqual("delta", "0"), less("R", "MAX")),
+						and_(less("delta", "0"), greater("R", "0"))
+					)
+				)
+			)
+		)
+	);
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

@@ -1,0 +1,54 @@
+operation Uppaal!LocalDeclarations setupODERateFunctions(nta: Uppaal!NSTA, animo: Animo!Network): Uppaal!LocalDeclarations {
+	for (reactant: Animo!Node in animo.activeNameSortedNodes()) {
+		var influencingReactions = animo.activeEdges().select(reaction | reaction.target.id() == reactant.id());
+
+		// double rate{id}() { ... }
+		var rateFunction = function_(nta.double, "rate" + reactant.id());
+		// double boundedRate{id}() { ... }
+		var boundedRateFunction = function_(nta.double, "boundedRate" + reactant.id());
+
+		if (influencingReactions.size() < 1) {
+			// return 0;
+			rateFunction.block.statement.add(return_("0"));
+			// return 0;
+			boundedRateFunction.block.statement.add(return_("0"));
+			self.declaration.add(rateFunction.declaration);
+			self.declaration.add(boundedRateFunction.declaration);
+			continue;
+		}
+
+		for (reaction: Animo!Edge in influencingReactions) {
+			// double {reactionId}_r = <reaction-rate-expression>;
+			rateFunction.block.declarations.declaration.add(
+				dataVariableDeclaration(nta.double, reaction.id() + "_r", setupODERateExpression(reaction))
+			);
+		}
+
+		// return +/- {reactionId}_r ...;
+		rateFunction.block.statement.add(return_(setupODESummedRateExpression(influencingReactions)));
+
+		// double r = rate{id}();
+		boundedRateFunction.block.declarations.declaration.add(
+			dataVariableDeclaration(nta.double, "r", functionCall("rate" + reactant.id()))
+		);
+
+		// if ({id} + r > {id}Levels) {
+		// 		return {id}Levels - {id};
+		// }
+		boundedRateFunction.block.statement.add(if_(greater(add(reactant.id(), "r"), reactant.id() + "Levels")));
+		boundedRateFunction.block.statement.get(0).thenStatement.statement.add(return_(reactant.id() + "Levels - " + reactant.id()));
+
+		// else if ({id} + r < 0) {
+		// 		return -{id};
+		// }
+		boundedRateFunction.block.statement.get(0).elseStatement = if_(less(add(reactant.id(), "r"), "0"));
+		boundedRateFunction.block.statement.get(0).elseStatement.thenStatement.statement.add(return_(minus(reactant.id())));
+		// return r;
+		boundedRateFunction.block.statement.add(return_("r"));
+
+		self.declaration.add(rateFunction.declaration);
+		self.declaration.add(boundedRateFunction.declaration);
+	}
+
+	return self;
+}

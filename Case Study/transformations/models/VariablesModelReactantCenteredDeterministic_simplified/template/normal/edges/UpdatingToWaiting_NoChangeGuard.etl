@@ -1,0 +1,13 @@
+operation Uppaal!Template setupUpdatingToWaiting_NoChangeGuard(): Uppaal!Template {
+	// updating --> waiting, no change
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "updating"),
+		self.location.selectOne(r | r.name = "waiting"),
+		null,
+		Sequence {},
+		guard_(or_(functionCall("infinite_delay"), lessOrEqual("c", "TU")), point(-1657, -671)),
+		null,
+		Sequence {}
+	));
+	return self;
+}

@@ -1,0 +1,2 @@
+// In this model, this check is not performed, so this operation overrides the implementation with an empty one to exclude it.
+operation setupIsDeltaBlockedByBounds(function_: Tuple) {}

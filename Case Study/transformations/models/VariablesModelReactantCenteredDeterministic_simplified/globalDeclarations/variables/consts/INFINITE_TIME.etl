@@ -1,0 +1,5 @@
+// const int INFINITE_TIME = -1;
+operation Uppaal!GlobalDeclarations setupINFINITE_TIME(): Uppaal!GlobalDeclarations {
+   	self.declaration.add(dataVariableDeclaration("CONST", "int", "INFINITE_TIME", "-1"));
+	return self;
+}

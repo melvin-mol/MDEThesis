@@ -1,0 +1,15 @@
+operation setupODEInitializationSelections(animo: Animo!Network): Sequence {
+	var selections = Sequence {};
+
+	for (reactant: Animo!Node in animo.activeNameSortedNodes().select(node | node.randomInitialConcentration)) {
+		selections.add(
+			selection(
+				rangeType("0", ((reactant.randomInitialConcentrationMaximum - reactant.randomInitialConcentrationMinimum) / reactant.randomInitialConcentrationStep).toString()),
+				Sequence { variable(reactant.id() + "_rInit") },
+				point(-430, -118)
+			)
+		);
+	}
+
+	return selections;
+}

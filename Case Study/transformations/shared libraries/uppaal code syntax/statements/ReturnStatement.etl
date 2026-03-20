@@ -1,0 +1,20 @@
+operation return_(variable: Uppaal!Variable): Uppaal!ReturnStatement {
+	var returnStatement = new Uppaal!ReturnStatement();
+	returnStatement.returnExpression = new Uppaal!IdentifierExpression();
+	returnStatement.returnExpression.identifier = variable;
+	return returnStatement;
+}
+
+operation return_(name: String): Uppaal!ReturnStatement {
+	var returnStatement = new Uppaal!ReturnStatement();
+	returnStatement.returnExpression = new Uppaal!IdentifierExpression();
+	returnStatement.returnExpression.identifier = new Uppaal!Variable();
+	returnStatement.returnExpression.identifier.name = name;
+	return returnStatement;
+}
+
+operation return_(expression: Uppaal!Expression): Uppaal!ReturnStatement {
+	var returnStatement = new Uppaal!ReturnStatement();
+	returnStatement.returnExpression = expression;
+	return returnStatement;
+}

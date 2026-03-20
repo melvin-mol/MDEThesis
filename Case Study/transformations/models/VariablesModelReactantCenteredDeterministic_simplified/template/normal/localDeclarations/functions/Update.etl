@@ -1,0 +1,119 @@
+operation Uppaal!LocalDeclarations setupUpdate(animo: Animo!Network): Uppaal!LocalDeclarations {
+	// void update() {
+	var function_ = function_("void", "update");
+	
+	// oldRate = totalRate;
+	function_.block.statement.add(assign("oldRate", "totalRate"));
+	
+	// totalRate = compute_rate();
+	function_.block.statement.add(assign("totalRate", functionCall("compute_rate")));
+
+	// if (totalRate.b < 0) {
+	//		delta = -1;
+	//		totalRate.b = -totalRate.b;
+	// else {
+	// 		delta = 1;
+	// }
+	function_.block.statement.add(ifElse(less("totalRate.b", "0")));
+	function_.block.statement.get(2).thenStatement.statement.add(assign("delta", "-1"));
+	function_.block.statement.get(2).thenStatement.statement.add(assign("totalRate.b", "-totalRate.b"));
+	function_.block.statement.get(2).elseStatement.statement.add(assign("delta", "1"));
+
+	// if (totalRate.b != 0) {
+	function_.block.statement.add(ifElse(not_("totalRate.b", "0")));
+	
+	if (animo.uncertainty != 0) {
+		// TL = _ANIMO_round(multiply(inverse(totalRate), LOWER_UNC));
+		function_.block.statement.get(3).thenStatement.statement.add(
+			assign(
+				"TL",
+				functionCall(
+					"_ANIMO_round", 
+					Sequence {
+						functionCall(
+							"multiply",
+							Sequence {
+								functionCall("inverse", Sequence {"totalRate"}),
+								"LOWER_UNC"
+							}
+						) 
+					}
+				)
+			)
+		);
+		// TU = _ANIMO_round(multiply(inverse(totalRate), UPPER_UNC));
+		function_.block.statement.get(3).thenStatement.statement.add(
+			assign(
+				"TU",
+				functionCall(
+					"_ANIMO_round", 
+					Sequence {
+						functionCall(
+							"multiply",
+							Sequence {
+								functionCall("inverse", Sequence {"totalRate"}),
+								"UPPER_UNC"
+							}
+						) 
+					}
+				)
+			)
+		);
+	} else {
+		// TL = _ANIMO_round(inverse(totalRate));
+		function_.block.statement.get(3).thenStatement.statement.add(
+			assign(
+				"TL",
+				functionCall(
+					"_ANIMO_round", 
+					Sequence { functionCall("inverse", Sequence { "totalRate" }) })
+			)
+		);
+		// TU = TL;
+		function_.block.statement.get(3).thenStatement.statement.add(assign("TU", "TL"));
+	}
+
+	// 		if (TL < 1) {
+	//			TL = 1;
+	//		}
+	var tlLessThen1 = if_(less("TL", "1"));
+	function_.block.statement.get(3).thenStatement.statement.add(tlLessThen1);
+	tlLessThen1.thenStatement.statement.add(assign("TL", "1"));
+	
+	//		if (TU < 1) {
+	//			TU = 1;
+	//		}
+	var tuLessThen1 = if_(less("TU", "1"));
+	function_.block.statement.get(3).thenStatement.statement.add(tuLessThen1);
+	tuLessThen1.thenStatement.statement.add(assign("TU", "1"));
+	
+	// } else {
+	// 		TL = INFINITE_TIME;
+	// 		TU = INFINITE_TIME;
+	// }
+	function_.block.statement.get(3).elseStatement.statement.add(assign("TL", "INFINITE_TIME"));
+	function_.block.statement.get(3).elseStatement.statement.add(assign("TU", "INFINITE_TIME"));
+
+	// if (TL != INFINITE_TIME && TL > TU) {
+	//		TL = TU;
+	// }
+	function_.block.statement.add(if_(and_(not_("TL", "INFINITE_TIME"), greater("TL", "TU"))));
+	function_.block.statement.get(4).thenStatement.statement.add(assign("TL", "TU"));
+
+	// 	if ((delta >= 0 && R == MAX) || (delta < 0 && R == 0)) {
+	// 		TL = TU = INFINITE_TIME;
+	// 	}
+	setupIsDeltaBlockedByBounds(function_);
+
+	self.declaration.add(function_.declaration);
+	return self;
+}
+
+// 	if ((delta >= 0 && R == MAX) || (delta < 0 && R == 0)) {
+// 		TL = TU = INFINITE_TIME;
+// 	}
+operation setupIsDeltaBlockedByBounds(function_: Tuple) {
+	var if_ = if_(or_(and_(greaterOrEqual("delta", "0"), equal("R", "MAX")), and_(less("delta", "0"), equal("R", "0"))));
+	if_.thenStatement.statement.add(assign(Sequence { "TL", "TU" }, "INFINITE_TIME"));
+	function_.block.statement.add(if_);
+}

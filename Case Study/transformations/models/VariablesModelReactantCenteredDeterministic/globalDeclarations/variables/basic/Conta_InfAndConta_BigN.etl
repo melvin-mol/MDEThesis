@@ -1,0 +1,5 @@
+// int conta_inf = 0, conta_bigN = 0;
+operation Uppaal!GlobalDeclarations setupConta_InfAndConta_BigN(): Uppaal!GlobalDeclarations {
+	self.declaration.add(dataVariableDeclarationWithVariables("int", Sequence { variable("conta_inf", "0"), variable("conta_bigN", "0") }));
+	return self;
+}

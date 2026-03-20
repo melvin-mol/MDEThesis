@@ -1,0 +1,8 @@
+import "Id0.etl";
+import "Id1.etl";
+
+operation Uppaal!Template setupLocations(animo: Animo!Network): Uppaal!Template {
+	return self
+		.setupId0(animo)
+		.setupId1();
+}

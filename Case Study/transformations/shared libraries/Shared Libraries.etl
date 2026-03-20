@@ -1,0 +1,3 @@
+import "animo/Animo.etl";
+import "general/General.etl";
+import "uppaal code syntax/Uppaal Code Syntax.etl";

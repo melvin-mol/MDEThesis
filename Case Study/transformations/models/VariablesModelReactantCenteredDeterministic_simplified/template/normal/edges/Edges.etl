@@ -1,0 +1,31 @@
+import "Id0ToWaiting_ReachedSend.etl";
+import "RespondingToUpdating_UpdateAndDecideReset.etl";
+import "StartToWaiting_DoUpdateReceive.etl";
+import "UpdatingToWaiting_NoChangeGuard.etl";
+import "UpdatingToWaiting_UrgentReactionGuard.etl";
+import "WaitingToId0_ReachingReceive.etl";
+import "WaitingToId0_ReachingSend.etl";
+import "WaitingToResponding_ReachedSourceReceive_Scenario1.etl";
+import "WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl";
+import "WaitingToResponding_ReachedSourceReceive_Scenario4.etl";
+
+operation Uppaal!Template setupEdges(reactant: Animo!Node, animo: Animo!Network): Uppaal!Template {
+	self.setupRespondingToUpdating_UpdateAndDecideReset()
+		.setupStartToWaiting_DoUpdateReceive(animo)
+		.setupUpdatingToWaiting_NoChangeGuard()
+		.setupUpdatingToWaiting_UrgentReactionGuard()
+		.setupWaitingToId0_ReachingSend()
+		.setupWaitingToId0_ReachingReceive()
+		.setupId0ToWaiting_ReachedSend(reactant);
+	
+	for (reaction in animo.targetEdges(reactant)) {
+		switch (reaction.scenario) {
+			case (0): self.setupWaitingToResponding_ReachedSourceReceive_Scenario1(reaction); break;
+			case (1): self.setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction, reactant); break;
+			case (2): self.setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction, reactant); break;
+			case (3): self.setupWaitingToResponding_ReachedSourceReceive_Scenario4(reaction, animo); break;
+		}
+	}
+
+	return self;
+}

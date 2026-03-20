@@ -1,0 +1,5 @@
+// int[-1, 1] delta = 0;
+operation Uppaal!LocalDeclarations setupDelta(): Uppaal!LocalDeclarations {
+	self.declaration.add(dataVariableDeclaration(rangeType("-1", "1"), "delta", "0"));
+	return self;
+}

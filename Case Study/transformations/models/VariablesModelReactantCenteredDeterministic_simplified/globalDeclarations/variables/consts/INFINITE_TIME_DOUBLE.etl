@@ -1,0 +1,5 @@
+// const double_t INFINITE_TIME_DOUBLE = {-1000, -3};
+operation Uppaal!GlobalDeclarations setupINFINITE_TIME_DOUBLE(): Uppaal!GlobalDeclarations {
+	self.declaration.add(dataVariableDeclaration("CONST", self.getDeclaredType("double_t"), "INFINITE_TIME_DOUBLE", "{-1000, -3}"));
+	return self;
+}

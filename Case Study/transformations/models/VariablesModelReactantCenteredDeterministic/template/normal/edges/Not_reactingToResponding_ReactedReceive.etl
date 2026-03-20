@@ -1,0 +1,77 @@
+operation Uppaal!Template setupNot_reactingToResponding_ReactedReceive(reactant: Animo!Node, animo: Animo!Network): Uppaal!Template {
+	// not_reacting --> responding
+	var y1 = -894;
+	var y2 = -877;
+	var incrY = -42;
+	var alreadyOutputReactants = Sequence {};
+
+	for (reaction in animo.targetEdges(reactant)) {
+		switch (reaction.scenario) {
+			case 0:
+				if (reaction.source.channelIndex() != reactant.channelIndex() and not alreadyOutputReactants.contains(reaction.source.channelIndex())) {
+					alreadyOutputReactants.add(reaction.source.channelIndex());
+					self.setupNot_reactingToResponding_ReactedReceiveFromSource(reaction, y1, y2);
+					y1 = y1 + incrY;
+					y2 = y2 + incrY;
+				}
+				break;
+			case 1:
+				if (reaction.source.channelIndex() != reactant.channelIndex() and not alreadyOutputReactants.contains(reaction.source.channelIndex())) {
+					alreadyOutputReactants.add(reaction.source.channelIndex());
+					self.setupNot_reactingToResponding_ReactedReceiveFromSource(reaction, y1, y2);
+					y1 = y1 + incrY;
+					y2 = y2 + incrY;
+				}
+				if (reaction.target.channelIndex() != reactant.channelIndex() and not alreadyOutputReactants.contains(reaction.target.channelIndex())) {
+					alreadyOutputReactants.add(reaction.target.channelIndex());
+					self.setupNot_reactingToResponding_ReactedReceiveFromTarget(reaction, y1, y2);
+					y1 = y1 + incrY;
+					y2 = y2 + incrY;
+				}
+				break;
+			case 2:
+				if (reaction.source.channelIndex() != reactant.channelIndex() and not alreadyOutputReactants.contains(reaction.source.channelIndex())) {
+					alreadyOutputReactants.add(reaction.source.channelIndex());
+					self.setupNot_reactingToResponding_ReactedReceiveFromSource(reaction, y1, y2);
+					y1 = y1 + incrY;
+					y2 = y2 + incrY;
+				}
+				if (reaction.target.channelIndex() != reactant.channelIndex() and not alreadyOutputReactants.contains(reaction.target.channelIndex())) {
+					alreadyOutputReactants.add(reaction.target.channelIndex());
+					self.setupNot_reactingToResponding_ReactedReceiveFromTarget(reaction, y1, y2);
+					y1 = y1 + incrY;
+					y2 = y2 + incrY;
+				}
+				break;
+			default:
+				break;
+		}
+	}
+	return self;
+}
+
+operation Uppaal!Template setupNot_reactingToResponding_ReactedReceiveFromSource(reaction: Animo!Edge, y1: Integer, y2: Integer): Uppaal!Template {
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "not_reacting"),
+		self.location.selectOne(r | r.name = "responding"),
+		synchronization("receive", "reacted[" + reaction.source.channelIndex() + "]", point(-1504, y1)),
+		Sequence { point(-1419, y2), point(-1853, y2) },
+		null,
+		update(assign("c", "0").expression, point(-1504, y2)),
+		Sequence {}
+	));
+	return self;
+}
+
+operation Uppaal!Template setupNot_reactingToResponding_ReactedReceiveFromTarget(reaction: Animo!Edge, y1: Integer, y2: Integer): Uppaal!Template {
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "not_reacting"),
+		self.location.selectOne(r | r.name = "responding"),
+		synchronization("receive", "reacted[" + reaction.target.channelIndex() + "]", point(-1504, y1)),
+		Sequence { point(-1419, y2), point(-1853, y2) },
+		null,
+		update(assign("c", "0").expression, point(-1504, y2)),
+		Sequence {}
+	));
+	return self;
+}

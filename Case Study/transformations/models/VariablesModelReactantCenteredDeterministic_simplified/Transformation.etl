@@ -1,0 +1,7 @@
+import "Animo2VariablesModelReactantCenteredDeterministic_simplified.etl";
+
+rule Network2NTA
+transform animo : Animo!Network
+to uppaal : Uppaal!NSTA {
+    transformation(animo, uppaal);
+}

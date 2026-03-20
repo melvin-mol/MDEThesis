@@ -1,0 +1,13 @@
+// typedef struct { int[-99980001, 99980001] b; int e; } double_t
+operation Uppaal!GlobalDeclarations setupDouble_t(): Uppaal!GlobalDeclarations {
+	self.declaration.add(
+		structTypeDeclaration(
+			Sequence { 
+				dataVariableDeclaration(rangeType("-99980001", "99980001"), "b"), 
+				dataVariableDeclaration("int", "e") 
+			}, 
+			"double_t"
+		)
+	);
+	return self;
+}

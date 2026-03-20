@@ -1,0 +1,7 @@
+// const double k_{id} = 0.123;
+operation Uppaal!GlobalDeclarations setupReactionVariables(animo : Animo!Network, nta: Uppaal!NSTA): Uppaal!GlobalDeclarations {
+	for (reaction: Animo!Edge in animo.activeEdges()) {
+		self.declaration.add(dataVariableDeclaration("CONST", nta.double, "k_" + reaction.id(), (reaction.k / (animo.secondsPerPoint * reaction.levelsScaleFactor)).toString()));
+	}
+	return self;
+}

@@ -1,0 +1,9 @@
+// int R{index} = {initalLevel};
+// const int R{index}Levels = {levels}
+operation Uppaal!GlobalDeclarations setupReactantVariables(animo : Animo!Network): Uppaal!GlobalDeclarations {
+	for (reactant: Animo!Node in animo.activeSortedNodes()) {
+		self.declaration.add(dataVariableDeclaration("int", reactant.id(), reactant.initialConcentration.toString()));
+		self.declaration.add(dataVariableDeclaration("CONST", "int", reactant.id() + "Levels", reactant.levels.toString()));
+	}
+	return self;
+}

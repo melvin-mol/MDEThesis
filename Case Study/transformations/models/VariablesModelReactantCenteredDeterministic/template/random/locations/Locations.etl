@@ -1,0 +1,12 @@
+import "Id2Random.etl";
+import "Id3Random.etl";
+import "Id4Random.etl";
+import "Id5Random.etl";
+
+operation Uppaal!Template setupLocations(): Uppaal!Template {
+	return self
+		.setupId2Random()
+		.setupId3Random()
+		.setupId4Random()
+		.setupId5Random();
+}

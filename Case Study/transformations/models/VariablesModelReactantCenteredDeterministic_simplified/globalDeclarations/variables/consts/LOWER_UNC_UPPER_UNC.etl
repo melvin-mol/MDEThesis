@@ -1,0 +1,14 @@
+// const double_t LOWER_UNC = { exponent, significand }, UPPER_UNC = { exponent, significand };
+operation Uppaal!GlobalDeclarations setupLOWER_UNC_UPPER_UNC(animo : Animo!Network): Uppaal!GlobalDeclarations {
+	if (animo.uncertainty != 0.0) {
+		// LOWER_UNC
+		self.declaration.add(dataVariableDeclaration(
+			"CONST", 
+			self.getDeclaredType("double_t"), Sequence { 
+				variable("LOWER_UNC", formatDouble((100.0 - animo.uncertainty) / 100.0)),
+				variable("UPPER_UNC", formatDouble((100.0 + animo.uncertainty) / 100.0))
+			}
+		));
+	}
+	return self;
+}

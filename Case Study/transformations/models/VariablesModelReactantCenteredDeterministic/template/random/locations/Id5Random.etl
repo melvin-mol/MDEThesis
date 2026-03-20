@@ -1,0 +1,4 @@
+operation Uppaal!Template setupId5Random(): Uppaal!Template {
+	self.location.add(chanceNode(self, "id5", point(161, 0)));
+    return self;
+}

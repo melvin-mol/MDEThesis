@@ -1,0 +1,13 @@
+operation Uppaal!Template setupId4ToId5(): Uppaal!Template {
+	// id4 --> id5
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "id4"),
+		self.location.selectOne(r | r.name = "id5"),
+		null,
+		Sequence {},
+		null,
+		null,
+		Sequence {}
+	));
+	return self;
+}

@@ -1,0 +1,21 @@
+operation Uppaal!GlobalDeclarations setupPower(): Uppaal!GlobalDeclarations {
+	// time_t power(int a, int b)
+	var function_ = function_(self.getDeclaredType("time_t"), "power", Sequence { parameter("int", "a"), parameter("int", "b") });
+	
+	// time_t r = 1;
+	function_.block.declarations.declaration.add(dataVariableDeclaration(self.getDeclaredType("time_t"), "r", "1"));
+	
+	// while (b > 0) {
+	// 		r = r * a;
+	// 		b = b - 1;
+	// }
+	function_.block.statement.add(while_(greater("b", "0")));
+	function_.block.statement.first().statement.statement.add(assign("r", multiplicate("r", "a")));
+	function_.block.statement.first().statement.statement.add(assign("b", subtract("b", "1")));
+		
+	// return r;
+	function_.block.statement.add(return_("r"));
+	
+	self.declaration.add(function_.declaration);
+	return self;
+}

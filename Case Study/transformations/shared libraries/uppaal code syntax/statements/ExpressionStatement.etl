@@ -1,0 +1,76 @@
+operation assign(firstLiteral: String, secondLiteral: String): Uppaal!ExpressionStatement {
+	var expressionStatememet = new Uppaal!ExpressionStatement();
+	expressionStatememet.expression = new Uppaal!AssignmentExpression();
+	expressionStatememet.expression.operator = Uppaal!AssignmentOperator#EQUAL;
+	expressionStatememet.expression.firstExpr = new Uppaal!LiteralExpression();
+	expressionStatememet.expression.firstExpr.text = firstLiteral;
+	expressionStatememet.expression.secondExpr = new Uppaal!LiteralExpression();
+	expressionStatememet.expression.secondExpr.text = secondLiteral;
+	return expressionStatememet;
+}
+
+operation assign(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ExpressionStatement {
+	var expressionStatememet = new Uppaal!ExpressionStatement();
+	expressionStatememet.expression = new Uppaal!AssignmentExpression();
+	expressionStatememet.expression.operator = Uppaal!AssignmentOperator#EQUAL;
+	expressionStatememet.expression.firstExpr = new Uppaal!LiteralExpression();
+	expressionStatememet.expression.firstExpr.text = firstLiteral;
+	expressionStatememet.expression.secondExpr = secondExpression;
+	return expressionStatememet;
+}
+
+operation assign(firstLiteral: String, secondLiteral: String, thirdLiteral: String): Uppaal!ExpressionStatement {
+	var nestedAssignment = new Uppaal!AssignmentExpression();
+	nestedAssignment.operator = Uppaal!AssignmentOperator#EQUAL;
+	nestedAssignment.firstExpr = new Uppaal!LiteralExpression();
+	nestedAssignment.firstExpr.text = secondLiteral;
+	nestedAssignment.secondExpr = new Uppaal!LiteralExpression();
+	nestedAssignment.secondExpr.text = thirdLiteral;
+
+	return assign(firstLiteral, nestedAssignment);
+}
+
+operation assign(variableNames: Sequence(String), valueLiteral: String): Uppaal!ExpressionStatement {
+	var expressionStatememet = new Uppaal!ExpressionStatement();
+	var nestedExpression = new Uppaal!LiteralExpression();
+	nestedExpression.text = valueLiteral;
+
+	var i = variableNames.size();
+	while (i > 0) {
+		var assignment = new Uppaal!AssignmentExpression();
+		assignment.operator = Uppaal!AssignmentOperator#EQUAL;
+		assignment.firstExpr = new Uppaal!LiteralExpression();
+		assignment.firstExpr.text = variableNames.at(i - 1);
+		assignment.secondExpr = nestedExpression;
+		nestedExpression = assignment;
+		i = i - 1;
+	}
+
+	expressionStatememet.expression = nestedExpression;
+	return expressionStatememet;
+}
+
+operation assign(variableNames: Sequence(String), valueExpression: Uppaal!Expression): Uppaal!ExpressionStatement {
+	var expressionStatememet = new Uppaal!ExpressionStatement();
+	var nestedExpression = valueExpression;
+
+	var i = variableNames.size();
+	while (i > 0) {
+		var assignment = new Uppaal!AssignmentExpression();
+		assignment.operator = Uppaal!AssignmentOperator#EQUAL;
+		assignment.firstExpr = new Uppaal!LiteralExpression();
+		assignment.firstExpr.text = variableName;
+		assignment.secondExpr = variableNames.at(i - 1);
+		nestedExpression = assignment;
+		i = i - 1;
+	}
+
+	expressionStatememet.expression = nestedExpression;
+	return expressionStatememet;
+}
+
+operation statement(expression: Uppaal!Expression): Uppaal!ExpressionStatement {
+	var expressionStatememet = new Uppaal!ExpressionStatement();
+	expressionStatememet.expression = expression;
+	return expressionStatememet;
+}

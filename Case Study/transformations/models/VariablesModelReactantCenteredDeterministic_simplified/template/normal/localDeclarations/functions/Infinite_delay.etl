@@ -1,0 +1,10 @@
+operation Uppaal!LocalDeclarations setupInfinite_delay(): Uppaal!LocalDeclarations {
+	// void infinite_delay() {
+	var function_ = function_("bool", "infinite_delay");
+	
+	// return TU == INFINITE_TIME;
+	function_.block.statement.add(return_(equal("TU", "INFINITE_TIME")));
+	
+	self.declaration.add(function_.declaration);
+	return self;
+}

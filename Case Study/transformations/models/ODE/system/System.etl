@@ -1,0 +1,16 @@
+import "instantiationList/InstantiationList.etl";
+
+operation Uppaal!NSTA setupSystem(animo : Animo!Network): Uppaal!NSTA {
+	self.systemDeclarations = new Uppaal!SystemDeclarations;
+	self.systemDeclarations.system = new Uppaal!System;
+
+	var instantiationList =
+		new Uppaal!InstantiationList
+			.setupModelInstantiation(self);
+
+	if (instantiationList.template.size() > 0) {
+		self.systemDeclarations.system.instantiationList.add(instantiationList);
+	}
+
+	return self;
+}

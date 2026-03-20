@@ -1,0 +1,5 @@
+// typedef int[-1073741822, 1073741822] int_t;
+operation Uppaal!GlobalDeclarations setupInt_t(): Uppaal!GlobalDeclarations {
+	self.declaration.add(rangeTypeDeclaration("-1073741822", "1073741822", "int_t"));
+	return self;
+}

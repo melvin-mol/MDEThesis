@@ -1,0 +1,13 @@
+operation Uppaal!Template setupId3ToId2_DoUpdateSend(): Uppaal!Template {
+	// id3 --> id3
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "id3"),
+		self.location.selectOne(r | r.name = "id2"),
+		synchronization("send", "do_update", point(348, -17)),
+		Sequence {},
+		null,
+		null,
+		Sequence {}
+	));
+	return self;
+}

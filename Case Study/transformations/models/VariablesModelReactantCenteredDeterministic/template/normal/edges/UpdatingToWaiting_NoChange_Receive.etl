@@ -1,0 +1,13 @@
+operation Uppaal!Template setupUpdatingToWaiting_NoChange_Receive(): Uppaal!Template {
+	// updating --> waiting, no change
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "updating"),
+		self.location.selectOne(r | r.name = "waiting"),
+		synchronization("receive", "decide_react", point(-1598, -731)),
+		Sequence {},
+		guard_(and_(functionCall("can_react"), lessOrEqual("c", "TU")), point(-1632, -748)),
+		null,
+		Sequence {}
+	));
+	return self;
+}

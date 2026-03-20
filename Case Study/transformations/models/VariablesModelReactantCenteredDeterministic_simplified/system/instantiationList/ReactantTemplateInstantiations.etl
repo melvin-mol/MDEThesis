@@ -1,0 +1,25 @@
+operation Uppaal!InstantiationList setupReactantTemplateInstantiations(nta: Uppaal!NSTA, animo: Animo!Network): Uppaal!InstantiationList {
+	for (reactant : Animo!Node in animo.activeSortedNodes()) {
+		if (animo.targetEdges(reactant).size() < 1) {
+			continue;
+		}
+
+		var templateDeclaration = new Uppaal!TemplateDeclaration;
+		templateDeclaration.declaredTemplate = new Uppaal!RedefinedTemplate;
+		templateDeclaration.declaredTemplate.name = reactant.id() + "_";
+		templateDeclaration.declaredTemplate.referredTemplate = nta.template.selectOne(t | t.name = "Reactant_" + reactant.id());
+
+		templateDeclaration.argument.add(new Uppaal!IdentifierExpression);
+		templateDeclaration.argument.get(0).identifier = nta.globalDeclarations.declaration.select(d |
+			d.eClass().getEStructuralFeature("variable") != null and
+			d.variable.exists(v | v.name = reactant.id())
+		).first().variable.select(v | v.name = reactant.id()).first();
+	
+		templateDeclaration.argument.add(new Uppaal!LiteralExpression);
+		templateDeclaration.argument.get(1).text = reactant.levels.toString();
+		
+		nta.systemDeclarations.declaration.add(templateDeclaration);
+		self.template.add(templateDeclaration.declaredTemplate);
+	}
+    return self;
+}

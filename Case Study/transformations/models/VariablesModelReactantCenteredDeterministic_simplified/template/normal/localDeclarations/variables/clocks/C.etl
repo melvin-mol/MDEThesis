@@ -1,0 +1,5 @@
+// clock c;
+operation Uppaal!LocalDeclarations setupClockC(): Uppaal!LocalDeclarations {
+	self.declaration.add(clock("c"));
+	return self;
+}

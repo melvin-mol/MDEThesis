@@ -1,0 +1,38 @@
+import "Add.etl";
+import "_ANIMO_round.etl";
+import "Divide.etl";
+import "Int_to_double.etl";
+import "Inverse.etl";
+import "Multiply.etl";
+import "Power.etl";
+import "Scenario1.etl";
+import "Scenario2_3.etl";
+import "Scenario4.etl";
+import "Subtract.etl";
+
+// // Creates:
+// if ((r.b > 0 && r.b < 10) || (r.b < 0 && r.b > -10)) {
+// 		r.b = r.b * 1000;
+//		r.e = r.e - 3;
+// else if ((r.b > 0 && r.b < 100) || (r.b < 0 && r.b > -100)) {
+// 		r.b = r.b * 100;
+//		r.e = r.e - 2;
+// }
+// else if ((r.b > 0 && r.b < 1000) || (r.b < 0 && r.b > -1000)){
+// 		r.b = r.b * 10;
+//		r.e = r.e - 1;
+//}
+operation normalizeMagnitude(): Uppaal!IfStatement {
+	var singleDigitNonZeroIf = if_(or_(and_(greater("r.b", "0"), less("r.b", "10")), and_(less("r.b", "0"), greater("r.b", "-10"))));
+	singleDigitNonZeroIf.thenStatement.statement.add(assign("r.b", multiplicate("r.b", "1000")));
+	singleDigitNonZeroIf.thenStatement.statement.add(assign("r.e", subtract("r.e", "3")));
+
+	singleDigitNonZeroIf.elseStatement = if_(or_(and_(greater("r.b", "0"), less("r.b", "100")), and_(less("r.b", "0"), greater("r.b", "-100"))));
+	singleDigitNonZeroIf.elseStatement.thenStatement.statement.add(assign("r.b", multiplicate("r.b", "100")));
+	singleDigitNonZeroIf.elseStatement.thenStatement.statement.add(assign("r.e", subtract("r.e", "2")));
+
+	singleDigitNonZeroIf.elseStatement.elseStatement = if_(or_(and_(greater("r.b", "0"), less("r.b", "1000")), and_(less("r.b", "0"), greater("r.b", "-1000"))));
+	singleDigitNonZeroIf.elseStatement.elseStatement.thenStatement.statement.add(assign("r.b", multiplicate("r.b", "10")));
+	singleDigitNonZeroIf.elseStatement.elseStatement.thenStatement.statement.add(assign("r.e", subtract("r.e", "1")));
+	return singleDigitNonZeroIf;
+}

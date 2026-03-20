@@ -1,0 +1,11 @@
+// broadcast chan reacting, do_update, decide_react;
+operation Uppaal!GlobalDeclarations setupReachingAndDoUpdate(): Uppaal!GlobalDeclarations {
+	self.declaration.add(
+		channelVariableDeclaration(
+			true, 
+			"chan", 
+			Sequence { variable("reacting"), variable("do_update"), variable("decide_react") }
+		)
+	);
+	return self;
+}

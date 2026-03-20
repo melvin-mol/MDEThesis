@@ -1,0 +1,25 @@
+operation Uppaal!GlobalDeclarations setupExitCrit(): Uppaal!GlobalDeclarations {
+	// void exitCrit(int id) {
+	var function_ = function_(
+		"void",
+		"exitCrit",
+		Sequence {
+			parameter("int", "id")
+		}
+	);
+
+	// criticalSession[id] = false;
+	function_.block.statement.add(assign("criticalSession[id]", "false"));
+
+	// if (id == minCrit) {
+	//   while (minCrit < N_REACTANTS && !criticalSession[minCrit]) {
+    //      minCrit++;
+    //   }
+	// }
+	function_.block.statement.add(if_(equal("id", "minCrit")));
+    function_.block.statement.get(1).thenStatement.statement.add(while_(and_(less("minCrit", "N_REACTANTS"), not_("criticalSession[minCrit]"))));
+    function_.block.statement.get(1).thenStatement.statement.get(0).statement.statement.add(statement(increment(self.findVariable("minCrit"))));
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

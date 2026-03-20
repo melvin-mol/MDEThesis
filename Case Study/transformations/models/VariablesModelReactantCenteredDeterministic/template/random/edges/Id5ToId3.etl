@@ -1,0 +1,40 @@
+operation Uppaal!Template setupId5ToId3(animo: Animo!Network): Uppaal!Template {
+	// id5 --> id3
+	var updateExpressions = Sequence {};
+	for (reactant: Animo!Node in animo.activeSortedNodes().select(node | node.randomInitialConcentration)) {
+		updateExpressions.add(
+			assign(
+				reactant.id(),
+				add(
+					reactant.randomInitialConcentrationMinimum.toString(),
+					multiplicate(reactant.id() + "_init", reactant.randomInitialConcentrationStep.toString())
+				)
+			).expression
+		);
+	}
+    
+	var selections = Sequence {};
+	for (reactant: Animo!Node in animo.activeSortedNodes().select(node | node.randomInitialConcentration)) {
+		selections.add(
+			selection(
+				rangeType(
+					"0",
+					((reactant.randomInitialConcentrationMaximum - reactant.randomInitialConcentrationMinimum) / reactant.randomInitialConcentrationStep).toString()
+				),
+				Sequence { variable(reactant.id() + "_init") },
+				point(178, -59)
+			)
+		);
+	}
+
+    self.edge.add(chanceEdge(
+		self.location.selectOne(r | r.name = "id5"),
+		self.location.selectOne(r | r.name = "id3"),
+		new Tuple(weight = 1, position = point(178, 8)),
+		Sequence {},
+		null,
+		update(updateExpressions, point(178, -25)),
+		selections
+	));
+	return self;
+}

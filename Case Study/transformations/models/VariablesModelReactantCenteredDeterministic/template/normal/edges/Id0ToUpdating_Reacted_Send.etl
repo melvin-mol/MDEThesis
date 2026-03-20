@@ -1,0 +1,16 @@
+operation Uppaal!Template setupId0ToUpdating_Reacted_Send(reactant: Animo!Node): Uppaal!Template {
+	// Also remember to tell your downstream people that you have reacted, and perform your update()
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "id0"),
+		self.location.selectOne(r | r.name = "updating"),
+		synchronization("send", "reacted[" + reactant.channelIndex() + "]", point(-1544, -827)),
+		Sequence { point(-1489, -810) },
+		guard_(equal("minCrit", reactant.channelIndex()), point(-1544, -841)),
+		update(Sequence {
+			functionCall("update"),
+			functionCall("exitCrit", Sequence { reactant.channelIndex() })
+		}, point(-1544, -810)),
+		Sequence {}
+	));
+	return self;
+}

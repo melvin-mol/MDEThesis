@@ -1,0 +1,7 @@
+operation chanceNode(parentTemplate: Uppaal!Template, name: String, point: Uppaal!Point): Uppaal!ChanceNode {
+	var chanceNode = new Uppaal!ChanceNode;
+	chanceNode.parentTemplate = parentTemplate;
+	chanceNode.name = name;
+	chanceNode.position = point;
+	return chanceNode;
+}

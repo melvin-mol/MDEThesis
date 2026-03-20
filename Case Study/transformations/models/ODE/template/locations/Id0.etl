@@ -1,0 +1,33 @@
+operation Uppaal!Template setupId0(animo: Animo!Network): Uppaal!Template {
+	self.location.add(
+		location(
+			self, 
+			new Tuple(name = "id0", position = point(-324, -85)), 
+			point(-314, -102), 
+			invariant(setupODEInvariant(animo), point(-324, -85))
+		)
+	);
+
+	return self;
+}
+
+operation setupODEInvariant(animo: Animo!Network): Uppaal!Expression {
+	var invariantExpression = null;
+	for (reactant: Animo!Node in animo.activeNameSortedNodes()) {
+		invariantExpression = invariantExpression.isDefined()
+			? and_(invariantExpression, equal(
+		        reactant.id() + "'",
+		        functionCall("boundedRate" + reactant.id())
+	        ))
+			: equal(
+		        reactant.id() + "'",
+		        functionCall("boundedRate" + reactant.id())
+	    );
+	}
+
+	if (invariantExpression.isDefined()) {
+		return invariantExpression;
+	}
+
+	return new Uppaal!LiteralExpression(text = "true");
+}

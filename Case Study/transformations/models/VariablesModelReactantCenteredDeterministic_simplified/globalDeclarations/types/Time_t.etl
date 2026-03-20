@@ -1,0 +1,5 @@
+// typedef int[-1, 1073741822] time_t;
+operation Uppaal!GlobalDeclarations setupTime_t(): Uppaal!GlobalDeclarations {
+	self.declaration.add(rangeTypeDeclaration("-1", "1073741822", "time_t"));
+	return self;
+}

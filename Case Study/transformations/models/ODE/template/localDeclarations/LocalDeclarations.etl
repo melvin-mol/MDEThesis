@@ -1,0 +1,8 @@
+import "./functions/Functions.etl";
+
+operation Uppaal!Template setupLocalDeclarations(nta: Uppaal!NSTA, animo: Animo!Network): Uppaal!Template {
+	self.declarations = 
+        new Uppaal!LocalDeclarations()
+		.setupODERateFunctions(nta, animo);
+	return self;
+}

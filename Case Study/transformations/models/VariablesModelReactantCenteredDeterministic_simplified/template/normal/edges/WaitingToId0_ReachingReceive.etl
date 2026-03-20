@@ -1,0 +1,13 @@
+operation Uppaal!Template setupWaitingToId0_ReachingReceive(): Uppaal!Template {
+	// Reach when ANYBODY is reaching if you can eact now
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "waiting"),
+		self.location.selectOne(r | r.name = "id0"),
+		synchronization("receive", "reaching", point(-1690, -827)),
+		Sequence { point(-1666, -810) },
+		guard_(and_(not_(functionCall("infinite_delay")), greaterOrEqual("c", "TL")), point(-1690, -861)),
+		update(Sequence { functionCall("reach"), assign("c", "0").expression }, point(-1690, -810)),
+		Sequence {}
+	));
+	return self;
+}

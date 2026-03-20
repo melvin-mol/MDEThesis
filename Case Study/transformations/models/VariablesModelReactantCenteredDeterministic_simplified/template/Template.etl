@@ -1,0 +1,8 @@
+import "normal/Normal.etl";
+import "random/Random.etl";
+
+operation Uppaal!NSTA setupTemplate(animo : Animo!Network): Uppaal!NSTA {
+	return self
+		.setupRandomTemplate(animo)
+		.setupNormalTemplates(animo);
+}

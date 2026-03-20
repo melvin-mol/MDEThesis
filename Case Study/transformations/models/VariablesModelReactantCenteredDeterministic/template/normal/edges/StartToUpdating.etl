@@ -1,0 +1,19 @@
+operation Uppaal!Template setupStartToUpdating(reactant: Animo!Node, animo: Animo!Network): Uppaal!Template {
+	// start --> waiting
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "start"),
+		self.location.selectOne(r | r.name = "updating"),
+		synchronization(
+			(animo.areThereRandomInitials() or not animo.isFirstOutputAutomatonTemplate(reactant)) 
+				? "receive" 
+				: "send", 
+			"do_update", 
+			point(-1343, -748)
+		),
+		Sequence {},
+		null,
+		update(functionCall("update"), point(-1343, -731)),
+		Sequence {}
+	));
+	return self;
+}

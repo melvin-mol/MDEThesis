@@ -1,0 +1,35 @@
+operation increment(variable: Uppaal!Variable): Uppaal!IncrementDecrementExpression {
+	var expression = new Uppaal!IncrementDecrementExpression();
+    expression.expression = new Uppaal!IdentifierExpression();
+    expression.expression.identifier = variable;
+	expression.operator = Uppaal!IncrementDecrementOperator#INCREMENT;
+	expression.position = Uppaal!IncrementDecrementPosition#POST;
+	return expression;
+}
+
+operation preIncrement(variable: Uppaal!Variable): Uppaal!IncrementDecrementExpression {
+	var expression = new Uppaal!IncrementDecrementExpression();
+    expression.expression = new Uppaal!IdentifierExpression();
+    expression.expression.identifier = variable;
+	expression.operator = Uppaal!IncrementDecrementOperator#INCREMENT;
+	expression.position = Uppaal!IncrementDecrementPosition#PRE;
+	return expression;
+}
+
+operation decrement(variable: Uppaal!Variable): Uppaal!IncrementDecrementExpression {
+	var expression = new Uppaal!IncrementDecrementExpression();
+    expression.expression = new Uppaal!IdentifierExpression();
+    expression.expression.identifier = variable;
+	expression.operator = Uppaal!IncrementDecrementOperator#DECREMENT;
+	expression.position = Uppaal!IncrementDecrementPosition#POST;
+	return expression;
+}
+
+operation preDecrement(variable: Uppaal!Variable): Uppaal!IncrementDecrementExpression {
+	var expression = new Uppaal!IncrementDecrementExpression();
+	expression.expression = new Uppaal!IdentifierExpression();
+	expression.expression.identifier = variable;
+	expression.operator = Uppaal!IncrementDecrementOperator#DECREMENT;
+	expression.position = Uppaal!IncrementDecrementPosition#PRE;
+	return expression;
+}

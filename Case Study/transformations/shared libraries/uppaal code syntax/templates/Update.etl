@@ -1,0 +1,13 @@
+operation update(expressions: Sequence(Uppaal!Expression), position: Uppaal!Point): Uppaal!Update {
+    var update = new Uppaal!Update;
+    update.expression.addAll(expressions);
+    update.position = position;
+    return update;
+}
+
+operation update(expression: Uppaal!Expression, position: Uppaal!Point): Uppaal!Update {
+    var update = new Uppaal!Update;
+    update.expression.add(expression);
+    update.position = position;
+    return update;
+}

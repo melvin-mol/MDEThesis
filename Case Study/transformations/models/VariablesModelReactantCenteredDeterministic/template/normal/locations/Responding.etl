@@ -1,0 +1,11 @@
+operation Uppaal!Template setupResponding(): Uppaal!Template {
+    self.location.add(
+        location(
+            self, 
+            new Tuple(name = "responding", position = point(-1850, -634)), 
+            "urgent",
+            point(-1853, -646)
+        )
+    );
+    return self;
+}

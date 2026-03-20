@@ -1,0 +1,6 @@
+// const int N_REACTANTS = countReactants;
+operation Uppaal!GlobalDeclarations setupN_REACTANTS(animo : Animo!Network): Uppaal!GlobalDeclarations {
+	// var randomInits : OrderedSet := animo.nodes.select(r | r.randomInitialConcentration);
+   	self.declaration.add(dataVariableDeclaration("CONST", "int", "N_REACTANTS", animo.nodes.select(r | r.enabled).size().toString()));
+	return self;	
+}

@@ -1,0 +1,10 @@
+import "variables/Variables.etl";
+
+operation Uppaal!NSTA setupGlobalDeclations(animo : Animo!Network): Uppaal!NSTA {
+	self.globalDeclarations = 
+		new Uppaal!GlobalDeclarations()
+		.setupGlobalTime()
+		.setupReactantVariables(animo)
+		.setupReactionVariables(animo, self);
+	return self;
+}

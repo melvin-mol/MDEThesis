@@ -1,0 +1,16 @@
+operation Uppaal!LocalDeclarations setupMake_urgent(): Uppaal!LocalDeclarations {
+	// void make_urgent() {
+	var function_ = function_("void", "make_urgent");
+	
+	// c = 0;
+	function_.block.statement.add(assign("c", "0"));
+
+	// TU = 0;
+	function_.block.statement.add(assign("TU", "0"));
+	
+	// TL = 0;
+	function_.block.statement.add(assign("TL", "0"));
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

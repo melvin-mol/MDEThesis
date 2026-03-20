@@ -1,0 +1,11 @@
+operation Uppaal!Template setupStart(animo: Animo!Network): Uppaal!Template {
+    var location = location(
+        self, 
+        new Tuple(name = "start", position = point(-1445, -755)), 
+        animo.areThereRandomInitials() ? "normal" : "committed", 
+        point(-1453, -731)
+    );
+ 	self.location.add(location);	
+    self.init = location;
+    return self;
+}

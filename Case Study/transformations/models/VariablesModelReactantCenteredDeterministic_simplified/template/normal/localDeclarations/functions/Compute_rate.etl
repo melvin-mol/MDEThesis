@@ -1,0 +1,176 @@
+operation Uppaal!LocalDeclarations setupCompute_rate(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network): Uppaal!LocalDeclarations {
+	// double_t compute_rate() {
+	var function_ = function_(
+		nta.globalDeclarations.getDeclaredType("double_t"), 
+		"compute_rate"
+	);
+
+	setupScenarioReactionFunctionCalls(nta, reactant, animo, function_);
+	setupScenarioReactionBoundaryRateCorrections(nta, reactant, animo, function_);	
+	setupCompute_rateReturn(reactant, animo, function_);
+
+	self.declaration.add(function_.declaration);
+	return self;
+}
+
+operation setupScenarioReactionFunctionCalls(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
+	for (reaction: Animo!Edge in animo.targetEdges(reactant)) {		
+		switch (reaction.scenario) {
+			case 0: setupScenario1FunctionCalls(nta, reaction, function_); break;
+			case 1: setupScenario2_3FunctionCalls(nta, reaction, function_); break;
+			case 2: setupScenario2_3FunctionCalls(nta, reaction, function_); break;
+			case 3: setupScenario4FunctionCalls(nta, reaction, function_); break;
+		}
+	}
+}
+
+operation setupScenarioReactionBoundaryRateCorrections(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
+	for (reaction: Animo!Edge in animo.targetEdges(reactant)) {		
+		switch (reaction.scenario) {
+			case 0: break;
+			case 1: setupScenario2_3BoundaryRateCorrection(nta, reaction, function_); break;
+			case 2: setupScenario2_3BoundaryRateCorrection(nta, reaction, function_); break;
+			case 3: break;
+		}
+	}
+}
+
+operation setupCompute_rateReturn(reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
+	if (animo.targetEdges(reactant).size() == 1) {
+		function_.block.statement.add(return_(
+			animo.targetEdges(reactant).first().increment > 0
+				? animo.targetEdges(reactant).first().id() + "_r"
+				: functionCall("subtract", Sequence { "zero", animo.targetEdges(reactant).first().id() + "_r" })
+			)
+		);
+	} else {
+		var computation = new Uppaal!LiteralExpression(text = "zero");
+		for (reaction: Animo!Edge in animo.targetEdges(reactant)) {
+			if (reaction.increment > 0) {
+				computation = functionCall("add", Sequence { computation, reaction.id() + "_r" });
+			} else {
+				computation = functionCall("subtract", Sequence { computation, reaction.id() + "_r" });
+			}
+		}
+		
+		function_.block.statement.add(return_(computation));
+	}
+}
+
+operation setupScenario2_3BoundaryRateCorrection(nta: Uppaal!NSTA, reaction: Animo!Edge, function_: Tuple) {
+	var rNotOutput;
+	var activityNotOutput = false;
+	var activeR1 = isR1Active(reaction);
+	var activeR2 = isR2Active(reaction);
+
+	if (reaction.target == reaction.source) {
+		rNotOutput = reaction.target;
+		activityNotOutput = activeR2;
+	} else {
+		rNotOutput = reaction.source;
+		activityNotOutput = activeR1;
+	}
+
+	if (reaction.target == reaction.source or reaction.target == reaction._REACTANT_E2) {
+		var ifStatement = if_(
+			and_(
+				equal(reaction.id() + "_r.b", "0"), 
+				activityNotOutput
+					? greater(rNotOutput.id(), "0")
+					: less(rNotOutput.id(), rNotOutput.id() + "Levels")
+			)
+		);
+
+		var r2Value = ((reaction._REACTANT_E2 == reaction.target) and activeR2)
+			? "1"
+			: (((reaction._REACTANT_E2 == reaction.target) and not activeR2) ? reaction._REACTANT_E2.id() + "Levels - 1" : reaction._REACTANT_E2.id());
+
+		var r1Value = ((reaction.source == reaction.target) and activeR1)
+			? "1"
+			: (((reaction.source == reaction.target) and not activeR1) ? reaction.source.id() + "Levels - 1" : reaction.source.id());
+
+		ifStatement.thenStatement.statement.add(
+			assign(
+				reaction.id() + "_r",
+				functionCall(
+					"scenario2_3",
+					Sequence {
+						"k_" + reaction.id(),
+						functionCall("int_to_double", Sequence { r2Value }),
+						functionCall("int_to_double", Sequence { reaction.target.id() + "Levels" }),
+						activeR2.toString(),
+						functionCall("int_to_double", Sequence { r1Value }),
+						functionCall("int_to_double", Sequence { reaction.source.id() + "Levels" }),
+						activeR1.toString()
+					}
+				)
+			)
+		);
+
+		function_.block.statement.add(ifStatement);
+	}
+}
+
+operation isR1Active(reaction: Animo!Edge): Boolean {
+	return (reaction.scenario == 0 or reaction.scenario == 1)
+		? true
+		: (reaction.scenario == 2 ? reaction._REACTANT_ACT_E1 : true);
+}
+
+operation isR2Active(reaction: Animo!Edge): Boolean {
+	return (reaction.scenario == 0 or reaction.scenario == 1)
+		? (reaction.increment < 0)
+		: (reaction.scenario == 2 ? reaction._REACTANT_ACT_E2 : true);
+}
+
+// double_t {id}_r = scenario1(k, r1, r1Levels, r1Active);
+operation setupScenario1FunctionCalls(nta: Uppaal!NSTA, reaction: Animo!Edge, function_: Tuple) {
+	function_.block.declarations.declaration.add(
+		dataVariableDeclaration(
+			nta.globalDeclarations.getDeclaredType("double_t"),
+			reaction.id() + "_r",
+			functionCall(
+				"scenario1", 
+				Sequence {
+					"k_" + reaction.id(),
+					functionCall("int_to_double", Sequence { reaction.source.id() }),
+					functionCall("int_to_double", Sequence { reaction.source.id() + "Levels" }),
+					isR1Active(reaction).toString()
+				}
+			)
+		)
+	);
+}
+
+// double_t {id}_r = scenario2_3(k, r2, r2Levels, r2Active, r1, r1Levels, r1Active);
+operation setupScenario2_3FunctionCalls(nta: Uppaal!NSTA, reaction: Animo!Edge, function_: Tuple) {	
+	function_.block.declarations.declaration.add(
+		dataVariableDeclaration(
+			nta.globalDeclarations.getDeclaredType("double_t"),
+			reaction.id() + "_r",
+			functionCall(
+				"scenario2_3", 
+				Sequence {
+					"k_" + reaction.id(),
+					functionCall("int_to_double", Sequence { reaction.target.id() }),
+					functionCall("int_to_double", Sequence { reaction.target.id() + "Levels" }),
+					isR2Active(reaction).toString(),
+					functionCall("int_to_double", Sequence { reaction.source.id() }),
+					functionCall("int_to_double", Sequence { reaction.source.id() + "Levels" }),
+					isR1Active(reaction).toString()
+				}
+			)
+		)
+	);
+}
+
+// double_t {id}_r = scenario4_{id}();
+operation setupScenario4FunctionCalls(nta: Uppaal!NSTA, reaction: Animo!Edge, function_: Tuple) {
+	function_.block.declarations.declaration.add(
+		dataVariableDeclaration(
+			nta.globalDeclarations.getDeclaredType("double_t"),
+			reaction.id() + "_r",
+			functionCall("scenario4_" + reaction.id())
+		)
+	);
+}

@@ -1,0 +1,49 @@
+operation Uppaal!GlobalDeclarations setupInverse(): Uppaal!GlobalDeclarations {
+	// double_t inverse(double_t a) {
+	var function_ = function_(self.getDeclaredType("double_t"), "inverse", Sequence { parameter(self.getDeclaredType("double_t"), "a") });
+	
+	// double_t r;
+	function_.block.declarations.declaration.add(dataVariableDeclaration(self.getDeclaredType("double_t"), "r"));
+	
+	// if (a.b == 0) {
+	// 		return INFINITE_TIME_DOUBLE;
+	// }
+	function_.block.statement.add(if_("a.b", "0"));
+	function_.block.statement.get(0).thenStatement.statement.add(return_("INFINITE_TIME_DOUBLE"));
+	
+	// if (a.e < -12) {
+	//		r.b = 1073;
+	//		r.e = 6;
+	//		return r;
+	// }
+	function_.block.statement.add(if_(less("a.e", "-12")));
+	function_.block.statement.get(1).thenStatement.statement.add(assign("conta_bigN", add("conta_bigN", "1")));
+	function_.block.statement.get(1).thenStatement.statement.add(assign("r.b", "1073"));
+	function_.block.statement.get(1).thenStatement.statement.add(assign("r.e", "6"));
+	function_.block.statement.get(1).thenStatement.statement.add(return_("r"));
+
+	// r.b = 10000000 / a.b;
+	function_.block.statement.add(assign("r.b", divide("10000000", "a.b")));
+
+	// r.e = -7 - a.e;
+	function_.block.statement.add(assign("r.e", subtract("-7", "a.e")));
+
+	// if ((r.b > 0 && r.b < 10) || (r.b < 0 && r.b > -10)) {
+	// 		r.b = r.b * 1000;
+	//		r.e = r.e - 3;
+	// else if ((r.b > 0 && r.b < 100) || (r.b < 0 && r.b > -100)) {
+	// 		r.b = r.b * 100;
+	//		r.e = r.e - 2;
+	// }
+	// else if ((r.b > 0 && r.b < 1000) || (r.b < 0 && r.b > -1000)){
+	// 		r.b = r.b * 10;
+	//		r.e = r.e - 1;
+	//}
+	function_.block.statement.add(normalizeMagnitude());
+	
+	// return r;
+	function_.block.statement.add(return_("r"));
+	
+	self.declaration.add(function_.declaration);
+	return self;
+}

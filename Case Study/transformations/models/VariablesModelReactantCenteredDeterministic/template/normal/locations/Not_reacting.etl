@@ -1,0 +1,11 @@
+operation Uppaal!Template setupNot_reacting(): Uppaal!Template {
+    self.location.add(
+        location(
+            self, 
+            new Tuple(name = "not_reacting", position = point(-1401, -857)), 
+            "normal",
+            point(-1419, -841)
+        )
+    );
+    return self;
+}

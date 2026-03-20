@@ -1,0 +1,10 @@
+// broadcast chan reached[N_REACTANTS];
+operation Uppaal!GlobalDeclarations setupReached(): Uppaal!GlobalDeclarations {	
+	var variable = variable("reacted");
+    variable.index.add(new Uppaal!ValueIndex());
+   	variable.index.first().sizeExpression = new Uppaal!IdentifierExpression();
+    variable.index.first().sizeExpression.identifier = self.findVariable("N_REACTANTS");
+    
+   	self.declaration.add(channelVariableDeclaration(true, "chan", variable));
+	return self;
+}

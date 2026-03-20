@@ -1,0 +1,39 @@
+import "functions/Functions.etl";
+import "types/Types.etl";
+import "variables/Variables.etl";
+
+operation Uppaal!NSTA setupGlobalDeclations(animo : Animo!Network): Uppaal!NSTA {
+	self.globalDeclarations = 
+		new Uppaal!GlobalDeclarations()
+		.setupGlobalTime()
+		.setupINFINITE_TIME()
+		.setupN_REACTANTS(animo)
+		.setupReached()
+		.setupReachingAndDoUpdate()
+		.setupReactantVariables(animo)
+		.setupDouble_t()
+		.setupZero()
+		.setupINFINITE_TIME_DOUBLE()
+		.setupMinCrit()
+		.setupCriticalSession(animo)
+		.setupEnterCrit()
+		.setupExitCrit()
+		.setupLOWER_UNC_UPPER_UNC(animo)
+		.setupTime_t()
+		.setupInt_t()
+		.setupTimeActivity()
+		.setupReactionVariables(animo)
+		.setupSubtractFunction()
+		.setupAddFunction()
+		.setupMultiplyFunction()
+		.setupDivide()
+		.setupConta_InfAndConta_BigN()
+		.setupInverse()
+		.setupPower()
+		.setup_ANIMO_round()
+		.setupScenario1()
+		.setupScenario2_3()
+		.setupInt_to_double()
+		.setupScenario4(animo);
+	return self;
+}

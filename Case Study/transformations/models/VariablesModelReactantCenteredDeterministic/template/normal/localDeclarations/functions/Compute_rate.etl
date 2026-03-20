@@ -1,0 +1,67 @@
+operation Uppaal!LocalDeclarations setupCompute_rate(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network): Uppaal!LocalDeclarations {
+	// double_t compute_rate() {
+	var function_ = function_(
+		nta.globalDeclarations.getDeclaredType("double_t"),
+		"compute_rate"
+	);
+
+	setupScenarioReactionFunctionCalls(nta, reactant, animo, function_);
+	setupScenarioReactionBoundaryRateCorrections(nta, reactant, animo, function_);
+	setupComputeT(reactant, animo, function_);
+	setupCompute_rateReturn(reactant, animo, function_);
+
+	self.declaration.add(function_.declaration);
+	return self;
+}
+
+operation setupComputeT(reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
+	for (reaction: Animo!Edge in animo.targetEdges(reactant)) {
+		setupComputeTForTargetEdge(reaction, animo, function_);
+	}
+}
+
+operation setupComputeTForTargetEdge(reaction: Animo!Edge, animo: Animo!Network, function_: Tuple) {
+	if (animo.uncertainty != 0.0) {
+		// {reactionId}.T = _ANIMO_round(multiply(inverse({reactionId}_r), LOWER_UNC));
+		function_.block.statement.add(
+			assign(
+				reaction.id() + ".T",
+				functionCall(
+					"_ANIMO_round",
+					Sequence {
+						functionCall(
+							"multiply",
+							Sequence {
+								functionCall("inverse", Sequence { reaction.id() + "_r" }),
+								"LOWER_UNC"
+							}
+						)
+					}
+				)
+			)
+		);
+	} else {
+		// {reactionId}.T = _ANIMO_round(inverse({reactionId}_r));
+		function_.block.statement.add(
+			assign(
+				reaction.id() + ".T",
+				functionCall(
+					"_ANIMO_round",
+					Sequence {
+						functionCall("inverse", Sequence { reaction.id() + "_r" })
+					}
+				)
+			)
+		);
+	}
+}
+
+operation setupScenarioReactionFunctionCalls(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
+	for (reaction: Animo!Edge in animo.targetEdges(reactant)) {
+		switch (reaction.scenario) {
+			case 0: setupScenario1FunctionCalls(nta, reaction, function_); break;
+			case 1: setupScenario2_3FunctionCalls(nta, reaction, function_); break;
+			case 2: setupScenario2_3FunctionCalls(nta, reaction, function_); break;
+		}
+	}
+}

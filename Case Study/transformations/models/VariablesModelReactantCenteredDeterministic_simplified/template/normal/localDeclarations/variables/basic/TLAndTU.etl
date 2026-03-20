@@ -1,0 +1,5 @@
+// time_t TL, TU;
+operation Uppaal!LocalDeclarations setupTLAndTU(nta: Uppaal!NSTA): Uppaal!LocalDeclarations {
+	self.declaration.add(dataVariableDeclaration(nta.globalDeclarations.getDeclaredType("time_t"), Sequence{"TL", "TU"}));
+	return self;
+}

@@ -1,0 +1,18 @@
+import "./InitializationSelections.etl";
+import "./InitializationUpdates.etl";
+
+operation Uppaal!Template setupId1ToId0_Initialize(animo: Animo!Network): Uppaal!Template {
+	self.edge.add(
+		chanceEdge(
+			self.location.selectOne(location_ | location_.name == "id1"),
+			self.location.selectOne(location_ | location_.name == "id0"),
+			new Tuple(weight = 1, position = point(-430, -86)),
+			Sequence {},
+			null,
+			update(setupODEInitializationUpdates(animo), point(-430, -102)),
+			setupODEInitializationSelections(animo)
+		)
+	);
+
+	return self;
+}

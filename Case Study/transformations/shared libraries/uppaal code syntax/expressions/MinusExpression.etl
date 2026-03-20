@@ -1,0 +1,12 @@
+operation minus(literal: String): Uppaal!MinusExpression {
+	var minusExpression = new Uppaal!MinusExpression();
+	minusExpression.invertedExpression = new Uppaal!LiteralExpression();
+	minusExpression.invertedExpression.text = literal;
+	return minusExpression;
+}
+
+operation minus(expression: Uppaal!Expression): Uppaal!MinusExpression {
+	var minusExpression = new Uppaal!MinusExpression();
+	minusExpression.invertedExpression = expression;
+	return minusExpression;
+}

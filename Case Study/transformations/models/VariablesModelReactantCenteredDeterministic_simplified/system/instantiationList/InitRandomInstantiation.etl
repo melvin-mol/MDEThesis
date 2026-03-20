@@ -1,0 +1,10 @@
+operation Uppaal!InstantiationList setupInitRandomInstantiation(nta : Uppaal!NSTA, animo : Animo!Network): Uppaal!InstantiationList {
+	if (animo.areThereRandomInitials()) {
+		var randomInitDeclaration = new Uppaal!TemplateDeclaration;
+		randomInitDeclaration.declaredTemplate = new Uppaal!RedefinedTemplate;
+		randomInitDeclaration.declaredTemplate.name = "Init_Random";
+		randomInitDeclaration.declaredTemplate.referredTemplate = nta.template.selectOne(t | t.name = "Init_Random");
+		self.template.add(randomInitDeclaration.declaredTemplate);
+	}
+    return self;
+}

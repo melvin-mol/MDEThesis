@@ -1,0 +1,15 @@
+import "edges/Edges.etl";
+import "locations/Locations.etl";
+
+operation Uppaal!NSTA setupRandomTemplate(animo : Animo!Network): Uppaal!NSTA {
+	if (not animo.areThereRandomInitials()) {
+		return self;
+	}
+
+	self.template.add(
+		template("Init_Random", Sequence {})
+			.setupLocations()
+			.setupEdges(animo, self)
+	);
+	return self;
+}

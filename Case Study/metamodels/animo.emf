@@ -1,0 +1,45 @@
+@namespace(uri="ANIMO", prefix="")
+package ANIMO;
+
+class Network {
+	val Node[*] nodes;
+	val Edge[*] edges;
+	attr Double secondsPerPoint;
+	attr Integer levels;
+	attr Double timeScaleFactor;
+	attr Double uncertainty;
+}
+
+abstract class NetworkElement {
+	attr int index;
+	attr Integer ~id;
+	attr Integer SUID;
+	attr String canonicalName;
+	attr String name;
+	attr Boolean enabled;
+}
+
+class Node extends NetworkElement {
+	attr Integer initialConcentration;
+	attr Integer levels;
+	attr String plotted;
+	attr Boolean randomInitialConcentration;
+	attr Integer randomInitialConcentrationMinimum;
+	attr Integer randomInitialConcentrationMaximum;
+	attr Integer randomInitialConcentrationStep;
+}
+
+class Edge extends NetworkElement {
+	attr Integer increment;
+	attr Integer scenario;
+	attr Double k;
+	ref Node source;
+	ref Node target;
+	attr Double levelsScaleFactor;
+	ref Node _REACTANT_E1;
+	ref Node _REACTANT_E2;
+	attr Boolean _REACTANT_ACT_E1;
+	attr Boolean _REACTANT_ACT_E2;
+	attr String customFormula;
+}
+

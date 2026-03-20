@@ -1,0 +1,14 @@
+import "Id0.etl";
+import "Responding.etl";
+import "Start.etl";
+import "Updating.etl";
+import "Waiting.etl";
+
+operation Uppaal!Template setupLocations(animo: Animo!Network): Uppaal!Template {
+	return self
+		.setupId0()
+		.setupResponding()
+		.setupStart(animo)
+		.setupUpdating()
+		.setupWaiting();
+}

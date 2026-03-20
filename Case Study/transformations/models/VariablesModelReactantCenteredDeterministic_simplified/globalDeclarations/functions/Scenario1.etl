@@ -1,0 +1,31 @@
+operation Uppaal!GlobalDeclarations setupScenario1(): Uppaal!GlobalDeclarations {
+	// double_t scenario1(double_t k, double_t r1, double_t r1Levels, bool r1Active) {
+	var function_ = function_(
+		self.getDeclaredType("double_t"), 
+		"scenario1", 
+		Sequence { 
+			parameter(self.getDeclaredType("double_t"), "k"),
+			parameter(self.getDeclaredType("double_t"), "r1"),
+			parameter(self.getDeclaredType("double_t"), "r1Levels"),
+			parameter("bool", "r1Active")
+		}
+	);
+
+	// double_t E;
+	function_.block.declarations.declaration.add(dataVariableDeclaration(self.getDeclaredType("double_t"), "E"));
+
+	// if (r1Active) {
+	// 		E = r1;
+	// } else {
+	//		E = subtract(r1Levels, r1);
+	// }
+	function_.block.statement.add(ifElse("r1Active"));
+	function_.block.statement.get(0).thenStatement.statement.add(assign("E", "r1"));
+	function_.block.statement.get(0).elseStatement.statement.add(assign("E", functionCall("subtract", Sequence { "r1Levels", "r1" })));
+	
+	// return multiply(k, E);
+	function_.block.statement.add(return_(functionCall("multiply", Sequence { "k", "E" })));
+	
+	self.declaration.add(function_.declaration);
+	return self;
+}

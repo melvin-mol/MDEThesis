@@ -1,0 +1,43 @@
+operation Uppaal!GlobalDeclarations setupScenario2_3(): Uppaal!GlobalDeclarations {
+	// double_t scenario2_3(double_t k, double_t r2, double_t r2Levels, bool r2Active, double_t r1, double_t r1Levels, bool r1Active) {
+	var function_ = function_(
+		self.getDeclaredType("double_t"), 
+		"scenario2_3", 
+		Sequence { 
+			parameter(self.getDeclaredType("double_t"), "k"),
+			parameter(self.getDeclaredType("double_t"), "r2"),
+			parameter(self.getDeclaredType("double_t"), "r2Levels"),
+			parameter("bool", "r2Active"),
+			parameter(self.getDeclaredType("double_t"), "r1"),
+			parameter(self.getDeclaredType("double_t"), "r1Levels"),
+			parameter("bool", "r1Active")
+		}
+	);
+	
+	// double_t E, S;
+	function_.block.declarations.declaration.add(dataVariableDeclaration(self.getDeclaredType("double_t"), Sequence { "E", "S" }));
+
+	// if (r1Active) {
+	// 		E = r1;
+	// } else {
+	//		E = subtract(r1Levels, r1);
+	// }
+	function_.block.statement.add(ifElse("r1Active"));
+	function_.block.statement.get(0).thenStatement.statement.add(assign("E", "r1"));
+	function_.block.statement.get(0).elseStatement.statement.add(assign("E", functionCall("subtract", Sequence { "r1Levels", "r1" })));
+
+	// if (r2Active) {
+	// 		S = r2;
+	// } else {
+	//		S = subtract(r2Levels, r2);
+	// }
+	function_.block.statement.add(ifElse("r2Active"));
+	function_.block.statement.get(1).thenStatement.statement.add(assign("S", "r2"));
+	function_.block.statement.get(1).elseStatement.statement.add(assign("S", functionCall("subtract", Sequence { "r2Levels", "r2" })));
+
+	// return multiply(k, multiply(E, S));
+	function_.block.statement.add(return_(functionCall("multiply", Sequence { "k", functionCall("multiply", Sequence { "E", "S" } ) })));
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

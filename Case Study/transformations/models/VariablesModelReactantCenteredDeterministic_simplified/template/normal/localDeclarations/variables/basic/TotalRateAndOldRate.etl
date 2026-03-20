@@ -1,0 +1,11 @@
+// double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+operation Uppaal!LocalDeclarations setupTotalRateAndOldRate(nta: Uppaal!NSTA): Uppaal!LocalDeclarations {
+	self.declaration.add(dataVariableDeclarationWithVariables(
+		nta.globalDeclarations.getDeclaredType("double_t"), 
+		Sequence {
+			variable("totalRate", "INFINITE_TIME_DOUBLE"),
+			variable("oldRate", "INFINITE_TIME_DOUBLE")
+		}
+	));
+	return self;
+}

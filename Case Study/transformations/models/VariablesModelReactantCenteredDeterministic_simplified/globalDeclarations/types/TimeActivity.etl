@@ -1,0 +1,7 @@
+// typedef struct { 
+//		time_t T; 
+// } timeActivity;
+operation Uppaal!GlobalDeclarations setupTimeActivity(): Uppaal!GlobalDeclarations {
+	self.declaration.add(structTypeDeclaration(Sequence { dataVariableDeclaration(self.getDeclaredType("time_t"), "T") }, "timeActivity"));
+	return self;
+}

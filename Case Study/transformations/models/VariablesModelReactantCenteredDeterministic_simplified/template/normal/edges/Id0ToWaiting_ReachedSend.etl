@@ -1,0 +1,14 @@
+operation Uppaal!Template setupId0ToWaiting_ReachedSend(reactant: Animo!Node): Uppaal!Template {
+	// Also remember to tell your downstream people that you have reached, and
+	// perform your update()
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "id0"),
+		self.location.selectOne(r | r.name = "waiting"),
+		synchronization("send", "reached[" + reactant.channelIndex() + "]", point(-1544, -827)),
+		Sequence { point(-1453, -810), point(-1453, -773) },
+		null,
+		update(functionCall("update"), point(-1544, -810)),
+		Sequence {}
+	));
+	return self;
+}

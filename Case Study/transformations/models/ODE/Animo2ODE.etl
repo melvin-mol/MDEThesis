@@ -1,0 +1,18 @@
+import "./../../shared libraries/Shared Libraries.etl";
+import "./globalDeclarations/GlobalDeclarations.etl";
+import "./template/Template.etl";
+import "./system/System.etl";
+
+pre{
+	var Math = Native("java.lang.Math");
+}
+
+operation transformation(animo: Animo!Network, uppaal: Uppaal!NSTA) {
+    uppaal.name = "Animo2ODE";
+
+	uppaal
+		.setupBuiltInTypes()
+		.setupGlobalDeclations(animo)
+		.setupTemplate(animo)
+		.setupSystem(animo);
+}

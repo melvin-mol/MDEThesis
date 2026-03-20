@@ -1,0 +1,5 @@
+import "./Id1ToId0_Initialize.etl";
+
+operation Uppaal!Template setupEdges(animo: Animo!Network): Uppaal!Template {
+	return self.setupId1ToId0_Initialize(animo);
+}

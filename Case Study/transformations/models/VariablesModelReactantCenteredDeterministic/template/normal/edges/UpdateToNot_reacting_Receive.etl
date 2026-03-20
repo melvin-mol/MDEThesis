@@ -1,0 +1,13 @@
+operation Uppaal!Template UpdateToNot_reacting_Receive(): Uppaal!Template {
+	// updating, --> not_reacting
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "updating"),
+		self.location.selectOne(r | r.name = "not_reacting"),
+		synchronization("receive", "decide_react", point(-1415, -795)),
+		Sequence {},
+		guard_(functionCall("cant_react"), point(-1415, -812)),
+		null,
+		Sequence {}
+	));
+	return self;
+}

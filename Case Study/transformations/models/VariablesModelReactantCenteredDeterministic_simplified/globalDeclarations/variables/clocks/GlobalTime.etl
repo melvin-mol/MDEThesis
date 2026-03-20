@@ -1,0 +1,5 @@
+// clock globalTime;
+operation Uppaal!GlobalDeclarations setupGlobalTime(): Uppaal!GlobalDeclarations {
+   	self.declaration.add(clock("globalTime"));
+	return self;
+}

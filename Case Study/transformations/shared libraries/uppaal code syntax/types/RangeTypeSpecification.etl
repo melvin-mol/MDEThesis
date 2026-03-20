@@ -1,0 +1,9 @@
+operation rangeType(lowerBound: String, upperBound: String): Uppaal!RangeTypeSpecification {
+	var type = new Uppaal!RangeTypeSpecification();
+	type.bounds = new Uppaal!IntegerBounds();
+	type.bounds.lowerBound = new Uppaal!LiteralExpression();
+	type.bounds.lowerBound.text = lowerBound;
+	type.bounds.upperBound  = new Uppaal!LiteralExpression();
+	type.bounds.upperBound.text = upperBound;
+	return type;
+}

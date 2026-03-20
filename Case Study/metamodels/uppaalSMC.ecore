@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="uppaalSMC" nsURI="http://fmt.ewi.utwente.nl/FMT/AFTModel/uppaalSMC" nsPrefix="uppaalSMC">
+  <eClassifiers xsi:type="ecore:EClass" name="NSTA" eSuperTypes="uppaal.ecore#//NTA">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="double" lowerBound="1"
+        eType="#//DoubleType" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="DoubleType" eSuperTypes="uppaal.ecore#//types/Type"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChanceNode" eSuperTypes="uppaal.ecore#//templates/Location"/>
+  <eClassifiers xsi:type="ecore:EClass" name="ChanceEdge" eSuperTypes="uppaal.ecore#//templates/Edge">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="weight" lowerBound="1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="probabilityPosition"
+      eType="ecore:EClass uppaal.ecore#//visuals/Point" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExponentialLocation" eSuperTypes="uppaal.ecore#//templates/Location">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="exitRate" lowerBound="1"
+        eType="ecore:EClass uppaal.ecore#//expressions/Expression"
+        containment="true"/>
+  </eClassifiers>
+</ecore:EPackage>

@@ -1,0 +1,22 @@
+import "edges/Edges.etl";
+import "localDeclarations/LocalDeclarations.etl";
+import "locations/Locations.etl";
+
+operation Uppaal!NSTA setupNormalTemplates(animo : Animo!Network): Uppaal!NSTA {
+    for(reactant: Animo!Node in animo.activeSortedNodes()) {	
+		if (animo.targetEdges(reactant).size() < 1) {
+			continue;
+		}
+
+		self.template.add(
+			template(
+				"Reactant_" + reactant.id(),
+				Sequence{ parameterCallByReference("int", "R"), parameter("CONST", "int", "MAX") }
+			)
+			.setupLocalDeclarations(self, reactant, animo)
+			.setupLocations(animo)
+			.setupEdges(reactant, animo)
+		);
+	}
+    return self;
+}

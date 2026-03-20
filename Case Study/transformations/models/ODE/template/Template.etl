@@ -1,0 +1,12 @@
+import "./edges/Edges.etl";
+import "./localDeclarations/LocalDeclarations.etl";
+import "./locations/Locations.etl";
+
+operation Uppaal!NSTA setupTemplate(animo : Animo!Network): Uppaal!NSTA {
+	self.template.add(
+		template("ODE_Model", Sequence {})
+		.setupLocalDeclarations(self, animo)
+		.setupLocations(animo)
+		.setupEdges(animo));
+	return self;
+}

@@ -1,0 +1,15 @@
+operation formatDouble(d) : String {
+	var e : Integer = Math.round(Math.log10(d)) - 3;
+	var b : Integer = Math.round(d * Math.pow(10, -e));
+	if (b < 10) {
+		b = b * 1000;
+		e = e - 3;
+	} else if (b < 100) {
+		b = b * 100;
+		e = e - 2;
+	} else if (b < 1000) {
+		b = b * 10;
+		e = e - 1;
+	}
+	return "{" + b + ", " + e + "}";
+}

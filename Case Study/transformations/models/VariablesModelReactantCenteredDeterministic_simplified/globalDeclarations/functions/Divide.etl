@@ -1,0 +1,54 @@
+operation Uppaal!GlobalDeclarations setupDivide(): Uppaal!GlobalDeclarations {
+	// double_t divide(double_t a, double_t b)
+	var function_ = function_(
+		self.getDeclaredType("double_t"), 
+		"divide", 
+		Sequence { 
+			parameter(self.getDeclaredType("double_t"), "a"), 
+			parameter(self.getDeclaredType("double_t"), "b") 
+		}
+	);
+
+	// double_t r;
+	function_.block.declarations.declaration.add(dataVariableDeclaration(self.getDeclaredType("double_t"), "r"));
+
+	// if (b.b == 0) {
+	// 		return INFINITE_TIME_DOUBLE;
+	// }
+	function_.block.statement.add(if_("b.b", "0"));
+	function_.block.statement.get(0).thenStatement.statement.add(return_("INFINITE_TIME_DOUBLE"));
+
+	// r.b = a.b * 1000 / b.b;
+	function_.block.statement.add(assign("r.b", multiplicate("a.b", divide("1000", "b.b"))));
+
+	// r.e = a.e - b.e - 3;
+	function_.block.statement.add(assign("r.e", subtract(subtract("a.e", "b.e"), "3")));
+
+	// if (r.b == 0) {
+	//		return r;
+	// }
+	function_.block.statement.add(if_("r.b", "0"));
+	function_.block.statement.get(3).thenStatement.statement.add(return_("r"));
+
+	// while (r.b < 9999 && r.b > -9999) {
+	//		r.b = r.b * 10;
+	//		r.e = r.e - 1;
+	// }
+	function_.block.statement.add(while_(and_(less("r.b", "9999"), greater("r.b", "-9999"))));	
+	function_.block.statement.get(4).statement.statement.add(assign("r.b", multiplicate("r.b", "10")));
+	function_.block.statement.get(4).statement.statement.add(assign("r.e", subtract("r.e", "1")));
+
+	// while (r.b > 9999 || r.b < -9999) {
+	//		r.b = r.b / 10;
+	//		r.e = r.e + 1;
+	// }
+	function_.block.statement.add(while_(or_(greater("r.b", "9999"), less("r.b", "-9999"))));	
+	function_.block.statement.get(5).statement.statement.add(assign("r.b", divide("r.b", "10")));
+	function_.block.statement.get(5).statement.statement.add(assign("r.e", add("r.e", "1")));
+
+	// return r;
+	function_.block.statement.add(return_("r"));
+		
+	self.declaration.add(function_.declaration);
+	return self;
+}

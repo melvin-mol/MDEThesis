@@ -1,0 +1,10 @@
+import "Id3ToId2_DoUpdateSend.etl";
+import "Id4ToId5.etl";
+import "Id5ToId3.etl";
+
+operation Uppaal!Template setupEdges(animo: Animo!Network, uppaal: Uppaal!NSTA): Uppaal!Template {
+	return self
+        .setupId3ToId2_DoUpdateSend()
+        .setupId5ToId3(animo)
+        .setupId4ToId5();
+}

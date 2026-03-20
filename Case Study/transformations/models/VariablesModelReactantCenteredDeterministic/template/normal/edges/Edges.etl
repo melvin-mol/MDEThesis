@@ -1,0 +1,32 @@
+import "Id0ToUpdating_Reacted_Send.etl";
+import "Not_reactingToResponding_ReactedReceive.etl";
+import "RespondingToUpdating_Receive.etl";
+import "RespondingToUpdating_Send.etl";
+import "StartToUpdating.etl";
+import "UpdateToNot_reacting_Receive.etl";
+import "UpdateToNot_reacting_Send.etl";
+import "UpdatingToWaiting_NoChange_Receive.etl";
+import "UpdatingToWaiting_NoChange_Send.etl";
+import "UpdatingToWaiting_UrgentReaction_Receive.etl";
+import "UpdatingToWaiting_UrgentReaction_Send.etl";
+import "WaitingToId0_Reacting_Receive.etl";
+import "WaitingToId0_Reacting_Send.etl";
+import "WaitingToResponding_ReactedReceive.etl";
+
+operation Uppaal!Template setupEdges(reactant: Animo!Node, animo: Animo!Network): Uppaal!Template {
+	return self
+		.setupRespondingToUpdating_Send()
+		.setupRespondingToUpdating_Receive()
+		.setupStartToUpdating(reactant, animo)
+		.UpdateToNot_reacting_Send()
+		.UpdateToNot_reacting_Receive()
+		.setupUpdatingToWaiting_NoChange_Send()
+		.setupUpdatingToWaiting_NoChange_Receive()
+		.setupUpdatingToWaiting_UrgentReaction_Send()
+		.setupUpdatingToWaiting_UrgentReaction_Receive()
+		.setupWaitingToId0_Reacting_Send(reactant)
+		.setupWaitingToId0_Reacting_Receive(reactant)
+		.setupId0ToUpdating_Reacted_Send(reactant)
+		.setupNot_reactingToResponding_ReactedReceive(reactant, animo)
+		.setupWaitingToResponding_ReactedReceive(reactant, animo);
+}

@@ -1,0 +1,42 @@
+operation setupODERateExpression(reaction: Animo!Edge) {
+	if (reaction.scenario == 0) {
+		return multiplicate("k_" + reaction.id(), reaction.source.id());
+	}
+
+	if (reaction.scenario == 1 or reaction.scenario == 2) {
+		return multiplicate(
+			multiplicate("k_" + reaction.id(), 
+				((reaction.scenario == 1) ? (reaction.increment < 0) : reaction._REACTANT_ACT_E2)
+					? reaction.target.id()
+					: subtract(reaction.target.id() + "Levels", reaction.target.id())
+			), 
+			((reaction.scenario == 1) ? true : reaction._REACTANT_ACT_E1)
+				? reaction.source.id()
+				: subtract(reaction.source.id() + "Levels", reaction.source.id())
+		);
+	}
+
+	// Legacy-compatible fallback: when scenario is unexpected, use fully active source/target terms.
+	return multiplicate(
+		multiplicate("k_" + reaction.id(), reaction.target.id()),
+		reaction.source.id()
+	);
+}
+
+operation setupODESummedRateExpression(influencingReactions: Collection(Animo!Edge)) {
+	var expression = null;
+	for (reaction: Animo!Edge in influencingReactions) {
+		var term = reaction.id() + "_r";
+		if (reaction.increment > 0) {
+			expression = expression.isDefined()
+				? add(expression, term)
+				: term;
+		} else {
+			expression = expression.isDefined()
+				? subtract(expression, term)
+				: minus(term);
+		}
+	}
+
+	return expression.isDefined() ? expression : "0";
+}

@@ -1,0 +1,5 @@
+// const double_t zero = {0, 0};
+operation Uppaal!GlobalDeclarations setupZero(): Uppaal!GlobalDeclarations {
+	self.declaration.add(dataVariableDeclaration("CONST", self.getDeclaredType("double_t"), "zero", "{0, 0}"));
+	return self;
+}

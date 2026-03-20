@@ -1,0 +1,13 @@
+operation Uppaal!Template setupRespondingToUpdating_Send(): Uppaal!Template {
+	// responding, --> updating
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "responding"),
+		self.location.selectOne(r | r.name = "updating"),
+		synchronization("send", "do_update", point(-1793, -663)),
+		Sequence { point(-1419, -646) },
+		null,
+		update(Sequence {functionCall("update"), functionCall("decide_reset") }, point(-1793, -646)),
+		Sequence {}
+	));
+	return self;
+}

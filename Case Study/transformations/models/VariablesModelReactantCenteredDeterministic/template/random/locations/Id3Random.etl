@@ -1,0 +1,11 @@
+operation Uppaal!Template setupId3Random(): Uppaal!Template {
+	self.location.add(
+        location(
+            self, 
+            new Tuple(name = "id3", position = point(323, 0)), 
+            "committed", 
+            point(323, 0)
+        )
+    );
+    return self;
+}

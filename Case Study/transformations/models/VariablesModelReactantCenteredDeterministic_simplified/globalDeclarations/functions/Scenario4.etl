@@ -1,0 +1,112 @@
+operation Uppaal!GlobalDeclarations setupScenario4(animo: Animo!Network): Uppaal!GlobalDeclarations {
+	for (reaction: Animo!Edge in animo.edgesWithCustomScenario()) {
+		var translation = reaction.translateScenario4Formula(animo);
+		var function_ = function_(
+			self.getDeclaredType("double_t"),
+			"scenario4_" + reaction.id()
+		);
+
+		if (translation.constants.size() > 0) {
+			for (constEntry in translation.constants) {
+				function_.block.declarations.declaration.add(
+					dataVariableDeclaration("CONST", self.getDeclaredType("double_t"), constEntry.name, constEntry.value)
+				);
+			}
+		}
+
+		if (translation.expression.isDefined() and translation.expression.size() > 0) {
+			function_.block.statement.add(return_(translation.expression));
+		} else {
+			function_.block.statement.add(return_("zero"));
+		}
+
+		self.declaration.add(function_.declaration);
+	}
+
+	return self;
+}
+
+operation Animo!Node matchesScenario4Token(token: String): Boolean {
+	if (token = null) {
+		return false;
+	}
+
+	return self.name.isDefined() and self.name = token;
+}
+
+operation Animo!Network resolveScenario4ReactantId(token: String): String {
+	var node = self.activeNodes().selectOne(candidate | candidate.matchesScenario4Token(token));
+	if (node.isDefined()) {
+		return node.id();
+	}
+
+	return null;
+}
+
+operation Animo!Edge translateScenario4Formula(animo: Animo!Network): Tuple {
+	var translatedFormula = self.customFormula;
+	var involvedReactants = Sequence {};
+	var constants = Sequence {};
+	var Double = Native("java.lang.Double");
+
+	if (translatedFormula.isUndefined() or translatedFormula.size() = 0) {
+		return new Tuple(expression = "", constants = constants, involvedReactants = involvedReactants);
+	}
+
+	translatedFormula = translatedFormula.replace("@k@", "k_" + self.id());
+
+	var firstIndexAt = translatedFormula.indexOf('@');
+	while (firstIndexAt != -1) {
+		var nextIndexAt = translatedFormula.indexOf('@', firstIndexAt + 1);
+		if (nextIndexAt = -1) {
+			break;
+		}
+
+		var reactantName = translatedFormula.substring(firstIndexAt + 1, nextIndexAt);
+		var reactantNameToBeReplaced = reactantName;
+		var inactive = false;
+
+		if (reactantName.startsWith("1-")) {
+			reactantName = reactantName.substring(2);
+			inactive = true;
+		}
+
+		var reactantId = animo.resolveScenario4ReactantId(reactantName);
+		var reactantIdValue = reactantId;
+		if (reactantIdValue.isUndefined() or reactantIdValue.size() = 0) {
+			reactantIdValue = "null";
+		}
+
+		involvedReactants.add(reactantIdValue);
+
+		translatedFormula = translatedFormula.replace(
+			"@" + reactantNameToBeReplaced + "@",
+			"int_to_double(" + (inactive ? (reactantIdValue + "Levels - ") : "") + reactantIdValue + ")"
+		);
+
+		firstIndexAt = translatedFormula.indexOf('@');
+	}
+
+	var firstIndexHash = translatedFormula.indexOf("#");
+	while (firstIndexHash != -1) {
+		var nextIndexHash = translatedFormula.indexOf("#", firstIndexHash + 1);
+		if (nextIndexHash = -1) {
+			break;
+		}
+
+		var number = translatedFormula.substring(firstIndexHash + 1, nextIndexHash);
+		if (number.matches("-?[0-9]+(\\.[0-9]+)?([eE][+-]?[0-9]+)?")) {
+			var constName = "CONST_" + number.replace(".", "_");
+			if (not constants.exists(c | c.name = constName)) {
+				constants.add(new Tuple(name = constName, value = formatDouble(Double.parseDouble(number))));
+			}
+
+			translatedFormula = translatedFormula.replace("#" + number + "#", constName);
+			firstIndexHash = translatedFormula.indexOf("#");
+		} else {
+			firstIndexHash = translatedFormula.indexOf("#", nextIndexHash + 1);
+		}
+	}
+
+	return new Tuple(expression = translatedFormula, constants = constants, involvedReactants = involvedReactants);
+}

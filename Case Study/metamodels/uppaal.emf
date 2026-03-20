@@ -1,0 +1,1076 @@
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Contains Uppaal-specific sub-packages.")
+@namespace(uri="http://www.muml.org/uppaal/1.0.0", prefix="uppaal")
+package uppaal;
+
+@ExtendedMetaData(name="NTA", kind="elementOnly")
+@GenModel(documentation="A 'Network of Timed Automata' as basic input to Uppaal.")
+@"http://www.eclipse.org/emf/2002/Ecore/OCL"(MatchingIntDetails="(not self.int.oclIsUndefined())
+implies
+((self.int.type = types::BuiltInType::INT) and (self.int.name.equalsIgnoreCase('int')))", MatchingBoolDetails="(not self.bool.oclIsUndefined())
+implies
+((self.bool.type = types::BuiltInType::BOOL) and (self.bool.name.equalsIgnoreCase('bool')))", MatchingClockDetails="(not self.clock.oclIsUndefined())
+implies
+((self.clock.type = types::BuiltInType::CLOCK) and (self.clock.name.equalsIgnoreCase('clock')))", MatchingChanDetails="(not self.chan.oclIsUndefined())
+implies
+((self.chan.type = types::BuiltInType::CHAN) and (self.chan.name.equalsIgnoreCase('chan')))", MatchingVoidDetails="(not self.void.oclIsUndefined())
+implies
+((self.void.type = types::BuiltInType::VOID) and (self.void.name.equalsIgnoreCase('void')))", UniqueTemplateNames="self.template->isUnique(name)")
+@Ecore(constraints="MatchingIntDetails MatchingBoolDetails MatchingClockDetails MatchingChanDetails MatchingVoidDetails UniqueTemplateNames")
+class NTA extends core.NamedElement, core.CommentableElement {
+
+	@ExtendedMetaData(kind="element", name="globalDeclarations")
+	@GenModel(documentation="The global declarations for the NTA.")
+	val declarations.GlobalDeclarations globalDeclarations;
+
+	@ExtendedMetaData(kind="element", name="template")
+	@GenModel(documentation="The Timed Automata templates of the NTA.")
+	val templates.Template[+] template;
+
+	@ExtendedMetaData(kind="element", name="systemDeclarations")
+	@GenModel(documentation="The declarations of process instantiations.")
+	val declarations.SystemDeclarations[1] systemDeclarations;
+
+	@GenModel(documentation="The predefined type 'int'.")
+	val types.PredefinedType[1] int;
+
+	@GenModel(documentation="The predefined type 'bool'.")
+	val types.PredefinedType[1] bool;
+
+	@GenModel(documentation="The predefined type 'clock'.")
+	val types.PredefinedType[1] clock;
+
+	@GenModel(documentation="The predefined type 'chan'.")
+	val types.PredefinedType[1] chan;
+
+	@GenModel(documentation="The predefined dummy type 'void'.")
+	val types.PredefinedType[1] ~void;
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Contains abstract general purpose classes.")
+@namespace(uri="http://www.muml.org/uppaal/core/1.0.0", prefix="core")
+package core {
+	@GenModel(documentation="Abstract base class for named model elements.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NoWhitespace="self.name.characters()->excludes(' ')", NoDigitStart="Set{0..9}->excludes(self.name.characters()->first())")
+	@Ecore(constraints="NoWhitespace NoDigitStart")
+	abstract class NamedElement {
+
+		@GenModel(documentation="The name of the model element..")
+		attr String[1] name;
+	}
+
+	@GenModel(documentation="Abstract base class for commentable model elements.")
+	abstract class CommentableElement {
+
+		@GenModel(documentation="The comment for the model element.
+\todocg{Change cardinality to 1..1?}")
+		attr String comment;
+	}
+
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Provides support for built-in and user-defined types.")
+@namespace(uri="http://www.muml.org/uppaal/types/1.0.0", prefix="types")
+package types {
+	@GenModel(documentation="Abstract base class for all types.")
+	abstract class Type extends core.NamedElement {
+
+		@GenModel(documentation="A set of array indexes for the type.")
+		val declarations.Index[*] index;
+
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(derivation="if self.oclIsKindOf(DeclaredType)
+then 
+	if self.oclAsType(DeclaredType).typeDefinition.oclIsUndefined()
+	then null
+	else self.oclAsType(DeclaredType).typeDefinition.baseType
+	endif
+else 
+	if self.oclIsKindOf(PredefinedType)
+	then self.oclAsType(PredefinedType).type
+	else null
+	endif
+endif")
+		readonly volatile transient derived attr BuiltInType baseType;
+
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(derivation="if (self.oclIsKindOf(DeclaredType))
+then self.oclAsType(DeclaredType).typeDefinition.typeSpecification
+else null
+endif")
+		readonly volatile transient derived ref TypeSpecification typeSpecification;
+	}
+
+	@GenModel(documentation="One of the predefined types 'int', 'bool', 'chan', 'clock' or 'void'.")
+	class PredefinedType extends Type {
+
+		@GenModel(documentation="Stores the concrete literal that represents the predefined type.")
+		attr BuiltInType[1] type;
+	}
+
+	@GenModel(documentation="All built-in types.")
+	enum BuiltInType {
+		INT = 0;
+		CLOCK = 1;
+		CHAN = 2;
+		BOOL = 3;
+		VOID = 4;
+	}
+
+	@GenModel(documentation="A user-declared type.")
+	class DeclaredType extends Type {
+
+		@GenModel(documentation="The declaration that declares this type.")
+		ref declarations.TypeDeclaration[1]#type typeDeclaration;
+
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(derivation="if self.typeDeclaration.oclIsUndefined()
+then null
+else self.typeDeclaration.typeDefinition
+endif")
+		@GenModel(documentation="The definition of the declared type. Usually a type specification, but can also be a type reference to a \"renamed\" type.")
+		readonly volatile transient derived ref TypeDefinition[1] typeDefinition;
+	}
+
+	@GenModel(documentation="Abstract base class for type definitions of all typed elements. Type definitions are either references to types defined elsewhere, or in place specifications of new types.")
+	abstract class TypeDefinition {
+
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(derivation="if self.oclIsKindOf(TypeReference)
+then 
+	if self.oclAsType(TypeReference).referredType.oclIsUndefined()
+	then null
+	else self.oclAsType(TypeReference).referredType.baseType
+	endif
+else 
+	if self.oclIsKindOf(ScalarTypeSpecification) or self.oclIsKindOf(RangeTypeSpecification)
+	then BuiltInType::INT
+	else null
+	endif
+endif")
+		@GenModel(documentation="The built-in base type this type definition relies on. Can be 'null' in case of a 'struct' type definition involved.")
+		readonly volatile transient derived attr BuiltInType baseType;
+
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(derivation="if (self.oclIsKindOf(TypeReference))
+then self.oclAsType(TypeReference).referredType.typeSpecification
+else
+	if (self.oclIsKindOf(TypeSpecification))
+	then self.oclAsType(TypeSpecification)
+	else null
+	endif
+endif")
+		readonly volatile transient derived ref TypeSpecification typeSpecification;
+	}
+
+	@GenModel(documentation="A reference to a type defined elsewhere.")
+	class TypeReference extends TypeDefinition {
+
+		@GenModel(documentation="The referred type.")
+		ref Type[1] referredType;
+	}
+
+	@GenModel(documentation="Abstract base class for the specification of new types, using either the 'struct' or 'scalar' keywords, or restricting a type to a range of values.")
+	abstract class TypeSpecification extends TypeDefinition {
+	}
+
+	@GenModel(documentation="A specification of a 'scalar' type.")
+	class ScalarTypeSpecification extends TypeSpecification {
+
+		@GenModel(documentation="An integer-based expression that represents the size of the scalar type.")
+		val expressions.Expression[1] sizeExpression;
+	}
+
+	@GenModel(documentation="A specification of a 'struct' type.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueFieldNames="self.declaration->collect(variable)->isUnique(name)")
+	@Ecore(constraints="UniqueFieldNames")
+	class StructTypeSpecification extends TypeSpecification {
+
+		@GenModel(documentation="The variable declarations representing the fields of the 'struct' type.")
+		val declarations.DataVariableDeclaration[+] declaration;
+	}
+
+	@GenModel(documentation="A type specification restricting the 'int' type to a range of values.")
+	class RangeTypeSpecification extends TypeSpecification {
+
+		@GenModel(documentation="The bounds that restrict the type specification.")
+		val IntegerBounds[1] bounds;
+	}
+
+	@ExtendedMetaData(name="IntegerBounds", kind="empty")
+	@GenModel(documentation="Used to restrict the 'int' type to a range of values.")
+	class IntegerBounds {
+
+		@GenModel(documentation="An integer-based expression representing the lower bound.")
+		val expressions.Expression[1] lowerBound;
+
+		@GenModel(documentation="An integer-based expression representing the upper bound.")
+		val expressions.Expression[1] upperBound;
+	}
+
+	class Library {
+		val PredefinedType types;
+	}
+
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Support for all kinds of declarations, e.g. types, functions, or variables.")
+@namespace(uri="http://www.muml.org/uppaal/declarations/1.0.0", prefix="declarations")
+package declarations {
+	@ExtendedMetaData(name="Declarations", kind="elementOnly")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueFunctionNames="self.declaration->select(oclIsKindOf(FunctionDeclaration)).oclAsType(FunctionDeclaration)->collect(function)->isUnique(name)", UniqueVariableNames="self.declaration->select(oclIsKindOf(VariableDeclaration)).oclAsType(VariableDeclaration)->collect(variable)->isUnique(name)", UniqueTypeNames="self.declaration->select(oclIsKindOf(TypeDeclaration)).oclAsType(TypeDeclaration)->collect(type)->isUnique(name)")
+	@GenModel(documentation="Represents a set of variable, type, function, or template declarations, that are either global, local to a template, local to a block, or system declarations.")
+	@Ecore(constraints="UniqueFunctionNames UniqueVariableNames UniqueTypeNames")
+	abstract class Declarations {
+
+		@GenModel(documentation="The single declarations.")
+		val Declaration[*] declaration;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NoTemplateDeclarations="not self.declaration->exists(oclIsKindOf(system::TemplateDeclaration))")
+	@Ecore(constraints="NoTemplateDeclarations")
+	@GenModel(documentation="Global declarations of an NTA.")
+	class GlobalDeclarations extends Declarations {
+
+		@GenModel(documentation="The declaration of the synchronization channel priorities.")
+		val global.ChannelPriority channelPriority;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NoTemplateDeclarations="not self.declaration->exists(oclIsKindOf(system::TemplateDeclaration))", NoChannelDeclarations="not self.declaration->exists(oclIsKindOf(ChannelVariableDeclaration))")
+	@Ecore(constraints="NoTemplateDeclarations NoChannelDeclarations")
+	@GenModel(documentation="Local declarations inside a template or block of statements.")
+	class LocalDeclarations extends Declarations {
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueTemplateNames="self.declaration->select(oclIsKindOf(system::TemplateDeclaration)).oclAsType(system::TemplateDeclaration)->collect(declaredTemplate)->isUnique(name)", NoChannelDeclarations="not self.declaration->exists(oclIsKindOf(ChannelVariableDeclaration))")
+	@Ecore(constraints="UniqueTemplateNames NoChannelDeclarations")
+	@GenModel(documentation="System declarations consisting of process instantiations.")
+	class SystemDeclarations extends Declarations {
+
+		@GenModel(documentation="The system section describing the process instantiations.")
+		val system.System[1] system;
+
+		@GenModel(documentation="The optional progress measure section.")
+		val system.ProgressMeasure progressMeasure;
+	}
+
+	@GenModel(documentation="Abstract base class representing a variable, function, or type declaration.")
+	abstract class Declaration {
+	}
+
+	@ExtendedMetaData(name="VariableDeclaration", kind="elementOnly")
+	@GenModel(documentation="A declaration of one or more variables.")
+	abstract class VariableDeclaration extends Declaration, VariableContainer {
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(MatchingType="(not self.typeDefinition.oclIsUndefined())
+implies
+self.typeDefinition.baseType = types::BuiltInType::CHAN")
+	@GenModel(documentation="A declaration of synchronization channel variables.")
+	@Ecore(constraints="MatchingType")
+	class ChannelVariableDeclaration extends VariableDeclaration {
+
+		@GenModel(documentation="Specifies the urgency of the declared synchronization channels.")
+		attr boolean[1] urgent = false;
+
+		@GenModel(documentation="Specifies whether the declared synchronization channels use broadcast.")
+		attr boolean[1] broadcast = false;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(MatchingType="(not self.typeDefinition.oclIsUndefined())
+implies
+self.typeDefinition.baseType = types::BuiltInType::CLOCK")
+	@GenModel(documentation="A declaration of clock variables.")
+	@Ecore(constraints="MatchingType")
+	class ClockVariableDeclaration extends VariableDeclaration {
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(MatchingType="(not self.typeDefinition.oclIsUndefined())
+implies
+(self.typeDefinition.baseType <> types::BuiltInType::CHAN
+and
+self.typeDefinition.baseType <> types::BuiltInType::CLOCK)")
+	@GenModel(documentation="A declaration of data variables.")
+	@Ecore(constraints="MatchingType")
+	class DataVariableDeclaration extends VariableDeclaration {
+
+		@GenModel(documentation="The prefix of the data variable declaration.")
+		attr DataVariablePrefix[1] prefix;
+	}
+
+	@GenModel(documentation="Prefixes for data variables with base type 'int' or 'bool'.")
+	enum DataVariablePrefix {
+		NONE = 0;
+		CONST = 1;
+		META = 2;
+	}
+
+	@GenModel(documentation="Declaration of a single function.")
+	class FunctionDeclaration extends Declaration {
+
+		@GenModel(documentation="The return type of this function.")
+		val Function[1] function;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(ValidReturnType="(not returnType.oclIsUndefined())
+implies
+(returnType.baseType = types::BuiltInType::VOID or
+ returnType.baseType = types::BuiltInType::INT or
+ returnType.baseType = types::BuiltInType::BOOL)", UniqueParameterNames="self.parameter->collect(variableDeclaration)->collect(variable)->isUnique(name)")
+	@GenModel(documentation="A function with a return type and optional parameters.")
+	@Ecore(constraints="ValidReturnType UniqueParameterNames")
+	class Function extends core.NamedElement {
+
+		@GenModel(documentation="The return type of this function.")
+		val types.TypeDefinition[1] returnType;
+
+		@GenModel(documentation="The block of statements representing the function body.")
+		val statements.Block[1] block;
+
+		@GenModel(documentation="The function's parameters.")
+		val Parameter[*] parameter;
+	}
+
+	@GenModel(documentation="A declaration of one or more types.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueTypeNames="self.type->isUnique(name)")
+	@Ecore(constraints="UniqueTypeNames")
+	class TypeDeclaration extends Declaration {
+
+		@GenModel(documentation="The types declared by this type declaration.")
+		val types.DeclaredType[+]#typeDeclaration type;
+
+		@GenModel(documentation="The type definition for declared types.")
+		val types.TypeDefinition[1] typeDefinition;
+	}
+
+	@ExtendedMetaData(name="Variable", kind="empty")
+	@GenModel(documentation="A typed variable.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NoInitializerForClockAndChannelVariables="((not self.typeDefinition.oclIsUndefined()) and
+(self.typeDefinition.baseType = types::BuiltInType::CHAN or
+ self.typeDefinition.baseType = types::BuiltInType::CLOCK))
+ implies self.initializer.oclIsUndefined()")
+	@Ecore(constraints="NoInitializerForClockAndChannelVariables")
+	class Variable extends core.NamedElement {
+
+		@GenModel(documentation="A set of array indexes for the variable.")
+		val Index[*] index;
+
+		@GenModel(documentation="The container of this variable.")
+		ref VariableContainer[1]#variable container;
+
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(derivation="if self.container.oclIsUndefined()
+then null 
+else 
+self.container.typeDefinition 
+endif")
+		@GenModel(documentation="The type definition of this variable.")
+		readonly volatile transient derived ref types.TypeDefinition[1] typeDefinition;
+
+		@GenModel(documentation="Represents the variable's initial value.")
+		val Initializer initializer;
+	}
+
+	@GenModel(documentation="Abstract base-class for indexing variables or types.")
+	abstract class Index {
+	}
+
+	@GenModel(documentation="An index specified by an expression value.")
+	class ValueIndex extends Index {
+
+		@GenModel(documentation="An integer-based expression representing size and range of the indexed type or variable.")
+		val expressions.Expression[1] sizeExpression;
+	}
+
+	@GenModel(documentation="An index specified by a bounded integer-based type.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(IntegerBasedIndex="(not self.typeDefinition.oclIsUndefined())
+implies
+self.typeDefinition.baseType = types::BuiltInType::INT")
+	@Ecore(constraints="IntegerBasedIndex")
+	class TypeIndex extends Index {
+
+		@GenModel(documentation="An integer-based type representing size and range of the indexed type or variable.")
+		val types.TypeDefinition[1] typeDefinition;
+	}
+
+	@GenModel(documentation="Abstract base class for objects containing variables like variable declarations, iterations, quantifications or selections.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NoVoidVariables="(not self.typeDefinition.oclIsUndefined())
+implies
+self.typeDefinition.baseType <> types::BuiltInType::VOID", UniqueVariableNames="self.variable->isUnique(name)")
+	@Ecore(constraints="NoVoidVariables UniqueVariableNames")
+	abstract class VariableContainer {
+
+		@GenModel(documentation="The type definition for the contained variables.")
+		val types.TypeDefinition[1] typeDefinition;
+
+		@ExtendedMetaData(kind="element", name="variable")
+		@GenModel(documentation="The contained variables.")
+		val Variable[+]#container variable;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(SingleVariable="(not self.variableDeclaration.oclIsUndefined())
+implies
+self.variableDeclaration.variable->size() <= 1")
+	@GenModel(documentation="A parameter of a function or template.")
+	@Ecore(constraints="SingleVariable")
+	class Parameter {
+
+		@GenModel(documentation="A variable declaration containing the variable that represents the parameter.")
+		val VariableDeclaration[1] variableDeclaration;
+
+		@GenModel(documentation="Specifies whether call-by-value or call-by-reference semantics should be applied.")
+		attr CallType callType = "CALL_BY_VALUE";
+	}
+
+	@GenModel(documentation="Represents call-by-value or call-by-reference parameters.")
+	enum CallType {
+		CALL_BY_VALUE = 0;
+		CALL_BY_REFERENCE = 1;
+	}
+
+	@GenModel(documentation="An initializer specifies a variable's initial value.")
+	abstract class Initializer {
+	}
+
+	@GenModel(documentation="An initializer that represents a single initial value by means of an expression.")
+	class ExpressionInitializer extends Initializer {
+
+		@GenModel(documentation="The expression representing the initial value.")
+		val expressions.Expression[1] expression;
+	}
+
+	@GenModel(documentation="An initializer for array variables, referring to multiple sub-initializers.")
+	class ArrayInitializer extends Initializer {
+
+		@GenModel(documentation="A number of sub-initializers, each one representing the initial value for one array index.")
+		val Initializer[+] initializer;
+	}
+
+	@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+	@GenModel(documentation="Contains special classes that are relevant for the global declarations.")
+	@namespace(uri="http://www.muml.org/uppaal/declarations/global/1.0.0", prefix="global")
+	package global {
+		@GenModel(documentation="A priority ordering for synchronization channels.")
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(AtMostOneDefaultItem="self.item->select(oclIsKindOf(DefaultChannelPriority))->size() <= 1", EachChannelContainedAtMostOnce="self.item->select(oclIsKindOf(ChannelList)).oclAsType(ChannelList)->collect(channelExpression)->isUnique(variable)")
+		@Ecore(constraints="AtMostOneDefaultItem EachChannelContainedAtMostOnce")
+		class ChannelPriority {
+
+			@GenModel(documentation="The items of the channel priority ordering.")
+			val ChannelPriorityItem[+] item;
+		}
+
+		@GenModel(documentation="Abstract base class for items inside a channel priority.")
+		abstract class ChannelPriorityItem {
+		}
+
+		@GenModel(documentation="A list of synchronization channel variables, used to assign these channels a common priority.")
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(ChannelVariablesOnly="self.channelExpression->forAll(
+	(not identifier.typeDefinition.oclIsUndefined()) implies identifier.typeDefinition.baseType = types::BuiltInType::CHAN
+)")
+		@Ecore(constraints="ChannelVariablesOnly")
+		class ChannelList extends ChannelPriorityItem {
+
+			@GenModel(documentation="The variable expressions representing the synchronization channels inside the channel list.")
+			val expressions.IdentifierExpression[+] channelExpression;
+		}
+
+		@GenModel(documentation="A 'default' item inside a channel priority, representing all channels not listed explicitly.")
+		class DefaultChannelPriority extends ChannelPriorityItem {
+		}
+
+	}
+
+	@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+	@GenModel(documentation="Contains special classes that are relevant for the system declarations.")
+	@namespace(uri="http://www.muml.org/uppaal/declarations/system/1.0.0", prefix="system")
+	package system {
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NumberOfArgumentsMatchesDeclaration="(not self.declaredTemplate.oclIsUndefined() and not self.declaredTemplate.referredTemplate.oclIsUndefined())
+implies
+self.argument->size() = self.declaredTemplate.referredTemplate.parameter->size()")
+		@Ecore(constraints="NumberOfArgumentsMatchesDeclaration")
+		@GenModel(documentation="A declaration of a template redefinition.")
+		class TemplateDeclaration extends Declaration {
+
+			@GenModel(documentation="The template being declared.")
+			val templates.RedefinedTemplate[1]#declaration declaredTemplate;
+
+			@GenModel(documentation="A number of arguments that describe how the referred template's parameters should be mapped towards the declared template's parameters.")
+			val expressions.Expression[*] argument;
+		}
+
+		@ExtendedMetaData(name="System", kind="elementOnly")
+		@GenModel(documentation="A system contains declarations of template instantiations.")
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(EachTemplateReferencedAtMostOnce="self.instantiationList->collect(template)->isUnique(t : templates::AbstractTemplate | t)")
+		@Ecore(constraints="EachTemplateReferencedAtMostOnce")
+		class System {
+
+			@GenModel(documentation="A list of process instantiation sublists, ordered by decreasing priority. The templates referenced inside the sublists are instantiated to be part of the system at runtime.")
+			val InstantiationList[+] instantiationList;
+		}
+
+		@GenModel(documentation="Represents a list of templates to be instantiated using a common priority.")
+		@"http://www.eclipse.org/emf/2002/Ecore/OCL"(OnlyLegalParamsForPartialInstantiation="self.template->forAll(
+	parameter->forAll(
+		callType = declarations::CallType::CALL_BY_VALUE
+		and
+		((not variableDeclaration.oclIsUndefined())
+			implies
+		 (variableDeclaration.typeDefinition.typeSpecification.oclIsKindOf(types::RangeTypeSpecification) or
+		  variableDeclaration.typeDefinition.typeSpecification.oclIsKindOf(types::ScalarTypeSpecification)))
+	)
+)")
+		@Ecore(constraints="OnlyLegalParamsForPartialInstantiation")
+		class InstantiationList {
+
+			@GenModel(documentation="The list of instantiations.")
+			ref templates.AbstractTemplate[+] template;
+		}
+
+		@GenModel(documentation="A progress measure consisting of monotonically increasing expressions.")
+		class ProgressMeasure {
+
+			@GenModel(documentation="The progress measure expressions.")
+			val expressions.Expression[+] expression;
+		}
+
+	}
+
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Support for Timed Automata templates consisting of locations and edges.")
+@namespace(uri="http://www.muml.org/uppaal/templates/1.0.0", prefix="templates")
+package templates {
+	@GenModel(documentation="Abstract base class for ordinary timed automata templates as well as redefined templates.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueParameterNames="self.parameter->collect(variableDeclaration)->collect(variable)->isUnique(name)")
+	@Ecore(constraints="UniqueParameterNames")
+	abstract class AbstractTemplate extends core.NamedElement, core.CommentableElement {
+
+		@GenModel(documentation="The parameter declarations of the template.")
+		val declarations.Parameter[*] parameter;
+	}
+
+	@ExtendedMetaData(name="Template", kind="elementOnly")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueLocationNames="self.location->isUnique(name)")
+	@Ecore(constraints="UniqueLocationNames")
+	@GenModel(documentation="An Uppaal template representing a single timed automaton.")
+	class Template extends AbstractTemplate {
+
+		@ExtendedMetaData(kind="element", name="declarations")
+		@GenModel(documentation="The local declarations of the template.")
+		val declarations.LocalDeclarations declarations;
+
+		@ExtendedMetaData(kind="element", name="location")
+		@GenModel(documentation="The locations inside this template.")
+		val Location[+]#parentTemplate location;
+
+		@ExtendedMetaData(kind="element", name="edge")
+		@GenModel(documentation="The edges inside this template.")
+		val Edge[*]#parentTemplate edge;
+
+		@ExtendedMetaData(kind="attribute", name="init")
+		@GenModel(documentation="The initial location of this template.")
+		ref Location[1] init;
+	}
+
+	@GenModel(documentation="A template resulting from redefinition of another referred template, altering its name and parametrization.")
+	class RedefinedTemplate extends AbstractTemplate {
+
+		@GenModel(documentation="The template that serves as basis for redefinition.")
+		ref AbstractTemplate[1] referredTemplate;
+
+		@GenModel(documentation="The declaration of this template.")
+		ref declarations.system.TemplateDeclaration[1]#declaredTemplate declaration;
+	}
+
+	@ExtendedMetaData(name="Location", kind="empty")
+	@GenModel(documentation="A location inside a template.")
+	class Location extends core.NamedElement, core.CommentableElement, visuals.PlanarElement, visuals.ColoredElement {
+
+		@GenModel(documentation="The parent template containing the location.")
+		ref Template[1]#location parentTemplate;
+
+		@GenModel(documentation="A boolean expression representing the location's invariant.")
+		val expressions.Expression invariant;
+
+		@GenModel(documentation="Specifies the kind of location (default, urgent, or committed).")
+		attr LocationKind[1] locationTimeKind;
+	}
+
+	@GenModel(documentation="Location types.")
+	enum LocationKind {
+		NORMAL = 0;
+		URGENT = 1;
+		COMMITED = 2;
+	}
+
+	@ExtendedMetaData(name="Edge", kind="empty")
+	@GenModel(documentation="An edge connecting two locations inside a template.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(UniqueParentTemplate="(not (self.source.oclIsUndefined() or self.target.oclIsUndefined()))
+implies
+self.source.parentTemplate = self.target.parentTemplate")
+	@Ecore(constraints="UniqueParentTemplate")
+	class Edge extends visuals.LinearElement, core.CommentableElement, visuals.ColoredElement {
+
+		@ExtendedMetaData(kind="attribute", name="source")
+		@GenModel(documentation="The source location of the edge.")
+		ref Location[1] source;
+
+		@ExtendedMetaData(kind="attribute", name="target")
+		@GenModel(documentation="The target location of the edge.")
+		ref Location[1] target;
+
+		@GenModel(documentation="The parent template containing the edge.")
+		ref Template[1]#edge parentTemplate;
+
+		@GenModel(documentation="The guard expression of the edge.")
+		val expressions.Expression guard;
+
+		@GenModel(documentation="A set of update expressions for the edge, evaluated if the edge fires.")
+		val expressions.Expression[*] update;
+
+		@GenModel(documentation="A synchronization performed when the edge fires.")
+		val Synchronization synchronization;
+
+		@GenModel(documentation="A set of non-deterministic value selections.")
+		val Selection[*] selection;
+	}
+
+	@GenModel(documentation="A sent or received synchronization between two templates using a specific synchronization channel.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(ChannelVariablesOnly="(not self.channelExpression.oclIsUndefined())
+and
+(not self.channelExpression.identifier.oclIsUndefined())
+and
+(self.channelExpression.identifier.oclIsKindOf(declarations::Variable))
+and
+(not self.channelExpression.identifier.oclAsType(declarations::Variable).typeDefinition.oclIsUndefined())
+implies
+self.channelExpression.identifier.oclAsType(declarations::Variable).typeDefinition.baseType = types::BuiltInType::CHAN")
+	@Ecore(constraints="ChannelVariablesOnly")
+	class Synchronization {
+
+		@GenModel(documentation="An expression representing the channel variable used for synchronization.")
+		val expressions.IdentifierExpression[1] channelExpression;
+
+		@GenModel(documentation="The kind of synchronization (sent or received).")
+		attr SynchronizationKind[1] kind;
+	}
+
+	@GenModel(documentation="Representing the type of synchronization.")
+	enum SynchronizationKind {
+		RECEIVE = 0;
+		SEND = 1;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(SingleVariable="self.variable->size() <= 1", IntegerBasedType="(not self.typeDefinition.oclIsUndefined())
+implies
+self.typeDefinition.baseType = types::BuiltInType::INT")
+	@Ecore(constraints="SingleVariable IntegerBasedType")
+	@GenModel(documentation="A non-deterministic selection of a value from a range. The range is specified by a bounded type.")
+	class Selection extends declarations.VariableContainer {
+	}
+
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Support for statements inside functions.")
+@namespace(uri="http://www.muml.org/uppaal/statements/1.0.0", prefix="statements")
+package statements {
+	@GenModel(documentation="Abstract base-class for all statements inside a function's body.")
+	abstract class Statement {
+	}
+
+	@GenModel(documentation="A block of one or more statements.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(DataVariableDeclarationsOnly="(not self.declarations.oclIsUndefined())
+implies
+(self.declarations.declaration->forAll(oclIsKindOf(declarations::DataVariableDeclaration)))")
+	@Ecore(constraints="DataVariableDeclarationsOnly")
+	class Block extends Statement {
+
+		@GenModel(documentation="The local declarations for the function's body.")
+		val declarations.LocalDeclarations declarations;
+
+		@GenModel(documentation="The statements inside the funtion's body.")
+		val Statement[+] statement;
+	}
+
+	@GenModel(documentation="An empty statement represented by a semicolon only.")
+	class EmptyStatement extends Statement {
+	}
+
+	@GenModel(documentation="A for-loop statement.")
+	class ForLoop extends Statement {
+
+		@GenModel(documentation="The initialization expression of the for loop.")
+		val expressions.Expression[1] initialization;
+
+		@GenModel(documentation="The condition of the for loop, represented by a boolean expression.")
+		val expressions.Expression[1] condition;
+
+		@GenModel(documentation="The iteration statements of the for loop.")
+		val expressions.Expression[1] iteration;
+
+		@GenModel(documentation="The statement to be evaluated for every value.")
+		val Statement[1] statement;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(SingleVariable="self.variable->size() <= 1")
+	@Ecore(constraints="SingleVariable")
+	@GenModel(documentation="An iteration over all possible values of a bounded type using the 'for' keyword.")
+	class Iteration extends Statement, declarations.VariableContainer {
+
+		@GenModel(documentation="The statement to be evaluated for every value.")
+		val Statement[1] statement;
+	}
+
+	@GenModel(documentation="A while-loop statement.")
+	class WhileLoop extends Statement {
+
+		@GenModel(documentation="A boolean expression for the while loop.")
+		val expressions.Expression[1] expression;
+
+		@GenModel(documentation="The statement to be evaluated for every value.")
+		val Statement[1] statement;
+	}
+
+	@GenModel(documentation="A do-while-loop statement.")
+	class DoWhileLoop extends Statement {
+
+		@GenModel(documentation="The statement to be evaluated for every value.")
+		val Statement[1] statement;
+
+		@GenModel(documentation="A boolean expression for the while loop.")
+		val expressions.Expression[1] expression;
+	}
+
+	@GenModel(documentation="An if-then-else statement.")
+	class IfStatement extends Statement {
+
+		@GenModel(documentation="The boolean if-expression.")
+		val expressions.Expression[1] ifExpression;
+
+		@GenModel(documentation="The then-statement.")
+		val Statement[1] thenStatement;
+
+		@GenModel(documentation="The else-statement.")
+		val Statement elseStatement;
+	}
+
+	@GenModel(documentation="A statement used to return from a function's body, optionally carrying a return value.")
+	class ReturnStatement extends Statement {
+
+		@GenModel(documentation="The expression representing the return value.")
+		val expressions.Expression returnExpression;
+	}
+
+	@GenModel(documentation="A statement that refers to an arbitrary expression.")
+	class ExpressionStatement extends Statement {
+
+		@GenModel(documentation="The expression this statement refers to.")
+		val expressions.Expression[1] expression;
+	}
+
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Introduces all kinds of expressions.")
+@namespace(uri="http://www.muml.org/uppaal/expressions/1.0.0", prefix="expressions")
+package expressions {
+	@GenModel(documentation="Abstract base class for all kinds of expressions.")
+	abstract class Expression {
+	}
+
+	@GenModel(documentation="A negation of an expression.")
+	class NegationExpression extends Expression {
+
+		@GenModel(documentation="The expression negated by this negation.")
+		val Expression[1] negatedExpression;
+	}
+
+	@GenModel(documentation="A confirmation of an integer-based expression using the '+' token.")
+	class PlusExpression extends Expression {
+
+		@GenModel(documentation="The expression negated by this negation.")
+		val Expression[1] confirmedExpression;
+	}
+
+	@GenModel(documentation="An inversion of an integer-based expression using the '-' token.")
+	class MinusExpression extends Expression {
+
+		@GenModel(documentation="The expression negated by this negation.")
+		val Expression[1] invertedExpression;
+	}
+
+	@GenModel(documentation="Abstract base class for all binary expressions connecting two sub-expressions.")
+	abstract class BinaryExpression extends Expression {
+
+		@GenModel(documentation="The first sub-expression.")
+		val Expression[1] firstExpr;
+
+		@GenModel(documentation="The second sub-expression.")
+		val Expression[1] secondExpr;
+	}
+
+	@GenModel(documentation="A binary assignment expression using a specific assignment operator.")
+	class AssignmentExpression extends BinaryExpression {
+
+		@GenModel(documentation="The operator for the assignment.")
+		attr AssignmentOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing all assignment operators.")
+	enum AssignmentOperator {
+		EQUAL = 0;
+		PLUS_EQUAL = 1;
+		MINUS_EQUAL = 2;
+		TIMES_EQUAL = 3;
+		DIVIDE_EQUAL = 4;
+		MODULO_EQUAL = 5;
+		BIT_AND_EQUAL = 6;
+		BIT_OR_EQUAL = 7;
+		BIT_LEFT_EQUAL = 8;
+		BIT_RIGHT_EQUAL = 9;
+		BIT_XOR_EQUAL = 10;
+	}
+
+	@GenModel(documentation="An expression referring to a variable.")
+	class IdentifierExpression extends Expression {
+
+		@GenModel(documentation="The referred variable.")
+		ref core.NamedElement[1] identifier;
+
+		@GenModel(documentation="A set of expressions that refer to the array indexes of the variable.")
+		val Expression[*] index;
+	}
+
+	@GenModel(documentation="An expression referring to a literal of any type.")
+	class LiteralExpression extends Expression {
+
+		@GenModel(documentation="The textual description of the literal.")
+		attr String[1] text;
+	}
+
+	@GenModel(documentation="A binary expression representing an arithemtic operation.")
+	class ArithmeticExpression extends BinaryExpression {
+
+		@GenModel(documentation="The arithmetic operator to be applied.")
+		attr ArithmeticOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing all arithmetic operators.")
+	enum ArithmeticOperator {
+		ADD = 0;
+		SUBTRACT = 1;
+		MULTIPLICATE = 2;
+		DIVIDE = 3;
+		MODULO = 4;
+	}
+
+	@GenModel(documentation="A logical expression.")
+	class LogicalExpression extends BinaryExpression {
+		attr LogicalOperator[1] operator;
+	}
+
+	enum LogicalOperator {
+		AND = 0;
+		OR = 1;
+		IMPLY = 2;
+	}
+
+	@GenModel(documentation="An expression representing a call to a function.")
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(NumberOfArgumentsMatchesDeclaration="(not self.function.oclIsUndefined())
+implies
+self.argument->size() = self.function.parameter->size()")
+	@Ecore(constraints="NumberOfArgumentsMatchesDeclaration")
+	class FunctionCallExpression extends Expression {
+
+		@GenModel(documentation="The function to be called.")
+		ref declarations.Function[1] function;
+
+		@GenModel(documentation="A set of expressions representing the argument values for the function call. Must conform to the parameters of the function declaration.")
+		val Expression[*] argument;
+	}
+
+	@GenModel(documentation="A comparison between two expression values using a specific comparison operator.")
+	class CompareExpression extends BinaryExpression {
+
+		@GenModel(documentation="The comparison operator to be applied.")
+		attr CompareOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing all comparison operators.")
+	enum CompareOperator {
+		EQUAL = 0;
+		GREATER = 1;
+		GREATER_OR_EQUAL = 2;
+		LESS = 3;
+		LESS_OR_EQUAL = 4;
+		UNEQUAL = 5;
+	}
+
+	@GenModel(documentation="An expression representing a conditional redirection to one of the sub-expressions. Uses tokens '?' and ':' for delimitation.")
+	class ConditionExpression extends Expression {
+
+		@GenModel(documentation="The boolean if-expression.")
+		val Expression[1] ifExpression;
+
+		@GenModel(documentation="The then-expression.")
+		val Expression[1] thenExpression;
+
+		@GenModel(documentation="The else-expression.")
+		val Expression[1] elseExpression;
+	}
+
+	@GenModel(documentation="An expression used to access a scoped identifier. Uses a dot for delimination between scope and identifier.")
+	class ScopedIdentifierExpression extends Expression {
+
+		@GenModel(documentation="An expression that refers to a certain identifier scope.")
+		val Expression[1] scope;
+
+		@GenModel(documentation="An expression that refers to a member of the scope.")
+		val IdentifierExpression[1] identifier;
+	}
+
+	@GenModel(documentation="Representing existential and universal quantification.")
+	enum Quantifier {
+		EXISTENTIAL = 0;
+		UNIVERSAL = 1;
+	}
+
+	@"http://www.eclipse.org/emf/2002/Ecore/OCL"(SingleVariable="self.variable->size() <= 1")
+	@Ecore(constraints="SingleVariable")
+	@GenModel(documentation="A quantification expression introducing a quantified variable.")
+	class QuantificationExpression extends Expression, declarations.VariableContainer {
+
+		@GenModel(documentation="The quantifier to be applied.")
+		attr Quantifier[1] quantifier;
+
+		@GenModel(documentation="The quantified expression.")
+		val Expression[1] expression;
+	}
+
+	@GenModel(documentation="An expression describing increment (++) or decrement (---) of an integer-based expression. ")
+	class IncrementDecrementExpression extends Expression {
+
+		@GenModel(documentation="The expression to be incremented or decremented.")
+		val Expression[1] expression;
+
+		@GenModel(documentation="Specifies pre- or post-evaluation.")
+		attr IncrementDecrementPosition[1] position;
+
+		@GenModel(documentation="Specifies increment or decrement.")
+		attr IncrementDecrementOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing increment and decrement operators.")
+	enum IncrementDecrementOperator {
+		INCREMENT = 0;
+		DECREMENT = 1;
+	}
+
+	@GenModel(documentation="Representing pre- or post-processing inside increment/decrement expressions.")
+	enum IncrementDecrementPosition {
+		PRE = 0;
+		POST = 1;
+	}
+
+	@GenModel(documentation="A binary expression representing an arithemtic operation.")
+	class BitShiftExpression extends BinaryExpression {
+
+		@GenModel(documentation="The arithmetic operator to be applied.")
+		attr BitShiftOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing all arithmetic operators.")
+	enum BitShiftOperator {
+		LEFT = 0;
+		RIGHT = 1;
+	}
+
+	@GenModel(documentation="A binary expression representing an arithemtic operation.")
+	class MinMaxExpression extends BinaryExpression {
+
+		@GenModel(documentation="The arithmetic operator to be applied.")
+		attr MinMaxOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing all arithmetic operators.")
+	enum MinMaxOperator {
+		MIN = 0;
+		MAX = 1;
+	}
+
+	@GenModel(documentation="A binary expression representing an arithemtic operation.")
+	class BitwiseExpression extends BinaryExpression {
+
+		@GenModel(documentation="The arithmetic operator to be applied.")
+		attr BitwiseOperator[1] operator;
+	}
+
+	@GenModel(documentation="Representing all arithmetic operators.")
+	enum BitwiseOperator {
+		AND = 0;
+		XOR = 1;
+		OR = 2;
+	}
+
+}
+
+@Ecore(invocationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", settingDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL", validationDelegates="http://www.eclipse.org/emf/2002/Ecore/OCL")
+@GenModel(documentation="Provides support for the visual representation of model elements.")
+@namespace(uri="http://www.muml.org/uppaal/visuals/1.0.0", prefix="visuals")
+package visuals {
+	@GenModel(documentation="A model element that has an optional color.")
+	abstract class ColoredElement {
+
+		@GenModel(documentation="The color of the model element. It is either a standard uppaal color (default, white, light grey, dark grey, black, blue, cyan, green, magenta, orange, pink, red, yellow) or a self-defined color. Edges should not be white.
+
+\todosd{We need an OCL-Constraint: Edges should not be white.}
+\todosd{We need an OCL-Constraint: If self defined is choosen then a color code must be specified.}")
+		attr ColorKind color;
+
+		@GenModel(documentation="The hexadecimal color code of the model element that must be defined if a self-defined color should be used.")
+		attr String colorCode;
+	}
+
+	@GenModel(documentation="A planar model element that has an optional position.")
+	abstract class PlanarElement {
+
+		@GenModel(documentation="The planar position of the model element.")
+		val Point position;
+	}
+
+	@GenModel(documentation="A linear model element that has a set of bend points.")
+	abstract class LinearElement {
+
+		@GenModel(documentation="The bend points of the linear model element.")
+		val Point[*] bendPoint;
+	}
+
+	@GenModel(documentation="Represents a point in the two-dimensional space.")
+	class Point {
+
+		@GenModel(documentation="The horizontal component of the point.")
+		attr int[1] x = 0;
+
+		@GenModel(documentation="The vertical component of the point.")
+		attr int[1] y = 0;
+	}
+
+	@GenModel(documentation="The color kinds of an element. They are the standard colors of uppaal or a self-defined color.")
+	enum ColorKind {
+		DEFAULT = 0;
+		WHITE = 1;
+		LIGHTGREY = 2;
+		DARKGREY = 3;
+		BLACK = 4;
+		BLUE = 5;
+		CYAN = 6;
+		GREEN = 7;
+		MAGENTA = 8;
+		ORANGE = 9;
+		PINK = 10;
+		RED = 11;
+		YELLOW = 12;
+		SELF_DEFINED = 13;
+	}
+
+}
+

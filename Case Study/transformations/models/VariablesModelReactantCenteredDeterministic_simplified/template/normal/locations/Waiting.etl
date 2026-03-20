@@ -1,0 +1,11 @@
+operation Uppaal!Template setupWaiting(): Uppaal!Template {
+	self.location.add(
+        location(
+            self, 
+            new Tuple(name = "waiting", position = point(-1730, -747)), 
+            point(-1666, -731), 
+            invariant(or_(lessOrEqual("c", "TU"), functionCall("infinite_delay")), point(-1730, -719))
+        )
+    );
+    return self;
+}

@@ -1,0 +1,14 @@
+// timeActivity {id};
+// const double_t k_{id} = {double};
+operation Uppaal!GlobalDeclarations setupReactionVariables(animo : Animo!Network): Uppaal!GlobalDeclarations {
+	for (reaction: Animo!Edge in animo.activeEdges()) {
+		self.declaration.add(dataVariableDeclaration(self.getDeclaredType("timeActivity"), reaction.id()));
+		self.declaration.add(dataVariableDeclaration(
+			"CONST",
+			self.getDeclaredType("double_t"),
+			"k_" + reaction.id(), 
+			formatDouble(reaction.k / (animo.timeScaleFactor * reaction.levelsScaleFactor)))
+		);
+	}
+	return self;
+}

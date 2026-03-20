@@ -1,0 +1,22 @@
+operation Uppaal!GlobalDeclarations setupEnterCrit(): Uppaal!GlobalDeclarations {
+	// void enterCrit(int id) {
+	var function_ = function_(
+		"void", 
+		"enterCrit", 
+		Sequence { 
+			parameter("int", "id")
+		}
+	);
+
+	// criticalSession[id] = true;
+	function_.block.statement.add(assign("criticalSession[id]", "true"));
+
+	// if (id < minCrit) {
+	// 		minCrit = id;
+	// }
+	function_.block.statement.add(if_(less("id", "minCrit")));
+	function_.block.statement.get(1).thenStatement.statement.add(assign("minCrit", "id"));
+		
+	self.declaration.add(function_.declaration);
+	return self;
+}

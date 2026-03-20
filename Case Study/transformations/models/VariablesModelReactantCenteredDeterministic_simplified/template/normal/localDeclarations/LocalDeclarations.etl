@@ -1,0 +1,18 @@
+import "./functions/Functions.etl";
+import "./variables/Variables.etl";
+
+operation Uppaal!Template setupLocalDeclarations(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network): Uppaal!Template {
+	self.declarations = new Uppaal!LocalDeclarations()
+		.setupDelta()
+		.setupTLAndTU(nta)
+		.setupClockC()
+		.setupTotalRateAndOldRate(nta)
+		.setupCompute_rate(nta, reactant, animo)
+		.setupUpdate(animo)
+		.setupReach()
+		.setupMake_urgent()
+		.setupRate_significantly_changed(nta)
+		.setupDecide_reset()
+		.setupInfinite_delay();
+	return self;
+}

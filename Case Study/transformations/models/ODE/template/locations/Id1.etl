@@ -1,0 +1,8 @@
+operation Uppaal!Template setupId1(): Uppaal!Template {
+	self.location.add(
+		location(self, new Tuple(name = "id1", position = point(-448, -102)), "committed", point(-448, -102))
+	);
+
+	self.init = self.location.selectOne(location_ | location_.name == "id1");
+	return self;
+}

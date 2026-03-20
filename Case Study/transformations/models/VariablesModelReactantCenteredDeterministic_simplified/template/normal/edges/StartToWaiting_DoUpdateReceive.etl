@@ -1,0 +1,13 @@
+operation Uppaal!Template setupStartToWaiting_DoUpdateReceive(animo: Animo!Network): Uppaal!Template {
+	// start --> waiting
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "start"),
+		self.location.selectOne(r | r.name = "waiting"),
+		animo.areThereRandomInitials() ? synchronization("receive", "do_update", point(-1538, -748)) : null,
+		Sequence {},
+		null,
+		update(functionCall("update"), point(-1538, -731)),
+		Sequence {}
+	));
+	return self;
+}

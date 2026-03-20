@@ -1,0 +1,11 @@
+operation Uppaal!Template setupUpdating(): Uppaal!Template {
+    self.location.add(
+        location(
+            self, 
+            new Tuple(name = "updating", position = point(-1411, -756)), 
+            "committed", 
+            point(-1419, -731)
+        )
+    );
+    return self;
+}

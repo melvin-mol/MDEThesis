@@ -1,0 +1,12 @@
+operation not_(expression: Uppaal!Expression): Uppaal!NegationExpression {
+	var negation = new Uppaal!NegationExpression;
+	negation.negatedExpression = expression;
+	return negation;
+}
+
+operation not_(literal: String): Uppaal!NegationExpression {
+	var negation = new Uppaal!NegationExpression;
+	negation.negatedExpression = new Uppaal!LiteralExpression;
+	negation.negatedExpression.text = literal;
+	return negation;
+}

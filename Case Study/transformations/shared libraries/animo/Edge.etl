@@ -1,0 +1,38 @@
+@cached
+operation Animo!Network activeEdges(): Collection(Animo!Edge) {
+	return self.edges.select(r | r.enabled);
+}
+
+@cached
+operation Animo!Network activeSortedEdges(): Collection(Animo!Edge) {
+	return self.edges.select(r | r.enabled).sortBy(r | r.name != null ? r.name : "");
+}
+
+@cached
+operation Animo!Network activeSortedTargetEdges(node: Animo!Node): Collection(Animo!Edge) {
+	return self.activeSortedEdges().select(edge | edge.target.id() == node.id());
+}
+
+@cached
+operation Animo!Network sortedTargetEdges(node: Animo!Node): Collection(Animo!Edge) {
+	return self.edges.sortBy(r | r.name != null ? r.name : "").select(edge | edge.target.id() == node.id());
+}
+
+@cached
+operation Animo!Network activeTargetEdges(node: Animo!Node): Collection(Animo!Edge) {
+	return self.activeEdges().select(edge | edge.target.id() == node.id());
+}
+
+@cached
+operation Animo!Network targetEdges(node: Animo!Node): Collection(Animo!Edge) {
+	return self.edges.select(edge | edge.target.id() == node.id());
+}
+
+@cached
+operation Animo!Network edgesWithCustomScenario(): Collection(Animo!Edge) {
+	return self.edges.select(r | r.enabled and r.scenario == 3);
+}
+
+operation Animo!Edge id(): String {
+	return self.source.id() + "_" + self.target.id();
+}

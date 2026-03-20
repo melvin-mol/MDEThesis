@@ -1,0 +1,17 @@
+operation Uppaal!Template setupWaitingToId0_Reacting_Receive(reactant: Animo!Node): Uppaal!Template {
+	// React when ANYBODY is reacting if you can react now
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "waiting"),
+		self.location.selectOne(r | r.name = "id0"),
+		synchronization("receive", "reacting", point(-1690, -827)),
+		Sequence { point(-1666, -810) },
+		guard_(greaterOrEqual("c", "TL"), point(-1690, -844)),
+		update(Sequence {
+			functionCall("react"),
+			assign("c", "0").expression,
+			functionCall("enterCrit", Sequence { reactant.channelIndex() })
+		}, point(-1690, -810)),
+		Sequence {}
+	));
+	return self;
+}

@@ -1,0 +1,26 @@
+operation Uppaal!Template setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction: Animo!Edge, reactant: Animo!Node): Uppaal!Template {
+	if (reaction.source.index != reactant.index) {
+		self.edge.add(edge(
+			self.location.selectOne(r | r.name = "waiting"),
+			self.location.selectOne(r | r.name = "responding"),
+			synchronization("receive", "reached[" + reaction.source.channelIndex() + "]", point(-1853, -748)),
+			Sequence { point(-1751, -731), point(-1853, -731) },
+			guard_(and_(greater("c", "0"), or_(functionCall("infinite_delay"), less("c", "TL"))), point(-1853, -782)),
+			null,
+			Sequence {}
+		));
+	}
+
+	if (reaction.target.index != reactant.index and reaction.target.index != reaction.source.index) {
+		self.edge.add(edge(
+			self.location.selectOne(r | r.name = "waiting"),
+			self.location.selectOne(r | r.name = "responding"),
+			synchronization("receive", "reached[" + reaction.target.channelIndex() + "]", point(-1853, -748)),
+			Sequence { point(-1751, -731), point(-1853, -731) },
+			guard_(and_(greater("c", "0"), or_(functionCall("infinite_delay"), less("c", "TL"))), point(-1853, -782)),
+			null,
+			Sequence {}
+		));
+	}
+	return self;
+}

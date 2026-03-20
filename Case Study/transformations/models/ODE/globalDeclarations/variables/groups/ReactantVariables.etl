@@ -1,0 +1,11 @@
+// clock {id};
+// const int {id}Init = {initialLevel};
+// const int {id}Levels = {numberofLevels};
+operation Uppaal!GlobalDeclarations setupReactantVariables(animo: Animo!Network): Uppaal!GlobalDeclarations {
+	for (reactant: Animo!Node in animo.activeNameSortedNodes()) {
+		self.declaration.add(clock(reactant.id()));
+		self.declaration.add(dataVariableDeclaration("CONST", "int", reactant.id() + "Init", reactant.initialConcentration.toString()));
+		self.declaration.add(dataVariableDeclaration("CONST", "int", reactant.id() + "Levels", reactant.levels.toString()));
+	}
+	return self;
+}

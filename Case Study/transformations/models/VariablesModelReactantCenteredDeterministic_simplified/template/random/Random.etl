@@ -1,0 +1,62 @@
+operation Uppaal!NSTA setupRandomTemplate(animo : Animo!Network): Uppaal!NSTA {
+	if (not animo.areThereRandomInitials()) {
+		return self;
+	}
+
+	var initTemplate = template("Init_Random", Sequence {});
+	initTemplate.location.add(location(initTemplate, new Tuple(name = "id0", position = point(0, 0)), "committed", point(0, 0)));
+	initTemplate.init = initTemplate.location.first();
+
+	var currentCommitted = initTemplate.location.first();
+	var chanceNodeIndex = 1;
+	var committedIndex = 2;
+	var x = 160;
+	var y = 0;
+
+	for (reactant : Animo!Node in animo.activeSortedNodes().select(node | node.randomInitialConcentration)) {
+		var chanceNode = chanceNode(initTemplate, "id" + chanceNodeIndex.toString(), point(x, y));
+		initTemplate.location.add(chanceNode);
+
+		var nextCommitted = location(initTemplate, new Tuple(name = "id" + committedIndex.toString(), position = point(x, y + 160)), "committed", point(x, y + 160));
+		initTemplate.location.add(nextCommitted);
+
+		var min = reactant.randomInitialConcentrationMinimum.isDefined() ? reactant.randomInitialConcentrationMinimum : 0;
+		var max = reactant.randomInitialConcentrationMaximum.isDefined() ? reactant.randomInitialConcentrationMaximum : min;
+		var step = reactant.randomInitialConcentrationStep.isDefined() ? reactant.randomInitialConcentrationStep : 1;
+		if (step == 0) {
+			step = 1;
+		}
+
+		initTemplate.edge.add(edge(currentCommitted, chanceNode, null, Sequence {}, null, null, Sequence {}));
+		initTemplate.edge.add(chanceEdge(
+			chanceNode,
+			nextCommitted,
+			new Tuple (weight = 1, position = point(chanceNode.position.x + 5, chanceNode.position.y + 54)),
+			Sequence {},
+			null,
+			update(assign(reactant.id(), add(min.toString(), multiplicate(reactant.id() + "_init", step.toString()))).expression, point(chanceNode.position.x + 5, chanceNode.position.y + 37)),
+			Sequence { selection(rangeType("0", ((max - min) / step).toString()), Sequence { variable(reactant.id() + "_init") }, point(chanceNode.position.x + 5, chanceNode.position.y + 20)) }
+    	));
+
+		currentCommitted = nextCommitted;
+		chanceNodeIndex = chanceNodeIndex + 2;
+		committedIndex = committedIndex + 2;
+		x = 160 - x;
+		y = y + 160;
+	}
+
+	var finalLocation = location(initTemplate, new Tuple(name = "id" + chanceNodeIndex.toString(), position = point(501, 0)), point(501, 0));
+	initTemplate.location.add(finalLocation);
+	initTemplate.edge.add(edge(
+		currentCommitted,
+		finalLocation,
+		synchronization("send", "do_update", point(finalLocation.position.x - 153, finalLocation.position.y - 17)),
+		Sequence {},
+		null,
+		null,
+		Sequence {}
+	));
+
+	self.template.add(initTemplate);
+	return self;
+}

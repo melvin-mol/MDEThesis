@@ -1,0 +1,76 @@
+operation Uppaal!GlobalDeclarations setup_ANIMO_round(): Uppaal!GlobalDeclarations {
+	// int_t _ANIMO_round(double_t a) {
+	var function_ = function_(self.getDeclaredType("int_t"), "_ANIMO_round", Sequence { parameter(self.getDeclaredType("double_t"), "a") });
+	
+	// if (a == INFINITE_TIME_DOUBLE) {
+	//		return INFINITE_TIME;
+	// }
+	function_.block.statement.add(if_("a", "INFINITE_TIME_DOUBLE"));
+	function_.block.statement.first().thenStatement.statement.add(return_("INFINITE_TIME"));
+	
+	// if (a.b >= 1073 && a.e > 6)
+	// 		return INFINITE_TIME;
+	// }
+	function_.block.statement.add(if_(and_(greaterOrEqual("a.b", "1073"), greaterOrEqual("a.e", "6"))));
+	function_.block.statement.get(1).thenStatement.statement.add(return_("INFINITE_TIME"));
+
+	// if (a.e < -4) {
+	//		return 0;
+	// }
+	function_.block.statement.add(if_(less("a.e", "-4")));
+	function_.block.statement.get(2).thenStatement.statement.add(return_("0"));
+
+	// if (a.e == -1) {
+	//		if (a.b % 10 < 5) {
+	//			return a.b / 10;
+	//		} else {
+	//			return 1 + a.b / 10;
+	//		}
+	// }
+	function_.block.statement.add(if_("a.e", "-1"));
+	function_.block.statement.get(3).thenStatement.statement.add(ifElse(less(modulo("a.b", "10"), "5")));
+	function_.block.statement.get(3).thenStatement.statement.first().thenStatement.statement.add(return_(divide("a.b", "10")));
+	function_.block.statement.get(3).thenStatement.statement.first().elseStatement.statement.add(return_(add("1", divide("a.b", "10"))));
+	
+	// if (a.e == -2) {
+	//		if (a.b % 100 < 50) {
+	//			return a.b / 100;
+	//		} else {
+	//			return 1 + a.b / 100;
+	//		}		
+	// }
+	function_.block.statement.add(if_("a.e", "-2"));
+	function_.block.statement.get(4).thenStatement.statement.add(ifElse(less(modulo("a.b", "100"), "50")));
+	function_.block.statement.get(4).thenStatement.statement.first().thenStatement.statement.add(return_(divide("a.b", "100")));
+	function_.block.statement.get(4).thenStatement.statement.first().elseStatement.statement.add(return_(add("1", divide("a.b", "100"))));
+	
+	// if (a.e == -3) {
+	//		if (a.b % 1000 < 500) {
+	//			return a.b / 1000;
+	//		} else {
+	//			return 1 + a.b / 1000;
+	//		}		
+	// }
+	function_.block.statement.add(if_("a.e", "-3"));
+	function_.block.statement.get(5).thenStatement.statement.add(ifElse(less(modulo("a.b", "1000"), "500")));
+	function_.block.statement.get(5).thenStatement.statement.first().thenStatement.statement.add(return_(divide("a.b", "1000")));
+	function_.block.statement.get(5).thenStatement.statement.first().elseStatement.statement.add(return_(add("1", divide("a.b", "1000"))));
+
+	// if (a.e == -4) {
+	//		if (a.b < 5000) {
+	//			return 0;
+	//		} else {
+	//			return 1;
+	//		}		
+	// }
+	function_.block.statement.add(if_("a.e", "-4"));
+	function_.block.statement.get(6).thenStatement.statement.add(ifElse(less("a.b", "5000")));
+	function_.block.statement.get(6).thenStatement.statement.first().thenStatement.statement.add(return_("0"));
+	function_.block.statement.get(6).thenStatement.statement.first().elseStatement.statement.add(return_("1"));
+	
+	// return a.b * power(10, a.e);
+	function_.block.statement.add(return_(multiplicate("a.b", functionCall("power", Sequence { "10", "a.e" }))));
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

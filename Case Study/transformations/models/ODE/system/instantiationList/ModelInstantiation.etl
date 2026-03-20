@@ -1,0 +1,10 @@
+operation Uppaal!InstantiationList setupModelInstantiation(nta: Uppaal!NSTA): Uppaal!InstantiationList {
+	var modelDeclaration = new Uppaal!TemplateDeclaration;
+	modelDeclaration.declaredTemplate = new Uppaal!RedefinedTemplate;
+	modelDeclaration.declaredTemplate.name = "model";
+	modelDeclaration.declaredTemplate.referredTemplate = nta.template.selectOne(t | t.name == "ODE_Model");
+
+	nta.systemDeclarations.declaration.add(modelDeclaration);
+	self.template.add(modelDeclaration.declaredTemplate);
+	return self;
+}

@@ -1,0 +1,42 @@
+operation Uppaal!GlobalDeclarations setupInt_to_double(): Uppaal!GlobalDeclarations {
+	// double_t int_to_double(int a) {
+	var function_ = function_(self.getDeclaredType("double_t"), "int_to_double", Sequence { parameter("int", "a") });
+	
+	// double_t r;
+	function_.block.declarations.declaration.add(dataVariableDeclaration(self.getDeclaredType("double_t"), "r"));
+
+	// if (a < 10) {
+	// 		r.b = a * 1000;
+	// 		r.e = -3;
+	// } else if (a < 100) {
+	//		r.b = a * 100;
+	// 		r.e = -2;
+	// } else if (a &lt; 1000) {
+	// 		r.b = a * 10;
+	// 		r.e = -1;
+	// } else if (a &lt; 10000) {
+	// 		r.b = a;
+	// 		r.e = 0;
+	// }
+	function_.block.statement.add(if_(less("a", "10")));
+	function_.block.statement.get(0).thenStatement.statement.add(assign("r.b", multiplicate("a", "1000")));
+	function_.block.statement.get(0).thenStatement.statement.add(assign("r.e", "-3"));
+	
+	function_.block.statement.get(0).elseStatement = if_(less("a", "100"));
+	function_.block.statement.get(0).elseStatement.thenStatement.statement.add(assign("r.b", multiplicate("a", "100")));
+	function_.block.statement.get(0).elseStatement.thenStatement.statement.add(assign("r.e", "-2"));
+	
+	function_.block.statement.get(0).elseStatement.elseStatement = if_(less("a", "1000"));
+	function_.block.statement.get(0).elseStatement.elseStatement.thenStatement.statement.add(assign("r.b", multiplicate("a", "10")));
+	function_.block.statement.get(0).elseStatement.elseStatement.thenStatement.statement.add(assign("r.e", "-1"));
+	
+	function_.block.statement.get(0).elseStatement.elseStatement.elseStatement = if_(less("a", "10000"));
+	function_.block.statement.get(0).elseStatement.elseStatement.elseStatement.thenStatement.statement.add(assign("r.b", "a"));
+	function_.block.statement.get(0).elseStatement.elseStatement.elseStatement.thenStatement.statement.add(assign("r.e", "0"));
+	
+	// return r;
+	function_.block.statement.add(return_("r"));
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

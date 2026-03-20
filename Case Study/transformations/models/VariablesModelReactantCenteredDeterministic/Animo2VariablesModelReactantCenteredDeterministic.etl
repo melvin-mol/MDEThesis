@@ -1,0 +1,17 @@
+// Override the transformation operations what differs between the simplified and non-simplified version
+import "globalDeclarations/GlobalDeclarations.etl";
+import "template/Template.etl";
+
+// Inherit from the Animo2VariablesModelReactantCenteredDeterministic_simplified transformation
+import "../VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl";
+
+// Inherit from the Animo2VariablesModelReactantCenteredDeterministic_simplified transformation
+operation transformation(animo: Animo!Network, uppaal: Uppaal!NSTA) {
+    uppaal.name = "Animo2VariablesModelReactantCenteredDeterministic";
+
+	uppaal
+		.setupBuiltInTypes()
+		.setupGlobalDeclations(animo)
+		.setupTemplate(animo)
+		.setupSystem(animo);
+}

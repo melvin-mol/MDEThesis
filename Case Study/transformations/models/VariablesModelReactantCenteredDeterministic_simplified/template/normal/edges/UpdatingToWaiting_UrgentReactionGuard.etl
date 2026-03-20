@@ -1,0 +1,13 @@
+operation Uppaal!Template setupUpdatingToWaiting_UrgentReactionGuard(): Uppaal!Template {
+	// updating --> waiting, urgent reaction
+	self.edge.add(edge(
+		self.location.selectOne(r | r.name = "updating"),
+		self.location.selectOne(r | r.name = "waiting"),
+		null,
+		Sequence { point(-1555, -612), point(-1555, -705) },
+		guard_(and_(not_(functionCall("infinite_delay")), greater("c", "TU")), point(-1547, -671)),
+		update(functionCall("make_urgent"), point(-1547, -637)),
+		Sequence {}
+	));
+	return self;
+}

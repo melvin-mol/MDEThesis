@@ -1,0 +1,13 @@
+operation Uppaal!LocalDeclarations setupReach(): Uppaal!LocalDeclarations {
+	// void react() {
+	var function_ = function_("void", "react");
+	
+	// if (0 <= R + delta && R + delta <= MAX) {
+	// 		R = R + delta;
+	// }
+	function_.block.statement.add(if_(and_(lessOrEqual("0", add("R", "delta")), lessOrEqual(add("R", "delta"), "MAX"))));
+	function_.block.statement.get(0).thenStatement.statement.add(assign("R", add("R", "delta")));
+	
+	self.declaration.add(function_.declaration);
+	return self;
+}

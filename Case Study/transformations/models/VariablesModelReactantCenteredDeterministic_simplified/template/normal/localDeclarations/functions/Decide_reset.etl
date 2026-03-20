@@ -1,0 +1,13 @@
+operation Uppaal!LocalDeclarations setupDecide_reset(): Uppaal!LocalDeclarations {
+	// void decide_reset() {
+	var function_ = function_("void", "decide_reset");
+	
+	// if (rate_significantly_changed(oldRate, totalRate)) {
+	// 		c = 0;
+	// }
+	function_.block.statement.add(if_(functionCall("rate_significantly_changed", Sequence { "oldRate", "totalRate" })));
+	function_.block.statement.get(0).thenStatement.statement.add(assign("c", "0"));
+
+	self.declaration.add(function_.declaration);
+	return self;
+}

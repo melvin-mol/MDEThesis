@@ -1,0 +1,15 @@
+import "Not_reacting.etl";
+import "Responding.etl";
+import "Start.etl";
+import "Update.etl";
+import "Waiting.etl";
+
+operation Uppaal!Template setupLocations(animo: Animo!Network, reactant: Animo!Node): Uppaal!Template {
+	return self
+		.setupId0()
+		.setupResponding()
+		.setupStart(animo, reactant)
+		.setupNot_reacting()
+		.setupUpdating()
+		.setupWaiting();
+}

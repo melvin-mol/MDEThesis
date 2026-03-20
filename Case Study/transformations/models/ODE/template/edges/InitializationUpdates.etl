@@ -1,0 +1,21 @@
+operation setupODEInitializationUpdates(animo: Animo!Network): Sequence {
+	var updateExpressions = Sequence {};
+
+	for (reactant: Animo!Node in animo.activeNameSortedNodes()) {
+		if (reactant.randomInitialConcentration) {
+			updateExpressions.add(
+				assign(
+					reactant.id(),
+					add(
+                        reactant.randomInitialConcentrationMinimum.toString(), 
+                        multiplicate(reactant.id() + "_rInit", reactant.randomInitialConcentrationStep.toString())
+                    )
+				).expression
+			);
+		} else {
+			updateExpressions.add(assign(reactant.id(), reactant.id() + "Init").expression);
+		}
+	}
+
+	return updateExpressions;
+}

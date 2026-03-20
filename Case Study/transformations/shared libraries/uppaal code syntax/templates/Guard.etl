@@ -1,0 +1,13 @@
+operation guard_(expression: Uppaal!Expression, position: Uppaal!Point): Uppaal!Guard {
+    var guard_ = new Uppaal!Guard;
+    guard_.expression = expression;
+    guard_.position = position;
+    return guard_;
+}
+
+operation guard_(expression: Uppaal!Expression): Uppaal!Guard {
+    var guard_ = new Uppaal!Guard;
+    guard_.expression = expression;
+    guard_.position = position;
+    return guard_;
+}

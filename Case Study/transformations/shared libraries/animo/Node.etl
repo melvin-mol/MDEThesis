@@ -1,0 +1,36 @@
+@cached
+operation Animo!Network activeNodes(): Collection(Animo!Node) {
+	return self.nodes.select(r | r.enabled);
+}
+
+@cached
+operation Animo!Network activeSortedNodes(): Collection(Animo!Node) {
+	return self.nodes.select(r | r.enabled).sortBy(r |
+		r.id.isDefined() ? r.id : r.index
+	);
+}
+
+@cached
+operation Animo!Network activeNameSortedNodes(): Collection(Animo!Node) {
+	return self.nodes.select(r | r.enabled).sortBy(r |
+		r.name.isDefined() ? r.name : (r.id.isDefined() ? r.id : r.index)
+	);
+}
+
+operation Animo!Node id(): String {
+	return "R" + (self.id.isDefined() ? self.id : self.index);
+}
+
+operation Animo!Node channelIndex(): String {
+	return (self.id.isDefined() ? self.id : self.index).toString();
+}
+
+operation Animo!Network areThereRandomInitials(): Boolean {
+	return self.nodes.exists(node | node.randomInitialConcentration);
+}
+
+@cached
+operation Animo!Network isFirstOutputAutomatonTemplate(reactant: Animo!Node): Boolean {
+	var outputReactants = self.activeSortedNodes().select(node | self.targetEdges(node).size() > 0);
+	return outputReactants.size() > 0 and outputReactants.first().id() == reactant.id();
+}

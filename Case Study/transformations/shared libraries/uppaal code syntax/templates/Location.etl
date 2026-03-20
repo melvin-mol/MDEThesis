@@ -1,0 +1,32 @@
+operation location(parentTemplate: Uppaal!Template, name: Tuple, locationTimeKind: String, point: Uppaal!Point): Uppaal!Location {
+	var location = new Uppaal!Location;
+	location.parentTemplate = parentTemplate;
+	location.name = name.name;
+	if (locationTimeKind == "committed") {
+		location.locationTimeKind = Uppaal!LocationKind#COMMITED;
+	} else if (locationTimeKind == "urgent") {
+		location.locationTimeKind = Uppaal!LocationKind#URGENT;
+	}
+	location.position = point;
+	location.namePosition = name.position;
+	return location;
+}
+
+operation location(parentTemplate: Uppaal!Template, name: Tuple, point: Uppaal!Point): Uppaal!Location {
+	var location = new Uppaal!Location;
+	location.parentTemplate = parentTemplate;
+	location.name = name.name;
+	location.position = point;
+	location.namePosition = name.position;
+	return location;
+}
+
+operation location(parentTemplate: Uppaal!Template, name: Tuple, point: Uppaal!Point, invariant: Uppaal!Invariant): Uppaal!Location {
+	var location = new Uppaal!Location;
+	location.parentTemplate = parentTemplate;
+	location.name = name.name;
+	location.position = point;
+	location.namePosition = name.position;
+	location.invariant = invariant;
+	return location;
+}

@@ -1,0 +1,21 @@
+// bool criticalSession[N_REACTANTS] = { booleans };
+operation Uppaal!GlobalDeclarations setupCriticalSession(animo : Animo!Network): Uppaal!GlobalDeclarations {
+	var value = "{";
+	var first = true;
+	for (reactant : Animo!Node in animo.nodes.select(r | r.enabled)) {
+		if (first) {
+            first = false;
+		} else {
+			value = value + ", ";
+		}
+		value = value + "0";
+	}
+	value = value + "}";
+
+	self.declaration.add(dataVariableDeclarationWithVariables(
+		"bool",
+		Sequence { variableList("criticalSession", self.findVariable("N_REACTANTS"), value) }
+	));
+
+	return self;
+}

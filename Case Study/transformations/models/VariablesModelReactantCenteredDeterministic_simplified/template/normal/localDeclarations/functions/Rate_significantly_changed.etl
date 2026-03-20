@@ -1,0 +1,33 @@
+operation Uppaal!LocalDeclarations setupRate_significantly_changed(nta: Uppaal!NSTA): Uppaal!LocalDeclarations {
+	// void rate_significantly_changed() {
+	var function_ = function_(
+		"bool",
+		"rate_significantly_changed",
+		Sequence { 
+			parameter(nta.globalDeclarations.getDeclaredType("double_t"), "oldRate"), 
+			parameter(nta.globalDeclarations.getDeclaredType("double_t"), "newRate") 
+		}
+	);
+
+	// if (((oldRate.b < 0 && newRate.b > 0) || (oldRate.b > 0 && newRate.b < 0)) && (R < MAX && R > 0)) {
+	//		return true;
+	// }
+	function_.block.statement.add(
+		if_(
+			and_(
+				or_(
+					and_(less("oldRate.b", "0"), greater("newRate.b", "0")),
+					and_(greater("oldRate.b", "0"), less("newRate.b", "0"))
+				),
+				and_(less("R", "MAX"), greater("R", "0"))
+			)
+		)
+	);
+	function_.block.statement.get(0).thenStatement.statement.add(return_("true"));
+	
+	// return false;
+	function_.block.statement.add(return_("false"));
+	
+	self.declaration.add(function_.declaration);
+	return self;
+}

@@ -1,0 +1,5 @@
+// broadcast chan reaching, do_update;
+operation Uppaal!GlobalDeclarations setupReachingAndDoUpdate(): Uppaal!GlobalDeclarations {
+	self.declaration.add(channelVariableDeclaration(true, "chan", Sequence { variable("reaching"), variable("do_update") }));
+	return self;
+}

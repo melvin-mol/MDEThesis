@@ -1,0 +1,5 @@
+// int minCrit = N_REACTANTS;
+operation Uppaal!GlobalDeclarations setupMinCrit(): Uppaal!GlobalDeclarations {
+	self.declaration.add(dataVariableDeclaration("int", "minCrit", "N_REACTANTS"));
+	return self;
+}

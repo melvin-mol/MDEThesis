@@ -1,0 +1,21 @@
+operation Uppaal!Template setupWaitingToResponding_ReachedSourceReceive_Scenario4(reaction: Animo!Edge, animo: Animo!Network): Uppaal!Template {
+	var translation = reaction.translateScenario4Formula(animo);
+	if (translation.involvedReactants.size() > 0) {
+		for (reactantId in translation.involvedReactants) {
+			var sourceReactant = animo.activeNodes().selectOne(node | node.id() = reactantId);
+			if (sourceReactant.isDefined()) {
+				self.edge.add(edge(
+					self.location.selectOne(r | r.name = "waiting"),
+					self.location.selectOne(r | r.name = "responding"),
+					synchronization("receive", "reached[" + sourceReactant.channelIndex() + "]", point(-1853, -748)),
+					Sequence { point(-1751, -731), point(-1853, -731) },
+					guard_(and_(greater("c", "0"), or_(functionCall("infinite_delay"), less("c", "TL"))), point(-1853, -782)),
+					null,
+					Sequence {}
+				));
+			}
+		}
+	}
+
+	return self;
+}
