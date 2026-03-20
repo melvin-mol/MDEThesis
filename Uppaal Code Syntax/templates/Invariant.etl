@@ -4,3 +4,10 @@ operation invariant(expression: Uppaal!Expression, position: Uppaal!Point): Uppa
     invariant.position = position;
     return invariant;
 }
+
+operation invariant(expression: Uppaal!Expression): Uppaal!Invariant {
+    var invariant = new Uppaal!Invariant;
+    invariant.expression = expression;
+    invariant.position = position;
+    return invariant;
+}
