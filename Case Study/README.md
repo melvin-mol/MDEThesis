@@ -8,19 +8,19 @@ This directory contains the case study for the Master's thesis **"Improving ANIM
 
 An ANIMO-to-Uppaal transformation that generates an ODE (Ordinary Differential Equation) based Uppaal model.
 
-**Location:** `transformations/models/ODE/`
+**Location:** [transformations/models/ODE/](transformations/models/ODE/)
 
 ### VariablesModelReactantCenteredDeterministic\_simplified
 
 A simplified ANIMO-to-Uppaal transformation that generates a variables model using a reactant-centered, deterministic approach.
 
-**Location:** `transformations/models/VariablesModelReactantCenteredDeterministic_simplified/`
+**Location:** [transformations/models/VariablesModelReactantCenteredDeterministic_simplified/](transformations/models/VariablesModelReactantCenteredDeterministic_simplified/)
 
 ### VariablesModelReactantCenteredDeterministic
 
 The reactant-centered deterministic transformation. It **inherits** from `VariablesModelReactantCenteredDeterministic_simplified` and overrides only the parts that differ, demonstrating the ETL inheritance approach described in the thesis. This keeps the two transformations DRY: shared logic lives in the simplified version and the non-simplified version only adds or replaces what is different.
 
-**Location:** `transformations/models/VariablesModelReactantCenteredDeterministic/`
+**Location:** [transformations/models/VariablesModelReactantCenteredDeterministic/](transformations/models/VariablesModelReactantCenteredDeterministic/)
 
 ## Uppaal Code Syntax
 
