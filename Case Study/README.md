@@ -8,26 +8,39 @@ This directory contains the case study for the Master's thesis **"Improving ANIM
 
 An ANIMO-to-Uppaal transformation that generates an ODE (Ordinary Differential Equation) based Uppaal model.
 
-**Location:** [transformations/models/ODE/](transformations/models/ODE/)
+**Location:** [epsilon transformations/models/ODE/](epsilon%20transformations/models/ODE/)
 
 ### VariablesModelReactantCenteredDeterministic\_simplified
 
 A simplified ANIMO-to-Uppaal transformation that generates a variables model using a reactant-centered, deterministic approach.
 
-**Location:** [transformations/models/VariablesModelReactantCenteredDeterministic_simplified/](transformations/models/VariablesModelReactantCenteredDeterministic_simplified/)
+**Location:** [epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/](epsilon%20transformations/models/VariablesModelReactantCenteredDeterministic_simplified/)
 
 ### VariablesModelReactantCenteredDeterministic
 
 The reactant-centered deterministic transformation. It **inherits** from `VariablesModelReactantCenteredDeterministic_simplified` and overrides only the parts that differ, demonstrating the ETL inheritance approach described in the thesis. This keeps the two transformations DRY: shared logic lives in the simplified version and the non-simplified version only adds or replaces what is different.
 
-**Location:** [transformations/models/VariablesModelReactantCenteredDeterministic/](transformations/models/VariablesModelReactantCenteredDeterministic/)
+**Location:** [epsilon transformations/models/VariablesModelReactantCenteredDeterministic/](epsilon%20transformations/models/VariablesModelReactantCenteredDeterministic/)
+
+## ANIMO Transformation Pipeline
+
+Besides the reusable ETL transformations, this case study also contains the Java-side ANIMO transformation pipeline in [animo transformation/](animo%20transformation/). The main entry point is [animo transformation/AnimoTransformer.java](animo%20transformation/AnimoTransformer.java), which executes the transformation in three steps:
+
+1. **CyNetwork to ANIMO metamodel**
+	The Cytoscape/ANIMO runtime model is converted into an instance of the ANIMO metamodel. This step is implemented by [animo transformation/cyNetworkToAnimoMetamodel/CyNetworkToAnimoMetamodelTransformer.java](animo%20transformation/cyNetworkToAnimoMetamodel/CyNetworkToAnimoMetamodelTransformer.java).
+2. **ANIMO metamodel to UPPAAL metamodel**
+	The intermediate ANIMO metamodel instance is transformed into a UPPAAL metamodel instance using the Epsilon ETL transformations in [epsilon transformations/](epsilon%20transformations/). Depending on the selected `modelType`, this step runs one of the model-specific ETL transformations described in the Models section above. This step is implemented by [animo transformation/animoMetamodelToUppaalMetamodel/AnimoMetamodelToUppaalMetamodelTransformer.java](animo%20transformation/animoMetamodelToUppaalMetamodel/AnimoMetamodelToUppaalMetamodelTransformer.java).
+3. **UPPAAL metamodel to UPPAAL NTA**
+	The generated UPPAAL metamodel instance is serialized into the final UPPAAL NTA text representation that can be analysed by UPPAAL. This step is implemented by [animo transformation/UppaalMetamodelToUppaalNTA/UppaalMetamodelToUppaalNTATransformer.java](animo%20transformation/UppaalMetamodelToUppaalNTA/UppaalMetamodelToUppaalNTATransformer.java).
+
+The Java code orchestrates the high-level flow, while the model-to-model logic in step 2 is delegated to the epsilon transformations.
 
 ## Uppaal Code Syntax
 
 All three transformations use the [Uppaal Code Syntax](../Uppaal%20Code%20Syntax/) library. It is included via the shared libraries entry point:
 
 ```
-transformations/shared libraries/Shared Libraries.etl
+epsilon transformations/shared libraries/Shared Libraries.etl
 ```
 
 Each top-level transformation file imports that entry point, which transitively pulls in the Uppaal Code Syntax helpers (e.g. `assign`, `edge`, `location`, `guard_`, etc.), removing the need to build the Uppaal AST node by node.
