@@ -1,0 +1,432 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+
+//R0 = ERK
+clock R0;
+const int R0Init = 0;
+const int R0Levels = 100;
+
+//R1 = FZD
+clock R1;
+const int R1Init = 0;
+const int R1Levels = 100;
+
+//R2 = FZD I
+clock R2;
+const int R2Init = 0;
+const int R2Levels = 100;
+
+//R3 = IL-1B
+clock R3;
+const int R3Init = 100;
+const int R3Levels = 100;
+
+//R4 = IL-1B R I
+clock R4;
+const int R4Init = 0;
+const int R4Levels = 100;
+
+//R5 = IL-1B R I
+clock R5;
+const int R5Init = 0;
+const int R5Levels = 100;
+
+//R6 = IL-1B signaling
+clock R6;
+const int R6Init = 0;
+const int R6Levels = 100;
+
+//R7 = Inh IL-1B sig
+clock R7;
+const int R7Init = 100;
+const int R7Levels = 100;
+
+//R8 = Inh Wnt sig
+clock R8;
+const int R8Init = 100;
+const int R8Levels = 100;
+
+//R9 = JNK1
+clock R9;
+const int R9Init = 0;
+const int R9Levels = 100;
+
+//R10 = Node 15
+clock R10;
+const int R10Init = 100;
+const int R10Levels = 100;
+
+//R11 = Node 16
+clock R11;
+const int R11Init = 100;
+const int R11Levels = 100;
+
+//R12 = Node 17
+clock R12;
+const int R12Init = 100;
+const int R12Levels = 100;
+
+//R13 = Wnt
+clock R13;
+const int R13Init = 100;
+const int R13Levels = 100;
+
+//R14 = Wnt signalir
+clock R14;
+const int R14Init = 0;
+const int R14Levels = 100;
+
+//R15 = p38
+clock R15;
+const int R15Init = 0;
+const int R15Levels = 100;
+
+//Reaction R11 (Node 16) --| R9 (JNK1)
+const double k_R11_R9 = 3.5E-6;
+
+//Reaction R7 (Inh IL-1B sig) --| R6 (IL-1B signaling)
+const double k_R7_R6 = 1.7999999999999998E-4;
+
+//Reaction R5 (IL-1B R I) --| R4 (IL-1B R I)
+const double k_R5_R4 = 0.024;
+
+//Reaction R6 (IL-1B signaling) --&gt; R0 (ERK)
+const double k_R6_R0 = 6.0E-5;
+
+//Reaction R2 (FZD I) --| R1 (FZD)
+const double k_R2_R1 = 0.024;
+
+//Reaction R10 (Node 15) --| R15 (p38)
+const double k_R10_R15 = 5.0E-6;
+
+//Reaction R6 (IL-1B signaling) --&gt; R15 (p38)
+const double k_R6_R15 = 1.0E-4;
+
+//Reaction R4 (IL-1B R I) --| R14 (Wnt signalir)
+const double k_R4_R14 = 0.009000000000000001;
+
+//Reaction R14 (Wnt signalir) --&gt; R0 (ERK)
+const double k_R14_R0 = 2.2000000000000003E-5;
+
+//Reaction R13 (Wnt) --&gt; R1 (FZD)
+const double k_R13_R1 = 0.009000000000000001;
+
+//Reaction R8 (Inh Wnt sig) --| R14 (Wnt signalir)
+const double k_R8_R14 = 2.8000000000000003E-4;
+
+//Reaction R12 (Node 17) --| R0 (ERK)
+const double k_R12_R0 = 3.5E-6;
+
+//Reaction R1 (FZD) --&gt; R14 (Wnt signalir)
+const double k_R1_R14 = 0.036;
+
+//Reaction R4 (IL-1B R I) --&gt; R5 (IL-1B R I)
+const double k_R4_R5 = 0.002;
+
+//Reaction R3 (IL-1B) --&gt; R4 (IL-1B R I)
+const double k_R3_R4 = 4.0E-5;
+
+//Reaction R4 (IL-1B R I) --&gt; R6 (IL-1B signaling)
+const double k_R4_R6 = 0.036;
+
+//Reaction R1 (FZD) --| R6 (IL-1B signaling)
+const double k_R1_R6 = 0.005;
+
+//Reaction R6 (IL-1B signaling) --&gt; R9 (JNK1)
+const double k_R6_R9 = 8.999999999999999E-5;
+
+</declaration>
+  
+  <template>
+      
+    <name x="5" y="5">ODE_Model</name>
+      
+    <declaration>double rateR0() {
+	double R6_R0_r = k_R6_R0 * (R0Levels - R0) * R6;
+	double R14_R0_r = k_R14_R0 * (R0Levels - R0) * R14;
+	double R12_R0_r = k_R12_R0 * R0 * R12;
+	return R6_R0_r + R14_R0_r - R12_R0_r;
+}
+
+double boundedRateR0() {
+	double r = rateR0();
+	if (R0 + r &gt; R0Levels) {
+		return R0Levels - R0;
+	} else if (R0 + r &lt; 0) {
+		return -R0;
+	}
+	return r;
+}
+
+double rateR1() {
+	double R2_R1_r = k_R2_R1 * R2;
+	double R13_R1_r = k_R13_R1 * (R1Levels - R1) * R13;
+	return  - R2_R1_r + R13_R1_r;
+}
+
+double boundedRateR1() {
+	double r = rateR1();
+	if (R1 + r &gt; R1Levels) {
+		return R1Levels - R1;
+	} else if (R1 + r &lt; 0) {
+		return -R1;
+	}
+	return r;
+}
+
+double rateR2() {
+	return 0;
+}
+
+double boundedRateR2() {
+	return 0;
+}
+
+double rateR3() {
+	return 0;
+}
+
+double boundedRateR3() {
+	return 0;
+}
+
+double rateR4() {
+	double R5_R4_r = k_R5_R4 * R5;
+	double R3_R4_r = k_R3_R4 * (R4Levels - R4) * R3;
+	return  - R5_R4_r + R3_R4_r;
+}
+
+double boundedRateR4() {
+	double r = rateR4();
+	if (R4 + r &gt; R4Levels) {
+		return R4Levels - R4;
+	} else if (R4 + r &lt; 0) {
+		return -R4;
+	}
+	return r;
+}
+
+double rateR5() {
+	double R4_R5_r = k_R4_R5 * R4;
+	return R4_R5_r;
+}
+
+double boundedRateR5() {
+	double r = rateR5();
+	if (R5 + r &gt; R5Levels) {
+		return R5Levels - R5;
+	} else if (R5 + r &lt; 0) {
+		return -R5;
+	}
+	return r;
+}
+
+double rateR6() {
+	double R7_R6_r = k_R7_R6 * R6 * R7;
+	double R4_R6_r = k_R4_R6 * R4;
+	double R1_R6_r = k_R1_R6 * R6 * R1;
+	return  - R7_R6_r + R4_R6_r - R1_R6_r;
+}
+
+double boundedRateR6() {
+	double r = rateR6();
+	if (R6 + r &gt; R6Levels) {
+		return R6Levels - R6;
+	} else if (R6 + r &lt; 0) {
+		return -R6;
+	}
+	return r;
+}
+
+double rateR7() {
+	return 0;
+}
+
+double boundedRateR7() {
+	return 0;
+}
+
+double rateR8() {
+	return 0;
+}
+
+double boundedRateR8() {
+	return 0;
+}
+
+double rateR9() {
+	double R11_R9_r = k_R11_R9 * R9 * R11;
+	double R6_R9_r = k_R6_R9 * (R9Levels - R9) * R6;
+	return  - R11_R9_r + R6_R9_r;
+}
+
+double boundedRateR9() {
+	double r = rateR9();
+	if (R9 + r &gt; R9Levels) {
+		return R9Levels - R9;
+	} else if (R9 + r &lt; 0) {
+		return -R9;
+	}
+	return r;
+}
+
+double rateR10() {
+	return 0;
+}
+
+double boundedRateR10() {
+	return 0;
+}
+
+double rateR11() {
+	return 0;
+}
+
+double boundedRateR11() {
+	return 0;
+}
+
+double rateR12() {
+	return 0;
+}
+
+double boundedRateR12() {
+	return 0;
+}
+
+double rateR13() {
+	return 0;
+}
+
+double boundedRateR13() {
+	return 0;
+}
+
+double rateR14() {
+	double R4_R14_r = k_R4_R14 * R14 * R4;
+	double R8_R14_r = k_R8_R14 * R14 * R8;
+	double R1_R14_r = k_R1_R14 * R1;
+	return  - R4_R14_r - R8_R14_r + R1_R14_r;
+}
+
+double boundedRateR14() {
+	double r = rateR14();
+	if (R14 + r &gt; R14Levels) {
+		return R14Levels - R14;
+	} else if (R14 + r &lt; 0) {
+		return -R14;
+	}
+	return r;
+}
+
+double rateR15() {
+	double R10_R15_r = k_R10_R15 * R15 * R10;
+	double R6_R15_r = k_R6_R15 * (R15Levels - R15) * R6;
+	return  - R10_R15_r + R6_R15_r;
+}
+
+double boundedRateR15() {
+	double r = rateR15();
+	if (R15 + r &gt; R15Levels) {
+		return R15Levels - R15;
+	} else if (R15 + r &lt; 0) {
+		return -R15;
+	}
+	return r;
+}
+
+</declaration>
+      
+    <location id="id0" x="-314" y="-102">
+          
+      <label kind="invariant" x="-324" y="-85">R0' == boundedRateR0()
+&amp;&amp;
+R1' == boundedRateR1()
+&amp;&amp;
+R2' == boundedRateR2()
+&amp;&amp;
+R3' == boundedRateR3()
+&amp;&amp;
+R4' == boundedRateR4()
+&amp;&amp;
+R5' == boundedRateR5()
+&amp;&amp;
+R6' == boundedRateR6()
+&amp;&amp;
+R7' == boundedRateR7()
+&amp;&amp;
+R8' == boundedRateR8()
+&amp;&amp;
+R9' == boundedRateR9()
+&amp;&amp;
+R10' == boundedRateR10()
+&amp;&amp;
+R11' == boundedRateR11()
+&amp;&amp;
+R12' == boundedRateR12()
+&amp;&amp;
+R13' == boundedRateR13()
+&amp;&amp;
+R14' == boundedRateR14()
+&amp;&amp;
+R15' == boundedRateR15()</label>
+        
+    </location>
+      
+    <location id="id1" x="-448" y="-102">
+          
+      <committed/>
+        
+    </location>
+      
+    <init ref="id1"/>
+      
+    <transition>
+          
+      <source ref="id1"/>
+          
+      <target ref="id0"/>
+          
+      <label kind="select" x="-430" y="-118"/>
+          
+      <label kind="assignment" x="-430" y="-102">R0 = R0Init,
+R1 = R1Init,
+R2 = R2Init,
+R3 = R3Init,
+R4 = R4Init,
+R5 = R5Init,
+R6 = R6Init,
+R7 = R7Init,
+R8 = R8Init,
+R9 = R9Init,
+R10 = R10Init,
+R11 = R11Init,
+R12 = R12Init,
+R13 = R13Init,
+R14 = R14Init,
+R15 = R15Init</label>
+          
+      <label kind="probability" x="-430" y="-86">1</label>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+model = ODE_Model();
+
+
+system model;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=14400] { R2, R3, R4, R5, R6, R7, R8, R9, R10, R12, R11, R14, R13, R15, R0, R1 }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>
