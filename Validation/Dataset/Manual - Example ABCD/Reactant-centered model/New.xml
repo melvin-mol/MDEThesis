@@ -1,0 +1,1580 @@
+<nta>
+  		
+  <declaration>
+clock globalTime;
+
+const int INFINITE_TIME = -1;
+
+const int N_REACTANTS = 5;
+
+broadcast chan reacted[N_REACTANTS];
+
+broadcast chan reacting, do_update, decide_react;
+
+int R0 = 100;
+
+const int R0Levels = 100;
+
+int R1 = 0;
+
+const int R1Levels = 100;
+
+int R2 = 0;
+
+const int R2Levels = 100;
+
+int R3 = 0;
+
+const int R3Levels = 100;
+
+int R4 = 1;
+
+const int R4Levels = 1;
+
+typedef struct {
+	int[-99980001,99980001] b;
+	int e;
+} double_t;
+
+const double_t zero = {0, 0};
+
+const double_t INFINITE_TIME_DOUBLE = {-1000, -3};
+
+int minCrit = N_REACTANTS;
+
+bool criticalSession[N_REACTANTS] = {0, 0, 0, 0, 0};
+
+void enterCrit(int id) {
+	criticalSession[id] = true;
+	if(id &lt; minCrit) {
+		minCrit = id;
+	} 
+}
+
+void exitCrit(int id) {
+	criticalSession[id] = false;
+	if(id == minCrit) {
+		while(minCrit &lt; N_REACTANTS and not criticalSession[minCrit]) {
+			minCrit++;
+		}
+	} 
+}
+
+typedef int[-1,1073741822] time_t;
+
+typedef int[-1073741822,1073741822] int_t;
+
+typedef struct {
+	time_t T;
+} timeActivity;
+
+timeActivity R4_R3;
+
+const double_t k_R4_R3 = {6250, -10};
+
+timeActivity R2_R1;
+
+const double_t k_R2_R1 = {1000, -8};
+
+timeActivity R0_R1;
+
+const double_t k_R0_R1 = {2500, -11};
+
+timeActivity R1_R3;
+
+const double_t k_R1_R3 = {5000, -11};
+
+timeActivity R1_R2;
+
+const double_t k_R1_R2 = {2500, -11};
+
+double_t subtract(double_t a, double_t b) {
+	double_t r = {-1000, -1000};
+	if(a.b == 0) {
+		r.b = -b.b;
+		r.e = b.e;
+		return r;
+	} 
+	if(b.b == 0) {
+		return a;
+	} 
+	if(a.e-b.e &gt;= 4) {
+		return a;
+	} 
+	if(b.e-a.e &gt;= 4) {
+		r.b = -b.b;
+		r.e = b.e;
+		return r;
+	} 
+	if(a.e == b.e) {
+		r.b = a.b-b.b;
+		r.e = a.e;
+	} 
+	if(a.e-b.e == 1) {
+		r.b = a.b-b.b/10;
+		r.e = a.e;
+	} 
+	if(a.e-b.e == 2) {
+		r.b = a.b-b.b/100;
+		r.e = a.e;
+	} 
+	if(a.e-b.e == 3) {
+		r.b = a.b-b.b/1000;
+		r.e = a.e;
+	} 
+	if(b.e-a.e == 1) {
+		r.b = a.b/10-b.b;
+		r.e = b.e;
+	} 
+	if(b.e-a.e == 2) {
+		r.b = a.b/100-b.b;
+		r.e = b.e;
+	} 
+	if(b.e-a.e == 3) {
+		r.b = a.b/1000-b.b;
+		r.e = b.e;
+	} 
+	if(r.b &gt; 0 and r.b &lt; 10 or r.b &lt; 0 and r.b &gt; -10) {
+		r.b = r.b*1000;
+		r.e = r.e-3;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 100 or r.b &lt; 0 and r.b &gt; -100) {
+		r.b = r.b*100;
+		r.e = r.e-2;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 1000 or r.b &lt; 0 and r.b &gt; -1000) {
+		r.b = r.b*10;
+		r.e = r.e-1;
+	} 
+	else 
+		if(r.b &gt; 9999 or r.b &lt; -9999) {
+		r.b = r.b/10;
+		r.e = r.e+1;
+	} 
+	return r;
+}
+
+double_t add(double_t a, double_t b) {
+	double_t r = {-1000, -1000};
+	if(a.b == 0) {
+		return b;
+	} 
+	if(b.b == 0) {
+		return a;
+	} 
+	if(a.e-b.e &gt;= 4) {
+		return a;
+	} 
+	if(b.e-a.e &gt;= 4) {
+		return b;
+	} 
+	if(a.e == b.e) {
+		r.b = a.b+b.b;
+		r.e = a.e;
+	} 
+	if(a.e-b.e == 1) {
+		r.b = a.b+b.b/10;
+		r.e = a.e;
+	} 
+	if(a.e-b.e == 2) {
+		r.b = a.b+b.b/100;
+		r.e = a.e;
+	} 
+	if(a.e-b.e == 3) {
+		r.b = a.b+b.b/1000;
+		r.e = a.e;
+	} 
+	if(b.e-a.e == 1) {
+		r.b = a.b/10+b.b;
+		r.e = b.e;
+	} 
+	if(b.e-a.e == 2) {
+		r.b = a.b/100+b.b;
+		r.e = b.e;
+	} 
+	if(b.e-a.e == 3) {
+		r.b = a.b/1000+b.b;
+		r.e = b.e;
+	} 
+	if(r.b &gt; 0 and r.b &lt; 10 or r.b &lt; 0 and r.b &gt; -10) {
+		r.b = r.b*1000;
+		r.e = r.e-3;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 100 or r.b &lt; 0 and r.b &gt; -100) {
+		r.b = r.b*100;
+		r.e = r.e-2;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 1000 or r.b &lt; 0 and r.b &gt; -1000) {
+		r.b = r.b*10;
+		r.e = r.e-1;
+	} 
+	else 
+		if(r.b &gt; 9999 or r.b &lt; -9999) {
+		r.b = r.b/10;
+		r.e = r.e+1;
+	} 
+	return r;
+}
+
+double_t multiply(double_t a, double_t b) {
+	double_t r;
+	r.b = a.b*b.b;
+	if(r.b%1000 &lt; 500) {
+		r.b = r.b/1000;
+	} 
+	else {
+		r.b = 1+r.b/1000;
+	}
+	r.e = a.e+b.e+3;
+	if(r.b &gt; 0 and r.b &lt; 10 or r.b &lt; 0 and r.b &gt; -10) {
+		r.b = r.b*1000;
+		r.e = r.e-3;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 100 or r.b &lt; 0 and r.b &gt; -100) {
+		r.b = r.b*100;
+		r.e = r.e-2;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 1000 or r.b &lt; 0 and r.b &gt; -1000) {
+		r.b = r.b*10;
+		r.e = r.e-1;
+	} 
+	while(r.b &gt; 9999 or r.b &lt; -9999) {
+		r.b = r.b/10;
+		r.e = r.e+1;
+	}
+	return r;
+}
+
+double_t divide(double_t a, double_t b) {
+	double_t r;
+	if(b.b == 0) {
+		return INFINITE_TIME_DOUBLE;
+	} 
+	r.b = a.b*1000/b.b;
+	r.e = a.e-b.e-3;
+	if(r.b == 0) {
+		return r;
+	} 
+	while(r.b &lt; 9999 and r.b &gt; -9999) {
+		r.b = r.b*10;
+		r.e = r.e-1;
+	}
+	while(r.b &gt; 9999 or r.b &lt; -9999) {
+		r.b = r.b/10;
+		r.e = r.e+1;
+	}
+	return r;
+}
+
+int conta_inf = 0, conta_bigN = 0;
+
+double_t inverse(double_t a) {
+	double_t r;
+	if(a.b == 0) {
+		return INFINITE_TIME_DOUBLE;
+	} 
+	if(a.e &lt; -12) {
+		conta_bigN = conta_bigN+1;
+		r.b = 1073;
+		r.e = 6;
+		return r;
+	} 
+	r.b = 10000000/a.b;
+	r.e = -7-a.e;
+	if(r.b &gt; 0 and r.b &lt; 10 or r.b &lt; 0 and r.b &gt; -10) {
+		r.b = r.b*1000;
+		r.e = r.e-3;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 100 or r.b &lt; 0 and r.b &gt; -100) {
+		r.b = r.b*100;
+		r.e = r.e-2;
+	} 
+	else 
+		if(r.b &gt; 0 and r.b &lt; 1000 or r.b &lt; 0 and r.b &gt; -1000) {
+		r.b = r.b*10;
+		r.e = r.e-1;
+	} 
+	return r;
+}
+
+time_t power(int a, int b) {
+	time_t r = 1;
+	while(b &gt; 0) {
+		r = r*a;
+		b = b-1;
+	}
+	return r;
+}
+
+int_t _ANIMO_round(double_t a) {
+	if(a == INFINITE_TIME_DOUBLE) {
+		return INFINITE_TIME;
+	} 
+	if(a.e &lt; -4) {
+		return 0;
+	} 
+	if(a.e == -1) {
+		if(a.b%10 &lt; 5) {
+			return a.b/10;
+		} 
+		else {
+			return 1+a.b/10;
+		}
+	} 
+	if(a.e == -2) {
+		if(a.b%100 &lt; 50) {
+			return a.b/100;
+		} 
+		else {
+			return 1+a.b/100;
+		}
+	} 
+	if(a.e == -3) {
+		if(a.b%1000 &lt; 500) {
+			return a.b/1000;
+		} 
+		else {
+			return 1+a.b/1000;
+		}
+	} 
+	if(a.e == -4) {
+		if(a.b &lt; 5000) {
+			return 0;
+		} 
+		else {
+			return 1;
+		}
+	} 
+	return a.b*power(10, a.e);
+}
+
+double_t scenario1(double_t k, double_t r1, double_t r1Levels, bool r1Active) {
+	double_t E;
+	if(r1Active) {
+		E = r1;
+	} 
+	else {
+		E = subtract(r1Levels, r1);
+	}
+	return multiply(k, E);
+}
+
+double_t scenario2_3(double_t k, double_t r2, double_t r2Levels, bool r2Active, double_t r1, double_t r1Levels, bool r1Active) {
+	double_t E, S;
+	if(r1Active) {
+		E = r1;
+	} 
+	else {
+		E = subtract(r1Levels, r1);
+	}
+	if(r2Active) {
+		S = r2;
+	} 
+	else {
+		S = subtract(r2Levels, r2);
+	}
+	return multiply(k, multiply(E, S));
+}
+
+double_t int_to_double(int a) {
+	double_t r;
+	if(a &lt; 10) {
+		r.b = a*1000;
+		r.e = -3;
+	} 
+	else 
+		if(a &lt; 100) {
+		r.b = a*100;
+		r.e = -2;
+	} 
+	else 
+		if(a &lt; 1000) {
+		r.b = a*10;
+		r.e = -1;
+	} 
+	else 
+		if(a &lt; 10000) {
+		r.b = a;
+		r.e = 0;
+	} 
+	return r;
+}
+
+		</declaration>
+  
+  <template>
+    <name>Reactant_R1</name>
+    <parameter>int &amp;R, const int MAX</parameter>
+    <declaration>int[-1,1] delta = 0;
+
+time_t TL, TU;
+
+clock c;
+
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+double_t compute_rate() {
+	double_t R2_R1_r = scenario1(k_R2_R1, int_to_double(R2), int_to_double(R2Levels), true);
+	double_t R0_R1_r = scenario2_3(k_R0_R1, int_to_double(R1), int_to_double(R1Levels), false, int_to_double(R0), int_to_double(R0Levels), true);
+	if(R0_R1_r.b == 0 and R0 &gt; 0) {
+		R0_R1_r = scenario2_3(k_R0_R1, int_to_double(R1Levels - 1), int_to_double(R1Levels), false, int_to_double(R0), int_to_double(R0Levels), true);
+	} 
+	R2_R1.T = _ANIMO_round(inverse(R2_R1_r));
+	R0_R1.T = _ANIMO_round(inverse(R0_R1_r));
+	return add(subtract(zero, R2_R1_r), R0_R1_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if(totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} 
+	else {
+		delta = 1;
+	}
+	if(totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if(TL &lt; 1) {
+			TL = 1;
+		} 
+		if(TU &lt; 1) {
+			TU = 1;
+		} 
+	} 
+	else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if(TL != INFINITE_TIME and TL &gt; TU) {
+		TL = TU;
+	} 
+}
+
+void react() {
+	if(0 &lt;= R+delta and R+delta &lt;= MAX) {
+		R = R+delta;
+	} 
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) {
+	if((oldRate.b &lt; 0 and newRate.b &gt; 0 or oldRate.b &gt; 0 and newRate.b &lt; 0) and R &lt; MAX and R &gt; 0) {
+		return true;
+	} 
+	return false;
+}
+
+void decide_reset() {
+	if(rate_significantly_changed(oldRate, totalRate)) {
+		c = 0;
+	} 
+}
+
+bool can_react() {
+	return minCrit == N_REACTANTS and TL != INFINITE_TIME and (delta &gt;= 0 and R &lt; MAX or delta &lt; 0 and R &gt; 0);
+}
+
+bool cant_react() {
+	return minCrit == N_REACTANTS and (TL == INFINITE_TIME or delta &gt;= 0 and R == MAX or delta &lt; 0 and R == 0);
+}
+
+</declaration>
+    <location id="id0_Reactant_R1" x="-1560" y="-810">
+      	
+      <name x="-1560" y="-810">id0</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="responding_Reactant_R1" x="-1853" y="-646">
+      	
+      <name x="-1850" y="-634">responding</name>
+      	
+      <urgent/>
+      
+    </location>
+    
+    <location id="start_Reactant_R1" x="-1232" y="-731">
+      	
+      <name x="-1224" y="-755">start</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="not_reacting_Reactant_R1" x="-1419" y="-841">
+      	
+      <name x="-1401" y="-857">not_reacting</name>
+      
+    </location>
+    
+    <location id="updating_Reactant_R1" x="-1419" y="-731">
+      	
+      <name x="-1411" y="-756">updating</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="waiting_Reactant_R1" x="-1666" y="-731">
+      	
+      <name x="-1730" y="-747">waiting</name>
+      	
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU</label>
+      
+    </location>
+    
+    <init ref="start_Reactant_R1"/>
+    <transition>
+      
+      <source ref="responding_Reactant_R1"/>
+      
+      <target ref="updating_Reactant_R1"/>
+      
+      <label kind="synchronisation" x="-1793" y="-663">do_update!</label>
+      
+      <label kind="assignment" x="-1793" y="-646">
+update(),
+decide_reset()
+</label>
+      
+      <nail x="-1419" y="-646"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="responding_Reactant_R1"/>
+      
+      <target ref="updating_Reactant_R1"/>
+      
+      <label kind="synchronisation" x="-1793" y="-663">do_update?</label>
+      
+      <label kind="assignment" x="-1793" y="-646">
+update(),
+decide_reset()
+</label>
+      
+      <nail x="-1419" y="-646"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="start_Reactant_R1"/>
+      
+      <target ref="updating_Reactant_R1"/>
+      
+      <label kind="synchronisation" x="-1343" y="-748">do_update!</label>
+      
+      <label kind="assignment" x="-1343" y="-731">
+update()
+</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R1"/>
+      
+      <target ref="not_reacting_Reactant_R1"/>
+      
+      <label kind="guard" x="-1415" y="-812">cant_react()</label>
+      
+      <label kind="synchronisation" x="-1415" y="-795">decide_react!</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R1"/>
+      
+      <target ref="not_reacting_Reactant_R1"/>
+      
+      <label kind="guard" x="-1415" y="-812">cant_react()</label>
+      
+      <label kind="synchronisation" x="-1415" y="-795">decide_react?</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R1"/>
+      
+      <target ref="waiting_Reactant_R1"/>
+      
+      <label kind="guard" x="-1632" y="-748">can_react() and c &lt;= TU</label>
+      
+      <label kind="synchronisation" x="-1598" y="-731">decide_react!</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R1"/>
+      
+      <target ref="waiting_Reactant_R1"/>
+      
+      <label kind="guard" x="-1632" y="-748">can_react() and c &lt;= TU</label>
+      
+      <label kind="synchronisation" x="-1598" y="-731">decide_react?</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R1"/>
+      
+      <target ref="waiting_Reactant_R1"/>
+      
+      <label kind="guard" x="-1632" y="-705">can_react() and c &gt; TU</label>
+      
+      <label kind="synchronisation" x="-1606" y="-688">decide_react!</label>
+      
+      <label kind="assignment" x="-1606" y="-671">
+make_urgent()
+</label>
+      
+      <nail x="-1479" y="-688"/>
+      
+      <nail x="-1632" y="-688"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R1"/>
+      
+      <target ref="waiting_Reactant_R1"/>
+      
+      <label kind="guard" x="-1632" y="-705">can_react() and c &gt; TU</label>
+      
+      <label kind="synchronisation" x="-1606" y="-688">decide_react?</label>
+      
+      <label kind="assignment" x="-1606" y="-671">
+make_urgent()
+</label>
+      
+      <nail x="-1479" y="-688"/>
+      
+      <nail x="-1632" y="-688"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R1"/>
+      
+      <target ref="id0_Reactant_R1"/>
+      
+      <label kind="guard" x="-1690" y="-844">c &gt;= TL</label>
+      
+      <label kind="synchronisation" x="-1690" y="-827">reacting!</label>
+      
+      <label kind="assignment" x="-1690" y="-810">
+react(),
+c = 0,
+enterCrit(1)
+</label>
+      
+      <nail x="-1666" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R1"/>
+      
+      <target ref="id0_Reactant_R1"/>
+      
+      <label kind="guard" x="-1690" y="-844">c &gt;= TL</label>
+      
+      <label kind="synchronisation" x="-1690" y="-827">reacting?</label>
+      
+      <label kind="assignment" x="-1690" y="-810">
+react(),
+c = 0,
+enterCrit(1)
+</label>
+      
+      <nail x="-1666" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="id0_Reactant_R1"/>
+      
+      <target ref="updating_Reactant_R1"/>
+      
+      <label kind="guard" x="-1544" y="-841">minCrit == 1</label>
+      
+      <label kind="synchronisation" x="-1544" y="-827">reacted[1]!</label>
+      
+      <label kind="assignment" x="-1544" y="-810">
+update(),
+exitCrit(1)
+</label>
+      
+      <nail x="-1489" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="not_reacting_Reactant_R1"/>
+      
+      <target ref="responding_Reactant_R1"/>
+      
+      <label kind="synchronisation" x="-1504" y="-894">reacted[2]?</label>
+      
+      <label kind="assignment" x="-1504" y="-877">
+c = 0
+</label>
+      
+      <nail x="-1419" y="-877"/>
+      
+      <nail x="-1853" y="-877"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="not_reacting_Reactant_R1"/>
+      
+      <target ref="responding_Reactant_R1"/>
+      
+      <label kind="synchronisation" x="-1504" y="-936">reacted[0]?</label>
+      
+      <label kind="assignment" x="-1504" y="-919">
+c = 0
+</label>
+      
+      <nail x="-1419" y="-919"/>
+      
+      <nail x="-1853" y="-919"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R1"/>
+      
+      <target ref="responding_Reactant_R1"/>
+      
+      <label kind="guard" x="-1836" y="-765">c &gt; 0 and c &lt; TL</label>
+      
+      <label kind="synchronisation" x="-1836" y="-748">reacted[2]?</label>
+      
+      <nail x="-1751" y="-731"/>
+      
+      <nail x="-1853" y="-731"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R1"/>
+      
+      <target ref="responding_Reactant_R1"/>
+      
+      <label kind="guard" x="-1836" y="-813">c &gt; 0 and c &lt; TL</label>
+      
+      <label kind="synchronisation" x="-1836" y="-796">reacted[0]?</label>
+      
+      <nail x="-1751" y="-779"/>
+      
+      <nail x="-1853" y="-779"/>
+      
+    </transition>
+    
+  </template>
+  <template>
+    <name>Reactant_R2</name>
+    <parameter>int &amp;R, const int MAX</parameter>
+    <declaration>int[-1,1] delta = 0;
+
+time_t TL, TU;
+
+clock c;
+
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+double_t compute_rate() {
+	double_t R1_R2_r = scenario2_3(k_R1_R2, int_to_double(R2), int_to_double(R2Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	if(R1_R2_r.b == 0 and R1 &gt; 0) {
+		R1_R2_r = scenario2_3(k_R1_R2, int_to_double(R2Levels - 1), int_to_double(R2Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	} 
+	R1_R2.T = _ANIMO_round(inverse(R1_R2_r));
+	return R1_R2_r;
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if(totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} 
+	else {
+		delta = 1;
+	}
+	if(totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if(TL &lt; 1) {
+			TL = 1;
+		} 
+		if(TU &lt; 1) {
+			TU = 1;
+		} 
+	} 
+	else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if(TL != INFINITE_TIME and TL &gt; TU) {
+		TL = TU;
+	} 
+}
+
+void react() {
+	if(0 &lt;= R+delta and R+delta &lt;= MAX) {
+		R = R+delta;
+	} 
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) {
+	if((oldRate.b &lt; 0 and newRate.b &gt; 0 or oldRate.b &gt; 0 and newRate.b &lt; 0) and R &lt; MAX and R &gt; 0) {
+		return true;
+	} 
+	return false;
+}
+
+void decide_reset() {
+	if(rate_significantly_changed(oldRate, totalRate)) {
+		c = 0;
+	} 
+}
+
+bool can_react() {
+	return minCrit == N_REACTANTS and TL != INFINITE_TIME and (delta &gt;= 0 and R &lt; MAX or delta &lt; 0 and R &gt; 0);
+}
+
+bool cant_react() {
+	return minCrit == N_REACTANTS and (TL == INFINITE_TIME or delta &gt;= 0 and R == MAX or delta &lt; 0 and R == 0);
+}
+
+</declaration>
+    <location id="id0_Reactant_R2" x="-1560" y="-810">
+      	
+      <name x="-1560" y="-810">id0</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="responding_Reactant_R2" x="-1853" y="-646">
+      	
+      <name x="-1850" y="-634">responding</name>
+      	
+      <urgent/>
+      
+    </location>
+    
+    <location id="start_Reactant_R2" x="-1232" y="-731">
+      	
+      <name x="-1224" y="-755">start</name>
+      
+    </location>
+    
+    <location id="not_reacting_Reactant_R2" x="-1419" y="-841">
+      	
+      <name x="-1401" y="-857">not_reacting</name>
+      
+    </location>
+    
+    <location id="updating_Reactant_R2" x="-1419" y="-731">
+      	
+      <name x="-1411" y="-756">updating</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="waiting_Reactant_R2" x="-1666" y="-731">
+      	
+      <name x="-1730" y="-747">waiting</name>
+      	
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU</label>
+      
+    </location>
+    
+    <init ref="start_Reactant_R2"/>
+    <transition>
+      
+      <source ref="responding_Reactant_R2"/>
+      
+      <target ref="updating_Reactant_R2"/>
+      
+      <label kind="synchronisation" x="-1793" y="-663">do_update!</label>
+      
+      <label kind="assignment" x="-1793" y="-646">
+update(),
+decide_reset()
+</label>
+      
+      <nail x="-1419" y="-646"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="responding_Reactant_R2"/>
+      
+      <target ref="updating_Reactant_R2"/>
+      
+      <label kind="synchronisation" x="-1793" y="-663">do_update?</label>
+      
+      <label kind="assignment" x="-1793" y="-646">
+update(),
+decide_reset()
+</label>
+      
+      <nail x="-1419" y="-646"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="start_Reactant_R2"/>
+      
+      <target ref="updating_Reactant_R2"/>
+      
+      <label kind="synchronisation" x="-1343" y="-748">do_update?</label>
+      
+      <label kind="assignment" x="-1343" y="-731">
+update()
+</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R2"/>
+      
+      <target ref="not_reacting_Reactant_R2"/>
+      
+      <label kind="guard" x="-1415" y="-812">cant_react()</label>
+      
+      <label kind="synchronisation" x="-1415" y="-795">decide_react!</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R2"/>
+      
+      <target ref="not_reacting_Reactant_R2"/>
+      
+      <label kind="guard" x="-1415" y="-812">cant_react()</label>
+      
+      <label kind="synchronisation" x="-1415" y="-795">decide_react?</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R2"/>
+      
+      <target ref="waiting_Reactant_R2"/>
+      
+      <label kind="guard" x="-1632" y="-748">can_react() and c &lt;= TU</label>
+      
+      <label kind="synchronisation" x="-1598" y="-731">decide_react!</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R2"/>
+      
+      <target ref="waiting_Reactant_R2"/>
+      
+      <label kind="guard" x="-1632" y="-748">can_react() and c &lt;= TU</label>
+      
+      <label kind="synchronisation" x="-1598" y="-731">decide_react?</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R2"/>
+      
+      <target ref="waiting_Reactant_R2"/>
+      
+      <label kind="guard" x="-1632" y="-705">can_react() and c &gt; TU</label>
+      
+      <label kind="synchronisation" x="-1606" y="-688">decide_react!</label>
+      
+      <label kind="assignment" x="-1606" y="-671">
+make_urgent()
+</label>
+      
+      <nail x="-1479" y="-688"/>
+      
+      <nail x="-1632" y="-688"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R2"/>
+      
+      <target ref="waiting_Reactant_R2"/>
+      
+      <label kind="guard" x="-1632" y="-705">can_react() and c &gt; TU</label>
+      
+      <label kind="synchronisation" x="-1606" y="-688">decide_react?</label>
+      
+      <label kind="assignment" x="-1606" y="-671">
+make_urgent()
+</label>
+      
+      <nail x="-1479" y="-688"/>
+      
+      <nail x="-1632" y="-688"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R2"/>
+      
+      <target ref="id0_Reactant_R2"/>
+      
+      <label kind="guard" x="-1690" y="-844">c &gt;= TL</label>
+      
+      <label kind="synchronisation" x="-1690" y="-827">reacting!</label>
+      
+      <label kind="assignment" x="-1690" y="-810">
+react(),
+c = 0,
+enterCrit(2)
+</label>
+      
+      <nail x="-1666" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R2"/>
+      
+      <target ref="id0_Reactant_R2"/>
+      
+      <label kind="guard" x="-1690" y="-844">c &gt;= TL</label>
+      
+      <label kind="synchronisation" x="-1690" y="-827">reacting?</label>
+      
+      <label kind="assignment" x="-1690" y="-810">
+react(),
+c = 0,
+enterCrit(2)
+</label>
+      
+      <nail x="-1666" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="id0_Reactant_R2"/>
+      
+      <target ref="updating_Reactant_R2"/>
+      
+      <label kind="guard" x="-1544" y="-841">minCrit == 2</label>
+      
+      <label kind="synchronisation" x="-1544" y="-827">reacted[2]!</label>
+      
+      <label kind="assignment" x="-1544" y="-810">
+update(),
+exitCrit(2)
+</label>
+      
+      <nail x="-1489" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="not_reacting_Reactant_R2"/>
+      
+      <target ref="responding_Reactant_R2"/>
+      
+      <label kind="synchronisation" x="-1504" y="-894">reacted[1]?</label>
+      
+      <label kind="assignment" x="-1504" y="-877">
+c = 0
+</label>
+      
+      <nail x="-1419" y="-877"/>
+      
+      <nail x="-1853" y="-877"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R2"/>
+      
+      <target ref="responding_Reactant_R2"/>
+      
+      <label kind="guard" x="-1836" y="-765">c &gt; 0 and c &lt; TL</label>
+      
+      <label kind="synchronisation" x="-1836" y="-748">reacted[1]?</label>
+      
+      <nail x="-1751" y="-731"/>
+      
+      <nail x="-1853" y="-731"/>
+      
+    </transition>
+    
+  </template>
+  <template>
+    <name>Reactant_R3</name>
+    <parameter>int &amp;R, const int MAX</parameter>
+    <declaration>int[-1,1] delta = 0;
+
+time_t TL, TU;
+
+clock c;
+
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+double_t compute_rate() {
+	double_t R4_R3_r = scenario2_3(k_R4_R3, int_to_double(R3), int_to_double(R3Levels), true, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R1_R3_r = scenario2_3(k_R1_R3, int_to_double(R3), int_to_double(R3Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	if(R4_R3_r.b == 0 and R4 &gt; 0) {
+		R4_R3_r = scenario2_3(k_R4_R3, int_to_double(1), int_to_double(R3Levels), true, int_to_double(R4), int_to_double(R4Levels), true);
+	} 
+	if(R1_R3_r.b == 0 and R1 &gt; 0) {
+		R1_R3_r = scenario2_3(k_R1_R3, int_to_double(R3Levels - 1), int_to_double(R3Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	} 
+	R4_R3.T = _ANIMO_round(inverse(R4_R3_r));
+	R1_R3.T = _ANIMO_round(inverse(R1_R3_r));
+	return add(subtract(zero, R4_R3_r), R1_R3_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if(totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} 
+	else {
+		delta = 1;
+	}
+	if(totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if(TL &lt; 1) {
+			TL = 1;
+		} 
+		if(TU &lt; 1) {
+			TU = 1;
+		} 
+	} 
+	else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if(TL != INFINITE_TIME and TL &gt; TU) {
+		TL = TU;
+	} 
+}
+
+void react() {
+	if(0 &lt;= R+delta and R+delta &lt;= MAX) {
+		R = R+delta;
+	} 
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) {
+	if((oldRate.b &lt; 0 and newRate.b &gt; 0 or oldRate.b &gt; 0 and newRate.b &lt; 0) and R &lt; MAX and R &gt; 0) {
+		return true;
+	} 
+	return false;
+}
+
+void decide_reset() {
+	if(rate_significantly_changed(oldRate, totalRate)) {
+		c = 0;
+	} 
+}
+
+bool can_react() {
+	return minCrit == N_REACTANTS and TL != INFINITE_TIME and (delta &gt;= 0 and R &lt; MAX or delta &lt; 0 and R &gt; 0);
+}
+
+bool cant_react() {
+	return minCrit == N_REACTANTS and (TL == INFINITE_TIME or delta &gt;= 0 and R == MAX or delta &lt; 0 and R == 0);
+}
+
+</declaration>
+    <location id="id0_Reactant_R3" x="-1560" y="-810">
+      	
+      <name x="-1560" y="-810">id0</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="responding_Reactant_R3" x="-1853" y="-646">
+      	
+      <name x="-1850" y="-634">responding</name>
+      	
+      <urgent/>
+      
+    </location>
+    
+    <location id="start_Reactant_R3" x="-1232" y="-731">
+      	
+      <name x="-1224" y="-755">start</name>
+      
+    </location>
+    
+    <location id="not_reacting_Reactant_R3" x="-1419" y="-841">
+      	
+      <name x="-1401" y="-857">not_reacting</name>
+      
+    </location>
+    
+    <location id="updating_Reactant_R3" x="-1419" y="-731">
+      	
+      <name x="-1411" y="-756">updating</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <location id="waiting_Reactant_R3" x="-1666" y="-731">
+      	
+      <name x="-1730" y="-747">waiting</name>
+      	
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU</label>
+      
+    </location>
+    
+    <init ref="start_Reactant_R3"/>
+    <transition>
+      
+      <source ref="responding_Reactant_R3"/>
+      
+      <target ref="updating_Reactant_R3"/>
+      
+      <label kind="synchronisation" x="-1793" y="-663">do_update!</label>
+      
+      <label kind="assignment" x="-1793" y="-646">
+update(),
+decide_reset()
+</label>
+      
+      <nail x="-1419" y="-646"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="responding_Reactant_R3"/>
+      
+      <target ref="updating_Reactant_R3"/>
+      
+      <label kind="synchronisation" x="-1793" y="-663">do_update?</label>
+      
+      <label kind="assignment" x="-1793" y="-646">
+update(),
+decide_reset()
+</label>
+      
+      <nail x="-1419" y="-646"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="start_Reactant_R3"/>
+      
+      <target ref="updating_Reactant_R3"/>
+      
+      <label kind="synchronisation" x="-1343" y="-748">do_update?</label>
+      
+      <label kind="assignment" x="-1343" y="-731">
+update()
+</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R3"/>
+      
+      <target ref="not_reacting_Reactant_R3"/>
+      
+      <label kind="guard" x="-1415" y="-812">cant_react()</label>
+      
+      <label kind="synchronisation" x="-1415" y="-795">decide_react!</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R3"/>
+      
+      <target ref="not_reacting_Reactant_R3"/>
+      
+      <label kind="guard" x="-1415" y="-812">cant_react()</label>
+      
+      <label kind="synchronisation" x="-1415" y="-795">decide_react?</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R3"/>
+      
+      <target ref="waiting_Reactant_R3"/>
+      
+      <label kind="guard" x="-1632" y="-748">can_react() and c &lt;= TU</label>
+      
+      <label kind="synchronisation" x="-1598" y="-731">decide_react!</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R3"/>
+      
+      <target ref="waiting_Reactant_R3"/>
+      
+      <label kind="guard" x="-1632" y="-748">can_react() and c &lt;= TU</label>
+      
+      <label kind="synchronisation" x="-1598" y="-731">decide_react?</label>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R3"/>
+      
+      <target ref="waiting_Reactant_R3"/>
+      
+      <label kind="guard" x="-1632" y="-705">can_react() and c &gt; TU</label>
+      
+      <label kind="synchronisation" x="-1606" y="-688">decide_react!</label>
+      
+      <label kind="assignment" x="-1606" y="-671">
+make_urgent()
+</label>
+      
+      <nail x="-1479" y="-688"/>
+      
+      <nail x="-1632" y="-688"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="updating_Reactant_R3"/>
+      
+      <target ref="waiting_Reactant_R3"/>
+      
+      <label kind="guard" x="-1632" y="-705">can_react() and c &gt; TU</label>
+      
+      <label kind="synchronisation" x="-1606" y="-688">decide_react?</label>
+      
+      <label kind="assignment" x="-1606" y="-671">
+make_urgent()
+</label>
+      
+      <nail x="-1479" y="-688"/>
+      
+      <nail x="-1632" y="-688"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R3"/>
+      
+      <target ref="id0_Reactant_R3"/>
+      
+      <label kind="guard" x="-1690" y="-844">c &gt;= TL</label>
+      
+      <label kind="synchronisation" x="-1690" y="-827">reacting!</label>
+      
+      <label kind="assignment" x="-1690" y="-810">
+react(),
+c = 0,
+enterCrit(3)
+</label>
+      
+      <nail x="-1666" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R3"/>
+      
+      <target ref="id0_Reactant_R3"/>
+      
+      <label kind="guard" x="-1690" y="-844">c &gt;= TL</label>
+      
+      <label kind="synchronisation" x="-1690" y="-827">reacting?</label>
+      
+      <label kind="assignment" x="-1690" y="-810">
+react(),
+c = 0,
+enterCrit(3)
+</label>
+      
+      <nail x="-1666" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="id0_Reactant_R3"/>
+      
+      <target ref="updating_Reactant_R3"/>
+      
+      <label kind="guard" x="-1544" y="-841">minCrit == 3</label>
+      
+      <label kind="synchronisation" x="-1544" y="-827">reacted[3]!</label>
+      
+      <label kind="assignment" x="-1544" y="-810">
+update(),
+exitCrit(3)
+</label>
+      
+      <nail x="-1489" y="-810"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="not_reacting_Reactant_R3"/>
+      
+      <target ref="responding_Reactant_R3"/>
+      
+      <label kind="synchronisation" x="-1504" y="-894">reacted[4]?</label>
+      
+      <label kind="assignment" x="-1504" y="-877">
+c = 0
+</label>
+      
+      <nail x="-1419" y="-877"/>
+      
+      <nail x="-1853" y="-877"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="not_reacting_Reactant_R3"/>
+      
+      <target ref="responding_Reactant_R3"/>
+      
+      <label kind="synchronisation" x="-1504" y="-936">reacted[1]?</label>
+      
+      <label kind="assignment" x="-1504" y="-919">
+c = 0
+</label>
+      
+      <nail x="-1419" y="-919"/>
+      
+      <nail x="-1853" y="-919"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R3"/>
+      
+      <target ref="responding_Reactant_R3"/>
+      
+      <label kind="guard" x="-1836" y="-765">c &gt; 0 and c &lt; TL</label>
+      
+      <label kind="synchronisation" x="-1836" y="-748">reacted[4]?</label>
+      
+      <nail x="-1751" y="-731"/>
+      
+      <nail x="-1853" y="-731"/>
+      
+    </transition>
+    
+    <transition>
+      
+      <source ref="waiting_Reactant_R3"/>
+      
+      <target ref="responding_Reactant_R3"/>
+      
+      <label kind="guard" x="-1836" y="-813">c &gt; 0 and c &lt; TL</label>
+      
+      <label kind="synchronisation" x="-1836" y="-796">reacted[1]?</label>
+      
+      <nail x="-1751" y="-779"/>
+      
+      <nail x="-1853" y="-779"/>
+      
+    </transition>
+    
+  </template>
+  		
+  <system>
+R1_ = Reactant_R1(R1, 100);
+
+R2_ = Reactant_R2(R2, 100);
+
+R3_ = Reactant_R3(R3, 100);
+
+	system R1_,R2_,R3_;
+		</system>
+  	
+  <queries>
+    <query>
+      <formula>simulate [&lt;=23040000] { R2, R3, R4, R0, R1, R4_R3.T, R2_R1.T, R0_R1.T, R1_R3.T, R1_R2.T } : false</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

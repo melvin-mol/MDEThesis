@@ -1,0 +1,174 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+
+//R0 = A
+clock R0;
+const int R0Init = 100;
+const int R0Levels = 100;
+
+//R1 = B
+clock R1;
+const int R1Init = 0;
+const int R1Levels = 100;
+
+//R2 = C
+clock R2;
+const int R2Init = 0;
+const int R2Levels = 100;
+
+//R3 = D
+clock R3;
+const int R3Init = 0;
+const int R3Levels = 100;
+
+//R4 = E
+clock R4;
+const int R4Init = 1;
+const int R4Levels = 1;
+
+//Reaction R4 (E) --| R3 (D)
+const double k_R4_R3 = 0.001;
+
+//Reaction R2 (C) --| R1 (B)
+const double k_R2_R1 = 0.016;
+
+//Reaction R0 (A) --&gt; R1 (B)
+const double k_R0_R1 = 4.0E-5;
+
+//Reaction R1 (B) --&gt; R3 (D)
+const double k_R1_R3 = 8.0E-5;
+
+//Reaction R1 (B) --&gt; R2 (C)
+const double k_R1_R2 = 4.0E-5;
+
+</declaration>
+  
+  <template>
+      
+    <name x="5" y="5">ODE_Model</name>
+      
+    <declaration>double rateR0() {
+	return 0;
+}
+
+double boundedRateR0() {
+	return 0;
+}
+
+double rateR1() {
+	double R2_R1_r = k_R2_R1 * R2;
+	double R0_R1_r = k_R0_R1 * (R1Levels - R1) * R0;
+	return  - R2_R1_r + R0_R1_r;
+}
+
+double boundedRateR1() {
+	double r = rateR1();
+	if (R1 + r &gt; R1Levels) {
+		return R1Levels - R1;
+	} else if (R1 + r &lt; 0) {
+		return -R1;
+	}
+	return r;
+}
+
+double rateR2() {
+	double R1_R2_r = k_R1_R2 * (R2Levels - R2) * R1;
+	return R1_R2_r;
+}
+
+double boundedRateR2() {
+	double r = rateR2();
+	if (R2 + r &gt; R2Levels) {
+		return R2Levels - R2;
+	} else if (R2 + r &lt; 0) {
+		return -R2;
+	}
+	return r;
+}
+
+double rateR3() {
+	double R4_R3_r = k_R4_R3 * R3 * R4;
+	double R1_R3_r = k_R1_R3 * (R3Levels - R3) * R1;
+	return  - R4_R3_r + R1_R3_r;
+}
+
+double boundedRateR3() {
+	double r = rateR3();
+	if (R3 + r &gt; R3Levels) {
+		return R3Levels - R3;
+	} else if (R3 + r &lt; 0) {
+		return -R3;
+	}
+	return r;
+}
+
+double rateR4() {
+	return 0;
+}
+
+double boundedRateR4() {
+	return 0;
+}
+
+</declaration>
+      
+    <location id="id0" x="-314" y="-102">
+          
+      <label kind="invariant" x="-324" y="-85">R0' == boundedRateR0()
+&amp;&amp;
+R1' == boundedRateR1()
+&amp;&amp;
+R2' == boundedRateR2()
+&amp;&amp;
+R3' == boundedRateR3()
+&amp;&amp;
+R4' == boundedRateR4()</label>
+        
+    </location>
+      
+    <location id="id1" x="-448" y="-102">
+          
+      <committed/>
+        
+    </location>
+      
+    <init ref="id1"/>
+      
+    <transition>
+          
+      <source ref="id1"/>
+          
+      <target ref="id0"/>
+          
+      <label kind="select" x="-430" y="-118"/>
+          
+      <label kind="assignment" x="-430" y="-102">R0 = R0Init,
+R1 = R1Init,
+R2 = R2Init,
+R3 = R3Init,
+R4 = R4Init</label>
+          
+      <label kind="probability" x="-430" y="-86">1</label>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+model = ODE_Model();
+
+
+system model;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=14400] { R2, R3, R4, R0, R1 }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

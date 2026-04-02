@@ -1,0 +1,7086 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+const int INFINITE_TIME = -1;
+const int INF = INFINITE_TIME;
+const int N_REACTANTS = 24;
+broadcast chan reached[N_REACTANTS];
+broadcast chan reaching, do_update;
+
+
+typedef struct {
+	int[-99980001, 99980001] b;
+	int e;
+} double_t;
+
+const double_t zero = {0, 0};
+const double_t INFINITE_TIME_DOUBLE = {-1000, -3}; //INFINITE_TIME (-1) translated into double
+//R0 = A
+int R0 := 2;
+const int R0Levels := 100;
+const double_t R0Levels_d := {1000, -1};
+
+//R1 = B
+int R1 := 0;
+const int R1Levels := 100;
+const double_t R1Levels_d := {1000, -1};
+
+//R2 = CLK
+int R2 := 9;
+const int R2Levels := 100;
+const double_t R2Levels_d := {1000, -1};
+
+//R3 = CRY
+int R3 := 39;
+const int R3Levels := 100;
+const double_t R3Levels_d := {1000, -1};
+
+//R4 = CWO
+int R4 := 6;
+const int R4Levels := 100;
+const double_t R4Levels_d := {1000, -1};
+
+//R5 = CYC
+int R5 := 100;
+const int R5Levels := 100;
+const double_t R5Levels_d := {1000, -1};
+
+//R6 = CYC/CLK
+int R6 := 17;
+const int R6Levels := 100;
+const double_t R6Levels_d := {1000, -1};
+
+//R7 = DBT
+int R7 := 100;
+const int R7Levels := 100;
+const double_t R7Levels_d := {1000, -1};
+
+//R9 = PDP1
+int R9 := 85;
+const int R9Levels := 100;
+const double_t R9Levels_d := {1000, -1};
+
+//R10 = PER
+int R10 := 19;
+const int R10Levels := 100;
+const double_t R10Levels_d := {1000, -1};
+
+//R11 = PER/TIM-p
+int R11 := 27;
+const int R11Levels := 100;
+const double_t R11Levels_d := {1000, -1};
+
+//R12 = S
+int R12 := 100;
+const int R12Levels := 100;
+const double_t R12Levels_d := {1000, -1};
+
+//R13 = TIM
+int R13 := 13;
+const int R13Levels := 100;
+const double_t R13Levels_d := {1000, -1};
+
+//R14 = VRI
+int R14 := 62;
+const int R14Levels := 100;
+const double_t R14Levels_d := {1000, -1};
+
+//R15 = a
+int R15 := 0;
+const int R15Levels := 100;
+const double_t R15Levels_d := {1000, -1};
+
+//R16 = b
+int R16 := 12;
+const int R16Levels := 100;
+const double_t R16Levels_d := {1000, -1};
+
+//R17 = c
+int R17 := 100;
+const int R17Levels := 100;
+const double_t R17Levels_d := {1000, -1};
+
+//R18 = clk
+int R18 := 13;
+const int R18Levels := 100;
+const double_t R18Levels_d := {1000, -1};
+
+//R19 = cry
+int R19 := 100;
+const int R19Levels := 100;
+const double_t R19Levels_d := {1000, -1};
+
+//R20 = cwo
+int R20 := 7;
+const int R20Levels := 100;
+const double_t R20Levels_d := {1000, -1};
+
+//R21 = pdp1
+int R21 := 34;
+const int R21Levels := 100;
+const double_t R21Levels_d := {1000, -1};
+
+//R22 = per
+int R22 := 13;
+const int R22Levels := 100;
+const double_t R22Levels_d := {1000, -1};
+
+//R23 = tim
+int R23 := 25;
+const int R23Levels := 100;
+const double_t R23Levels_d := {1000, -1};
+
+//R24 = vri
+int R24 := 15;
+const int R24Levels := 100;
+const double_t R24Levels_d := {1000, -1};
+
+
+typedef int[-1, 1073741822] time_t;
+typedef int[-1073741822, 1073741822] int_t;
+
+typedef struct {
+	time_t T;
+} timeActivity;
+
+//Reaction R4 (CWO) --| R23 (tim)
+timeActivity R4_R23;
+const double_t k_R4_R23 = {4500, -10};
+
+//Reaction R4 (CWO) --| R24 (vri)
+timeActivity R4_R24;
+const double_t k_R4_R24 = {5400, -10};
+
+//Reaction R6 (CYC/CLK) --| R6 (CYC/CLK)
+timeActivity R6_R6;
+const double_t k_R6_R6 = {5940, -11};
+
+//Reaction R4 (CWO) --| R21 (pdp1)
+timeActivity R4_R21;
+const double_t k_R4_R21 = {8640, -10};
+
+//Reaction R20 (cwo) --| R20 (cwo)
+timeActivity R20_R20;
+const double_t k_R20_R20 = {7810, -10};
+
+//Reaction R4 (CWO) --| R22 (per)
+timeActivity R4_R22;
+const double_t k_R4_R22 = {1125, -9};
+
+//Reaction R2 (CLK) --| R2 (CLK)
+timeActivity R2_R2;
+const double_t k_R2_R2 = {9630, -10};
+
+//Reaction R4 (CWO) --| R20 (cwo)
+timeActivity R4_R20;
+const double_t k_R4_R20 = {4770, -10};
+
+//Reaction R10 (PER) --| R10 (PER)
+timeActivity R10_R10;
+const double_t k_R10_R10 = {1563, -10};
+
+//Reaction R21 (pdp1) --| R21 (pdp1)
+timeActivity R21_R21;
+const double_t k_R21_R21 = {1488, -10};
+
+//Reaction R1 (B) --| R17 (c)
+timeActivity R1_R17;
+const double_t k_R1_R17 = {2129, -9};
+
+//Reaction R22 (per) --| R22 (per)
+timeActivity R22_R22;
+const double_t k_R22_R22 = {4690, -10};
+
+//Reaction R18 (clk) --&gt; R2 (CLK)
+timeActivity R18_R2;
+const double_t k_R18_R2 = {1031, -9};
+
+//Reaction R19 (cry) --| R15 (a)
+timeActivity R19_R15;
+const double_t k_R19_R15 = {2129, -9};
+
+//Reaction R11 (PER/TIM-p) --| R11 (PER/TIM-p)
+timeActivity R11_R11;
+const double_t k_R11_R11 = {6250, -10};
+
+//Reaction R9 (PDP1) --| R9 (PDP1)
+timeActivity R9_R9;
+const double_t k_R9_R9 = {4320, -10};
+
+//Reaction R11 (PER/TIM-p) --| R6 (CYC/CLK)
+timeActivity R11_R6;
+const double_t k_R11_R6 = {1000, -10};
+
+//Reaction R18 (clk) --| R18 (clk)
+timeActivity R18_R18;
+const double_t k_R18_R18 = {2881, -11};
+
+//Reaction R2 (CLK) AND R5 (CYC) --&gt; R6 (CYC/CLK)
+timeActivity R2_R5_R6;
+const double_t k_R2_R5_R6 = {6550, -11};
+
+//Reaction R22 (per) --&gt; R10 (PER)
+timeActivity R22_R10;
+const double_t k_R22_R10 = {2344, -10};
+
+//Reaction R17 (c) --&gt; R19 (cry)
+timeActivity R17_R19;
+const double_t k_R17_R19 = {3860, -9};
+
+//Reaction R19 (cry) --&gt; R3 (CRY)
+timeActivity R19_R3;
+const double_t k_R19_R3 = {3086, -12};
+
+//Reaction R15 (a) --&gt; R0 (A)
+timeActivity R15_R0;
+const double_t k_R15_R0 = {3860, -9};
+
+//Reaction R3 (CRY) --| R13 (TIM)
+timeActivity R3_R13;
+const double_t k_R3_R13 = {6610, -11};
+
+//Reaction R4 (CWO) --| R4 (CWO)
+timeActivity R4_R4;
+const double_t k_R4_R4 = {7810, -10};
+
+//Reaction R23 (tim) --&gt; R13 (TIM)
+timeActivity R23_R13;
+const double_t k_R23_R13 = {1750, -9};
+
+//Reaction R14 (VRI) --| R18 (clk)
+timeActivity R14_R18;
+const double_t k_R14_R18 = {4910, -10};
+
+//Reaction R14 (VRI) --| R14 (VRI)
+timeActivity R14_R14;
+const double_t k_R14_R14 = {2031, -10};
+
+//Reaction R21 (pdp1) --&gt; R9 (PDP1)
+timeActivity R21_R9;
+const double_t k_R21_R9 = {1190, -9};
+
+//Reaction R24 (vri) --&gt; R14 (VRI)
+timeActivity R24_R14;
+const double_t k_R24_R14 = {8130, -10};
+
+//Reaction R12 (S) --| R0 (A)
+timeActivity R12_R0;
+const double_t k_R12_R0 = {3860, -10};
+
+//Reaction R10 (PER) AND R13 (TIM) --&gt; R11 (PER/TIM-p)
+timeActivity R10_R13_R11;
+const double_t k_R10_R13_R11 = {3720, -11};
+
+//Reaction R12 (S) --| R1 (B)
+timeActivity R12_R1;
+const double_t k_R12_R1 = {3860, -10};
+
+//Reaction R9 (PDP1) --&gt; R18 (clk)
+timeActivity R9_R18;
+const double_t k_R9_R18 = {4300, -10};
+
+//Reaction R5 (CYC) --&gt; R6 (CYC/CLK)
+timeActivity R5_R6;
+const double_t k_R5_R6 = {0, -6};
+
+//Reaction R16 (b) --&gt; R1 (B)
+timeActivity R16_R1;
+const double_t k_R16_R1 = {3860, -9};
+
+//Reaction R12 (S) --&gt; R16 (b)
+timeActivity R12_R16;
+const double_t k_R12_R16 = {4820, -10};
+
+//Reaction R12 (S) --&gt; R15 (a)
+timeActivity R12_R15;
+const double_t k_R12_R15 = {4820, -10};
+
+//Reaction R3 (CRY) --| R3 (CRY)
+timeActivity R3_R3;
+const double_t k_R3_R3 = {1232, -11};
+
+//Reaction R6 (CYC/CLK) --&gt; R21 (pdp1)
+timeActivity R6_R21;
+const double_t k_R6_R21 = {1113, -9};
+
+//Reaction R12 (S) --&gt; R17 (c)
+timeActivity R12_R17;
+const double_t k_R12_R17 = {4820, -10};
+
+//Reaction R6 (CYC/CLK) --&gt; R22 (per)
+timeActivity R6_R22;
+const double_t k_R6_R22 = {1375, -9};
+
+//Reaction R12 (S) --| R19 (cry)
+timeActivity R12_R19;
+const double_t k_R12_R19 = {3860, -10};
+
+//Reaction R6 (CYC/CLK) --&gt; R20 (cwo)
+timeActivity R6_R20;
+const double_t k_R6_R20 = {7560, -10};
+
+//Reaction R0 (A) --| R16 (b)
+timeActivity R0_R16;
+const double_t k_R0_R16 = {2129, -9};
+
+//Reaction R6 (CYC/CLK) --&gt; R23 (tim)
+timeActivity R6_R23;
+const double_t k_R6_R23 = {6880, -10};
+
+//Reaction R6 (CYC/CLK) --&gt; R24 (vri)
+timeActivity R6_R24;
+const double_t k_R6_R24 = {1064, -9};
+
+//Reaction R23 (tim) --| R23 (tim)
+timeActivity R23_R23;
+const double_t k_R23_R23 = {1563, -10};
+
+//Reaction R13 (TIM) --&gt; R11 (PER/TIM-p)
+timeActivity R13_R11;
+const double_t k_R13_R11 = {0, -6};
+
+//Reaction R24 (vri) --| R24 (vri)
+timeActivity R24_R24;
+const double_t k_R24_R24 = {4060, -10};
+
+//Reaction R20 (cwo) --&gt; R4 (CWO)
+timeActivity R20_R4;
+const double_t k_R20_R4 = {1172, -9};
+
+//Reaction R7 (DBT) --&gt; R11 (PER/TIM-p)
+timeActivity R7_R11;
+const double_t k_R7_R11 = {3125, -11};
+
+//Reaction R13 (TIM) --| R13 (TIM)
+timeActivity R13_R13;
+const double_t k_R13_R13 = {8750, -10};
+
+
+
+double_t subtract(double_t a, double_t b) { // a - b
+	double_t r = {-1000, -1000};
+	if (a.b == 0) {
+		r.b = -b.b;
+		r.e = b.e;
+		return r;
+	}
+	if (b.b == 0) {
+		return a;
+	}
+	if ((a.e - b.e) &gt;= 4) return a;
+	if ((b.e - a.e) &gt;= 4) {
+		r.b = -b.b;
+		r.e = b.e;
+		return r;
+	}
+	if (a.e == b.e) {
+		r.b = a.b - b.b;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 1) {
+		r.b = a.b - b.b/10;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 2) {
+		r.b = a.b - b.b/100;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 3) {
+		r.b = a.b - b.b/1000;
+		r.e = a.e;
+	}
+	if (b.e - a.e == 1) {
+		r.b = a.b/10 - b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 2) {
+		r.b = a.b/100 - b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 3) {
+		r.b = a.b/1000 - b.b;
+		r.e = b.e;
+	}
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	} else if (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t add(double_t a, double_t b) { // a + b
+	double_t r = {-1000,-1000};
+	if (a.b == 0) {
+		return b;
+	}
+	if (b.b == 0) {
+		return a;
+	}
+	if ((a.e - b.e) &gt;= 4) return a;
+	if ((b.e - a.e) &gt;= 4) return b;
+	if (a.e == b.e) {
+		r.b = a.b + b.b;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 1) {
+		r.b = a.b + b.b/10;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 2) {
+		r.b = a.b + b.b/100;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 3) {
+		r.b = a.b + b.b/1000;
+		r.e = a.e;
+	}
+	if (b.e - a.e == 1) {
+		r.b = a.b/10 + b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 2) {
+		r.b = a.b/100 + b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 3) {
+		r.b = a.b/1000 + b.b;
+		r.e = b.e;
+	}
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	} else if (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t multiply(double_t a, double_t b) { // a * b
+	double_t r;
+	r.b = a.b * b.b;
+	if (r.b % 1000 &lt; 500) {
+		r.b = r.b / 1000;
+	} else {
+		r.b = 1 + r.b / 1000;
+	}
+	r.e = a.e + b.e + 3;
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	}
+	while (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t divide(double_t a, double_t b) { //a / b
+	double_t r;
+	if (b.b == 0) {
+		return INFINITE_TIME_DOUBLE;
+	}
+	r.b = a.b * 1000 / b.b;
+	r.e = a.e - b.e - 3;
+	if (r.b == 0) {
+		return r;
+	}
+	while (r.b &lt; 9999 &amp;&amp; r.b &gt; -9999) {
+		r.b = r.b * 10;
+		r.e = r.e -1;
+	}
+	while (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t inverse(double_t a) { // 1 / a
+	double_t r;
+	if (a.b == 0) {
+		return INFINITE_TIME_DOUBLE;
+	}
+	if (a.e &lt; -12) { // 1 / 1e-9 is still ok, but 1 / 1e-10 is too large (&gt; 2^30 - 2, the largest allowed constant for guards/invariants)
+		r.b = 1073;
+		r.e = 6;
+		return r;
+	}
+	r.b = 10000000 / a.b;
+	r.e = -7 - a.e;
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	}
+	return r;
+}
+
+time_t power(int a, int b) { // a ^ b (b &gt;= 0)
+	time_t r = 1;
+	while (b &gt; 0) {
+		r = r * a;
+		b = b - 1;
+	}
+	return r;
+}
+
+int_t _ANIMO_round(double_t a) { // double --&gt; integer
+	if (a == INFINITE_TIME_DOUBLE) { // Don't need to translate literally if we have infinite
+		return INFINITE_TIME;
+	}
+	if (a.b &gt;= 1073 &amp;&amp; a.e &gt;= 6) { // If the number is too large, we consider it to be infinite
+		return INFINITE_TIME;
+	}
+	if (a.e &lt; -4) {
+		return 0;
+	}
+	if (a.e == -1) {
+		if (a.b % 10 &lt; 5) {
+			return a.b / 10;
+		} else {
+			return 1 + a.b / 10;
+		}
+	}
+	if (a.e == -2) {
+		if (a.b % 100 &lt; 50) {
+			return a.b / 100;
+		} else {
+			return 1 + a.b / 100;
+		}
+	}
+	if (a.e == -3) {
+		if (a.b % 1000 &lt; 500) {
+			return a.b / 1000;
+		} else {
+			return 1 + a.b / 1000;
+		}
+	}
+	if (a.e == -4) {
+		if (a.b &lt; 5000) return 0;
+		else return 1;
+	}
+	return a.b * power(10, a.e);
+}
+
+double_t scenario1(double_t k, double_t r1, double_t r1Levels, bool r1Active) {
+	double_t E;
+	if (r1Active) { //If we depend on active R1, the level of activity is the value of E
+		E = r1;
+	} else { //otherwise we find the inactivity level via the total number of levels
+		E = subtract(r1Levels, r1);
+	}
+	return multiply(k, E);
+}
+
+
+double_t scenario2_3(double_t k, double_t r2, double_t r2Levels, bool r2Active, double_t r1, double_t r1Levels, bool r1Active) {
+	double_t E, S;
+	if (r1Active) { //If we depend on active R1, the level of activity is the value of E
+		E = r1;
+	} else { //otherwise we find the inactivity level via the total number of levels
+		E = subtract(r1Levels, r1);
+	}
+	if (r2Active) { //Same for R2
+		S = r2;
+	} else {
+		S = subtract(r2Levels, r2);
+	}
+	return multiply(k, multiply(E, S));
+}
+
+
+double_t int_to_double(int_t a) { //Used to translate an activity level into double.
+	double_t r;
+	bool neg = false;
+	if (a &lt; 0) {
+		a = -a;
+		neg = true;
+	}
+	if (a &lt; 10) {
+		r.b = a * 1000;
+		r.e = -3;
+	} else if (a &lt; 100) {
+		r.b = a * 100;
+		r.e = -2;
+	} else if (a &lt; 1000) {
+		r.b = a * 10;
+		r.e = -1;
+	} else if (a &lt; 10000) { //Our model supports up to 100 levels, so this should be the most it makes sense to check
+		r.b = a;
+		r.e = 0;
+	} else {
+		r.e = 0;
+		while (a &gt; 9999) {
+			a = a / 10;
+			r.e++;
+		}
+		r.b = a;
+	}
+	if (neg) {
+		r.b = -r.b;
+	}
+	return r;
+}
+
+
+</declaration>
+  
+  <template>
+      
+    <name>Reactant_R0</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R15_R0_r = scenario1(k_R15_R0, int_to_double(R15), int_to_double(R15Levels), true);
+	double_t R12_R0_r = scenario1(k_R12_R0, int_to_double(R12), int_to_double(R12Levels), true);
+	//R15_R0.T = _ANIMO_round(inverse(R15_R0_r));
+	//R12_R0.T = _ANIMO_round(inverse(R12_R0_r));
+	return subtract(add(zero, R15_R0_r), R12_R0_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[0]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[14]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[11]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R1</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R12_R1_r = scenario1(k_R12_R1, int_to_double(R12), int_to_double(R12Levels), true);
+	double_t R16_R1_r = scenario1(k_R16_R1, int_to_double(R16), int_to_double(R16Levels), true);
+	//R12_R1.T = _ANIMO_round(inverse(R12_R1_r));
+	//R16_R1.T = _ANIMO_round(inverse(R16_R1_r));
+	return add(subtract(zero, R12_R1_r), R16_R1_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[1]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[11]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[15]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R2</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R2_R2_r = scenario1(k_R2_R2, int_to_double(R2), int_to_double(R2Levels), true);
+	double_t R18_R2_r = scenario1(k_R18_R2, int_to_double(R18), int_to_double(R18Levels), true);
+	//R2_R2.T = _ANIMO_round(inverse(R2_R2_r));
+	//R18_R2.T = _ANIMO_round(inverse(R18_R2_r));
+	return add(subtract(zero, R2_R2_r), R18_R2_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[2]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[17]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R3</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R19_R3_r = scenario2_3(k_R19_R3, int_to_double(R3), int_to_double(R3Levels), false, int_to_double(R19), int_to_double(R19Levels), true);
+	double_t R3_R3_r = scenario2_3(k_R3_R3, int_to_double(R3), int_to_double(R3Levels), true, int_to_double(R3), int_to_double(R3Levels), true);
+	if (R19_R3_r.b == 0 &amp;&amp; R19 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R19_R3 (note that R is actually R3), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R19_R3_r = scenario2_3(k_R19_R3, int_to_double(R3Levels - 1), int_to_double(R3Levels), false, int_to_double(R19), int_to_double(R19Levels), true);
+	}
+	if (R3_R3_r.b == 0 &amp;&amp; R3 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R3_R3 (note that R is actually R3), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R3_R3_r = scenario2_3(k_R3_R3, int_to_double(1), int_to_double(R3Levels), true, int_to_double(1), int_to_double(R3Levels), true);
+	}
+	//R19_R3.T = _ANIMO_round(inverse(R19_R3_r));
+	//R3_R3.T = _ANIMO_round(inverse(R3_R3_r));
+	return subtract(add(zero, R19_R3_r), R3_R3_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[3]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[18]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R4</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R4_R4_r = scenario1(k_R4_R4, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R20_R4_r = scenario1(k_R20_R4, int_to_double(R20), int_to_double(R20Levels), true);
+	//R4_R4.T = _ANIMO_round(inverse(R4_R4_r));
+	//R20_R4.T = _ANIMO_round(inverse(R20_R4_r));
+	return add(subtract(zero, R4_R4_r), R20_R4_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[4]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[19]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R6</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R6_R6_r = scenario1(k_R6_R6, int_to_double(R6), int_to_double(R6Levels), true);
+	double_t R11_R6_r = scenario2_3(k_R11_R6, int_to_double(R6), int_to_double(R6Levels), true, int_to_double(R11), int_to_double(R11Levels), true);
+	double_t R2_R5_R6_r = scenario2_3(k_R2_R5_R6, int_to_double(R5), int_to_double(R5Levels), true, int_to_double(R2), int_to_double(R2Levels), true);
+	double_t R5_R6_r = scenario1(k_R5_R6, int_to_double(R5), int_to_double(R5Levels), true);
+	if (R11_R6_r.b == 0 &amp;&amp; R11 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R11_R6 (note that R is actually R6), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R11_R6_r = scenario2_3(k_R11_R6, int_to_double(1), int_to_double(R6Levels), true, int_to_double(R11), int_to_double(R11Levels), true);
+	}
+	//R6_R6.T = _ANIMO_round(inverse(R6_R6_r));
+	//R11_R6.T = _ANIMO_round(inverse(R11_R6_r));
+	//R2_R5_R6.T = _ANIMO_round(inverse(R2_R5_R6_r));
+	//R5_R6.T = _ANIMO_round(inverse(R5_R6_r));
+	return add(add(subtract(subtract(zero, R6_R6_r), R11_R6_r), R2_R5_R6_r), R5_R6_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[6]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[10]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[2]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[5]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R9</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R9_R9_r = scenario1(k_R9_R9, int_to_double(R9), int_to_double(R9Levels), true);
+	double_t R21_R9_r = scenario1(k_R21_R9, int_to_double(R21), int_to_double(R21Levels), true);
+	//R9_R9.T = _ANIMO_round(inverse(R9_R9_r));
+	//R21_R9.T = _ANIMO_round(inverse(R21_R9_r));
+	return add(subtract(zero, R9_R9_r), R21_R9_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[8]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[20]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R10</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R10_R10_r = scenario1(k_R10_R10, int_to_double(R10), int_to_double(R10Levels), true);
+	double_t R22_R10_r = scenario1(k_R22_R10, int_to_double(R22), int_to_double(R22Levels), true);
+	//R10_R10.T = _ANIMO_round(inverse(R10_R10_r));
+	//R22_R10.T = _ANIMO_round(inverse(R22_R10_r));
+	return add(subtract(zero, R10_R10_r), R22_R10_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[9]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[21]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R11</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R11_R11_r = scenario1(k_R11_R11, int_to_double(R11), int_to_double(R11Levels), true);
+	double_t R10_R13_R11_r = scenario2_3(k_R10_R13_R11, int_to_double(R13), int_to_double(R13Levels), true, int_to_double(R10), int_to_double(R10Levels), true);
+	double_t R13_R11_r = scenario1(k_R13_R11, int_to_double(R13), int_to_double(R13Levels), true);
+	double_t R7_R11_r = scenario1(k_R7_R11, int_to_double(R7), int_to_double(R7Levels), true);
+	//R11_R11.T = _ANIMO_round(inverse(R11_R11_r));
+	//R10_R13_R11.T = _ANIMO_round(inverse(R10_R13_R11_r));
+	//R13_R11.T = _ANIMO_round(inverse(R13_R11_r));
+	//R7_R11.T = _ANIMO_round(inverse(R7_R11_r));
+	return add(add(add(subtract(zero, R11_R11_r), R10_R13_R11_r), R13_R11_r), R7_R11_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[10]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[9]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[12]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[7]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R13</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R3_R13_r = scenario2_3(k_R3_R13, int_to_double(R13), int_to_double(R13Levels), true, int_to_double(R3), int_to_double(R3Levels), true);
+	double_t R23_R13_r = scenario1(k_R23_R13, int_to_double(R23), int_to_double(R23Levels), true);
+	double_t R13_R13_r = scenario1(k_R13_R13, int_to_double(R13), int_to_double(R13Levels), true);
+	if (R3_R13_r.b == 0 &amp;&amp; R3 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R3_R13 (note that R is actually R13), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R3_R13_r = scenario2_3(k_R3_R13, int_to_double(1), int_to_double(R13Levels), true, int_to_double(R3), int_to_double(R3Levels), true);
+	}
+	//R3_R13.T = _ANIMO_round(inverse(R3_R13_r));
+	//R23_R13.T = _ANIMO_round(inverse(R23_R13_r));
+	//R13_R13.T = _ANIMO_round(inverse(R13_R13_r));
+	return subtract(add(subtract(zero, R3_R13_r), R23_R13_r), R13_R13_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[12]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[3]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[22]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R14</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R14_R14_r = scenario1(k_R14_R14, int_to_double(R14), int_to_double(R14Levels), true);
+	double_t R24_R14_r = scenario1(k_R24_R14, int_to_double(R24), int_to_double(R24Levels), true);
+	//R14_R14.T = _ANIMO_round(inverse(R14_R14_r));
+	//R24_R14.T = _ANIMO_round(inverse(R24_R14_r));
+	return add(subtract(zero, R14_R14_r), R24_R14_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[13]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[23]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R15</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R19_R15_r = scenario1(k_R19_R15, int_to_double(R19), int_to_double(R19Levels), true);
+	double_t R12_R15_r = scenario1(k_R12_R15, int_to_double(R12), int_to_double(R12Levels), true);
+	//R19_R15.T = _ANIMO_round(inverse(R19_R15_r));
+	//R12_R15.T = _ANIMO_round(inverse(R12_R15_r));
+	return add(subtract(zero, R19_R15_r), R12_R15_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[14]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[18]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[11]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R16</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R12_R16_r = scenario1(k_R12_R16, int_to_double(R12), int_to_double(R12Levels), true);
+	double_t R0_R16_r = scenario1(k_R0_R16, int_to_double(R0), int_to_double(R0Levels), true);
+	//R12_R16.T = _ANIMO_round(inverse(R12_R16_r));
+	//R0_R16.T = _ANIMO_round(inverse(R0_R16_r));
+	return subtract(add(zero, R12_R16_r), R0_R16_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[15]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[11]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[0]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R17</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R1_R17_r = scenario1(k_R1_R17, int_to_double(R1), int_to_double(R1Levels), true);
+	double_t R12_R17_r = scenario1(k_R12_R17, int_to_double(R12), int_to_double(R12Levels), true);
+	//R1_R17.T = _ANIMO_round(inverse(R1_R17_r));
+	//R12_R17.T = _ANIMO_round(inverse(R12_R17_r));
+	return add(subtract(zero, R1_R17_r), R12_R17_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[16]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[1]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[11]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R18</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R18_R18_r = scenario1(k_R18_R18, int_to_double(R18), int_to_double(R18Levels), true);
+	double_t R14_R18_r = scenario1(k_R14_R18, int_to_double(R14), int_to_double(R14Levels), true);
+	double_t R9_R18_r = scenario1(k_R9_R18, int_to_double(R9), int_to_double(R9Levels), true);
+	//R18_R18.T = _ANIMO_round(inverse(R18_R18_r));
+	//R14_R18.T = _ANIMO_round(inverse(R14_R18_r));
+	//R9_R18.T = _ANIMO_round(inverse(R9_R18_r));
+	return add(subtract(subtract(zero, R18_R18_r), R14_R18_r), R9_R18_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[17]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[13]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[8]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R19</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R17_R19_r = scenario1(k_R17_R19, int_to_double(R17), int_to_double(R17Levels), true);
+	double_t R12_R19_r = scenario1(k_R12_R19, int_to_double(R12), int_to_double(R12Levels), true);
+	//R17_R19.T = _ANIMO_round(inverse(R17_R19_r));
+	//R12_R19.T = _ANIMO_round(inverse(R12_R19_r));
+	return subtract(add(zero, R17_R19_r), R12_R19_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[18]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[16]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[11]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R20</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R20_R20_r = scenario1(k_R20_R20, int_to_double(R20), int_to_double(R20Levels), true);
+	double_t R4_R20_r = scenario1(k_R4_R20, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R6_R20_r = scenario1(k_R6_R20, int_to_double(R6), int_to_double(R6Levels), true);
+	//R20_R20.T = _ANIMO_round(inverse(R20_R20_r));
+	//R4_R20.T = _ANIMO_round(inverse(R4_R20_r));
+	//R6_R20.T = _ANIMO_round(inverse(R6_R20_r));
+	return add(subtract(subtract(zero, R20_R20_r), R4_R20_r), R6_R20_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[19]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[4]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[6]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R21</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R4_R21_r = scenario1(k_R4_R21, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R21_R21_r = scenario1(k_R21_R21, int_to_double(R21), int_to_double(R21Levels), true);
+	double_t R6_R21_r = scenario1(k_R6_R21, int_to_double(R6), int_to_double(R6Levels), true);
+	//R4_R21.T = _ANIMO_round(inverse(R4_R21_r));
+	//R21_R21.T = _ANIMO_round(inverse(R21_R21_r));
+	//R6_R21.T = _ANIMO_round(inverse(R6_R21_r));
+	return add(subtract(subtract(zero, R4_R21_r), R21_R21_r), R6_R21_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[20]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[4]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[6]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R22</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R4_R22_r = scenario1(k_R4_R22, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R22_R22_r = scenario1(k_R22_R22, int_to_double(R22), int_to_double(R22Levels), true);
+	double_t R6_R22_r = scenario1(k_R6_R22, int_to_double(R6), int_to_double(R6Levels), true);
+	//R4_R22.T = _ANIMO_round(inverse(R4_R22_r));
+	//R22_R22.T = _ANIMO_round(inverse(R22_R22_r));
+	//R6_R22.T = _ANIMO_round(inverse(R6_R22_r));
+	return add(subtract(subtract(zero, R4_R22_r), R22_R22_r), R6_R22_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[21]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[4]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[6]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R23</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R4_R23_r = scenario1(k_R4_R23, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R6_R23_r = scenario1(k_R6_R23, int_to_double(R6), int_to_double(R6Levels), true);
+	double_t R23_R23_r = scenario1(k_R23_R23, int_to_double(R23), int_to_double(R23Levels), true);
+	//R4_R23.T = _ANIMO_round(inverse(R4_R23_r));
+	//R6_R23.T = _ANIMO_round(inverse(R6_R23_r));
+	//R23_R23.T = _ANIMO_round(inverse(R23_R23_r));
+	return subtract(add(subtract(zero, R4_R23_r), R6_R23_r), R23_R23_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[22]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[4]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[6]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R24</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R4_R24_r = scenario1(k_R4_R24, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R6_R24_r = scenario1(k_R6_R24, int_to_double(R6), int_to_double(R6Levels), true);
+	double_t R24_R24_r = scenario1(k_R24_R24, int_to_double(R24), int_to_double(R24Levels), true);
+	//R4_R24.T = _ANIMO_round(inverse(R4_R24_r));
+	//R6_R24.T = _ANIMO_round(inverse(R6_R24_r));
+	//R24_R24.T = _ANIMO_round(inverse(R24_R24_r));
+	return subtract(add(subtract(zero, R4_R24_r), R6_R24_r), R24_R24_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[23]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[4]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[6]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+R0_ = Reactant_R0(R0, 100);
+R1_ = Reactant_R1(R1, 100);
+R2_ = Reactant_R2(R2, 100);
+R3_ = Reactant_R3(R3, 100);
+R4_ = Reactant_R4(R4, 100);
+R6_ = Reactant_R6(R6, 100);
+R9_ = Reactant_R9(R9, 100);
+R10_ = Reactant_R10(R10, 100);
+R11_ = Reactant_R11(R11, 100);
+R13_ = Reactant_R13(R13, 100);
+R14_ = Reactant_R14(R14, 100);
+R15_ = Reactant_R15(R15, 100);
+R16_ = Reactant_R16(R16, 100);
+R17_ = Reactant_R17(R17, 100);
+R18_ = Reactant_R18(R18, 100);
+R19_ = Reactant_R19(R19, 100);
+R20_ = Reactant_R20(R20, 100);
+R21_ = Reactant_R21(R21, 100);
+R22_ = Reactant_R22(R22, 100);
+R23_ = Reactant_R23(R23, 100);
+R24_ = Reactant_R24(R24, 100);
+
+
+
+system R0_, R1_, R2_, R3_, R4_, R6_, R9_, R10_, R11_, R13_, R14_, R15_, R16_, R17_, R18_, R19_, R20_, R21_, R22_, R23_, R24_;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=1919603] { R21, R20, R23, R22, R24, R0, R1, R2, R3, R4, R5, R6, R7, R9, R10, R12, R11, R14, R13, R16, R15, R18, R17, R19, R4_R23.T, R4_R24.T, R6_R6.T, R4_R21.T, R20_R20.T, R4_R22.T, R2_R2.T, R4_R20.T, R10_R10.T, R21_R21.T, R1_R17.T, R22_R22.T, R18_R2.T, R19_R15.T, R11_R11.T, R9_R9.T, R11_R6.T, R18_R18.T, R2_R5_R6.T, R22_R10.T, R17_R19.T, R19_R3.T, R15_R0.T, R3_R13.T, R4_R4.T, R23_R13.T, R14_R18.T, R14_R14.T, R21_R9.T, R24_R14.T, R12_R0.T, R10_R13_R11.T, R12_R1.T, R9_R18.T, R5_R6.T, R16_R1.T, R12_R16.T, R12_R15.T, R3_R3.T, R6_R21.T, R12_R17.T, R6_R22.T, R12_R19.T, R6_R20.T, R0_R16.T, R6_R23.T, R6_R24.T, R23_R23.T, R13_R11.T, R24_R24.T, R20_R4.T, R7_R11.T, R13_R13.T }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

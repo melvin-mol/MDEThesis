@@ -1,0 +1,1300 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+const int INFINITE_TIME = -1;
+const int INF = INFINITE_TIME;
+const int N_REACTANTS = 5;
+broadcast chan reached[N_REACTANTS];
+broadcast chan reaching, do_update;
+
+
+typedef struct {
+	int[-99980001, 99980001] b;
+	int e;
+} double_t;
+
+const double_t zero = {0, 0};
+const double_t INFINITE_TIME_DOUBLE = {-1000, -3}; //INFINITE_TIME (-1) translated into double
+//R0 = A
+int R0 := 100;
+const int R0Levels := 100;
+const double_t R0Levels_d := {1000, -1};
+
+//R1 = B
+int R1 := 0;
+const int R1Levels := 100;
+const double_t R1Levels_d := {1000, -1};
+
+//R2 = C
+int R2 := 0;
+const int R2Levels := 100;
+const double_t R2Levels_d := {1000, -1};
+
+//R3 = D
+int R3 := 0;
+const int R3Levels := 100;
+const double_t R3Levels_d := {1000, -1};
+
+//R4 = E
+int R4 := 1;
+const int R4Levels := 1;
+const double_t R4Levels_d := {1000, -3};
+
+
+typedef int[-1, 1073741822] time_t;
+typedef int[-1073741822, 1073741822] int_t;
+
+typedef struct {
+	time_t T;
+} timeActivity;
+
+//Reaction R4 (E) --| R3 (D)
+timeActivity R4_R3;
+const double_t k_R4_R3 = {6250, -10};
+
+//Reaction R2 (C) --| R1 (B)
+timeActivity R2_R1;
+const double_t k_R2_R1 = {1000, -8};
+
+//Reaction R0 (A) --&gt; R1 (B)
+timeActivity R0_R1;
+const double_t k_R0_R1 = {2500, -11};
+
+//Reaction R1 (B) --&gt; R3 (D)
+timeActivity R1_R3;
+const double_t k_R1_R3 = {5000, -11};
+
+//Reaction R1 (B) --&gt; R2 (C)
+timeActivity R1_R2;
+const double_t k_R1_R2 = {2500, -11};
+
+
+
+double_t subtract(double_t a, double_t b) { // a - b
+	double_t r = {-1000, -1000};
+	if (a.b == 0) {
+		r.b = -b.b;
+		r.e = b.e;
+		return r;
+	}
+	if (b.b == 0) {
+		return a;
+	}
+	if ((a.e - b.e) &gt;= 4) return a;
+	if ((b.e - a.e) &gt;= 4) {
+		r.b = -b.b;
+		r.e = b.e;
+		return r;
+	}
+	if (a.e == b.e) {
+		r.b = a.b - b.b;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 1) {
+		r.b = a.b - b.b/10;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 2) {
+		r.b = a.b - b.b/100;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 3) {
+		r.b = a.b - b.b/1000;
+		r.e = a.e;
+	}
+	if (b.e - a.e == 1) {
+		r.b = a.b/10 - b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 2) {
+		r.b = a.b/100 - b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 3) {
+		r.b = a.b/1000 - b.b;
+		r.e = b.e;
+	}
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	} else if (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t add(double_t a, double_t b) { // a + b
+	double_t r = {-1000,-1000};
+	if (a.b == 0) {
+		return b;
+	}
+	if (b.b == 0) {
+		return a;
+	}
+	if ((a.e - b.e) &gt;= 4) return a;
+	if ((b.e - a.e) &gt;= 4) return b;
+	if (a.e == b.e) {
+		r.b = a.b + b.b;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 1) {
+		r.b = a.b + b.b/10;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 2) {
+		r.b = a.b + b.b/100;
+		r.e = a.e;
+	}
+	if (a.e - b.e == 3) {
+		r.b = a.b + b.b/1000;
+		r.e = a.e;
+	}
+	if (b.e - a.e == 1) {
+		r.b = a.b/10 + b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 2) {
+		r.b = a.b/100 + b.b;
+		r.e = b.e;
+	}
+	if (b.e - a.e == 3) {
+		r.b = a.b/1000 + b.b;
+		r.e = b.e;
+	}
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	} else if (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t multiply(double_t a, double_t b) { // a * b
+	double_t r;
+	r.b = a.b * b.b;
+	if (r.b % 1000 &lt; 500) {
+		r.b = r.b / 1000;
+	} else {
+		r.b = 1 + r.b / 1000;
+	}
+	r.e = a.e + b.e + 3;
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	}
+	while (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t divide(double_t a, double_t b) { //a / b
+	double_t r;
+	if (b.b == 0) {
+		return INFINITE_TIME_DOUBLE;
+	}
+	r.b = a.b * 1000 / b.b;
+	r.e = a.e - b.e - 3;
+	if (r.b == 0) {
+		return r;
+	}
+	while (r.b &lt; 9999 &amp;&amp; r.b &gt; -9999) {
+		r.b = r.b * 10;
+		r.e = r.e -1;
+	}
+	while (r.b &gt; 9999 || r.b &lt; -9999) {
+		r.b = r.b / 10;
+		r.e = r.e + 1;
+	}
+	return r;
+}
+
+double_t inverse(double_t a) { // 1 / a
+	double_t r;
+	if (a.b == 0) {
+		return INFINITE_TIME_DOUBLE;
+	}
+	if (a.e &lt; -12) { // 1 / 1e-9 is still ok, but 1 / 1e-10 is too large (&gt; 2^30 - 2, the largest allowed constant for guards/invariants)
+		r.b = 1073;
+		r.e = 6;
+		return r;
+	}
+	r.b = 10000000 / a.b;
+	r.e = -7 - a.e;
+	if ((r.b &gt; 0 &amp;&amp; r.b &lt; 10) || (r.b &lt; 0 &amp;&amp; r.b &gt; -10)) {
+		r.b = r.b * 1000;
+		r.e = r.e - 3;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 100) || (r.b &lt; 0 &amp;&amp; r.b &gt; -100)) {
+		r.b = r.b * 100;
+		r.e = r.e - 2;
+	} else if ((r.b &gt; 0 &amp;&amp; r.b &lt; 1000) || (r.b &lt; 0 &amp;&amp; r.b &gt; -1000)) {
+		r.b = r.b * 10;
+		r.e = r.e - 1;
+	}
+	return r;
+}
+
+time_t power(int a, int b) { // a ^ b (b &gt;= 0)
+	time_t r = 1;
+	while (b &gt; 0) {
+		r = r * a;
+		b = b - 1;
+	}
+	return r;
+}
+
+int_t _ANIMO_round(double_t a) { // double --&gt; integer
+	if (a == INFINITE_TIME_DOUBLE) { // Don't need to translate literally if we have infinite
+		return INFINITE_TIME;
+	}
+	if (a.b &gt;= 1073 &amp;&amp; a.e &gt;= 6) { // If the number is too large, we consider it to be infinite
+		return INFINITE_TIME;
+	}
+	if (a.e &lt; -4) {
+		return 0;
+	}
+	if (a.e == -1) {
+		if (a.b % 10 &lt; 5) {
+			return a.b / 10;
+		} else {
+			return 1 + a.b / 10;
+		}
+	}
+	if (a.e == -2) {
+		if (a.b % 100 &lt; 50) {
+			return a.b / 100;
+		} else {
+			return 1 + a.b / 100;
+		}
+	}
+	if (a.e == -3) {
+		if (a.b % 1000 &lt; 500) {
+			return a.b / 1000;
+		} else {
+			return 1 + a.b / 1000;
+		}
+	}
+	if (a.e == -4) {
+		if (a.b &lt; 5000) return 0;
+		else return 1;
+	}
+	return a.b * power(10, a.e);
+}
+
+double_t scenario1(double_t k, double_t r1, double_t r1Levels, bool r1Active) {
+	double_t E;
+	if (r1Active) { //If we depend on active R1, the level of activity is the value of E
+		E = r1;
+	} else { //otherwise we find the inactivity level via the total number of levels
+		E = subtract(r1Levels, r1);
+	}
+	return multiply(k, E);
+}
+
+
+double_t scenario2_3(double_t k, double_t r2, double_t r2Levels, bool r2Active, double_t r1, double_t r1Levels, bool r1Active) {
+	double_t E, S;
+	if (r1Active) { //If we depend on active R1, the level of activity is the value of E
+		E = r1;
+	} else { //otherwise we find the inactivity level via the total number of levels
+		E = subtract(r1Levels, r1);
+	}
+	if (r2Active) { //Same for R2
+		S = r2;
+	} else {
+		S = subtract(r2Levels, r2);
+	}
+	return multiply(k, multiply(E, S));
+}
+
+
+double_t int_to_double(int_t a) { //Used to translate an activity level into double.
+	double_t r;
+	bool neg = false;
+	if (a &lt; 0) {
+		a = -a;
+		neg = true;
+	}
+	if (a &lt; 10) {
+		r.b = a * 1000;
+		r.e = -3;
+	} else if (a &lt; 100) {
+		r.b = a * 100;
+		r.e = -2;
+	} else if (a &lt; 1000) {
+		r.b = a * 10;
+		r.e = -1;
+	} else if (a &lt; 10000) { //Our model supports up to 100 levels, so this should be the most it makes sense to check
+		r.b = a;
+		r.e = 0;
+	} else {
+		r.e = 0;
+		while (a &gt; 9999) {
+			a = a / 10;
+			r.e++;
+		}
+		r.b = a;
+	}
+	if (neg) {
+		r.b = -r.b;
+	}
+	return r;
+}
+
+
+</declaration>
+  
+  <template>
+      
+    <name>Reactant_R1</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R2_R1_r = scenario1(k_R2_R1, int_to_double(R2), int_to_double(R2Levels), true);
+	double_t R0_R1_r = scenario2_3(k_R0_R1, int_to_double(R1), int_to_double(R1Levels), false, int_to_double(R0), int_to_double(R0Levels), true);
+	if (R0_R1_r.b == 0 &amp;&amp; R0 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R0_R1 (note that R is actually R1), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R0_R1_r = scenario2_3(k_R0_R1, int_to_double(R1Levels - 1), int_to_double(R1Levels), false, int_to_double(R0), int_to_double(R0Levels), true);
+	}
+	//R2_R1.T = _ANIMO_round(inverse(R2_R1_r));
+	//R0_R1.T = _ANIMO_round(inverse(R0_R1_r));
+	return add(subtract(zero, R2_R1_r), R0_R1_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[1]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[2]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[0]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R2</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R1_R2_r = scenario2_3(k_R1_R2, int_to_double(R2), int_to_double(R2Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	if (R1_R2_r.b == 0 &amp;&amp; R1 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R1_R2 (note that R is actually R2), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R1_R2_r = scenario2_3(k_R1_R2, int_to_double(R2Levels - 1), int_to_double(R2Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	}
+	//R1_R2.T = _ANIMO_round(inverse(R1_R2_r));
+	return R1_R2_r;
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[2]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[1]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <template>
+      
+    <name>Reactant_R3</name>
+      
+    <parameter>int&amp; R, const int MAX</parameter>
+      
+    <declaration>int[-1, 1] delta = 0;
+time_t TL, TU;
+clock c;
+double_t totalRate = INFINITE_TIME_DOUBLE, oldRate = INFINITE_TIME_DOUBLE;
+
+
+double_t compute_rate() {
+	double_t R4_R3_r = scenario2_3(k_R4_R3, int_to_double(R3), int_to_double(R3Levels), true, int_to_double(R4), int_to_double(R4Levels), true);
+	double_t R1_R3_r = scenario2_3(k_R1_R3, int_to_double(R3), int_to_double(R3Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	if (R4_R3_r.b == 0 &amp;&amp; R4 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R4_R3 (note that R is actually R3), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R4_R3_r = scenario2_3(k_R4_R3, int_to_double(1), int_to_double(R3Levels), true, int_to_double(R4), int_to_double(R4Levels), true);
+	}
+	if (R1_R3_r.b == 0 &amp;&amp; R1 &gt; 0) { //If the downstream reactant (R) is the only reason for the inactivity of the reaction R1_R3 (note that R is actually R3), consider the reaction as still available (recomputing the rate as the one closest to the current situation), to avoid significant errors in performing the next update to R. We want to avoid considering any other reaction active on R as the only one possible during the whole next delta increment to R.
+		//Using the following rate is not very precise, but makes for a much more precise total rate than we would get if considering the reaction as inactive (especially with low levels of granularity for R, i.e. small values of MAX)
+		R1_R3_r = scenario2_3(k_R1_R3, int_to_double(R3Levels - 1), int_to_double(R3Levels), false, int_to_double(R1), int_to_double(R1Levels), true);
+	}
+	//R4_R3.T = _ANIMO_round(inverse(R4_R3_r));
+	//R1_R3.T = _ANIMO_round(inverse(R1_R3_r));
+	return add(subtract(zero, R4_R3_r), R1_R3_r);
+}
+
+void update() {
+	oldRate = totalRate;
+	totalRate = compute_rate();
+	if (totalRate.b &lt; 0) {
+		delta = -1;
+		totalRate.b = -totalRate.b;
+	} else {
+		delta = 1;
+	}
+	if (totalRate.b != 0) {
+		TL = _ANIMO_round(inverse(totalRate));
+		TU = TL;
+		if (TL &lt; 1) TL = 1; // Ensure that the minimal duration for a reaction is 1 t.u., otherwise the model will behave nondeterministically
+		if (TU &lt; 1) TU = 1;
+	} else {
+		TL = INFINITE_TIME;
+		TU = INFINITE_TIME;
+	}
+	if (TL != INFINITE_TIME &amp;&amp; TL &gt; TU) { //We use rounded things: maybe the difference between TL and TU was not so large, and with some rounding problems we could have this case
+		TL = TU;
+	}
+	if ((delta &gt;= 0 &amp;&amp; R == MAX) || (delta &lt; 0 &amp;&amp; R == 0)) {
+		TL = TU = INFINITE_TIME;
+	}
+}
+
+void reach() {
+	if (-MAX &lt;= R + delta &amp;&amp; R + delta &lt;= MAX) {
+		R = R + delta;
+	}
+}
+
+void make_urgent() {
+	c = 0;
+	TU = 0;
+	TL = 0;
+}
+
+bool rate_significantly_changed(double_t oldRate, double_t newRate) { //True if the new rate is at least double the old one, or if the sign of the rates is different (the reaction changes direction. Note that no change of direction will be detected if we are at MAX or 0, or we were constant until now)
+	if ((oldRate.b &lt; 0 &amp;&amp; newRate.b &gt; 0 || oldRate.b &gt; 0 &amp;&amp; newRate.b &lt; 0) &amp;&amp; (R &lt; MAX &amp;&amp; R &gt; 0)) {
+		return true;
+	}
+	return false;
+}
+
+void decide_reset() {
+	if (rate_significantly_changed(oldRate, totalRate)) { //If the updated conditions have significantly changed the rate, restart the reaction from the beginning, without considering the work already done.
+		c = 0;
+	}
+}
+
+bool infinite_delay() {
+	return TU == INFINITE_TIME;
+}
+
+</declaration>
+      
+    <location id="id0" x="-1560" y="-810">
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id3" x="-1853" y="-612">
+           
+    
+      <name x="-1870" y="-603">responding</name>
+           
+    
+      <urgent/>
+        
+    </location>
+      
+    <location id="id5" x="-1453" y="-731">
+           
+    
+      <name x="-1445" y="-755">start</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id7" x="-1666" y="-612">
+           
+    
+      <name x="-1683" y="-603">updating</name>
+           
+    
+      <committed/>
+        
+    </location>
+      
+    <location id="id8" x="-1666" y="-731">
+           
+    
+      <name x="-1730" y="-747">waiting</name>
+           
+    
+      <label kind="invariant" x="-1730" y="-719">c &lt;= TU
+|| infinite_delay()</label>
+        
+    </location>
+      
+    <init ref="id5"/>
+      
+    <transition>
+           
+    
+      <source ref="id3"/>
+           
+    
+      <target ref="id7"/>
+           
+    
+      <label kind="assignment" x="-1793" y="-629">update(),
+decide_reset()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id5"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="assignment" x="-1538" y="-748">update()</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1657" y="-671">infinite_delay()
+|| c &lt;= TU</label>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id7"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="guard" x="-1547" y="-671">!infinite_delay()
+&amp;&amp; c &gt; TU</label>
+           
+    
+      <label kind="assignment" x="-1547" y="-637">make_urgent()</label>
+           
+    
+      <nail x="-1555" y="-612"/>
+           
+    
+      <nail x="-1555" y="-705"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching!</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id0"/>
+           
+    
+      <label kind="guard" x="-1690" y="-861">!infinite_delay() &amp;&amp;
+c &gt;= TL</label>
+           
+    
+      <label kind="synchronisation" x="-1690" y="-827">reaching?</label>
+           
+    
+      <label kind="assignment" x="-1690" y="-810">reach(), c = 0</label>
+           
+    
+      <nail x="-1666" y="-810"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id0"/>
+           
+    
+      <target ref="id8"/>
+           
+    
+      <label kind="synchronisation" x="-1544" y="-827">reached[3]!</label>
+           
+    
+      <label kind="assignment" x="-1544" y="-810">update()</label>
+           
+    
+      <nail x="-1453" y="-810"/>
+           
+    
+      <nail x="-1453" y="-773"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[4]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+      
+    <transition>
+           
+    
+      <source ref="id8"/>
+           
+    
+      <target ref="id3"/>
+           
+    
+      <label kind="synchronisation" x="-1853" y="-748">reached[1]?</label>
+           
+    
+      <label kind="guard" x="-1853" y="-782">c &gt; 0 &amp;&amp;
+(infinite_delay() || c &lt; TL)</label>
+           
+    
+      <nail x="-1751" y="-731"/>
+           
+    
+      <nail x="-1853" y="-731"/>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+R1_ = Reactant_R1(R1, 100);
+R2_ = Reactant_R2(R2, 100);
+R3_ = Reactant_R3(R3, 100);
+
+
+
+system R1_, R2_, R3_;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=23040000] { R2, R3, R4, R0, R1, R4_R3.T, R2_R1.T, R0_R1.T, R1_R3.T, R1_R2.T }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

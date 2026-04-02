@@ -1,0 +1,778 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+
+//R0 = A
+clock R0;
+const int R0Init = 2;
+const int R0Levels = 100;
+
+//R1 = B
+clock R1;
+const int R1Init = 0;
+const int R1Levels = 100;
+
+//R2 = CLK
+clock R2;
+const int R2Init = 9;
+const int R2Levels = 100;
+
+//R3 = CRY
+clock R3;
+const int R3Init = 39;
+const int R3Levels = 100;
+
+//R4 = CWO
+clock R4;
+const int R4Init = 6;
+const int R4Levels = 100;
+
+//R5 = CYC
+clock R5;
+const int R5Init = 100;
+const int R5Levels = 100;
+
+//R6 = CYC/CLK
+clock R6;
+const int R6Init = 17;
+const int R6Levels = 100;
+
+//R7 = DBT
+clock R7;
+const int R7Init = 100;
+const int R7Levels = 100;
+
+//R9 = PDP1
+clock R9;
+const int R9Init = 85;
+const int R9Levels = 100;
+
+//R10 = PER
+clock R10;
+const int R10Init = 19;
+const int R10Levels = 100;
+
+//R11 = PER/TIM-p
+clock R11;
+const int R11Init = 27;
+const int R11Levels = 100;
+
+//R12 = S
+clock R12;
+const int R12Init = 100;
+const int R12Levels = 100;
+
+//R13 = TIM
+clock R13;
+const int R13Init = 13;
+const int R13Levels = 100;
+
+//R14 = VRI
+clock R14;
+const int R14Init = 62;
+const int R14Levels = 100;
+
+//R15 = a
+clock R15;
+const int R15Init = 0;
+const int R15Levels = 100;
+
+//R16 = b
+clock R16;
+const int R16Init = 12;
+const int R16Levels = 100;
+
+//R17 = c
+clock R17;
+const int R17Init = 100;
+const int R17Levels = 100;
+
+//R18 = clk
+clock R18;
+const int R18Init = 13;
+const int R18Levels = 100;
+
+//R19 = cry
+clock R19;
+const int R19Init = 100;
+const int R19Levels = 100;
+
+//R20 = cwo
+clock R20;
+const int R20Init = 7;
+const int R20Levels = 100;
+
+//R21 = pdp1
+clock R21;
+const int R21Init = 34;
+const int R21Levels = 100;
+
+//R22 = per
+clock R22;
+const int R22Init = 13;
+const int R22Levels = 100;
+
+//R23 = tim
+clock R23;
+const int R23Init = 25;
+const int R23Levels = 100;
+
+//R24 = vri
+clock R24;
+const int R24Init = 15;
+const int R24Levels = 100;
+
+//Reaction R4 (CWO) --| R23 (tim)
+const double k_R4_R23 = 0.02723437484393786;
+
+//Reaction R4 (CWO) --| R24 (vri)
+const double k_R4_R24 = 0.03268124981272543;
+
+//Reaction R6 (CYC/CLK) --| R6 (CYC/CLK)
+const double k_R6_R6 = 0.0035934244585751345;
+
+//Reaction R4 (CWO) --| R21 (pdp1)
+const double k_R4_R21 = 0.05228999970036069;
+
+//Reaction R20 (cwo) --| R20 (cwo)
+const double k_R20_R20 = 0.04728190077072545;
+
+//Reaction R4 (CWO) --| R22 (per)
+const double k_R4_R22 = 0.06808593710984465;
+
+//Reaction R2 (CLK) --| R2 (CLK)
+const double k_R2_R2 = 0.05825130174953377;
+
+//Reaction R4 (CWO) --| R20 (cwo)
+const double k_R4_R20 = 0.028868437334574133;
+
+//Reaction R10 (PER) --| R10 (PER)
+const double k_R10_R10 = 0.009456380154145091;
+
+//Reaction R21 (pdp1) --| R21 (pdp1)
+const double k_R21_R21 = 0.009006076337281036;
+
+//Reaction R1 (B) --| R17 (c)
+const double k_R1_R17 = 0.1288211353095487;
+
+//Reaction R22 (per) --| R22 (per)
+const double k_R22_R22 = 0.028369140462435265;
+
+//Reaction R18 (clk) --&gt; R2 (CLK)
+const double k_R18_R2 = 0.062412109017357595;
+
+//Reaction R19 (cry) --| R15 (a)
+const double k_R19_R15 = 0.1288211353095487;
+
+//Reaction R11 (PER/TIM-p) --| R11 (PER/TIM-p)
+const double k_R11_R11 = 0.037825520616580365;
+
+//Reaction R9 (PDP1) --| R9 (PDP1)
+const double k_R9_R9 = 0.026117621378115016;
+
+//Reaction R11 (PER/TIM-p) --| R6 (CYC/CLK)
+const double k_R11_R6 = 0.006052083298652858;
+
+//Reaction R18 (clk) --| R18 (clk)
+const double k_R18_R18 = 0.0017435763788976094;
+
+//Reaction R2 (CLK) AND R5 (CYC) --&gt; R6 (CYC/CLK)
+const double k_R2_R5_R6 = 0.003962673588403658;
+
+//Reaction R22 (per) --&gt; R10 (PER)
+const double k_R22_R10 = 0.014184570231217632;
+
+//Reaction R17 (c) --&gt; R19 (cry)
+const double k_R17_R19 = 0.23342236593018179;
+
+//Reaction R19 (cry) --&gt; R3 (CRY)
+const double k_R19_R3 = 1.8673789274414543E-4;
+
+//Reaction R15 (a) --&gt; R0 (A)
+const double k_R15_R0 = 0.23342236593018179;
+
+//Reaction R3 (CRY) --| R13 (TIM)
+const double k_R3_R13 = 0.004;
+
+//Reaction R4 (CWO) --| R4 (CWO)
+const double k_R4_R4 = 0.04728190077072545;
+
+//Reaction R23 (tim) --&gt; R13 (TIM)
+const double k_R23_R13 = 0.10591145772642502;
+
+//Reaction R14 (VRI) --| R18 (clk)
+const double k_R14_R18 = 0.02972005191302743;
+
+//Reaction R14 (VRI) --| R14 (VRI)
+const double k_R14_R14 = 0.012293294200388617;
+
+//Reaction R21 (pdp1) --&gt; R9 (PDP1)
+const double k_R21_R9 = 0.07204861069824829;
+
+//Reaction R24 (vri) --&gt; R14 (VRI)
+const double k_R24_R14 = 0.04917317680155447;
+
+//Reaction R12 (S) --| R0 (A)
+const double k_R12_R0 = 0.02334223659301817;
+
+//Reaction R10 (PER) AND R13 (TIM) --&gt; R11 (PER/TIM-p)
+const double k_R10_R13_R11 = 0.00225151908432026;
+
+//Reaction R12 (S) --| R1 (B)
+const double k_R12_R1 = 0.02334223659301817;
+
+//Reaction R9 (PDP1) --&gt; R18 (clk)
+const double k_R9_R18 = 0.026005045423899004;
+
+//Reaction R5 (CYC) --&gt; R6 (CYC/CLK)
+const double k_R5_R6 = 0.0;
+
+//Reaction R16 (b) --&gt; R1 (B)
+const double k_R16_R1 = 0.23342236593018179;
+
+//Reaction R12 (S) --&gt; R16 (b)
+const double k_R12_R16 = 0.029177795741272723;
+
+//Reaction R12 (S) --&gt; R15 (a)
+const double k_R12_R15 = 0.029177795741272723;
+
+//Reaction R3 (CRY) --| R3 (CRY)
+const double k_R3_R3 = 7.454926771046265E-4;
+
+//Reaction R6 (CYC/CLK) --&gt; R21 (pdp1)
+const double k_R6_R21 = 0.06736545100286218;
+
+//Reaction R12 (S) --&gt; R17 (c)
+const double k_R12_R17 = 0.029177795741272723;
+
+//Reaction R6 (CYC/CLK) --&gt; R22 (per)
+const double k_R6_R22 = 0.0832161453564768;
+
+//Reaction R12 (S) --| R19 (cry)
+const double k_R12_R19 = 0.02334223659301817;
+
+//Reaction R6 (CYC/CLK) --&gt; R20 (cwo)
+const double k_R6_R20 = 0.045768879946062234;
+
+//Reaction R0 (A) --| R16 (b)
+const double k_R0_R16 = 0.1288211353095487;
+
+//Reaction R6 (CYC/CLK) --&gt; R23 (tim)
+const double k_R6_R23 = 0.0416080726782384;
+
+//Reaction R6 (CYC/CLK) --&gt; R24 (vri)
+const double k_R6_R24 = 0.06439344581155945;
+
+//Reaction R23 (tim) --| R23 (tim)
+const double k_R23_R23 = 0.009456380154145091;
+
+//Reaction R13 (TIM) --&gt; R11 (PER/TIM-p)
+const double k_R13_R11 = 0.0;
+
+//Reaction R24 (vri) --| R24 (vri)
+const double k_R24_R24 = 0.024586588400777234;
+
+//Reaction R20 (cwo) --&gt; R4 (CWO)
+const double k_R20_R4 = 0.07092285115608817;
+
+//Reaction R7 (DBT) --&gt; R11 (PER/TIM-p)
+const double k_R7_R11 = 0.001891276030829018;
+
+//Reaction R13 (TIM) --| R13 (TIM)
+const double k_R13_R13 = 0.05295572886321251;
+
+</declaration>
+  
+  <template>
+      
+    <name x="5" y="5">ODE_Model</name>
+      
+    <declaration>double rateR0() {
+	double R15_R0_r = k_R15_R0 * R15;
+	double R12_R0_r = k_R12_R0 * R12;
+	return R15_R0_r - R12_R0_r;
+}
+
+double boundedRateR0() {
+	double r = rateR0();
+	if (R0 + r &gt; R0Levels) {
+		return R0Levels - R0;
+	} else if (R0 + r &lt; 0) {
+		return -R0;
+	}
+	return r;
+}
+
+double rateR1() {
+	double R12_R1_r = k_R12_R1 * R12;
+	double R16_R1_r = k_R16_R1 * R16;
+	return  - R12_R1_r + R16_R1_r;
+}
+
+double boundedRateR1() {
+	double r = rateR1();
+	if (R1 + r &gt; R1Levels) {
+		return R1Levels - R1;
+	} else if (R1 + r &lt; 0) {
+		return -R1;
+	}
+	return r;
+}
+
+double rateR2() {
+	double R2_R2_r = k_R2_R2 * R2;
+	double R18_R2_r = k_R18_R2 * R18;
+	return  - R2_R2_r + R18_R2_r;
+}
+
+double boundedRateR2() {
+	double r = rateR2();
+	if (R2 + r &gt; R2Levels) {
+		return R2Levels - R2;
+	} else if (R2 + r &lt; 0) {
+		return -R2;
+	}
+	return r;
+}
+
+double rateR3() {
+	double R19_R3_r = k_R19_R3 * (R3Levels - R3) * R19;
+	double R3_R3_r = k_R3_R3 * R3 * R3;
+	return R19_R3_r - R3_R3_r;
+}
+
+double boundedRateR3() {
+	double r = rateR3();
+	if (R3 + r &gt; R3Levels) {
+		return R3Levels - R3;
+	} else if (R3 + r &lt; 0) {
+		return -R3;
+	}
+	return r;
+}
+
+double rateR4() {
+	double R4_R4_r = k_R4_R4 * R4;
+	double R20_R4_r = k_R20_R4 * R20;
+	return  - R4_R4_r + R20_R4_r;
+}
+
+double boundedRateR4() {
+	double r = rateR4();
+	if (R4 + r &gt; R4Levels) {
+		return R4Levels - R4;
+	} else if (R4 + r &lt; 0) {
+		return -R4;
+	}
+	return r;
+}
+
+double rateR5() {
+	return 0;
+}
+
+double boundedRateR5() {
+	return 0;
+}
+
+double rateR6() {
+	double R6_R6_r = k_R6_R6 * R6;
+	double R11_R6_r = k_R11_R6 * R6 * R11;
+	double R2_R5_R6_r = k_R2_R5_R6 * R5 * R2;
+	double R5_R6_r = k_R5_R6 * R5;
+	return  - R6_R6_r - R11_R6_r + R2_R5_R6_r + R5_R6_r;
+}
+
+double boundedRateR6() {
+	double r = rateR6();
+	if (R6 + r &gt; R6Levels) {
+		return R6Levels - R6;
+	} else if (R6 + r &lt; 0) {
+		return -R6;
+	}
+	return r;
+}
+
+double rateR7() {
+	return 0;
+}
+
+double boundedRateR7() {
+	return 0;
+}
+
+double rateR9() {
+	double R9_R9_r = k_R9_R9 * R9;
+	double R21_R9_r = k_R21_R9 * R21;
+	return  - R9_R9_r + R21_R9_r;
+}
+
+double boundedRateR9() {
+	double r = rateR9();
+	if (R9 + r &gt; R9Levels) {
+		return R9Levels - R9;
+	} else if (R9 + r &lt; 0) {
+		return -R9;
+	}
+	return r;
+}
+
+double rateR10() {
+	double R10_R10_r = k_R10_R10 * R10;
+	double R22_R10_r = k_R22_R10 * R22;
+	return  - R10_R10_r + R22_R10_r;
+}
+
+double boundedRateR10() {
+	double r = rateR10();
+	if (R10 + r &gt; R10Levels) {
+		return R10Levels - R10;
+	} else if (R10 + r &lt; 0) {
+		return -R10;
+	}
+	return r;
+}
+
+double rateR11() {
+	double R11_R11_r = k_R11_R11 * R11;
+	double R10_R13_R11_r = k_R10_R13_R11 * R13 * R10;
+	double R13_R11_r = k_R13_R11 * R13;
+	double R7_R11_r = k_R7_R11 * R7;
+	return  - R11_R11_r + R10_R13_R11_r + R13_R11_r + R7_R11_r;
+}
+
+double boundedRateR11() {
+	double r = rateR11();
+	if (R11 + r &gt; R11Levels) {
+		return R11Levels - R11;
+	} else if (R11 + r &lt; 0) {
+		return -R11;
+	}
+	return r;
+}
+
+double rateR12() {
+	return 0;
+}
+
+double boundedRateR12() {
+	return 0;
+}
+
+double rateR13() {
+	double R3_R13_r = k_R3_R13 * R13 * R3;
+	double R23_R13_r = k_R23_R13 * R23;
+	double R13_R13_r = k_R13_R13 * R13;
+	return  - R3_R13_r + R23_R13_r - R13_R13_r;
+}
+
+double boundedRateR13() {
+	double r = rateR13();
+	if (R13 + r &gt; R13Levels) {
+		return R13Levels - R13;
+	} else if (R13 + r &lt; 0) {
+		return -R13;
+	}
+	return r;
+}
+
+double rateR14() {
+	double R14_R14_r = k_R14_R14 * R14;
+	double R24_R14_r = k_R24_R14 * R24;
+	return  - R14_R14_r + R24_R14_r;
+}
+
+double boundedRateR14() {
+	double r = rateR14();
+	if (R14 + r &gt; R14Levels) {
+		return R14Levels - R14;
+	} else if (R14 + r &lt; 0) {
+		return -R14;
+	}
+	return r;
+}
+
+double rateR15() {
+	double R19_R15_r = k_R19_R15 * R19;
+	double R12_R15_r = k_R12_R15 * R12;
+	return  - R19_R15_r + R12_R15_r;
+}
+
+double boundedRateR15() {
+	double r = rateR15();
+	if (R15 + r &gt; R15Levels) {
+		return R15Levels - R15;
+	} else if (R15 + r &lt; 0) {
+		return -R15;
+	}
+	return r;
+}
+
+double rateR16() {
+	double R12_R16_r = k_R12_R16 * R12;
+	double R0_R16_r = k_R0_R16 * R0;
+	return R12_R16_r - R0_R16_r;
+}
+
+double boundedRateR16() {
+	double r = rateR16();
+	if (R16 + r &gt; R16Levels) {
+		return R16Levels - R16;
+	} else if (R16 + r &lt; 0) {
+		return -R16;
+	}
+	return r;
+}
+
+double rateR17() {
+	double R1_R17_r = k_R1_R17 * R1;
+	double R12_R17_r = k_R12_R17 * R12;
+	return  - R1_R17_r + R12_R17_r;
+}
+
+double boundedRateR17() {
+	double r = rateR17();
+	if (R17 + r &gt; R17Levels) {
+		return R17Levels - R17;
+	} else if (R17 + r &lt; 0) {
+		return -R17;
+	}
+	return r;
+}
+
+double rateR18() {
+	double R18_R18_r = k_R18_R18 * R18;
+	double R14_R18_r = k_R14_R18 * R14;
+	double R9_R18_r = k_R9_R18 * R9;
+	return  - R18_R18_r - R14_R18_r + R9_R18_r;
+}
+
+double boundedRateR18() {
+	double r = rateR18();
+	if (R18 + r &gt; R18Levels) {
+		return R18Levels - R18;
+	} else if (R18 + r &lt; 0) {
+		return -R18;
+	}
+	return r;
+}
+
+double rateR19() {
+	double R17_R19_r = k_R17_R19 * R17;
+	double R12_R19_r = k_R12_R19 * R12;
+	return R17_R19_r - R12_R19_r;
+}
+
+double boundedRateR19() {
+	double r = rateR19();
+	if (R19 + r &gt; R19Levels) {
+		return R19Levels - R19;
+	} else if (R19 + r &lt; 0) {
+		return -R19;
+	}
+	return r;
+}
+
+double rateR20() {
+	double R20_R20_r = k_R20_R20 * R20;
+	double R4_R20_r = k_R4_R20 * R4;
+	double R6_R20_r = k_R6_R20 * R6;
+	return  - R20_R20_r - R4_R20_r + R6_R20_r;
+}
+
+double boundedRateR20() {
+	double r = rateR20();
+	if (R20 + r &gt; R20Levels) {
+		return R20Levels - R20;
+	} else if (R20 + r &lt; 0) {
+		return -R20;
+	}
+	return r;
+}
+
+double rateR21() {
+	double R4_R21_r = k_R4_R21 * R4;
+	double R21_R21_r = k_R21_R21 * R21;
+	double R6_R21_r = k_R6_R21 * R6;
+	return  - R4_R21_r - R21_R21_r + R6_R21_r;
+}
+
+double boundedRateR21() {
+	double r = rateR21();
+	if (R21 + r &gt; R21Levels) {
+		return R21Levels - R21;
+	} else if (R21 + r &lt; 0) {
+		return -R21;
+	}
+	return r;
+}
+
+double rateR22() {
+	double R4_R22_r = k_R4_R22 * R4;
+	double R22_R22_r = k_R22_R22 * R22;
+	double R6_R22_r = k_R6_R22 * R6;
+	return  - R4_R22_r - R22_R22_r + R6_R22_r;
+}
+
+double boundedRateR22() {
+	double r = rateR22();
+	if (R22 + r &gt; R22Levels) {
+		return R22Levels - R22;
+	} else if (R22 + r &lt; 0) {
+		return -R22;
+	}
+	return r;
+}
+
+double rateR23() {
+	double R4_R23_r = k_R4_R23 * R4;
+	double R6_R23_r = k_R6_R23 * R6;
+	double R23_R23_r = k_R23_R23 * R23;
+	return  - R4_R23_r + R6_R23_r - R23_R23_r;
+}
+
+double boundedRateR23() {
+	double r = rateR23();
+	if (R23 + r &gt; R23Levels) {
+		return R23Levels - R23;
+	} else if (R23 + r &lt; 0) {
+		return -R23;
+	}
+	return r;
+}
+
+double rateR24() {
+	double R4_R24_r = k_R4_R24 * R4;
+	double R6_R24_r = k_R6_R24 * R6;
+	double R24_R24_r = k_R24_R24 * R24;
+	return  - R4_R24_r + R6_R24_r - R24_R24_r;
+}
+
+double boundedRateR24() {
+	double r = rateR24();
+	if (R24 + r &gt; R24Levels) {
+		return R24Levels - R24;
+	} else if (R24 + r &lt; 0) {
+		return -R24;
+	}
+	return r;
+}
+
+</declaration>
+      
+    <location id="id0" x="-314" y="-102">
+          
+      <label kind="invariant" x="-324" y="-85">R0' == boundedRateR0()
+&amp;&amp;
+R1' == boundedRateR1()
+&amp;&amp;
+R2' == boundedRateR2()
+&amp;&amp;
+R3' == boundedRateR3()
+&amp;&amp;
+R4' == boundedRateR4()
+&amp;&amp;
+R5' == boundedRateR5()
+&amp;&amp;
+R6' == boundedRateR6()
+&amp;&amp;
+R7' == boundedRateR7()
+&amp;&amp;
+R9' == boundedRateR9()
+&amp;&amp;
+R10' == boundedRateR10()
+&amp;&amp;
+R11' == boundedRateR11()
+&amp;&amp;
+R12' == boundedRateR12()
+&amp;&amp;
+R13' == boundedRateR13()
+&amp;&amp;
+R14' == boundedRateR14()
+&amp;&amp;
+R15' == boundedRateR15()
+&amp;&amp;
+R16' == boundedRateR16()
+&amp;&amp;
+R17' == boundedRateR17()
+&amp;&amp;
+R18' == boundedRateR18()
+&amp;&amp;
+R19' == boundedRateR19()
+&amp;&amp;
+R20' == boundedRateR20()
+&amp;&amp;
+R21' == boundedRateR21()
+&amp;&amp;
+R22' == boundedRateR22()
+&amp;&amp;
+R23' == boundedRateR23()
+&amp;&amp;
+R24' == boundedRateR24()</label>
+        
+    </location>
+      
+    <location id="id1" x="-448" y="-102">
+          
+      <committed/>
+        
+    </location>
+      
+    <init ref="id1"/>
+      
+    <transition>
+          
+      <source ref="id1"/>
+          
+      <target ref="id0"/>
+          
+      <label kind="select" x="-430" y="-118"/>
+          
+      <label kind="assignment" x="-430" y="-102">R0 = R0Init,
+R1 = R1Init,
+R2 = R2Init,
+R3 = R3Init,
+R4 = R4Init,
+R5 = R5Init,
+R6 = R6Init,
+R7 = R7Init,
+R9 = R9Init,
+R10 = R10Init,
+R11 = R11Init,
+R12 = R12Init,
+R13 = R13Init,
+R14 = R14Init,
+R15 = R15Init,
+R16 = R16Init,
+R17 = R17Init,
+R18 = R18Init,
+R19 = R19Init,
+R20 = R20Init,
+R21 = R21Init,
+R22 = R22Init,
+R23 = R23Init,
+R24 = R24Init</label>
+          
+      <label kind="probability" x="-430" y="-86">1</label>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+model = ODE_Model();
+
+
+system model;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=31] { R21, R20, R23, R22, R24, R0, R1, R2, R3, R4, R5, R6, R7, R9, R10, R12, R11, R14, R13, R16, R15, R18, R17, R19 }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

@@ -1,0 +1,3120 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+
+//R0 = ATF2
+clock R0;
+const int R0Init = 0;
+const int R0Levels = 100;
+
+//R1 = ATF2 PTM
+clock R1;
+const int R1Init = 1;
+const int R1Levels = 100;
+
+//R2 = ATF2 prot
+clock R2;
+const int R2Init = 7;
+const int R2Levels = 100;
+
+//R3 = ATF4
+clock R3;
+const int R3Init = 67;
+const int R3Levels = 100;
+
+//R4 = Akt
+clock R4;
+const int R4Init = 0;
+const int R4Levels = 100;
+
+//R5 = Akt PTM
+clock R5;
+const int R5Init = 0;
+const int R5Levels = 100;
+
+//R6 = Akt prot
+clock R6;
+const int R6Init = 0;
+const int R6Levels = 100;
+
+//R7 = B-catenin
+clock R7;
+const int R7Init = 0;
+const int R7Levels = 100;
+
+//R8 = BMP
+clock R8;
+const int R8Init = 0;
+const int R8Levels = 100;
+
+//R9 = Bcat dummy value must be 1
+clock R9;
+const int R9Init = 100;
+const int R9Levels = 100;
+
+//R10 = Bcatleftcfcomplex
+clock R10;
+const int R10Init = 0;
+const int R10Levels = 100;
+
+//R11 = C/EBPb dummy
+clock R11;
+const int R11Init = 0;
+const int R11Levels = 100;
+
+//R12 = CCND1
+clock R12;
+const int R12Init = 63;
+const int R12Levels = 100;
+
+//R13 = CCND1 PTM
+clock R13;
+const int R13Init = 80;
+const int R13Levels = 100;
+
+//R14 = CCND1 dummy must be 1
+clock R14;
+const int R14Init = 100;
+const int R14Levels = 100;
+
+//R15 = CCND1 prot
+clock R15;
+const int R15Init = 80;
+const int R15Levels = 100;
+
+//R16 = Col-II
+clock R16;
+const int R16Init = 88;
+const int R16Levels = 100;
+
+//R17 = Col-X
+clock R17;
+const int R17Init = 0;
+const int R17Levels = 100;
+
+//R18 = DC canonical dummy
+clock R18;
+const int R18Init = 100;
+const int R18Levels = 100;
+
+//R19 = DC degradation dummy
+clock R19;
+const int R19Init = 100;
+const int R19Levels = 100;
+
+//R21 = DC dummy must be 1
+clock R21;
+const int R21Init = 100;
+const int R21Levels = 100;
+
+//R20 = DC dummy must be 1
+clock R20;
+const int R20Init = 100;
+const int R20Levels = 100;
+
+//R23 = Dlx5
+clock R23;
+const int R23Init = 0;
+const int R23Levels = 100;
+
+//R24 = Dlx5 PTM
+clock R24;
+const int R24Init = 6;
+const int R24Levels = 100;
+
+//R25 = Dlx5 prot
+clock R25;
+const int R25Init = 0;
+const int R25Levels = 100;
+
+//R26 = Dsh
+clock R26;
+const int R26Init = 0;
+const int R26Levels = 100;
+
+//R27 = ERK1/2
+clock R27;
+const int R27Init = 0;
+const int R27Levels = 100;
+
+//R28 = Ets1
+clock R28;
+const int R28Init = 2;
+const int R28Levels = 100;
+
+//R29 = Ets1 PTM
+clock R29;
+const int R29Init = 45;
+const int R29Levels = 100;
+
+//R30 = Ets1 prot
+clock R30;
+const int R30Init = 7;
+const int R30Levels = 100;
+
+//R31 = FGF
+clock R31;
+const int R31Init = 0;
+const int R31Levels = 100;
+
+//R32 = FGFR1
+clock R32;
+const int R32Init = 0;
+const int R32Levels = 100;
+
+//R33 = FGFR1 PTM
+clock R33;
+const int R33Init = 0;
+const int R33Levels = 100;
+
+//R34 = FGFR1 prot
+clock R34;
+const int R34Init = 0;
+const int R34Levels = 100;
+
+//R35 = FGFR3
+clock R35;
+const int R35Init = 0;
+const int R35Levels = 100;
+
+//R36 = FGFR3 PTM
+clock R36;
+const int R36Init = 0;
+const int R36Levels = 100;
+
+//R37 = FGFR3 prot
+clock R37;
+const int R37Init = 100;
+const int R37Levels = 100;
+
+//R39 = Frizzled - LRP 5/6
+clock R39;
+const int R39Init = 0;
+const int R39Levels = 100;
+
+//R41 = GSK
+clock R41;
+const int R41Init = 100;
+const int R41Levels = 100;
+
+//R42 = GSK dummy
+clock R42;
+const int R42Init = 0;
+const int R42Levels = 100;
+
+//R43 = GSK dummy must be one
+clock R43;
+const int R43Init = 100;
+const int R43Levels = 100;
+
+//R44 = Gli2
+clock R44;
+const int R44Init = 28;
+const int R44Levels = 100;
+
+//R45 = HDAC4
+clock R45;
+const int R45Init = 33;
+const int R45Levels = 100;
+
+//R46 = HIF-2a
+clock R46;
+const int R46Init = 0;
+const int R46Levels = 100;
+
+//R47 = IGF-1
+clock R47;
+const int R47Init = 100;
+const int R47Levels = 100;
+
+//R48 = IGF-1R
+clock R48;
+const int R48Init = 21;
+const int R48Levels = 100;
+
+//R49 = IGF-1R PTM
+clock R49;
+const int R49Init = 100;
+const int R49Levels = 100;
+
+//R50 = IGF-1R prot
+clock R50;
+const int R50Init = 21;
+const int R50Levels = 100;
+
+//R51 = Ihh
+clock R51;
+const int R51Init = 43;
+const int R51Levels = 100;
+
+//R52 = Lef/Tcf
+clock R52;
+const int R52Init = 0;
+const int R52Levels = 100;
+
+//R53 = Lef/Tcf PTM
+clock R53;
+const int R53Init = 0;
+const int R53Levels = 100;
+
+//R54 = Lef/Tcf dummy must be 1
+clock R54;
+const int R54Init = 100;
+const int R54Levels = 100;
+
+//R55 = Lef/Tcf prot
+clock R55;
+const int R55Init = 44;
+const int R55Levels = 100;
+
+//R56 = MEF2C
+clock R56;
+const int R56Init = 0;
+const int R56Levels = 100;
+
+//R57 = MEF2C PTM
+clock R57;
+const int R57Init = 0;
+const int R57Levels = 100;
+
+//R58 = MEF2C prot
+clock R58;
+const int R58Init = 0;
+const int R58Levels = 100;
+
+//R59 = MMP13
+clock R59;
+const int R59Init = 0;
+const int R59Levels = 100;
+
+//R60 = Msx2
+clock R60;
+const int R60Init = 6;
+const int R60Levels = 100;
+
+//R61 = Msx2 PTM
+clock R61;
+const int R61Init = 100;
+const int R61Levels = 100;
+
+//R62 = Msx2 dummy must be 1
+clock R62;
+const int R62Init = 100;
+const int R62Levels = 100;
+
+//R63 = Msx2 prot
+clock R63;
+const int R63Init = 7;
+const int R63Levels = 100;
+
+//R64 = NFkb
+clock R64;
+const int R64Init = 0;
+const int R64Levels = 100;
+
+//R65 = Nkx3.2
+clock R65;
+const int R65Init = 100;
+const int R65Levels = 100;
+
+//R66 = PI3K
+clock R66;
+const int R66Init = 0;
+const int R66Levels = 100;
+
+//R67 = PI3K PTM
+clock R67;
+const int R67Init = 14;
+const int R67Levels = 100;
+
+//R68 = PI3K prot
+clock R68;
+const int R68Init = 0;
+const int R68Levels = 100;
+
+//R69 = PKA
+clock R69;
+const int R69Init = 100;
+const int R69Levels = 100;
+
+//R70 = PP2A
+clock R70;
+const int R70Init = 100;
+const int R70Levels = 100;
+
+//R71 = PPR
+clock R71;
+const int R71Init = 62;
+const int R71Levels = 100;
+
+//R72 = PPR PTM
+clock R72;
+const int R72Init = 77;
+const int R72Levels = 100;
+
+//R73 = PPR prot
+clock R73;
+const int R73Init = 81;
+const int R73Levels = 100;
+
+//R74 = PTHrP
+clock R74;
+const int R74Init = 78;
+const int R74Levels = 100;
+
+//R75 = R-smad
+clock R75;
+const int R75Init = 0;
+const int R75Levels = 100;
+
+//R76 = Ras
+clock R76;
+const int R76Init = 0;
+const int R76Levels = 100;
+
+//R77 = Runx2
+clock R77;
+const int R77Init = 0;
+const int R77Levels = 100;
+
+//R78 = Runx2 PTM
+clock R78;
+const int R78Init = 0;
+const int R78Levels = 100;
+
+//R79 = Runx2 prot
+clock R79;
+const int R79Init = 0;
+const int R79Levels = 100;
+
+//R80 = STAT1
+clock R80;
+const int R80Init = 7;
+const int R80Levels = 100;
+
+//R81 = Smad3
+clock R81;
+const int R81Init = 6;
+const int R81Levels = 100;
+
+//R82 = Smad7
+clock R82;
+const int R82Init = 3;
+const int R82Levels = 100;
+
+//R83 = Smadcomplex
+clock R83;
+const int R83Init = 0;
+const int R83Levels = 100;
+
+//R84 = Sox9
+clock R84;
+const int R84Init = 100;
+const int R84Levels = 100;
+
+//R85 = Sox9 PTM
+clock R85;
+const int R85Init = 100;
+const int R85Levels = 100;
+
+//R86 = Sox9 prot
+clock R86;
+const int R86Init = 100;
+const int R86Levels = 100;
+
+//R87 = TGFb
+clock R87;
+const int R87Init = 28;
+const int R87Levels = 100;
+
+//R88 = Wnt
+clock R88;
+const int R88Init = 0;
+const int R88Levels = 100;
+
+//R89 = Wnt source
+clock R89;
+const int R89Init = 1;
+const int R89Levels = 1;
+
+//R90 = dEF-1
+clock R90;
+const int R90Init = 2;
+const int R90Levels = 100;
+
+//R91 = destruction complex
+clock R91;
+const int R91Init = 100;
+const int R91Levels = 100;
+
+//R92 = p38
+clock R92;
+const int R92Init = 19;
+const int R92Levels = 100;
+
+//Reaction R63 (Msx2 prot) --| R63 (Msx2 prot)
+const double k_R63_R63 = 0.1;
+
+//Reaction R46 (HIF-2a) AND R77 (Runx2) --&gt; R11 (C/EBPb dummy)
+const double k_R46_R77_R11 = 0.01;
+
+//Reaction R31 (FGF) --&gt; R36 (FGFR3 PTM)
+const double k_R31_R36 = 1.0;
+
+//Reaction R31 (FGF) --| R31 (FGF)
+const double k_R31_R31 = 0.1;
+
+//Reaction R2 (ATF2 prot) --| R2 (ATF2 prot)
+const double k_R2_R2 = 0.1;
+
+//Reaction R4 (Akt) --&gt; R64 (NFkb)
+const double k_R4_R64 = 0.667;
+
+//Reaction R47 (IGF-1) --&gt; R69 (PKA)
+const double k_R47_R69 = 0.667;
+
+//Reaction R71 (PPR) --&gt; R65 (Nkx3.2)
+const double k_R71_R65 = 0.067;
+
+//Reaction R31 (FGF) --&gt; R33 (FGFR1 PTM)
+const double k_R31_R33 = 1.0;
+
+//Reaction R75 (R-smad) --&gt; R83 (Smadcomplex)
+const double k_R75_R83 = 1.0;
+
+//Reaction R32 (FGFR1) --&gt; R80 (STAT1)
+const double k_R32_R80 = 0.444;
+
+//Reaction R51 (Ihh) --&gt; R44 (Gli2)
+const double k_R51_R44 = 0.667;
+
+//Reaction R32 (FGFR1) --&gt; R76 (Ras)
+const double k_R32_R76 = 0.444;
+
+//Reaction R28 (Ets1) --&gt; R90 (dEF-1)
+const double k_R28_R90 = 0.067;
+
+//Reaction R75 (R-smad) --| R75 (R-smad)
+const double k_R75_R75 = 1.0;
+
+//Reaction R83 (Smadcomplex) --| R80 (STAT1)
+const double k_R83_R80 = 1.0;
+
+//Reaction R83 (Smadcomplex) --| R83 (Smadcomplex)
+const double k_R83_R83 = 1.0;
+
+//Reaction R83 (Smadcomplex) --&gt; R82 (Smad7)
+const double k_R83_R82 = 0.027;
+
+//Reaction R51 (Ihh) --| R51 (Ihh)
+const double k_R51_R51 = 0.1;
+
+//Reaction R43 (GSK dummy must be one) --&gt; R41 (GSK)
+const double k_R43_R41 = 1.0;
+
+//Reaction R11 (C/EBPb dummy) --| R11 (C/EBPb dummy)
+const double k_R11_R11 = 1.0;
+
+//Reaction R77 (Runx2) --&gt; R17 (Col-X)
+const double k_R77_R17 = 0.067;
+
+//Reaction R44 (Gli2) AND R84 (Sox9) --&gt; R74 (PTHrP)
+const double k_R44_R84_R74 = 3.3E-4;
+
+//Reaction R77 (Runx2) --&gt; R11 (C/EBPb dummy)
+const double k_R77_R11 = 0.0;
+
+//Reaction R60 (Msx2) --| R88 (Wnt)
+const double k_R60_R88 = 0.067;
+
+//Reaction R18 (DC canonical dummy) --| R18 (DC canonical dummy)
+const double k_R18_R18 = 1.0;
+
+//Reaction R12 (CCND1) --| R78 (Runx2 PTM)
+const double k_R12_R78 = 1.0;
+
+//Reaction R32 (FGFR1) --&gt; R64 (NFkb)
+const double k_R32_R64 = 0.667;
+
+//Reaction R60 (Msx2) --| R79 (Runx2 prot)
+const double k_R60_R79 = 0.044;
+
+//Reaction R60 (Msx2) --| R78 (Runx2 PTM)
+const double k_R60_R78 = 1.0;
+
+//Reaction R7 (B-catenin) --&gt; R31 (FGF)
+const double k_R7_R31 = 0.067;
+
+//Reaction R12 (CCND1) --| R81 (Smad3)
+const double k_R12_R81 = 0.333;
+
+//Reaction R8 (BMP) --&gt; R76 (Ras)
+const double k_R8_R76 = 0.444;
+
+//Reaction R8 (BMP) --&gt; R75 (R-smad)
+const double k_R8_R75 = 1.0;
+
+//Reaction R79 (Runx2 prot) --| R79 (Runx2 prot)
+const double k_R79_R79 = 0.1;
+
+//Reaction R8 (BMP) --| R8 (BMP)
+const double k_R8_R8 = 0.1;
+
+//Reaction R73 (PPR prot) AND R72 (PPR PTM) --&gt; R71 (PPR)
+const double k_R73_R72_R71 = 0.01;
+
+//Reaction R46 (HIF-2a) --| R46 (HIF-2a)
+const double k_R46_R46 = 0.1;
+
+//Reaction R83 (Smadcomplex) --&gt; R58 (MEF2C prot)
+const double k_R83_R58 = 0.067;
+
+//Reaction R83 (Smadcomplex) --&gt; R57 (MEF2C PTM)
+const double k_R83_R57 = 1.0;
+
+//Reaction R59 (MMP13) --| R59 (MMP13)
+const double k_R59_R59 = 0.1;
+
+//Reaction R83 (Smadcomplex) --&gt; R63 (Msx2 prot)
+const double k_R83_R63 = 0.1;
+
+//Reaction R64 (NFkb) --&gt; R90 (dEF-1)
+const double k_R64_R90 = 0.067;
+
+//Reaction R86 (Sox9 prot) AND R85 (Sox9 PTM) --&gt; R84 (Sox9)
+const double k_R86_R85_R84 = 0.01;
+
+//Reaction R26 (Dsh) --| R26 (Dsh)
+const double k_R26_R26 = 1.0;
+
+//Reaction R15 (CCND1 prot) --| R15 (CCND1 prot)
+const double k_R15_R15 = 0.1;
+
+//Reaction R55 (Lef/Tcf prot) --| R55 (Lef/Tcf prot)
+const double k_R55_R55 = 0.1;
+
+//Reaction R27 (ERK1/2) --| R41 (GSK)
+const double k_R27_R41 = 0.0;
+
+//Reaction R3 (ATF4) --| R3 (ATF4)
+const double k_R3_R3 = 1.0;
+
+//Reaction R26 (Dsh) --| R18 (DC canonical dummy)
+const double k_R26_R18 = 1.0;
+
+//Reaction R92 (p38) --| R92 (p38)
+const double k_R92_R92 = 1.0;
+
+//Reaction R23 (Dlx5) --| R61 (Msx2 PTM)
+const double k_R23_R61 = 1.0;
+
+//Reaction R23 (Dlx5) --| R63 (Msx2 prot)
+const double k_R23_R63 = 0.1;
+
+//Reaction R66 (PI3K) --| R66 (PI3K)
+const double k_R66_R66 = 1.0;
+
+//Reaction R64 (NFkb) --&gt; R82 (Smad7)
+const double k_R64_R82 = 0.053;
+
+//Reaction R35 (FGFR3) --| R35 (FGFR3)
+const double k_R35_R35 = 1.0;
+
+//Reaction R83 (Smadcomplex) --&gt; R73 (PPR prot)
+const double k_R83_R73 = 0.067;
+
+//Reaction R7 (B-catenin) --&gt; R53 (Lef/Tcf PTM)
+const double k_R7_R53 = 1.0;
+
+//Reaction R7 (B-catenin) --&gt; R55 (Lef/Tcf prot)
+const double k_R7_R55 = 0.044;
+
+//Reaction R69 (PKA) --&gt; R15 (CCND1 prot)
+const double k_R69_R15 = 0.067;
+
+//Reaction R69 (PKA) --| R17 (Col-X)
+const double k_R69_R17 = 0.067;
+
+//Reaction R8 (BMP) --&gt; R92 (p38)
+const double k_R8_R92 = 0.667;
+
+//Reaction R6 (Akt prot) --| R6 (Akt prot)
+const double k_R6_R6 = 0.1;
+
+//Reaction R34 (FGFR1 prot) AND R33 (FGFR1 PTM) --&gt; R32 (FGFR1)
+const double k_R34_R33_R32 = 0.01;
+
+//Reaction R23 (Dlx5) --&gt; R79 (Runx2 prot)
+const double k_R23_R79 = 0.044;
+
+//Reaction R82 (Smad7) --| R75 (R-smad)
+const double k_R82_R75 = 1.0;
+
+//Reaction R42 (GSK dummy) --| R42 (GSK dummy)
+const double k_R42_R42 = 1.0;
+
+//Reaction R6 (Akt prot) AND R5 (Akt PTM) --&gt; R4 (Akt)
+const double k_R6_R5_R4 = 0.01;
+
+//Reaction R23 (Dlx5) --&gt; R78 (Runx2 PTM)
+const double k_R23_R78 = 1.0;
+
+//Reaction R81 (Smad3) --| R25 (Dlx5 prot)
+const double k_R81_R25 = 0.142;
+
+//Reaction R64 (NFkb) --| R64 (NFkb)
+const double k_R64_R64 = 1.0;
+
+//Reaction R92 (p38) --&gt; R86 (Sox9 prot)
+const double k_R92_R86 = 0.021;
+
+//Reaction R44 (Gli2) --| R59 (MMP13)
+const double k_R44_R59 = 0.025;
+
+//Reaction R10 (Bcatleftcfcomplex) --| R10 (Bcatleftcfcomplex)
+const double k_R10_R10 = 1.0;
+
+//Reaction R32 (FGFR1) --| R32 (FGFR1)
+const double k_R32_R32 = 1.0;
+
+//Reaction R2 (ATF2 prot) AND R1 (ATF2 PTM) --&gt; R0 (ATF2)
+const double k_R2_R1_R0 = 0.01;
+
+//Reaction R29 (Ets1 PTM) --&gt; R28 (Ets1)
+const double k_R29_R28 = 0.0;
+
+//Reaction R86 (Sox9 prot) --| R86 (Sox9 prot)
+const double k_R86_R86 = 0.1;
+
+//Reaction R69 (PKA) --&gt; R42 (GSK dummy)
+const double k_R69_R42 = 1.0;
+
+//Reaction R29 (Ets1 PTM) --| R29 (Ets1 PTM)
+const double k_R29_R29 = 1.0;
+
+//Reaction R7 (B-catenin) --| R85 (Sox9 PTM)
+const double k_R7_R85 = 1.0;
+
+//Reaction R81 (Smad3) --&gt; R30 (Ets1 prot)
+const double k_R81_R30 = 0.142;
+
+//Reaction R48 (IGF-1R) --&gt; R67 (PI3K PTM)
+const double k_R48_R67 = 0.667;
+
+//Reaction R19 (DC degradation dummy) --| R19 (DC degradation dummy)
+const double k_R19_R19 = 1.0;
+
+//Reaction R50 (IGF-1R prot) --| R50 (IGF-1R prot)
+const double k_R50_R50 = 0.1;
+
+//Reaction R72 (PPR PTM) --&gt; R71 (PPR)
+const double k_R72_R71 = 0.0;
+
+//Reaction R72 (PPR PTM) --| R72 (PPR PTM)
+const double k_R72_R72 = 1.0;
+
+//Reaction R76 (Ras) --| R76 (Ras)
+const double k_R76_R76 = 1.0;
+
+//Reaction R54 (Lef/Tcf dummy must be 1) --&gt; R55 (Lef/Tcf prot)
+const double k_R54_R55 = 0.044;
+
+//Reaction R69 (PKA) --&gt; R47 (IGF-1)
+const double k_R69_R47 = 0.1;
+
+//Reaction R92 (p38) AND R81 (Smad3) --&gt; R1 (ATF2 PTM)
+const double k_R92_R81_R1 = 0.00904;
+
+//Reaction R1 (ATF2 PTM) --| R1 (ATF2 PTM)
+const double k_R1_R1 = 1.0;
+
+//Reaction R1 (ATF2 PTM) --&gt; R0 (ATF2)
+const double k_R1_R0 = 0.0;
+
+//Reaction R20 (DC dummy must be 1) --&gt; R19 (DC degradation dummy)
+const double k_R20_R19 = 1.5;
+
+//Reaction R64 (NFkb) --&gt; R59 (MMP13)
+const double k_R64_R59 = 0.025;
+
+//Reaction R91 (destruction complex) --| R7 (B-catenin)
+const double k_R91_R7 = 1.0;
+
+//Reaction R75 (R-smad) --| R26 (Dsh)
+const double k_R75_R26 = 0.5;
+
+//Reaction R76 (Ras) --&gt; R67 (PI3K PTM)
+const double k_R76_R67 = 0.667;
+
+//Reaction R36 (FGFR3 PTM) --| R36 (FGFR3 PTM)
+const double k_R36_R36 = 1.0;
+
+//Reaction R36 (FGFR3 PTM) --&gt; R35 (FGFR3)
+const double k_R36_R35 = 0.0;
+
+//Reaction R47 (IGF-1) --&gt; R49 (IGF-1R PTM)
+const double k_R47_R49 = 1.0;
+
+//Reaction R25 (Dlx5 prot) --| R25 (Dlx5 prot)
+const double k_R25_R25 = 0.1;
+
+//Reaction R44 (Gli2) --&gt; R73 (PPR prot)
+const double k_R44_R73 = 0.067;
+
+//Reaction R47 (IGF-1) --| R47 (IGF-1)
+const double k_R47_R47 = 0.1;
+
+//Reaction R64 (NFkb) --&gt; R46 (HIF-2a)
+const double k_R64_R46 = 0.1;
+
+//Reaction R64 (NFkb) --&gt; R8 (BMP)
+const double k_R64_R8 = 0.067;
+
+//Reaction R27 (ERK1/2) --&gt; R78 (Runx2 PTM)
+const double k_R27_R78 = 0.87;
+
+//Reaction R14 (CCND1 dummy must be 1) --&gt; R13 (CCND1 PTM)
+const double k_R14_R13 = 1.0;
+
+//Reaction R92 (p38) --&gt; R57 (MEF2C PTM)
+const double k_R92_R57 = 0.637;
+
+//Reaction R64 (NFkb) --&gt; R51 (Ihh)
+const double k_R64_R51 = 0.067;
+
+//Reaction R92 (p38) --&gt; R59 (MMP13)
+const double k_R92_R59 = 0.0;
+
+//Reaction R64 (NFkb) --&gt; R50 (IGF-1R prot)
+const double k_R64_R50 = 0.1;
+
+//Reaction R70 (PP2A) --&gt; R45 (HDAC4)
+const double k_R70_R45 = 1.0;
+
+//Reaction R70 (PP2A) --| R42 (GSK dummy)
+const double k_R70_R42 = 1.0;
+
+//Reaction R65 (Nkx3.2) --&gt; R86 (Sox9 prot)
+const double k_R65_R86 = 0.033;
+
+//Reaction R58 (MEF2C prot) --| R58 (MEF2C prot)
+const double k_R58_R58 = 0.1;
+
+//Reaction R87 (TGFb) --&gt; R81 (Smad3)
+const double k_R87_R81 = 1.0;
+
+//Reaction R48 (IGF-1R) --&gt; R80 (STAT1)
+const double k_R48_R80 = 0.333;
+
+//Reaction R69 (PKA) --| R69 (PKA)
+const double k_R69_R69 = 1.0;
+
+//Reaction R80 (STAT1) --| R13 (CCND1 PTM)
+const double k_R80_R13 = 0.5;
+
+//Reaction R44 (Gli2) --&gt; R87 (TGFb)
+const double k_R44_R87 = 0.1;
+
+//Reaction R44 (Gli2) --&gt; R88 (Wnt)
+const double k_R44_R88 = 0.133;
+
+//Reaction R71 (PPR) --| R71 (PPR)
+const double k_R71_R71 = 1.0;
+
+//Reaction R27 (ERK1/2) --| R83 (Smadcomplex)
+const double k_R27_R83 = 0.87;
+
+//Reaction R7 (B-catenin) --| R7 (B-catenin)
+const double k_R7_R7 = 1.0;
+
+//Reaction R87 (TGFb) --| R87 (TGFb)
+const double k_R87_R87 = 0.1;
+
+//Reaction R82 (Smad7) --| R82 (Smad7)
+const double k_R82_R82 = 0.1;
+
+//Reaction R82 (Smad7) --| R81 (Smad3)
+const double k_R82_R81 = 0.5;
+
+//Reaction R27 (ERK1/2) --| R81 (Smad3)
+const double k_R27_R81 = 0.29;
+
+//Reaction R70 (PP2A) --| R27 (ERK1/2)
+const double k_R70_R27 = 1.0;
+
+//Reaction R83 (Smadcomplex) AND R65 (Nkx3.2) --| R79 (Runx2 prot)
+const double k_R83_R65_R79 = 4.3999999999999996E-4;
+
+//Reaction R0 (ATF2) --&gt; R15 (CCND1 prot)
+const double k_R0_R15 = 0.067;
+
+//Reaction R60 (Msx2) --| R60 (Msx2)
+const double k_R60_R60 = 1.0;
+
+//Reaction R71 (PPR) --&gt; R69 (PKA)
+const double k_R71_R69 = 0.667;
+
+//Reaction R87 (TGFb) --&gt; R92 (p38)
+const double k_R87_R92 = 0.667;
+
+//Reaction R65 (Nkx3.2) --| R79 (Runx2 prot)
+const double k_R65_R79 = 0.0;
+
+//Reaction R41 (GSK) --| R41 (GSK)
+const double k_R41_R41 = 1.0;
+
+//Reaction R55 (Lef/Tcf prot) AND R53 (Lef/Tcf PTM) --&gt; R52 (Lef/Tcf)
+const double k_R55_R53_R52 = 0.01;
+
+//Reaction R73 (PPR prot) --| R73 (PPR prot)
+const double k_R73_R73 = 0.1;
+
+//Reaction R81 (Smad3) --&gt; R1 (ATF2 PTM)
+const double k_R81_R1 = 0.0;
+
+//Reaction R69 (PKA) --&gt; R3 (ATF4)
+const double k_R69_R3 = 0.667;
+
+//Reaction R53 (Lef/Tcf PTM) --&gt; R52 (Lef/Tcf)
+const double k_R53_R52 = 0.0;
+
+//Reaction R53 (Lef/Tcf PTM) --| R53 (Lef/Tcf PTM)
+const double k_R53_R53 = 1.0;
+
+//Reaction R44 (Gli2) --&gt; R15 (CCND1 prot)
+const double k_R44_R15 = 0.044;
+
+//Reaction R77 (Runx2) --| R85 (Sox9 PTM)
+const double k_R77_R85 = 1.0;
+
+//Reaction R81 (Smad3) --&gt; R2 (ATF2 prot)
+const double k_R81_R2 = 0.142;
+
+//Reaction R69 (PKA) --&gt; R85 (Sox9 PTM)
+const double k_R69_R85 = 1.0;
+
+//Reaction R84 (Sox9) --&gt; R37 (FGFR3 prot)
+const double k_R84_R37 = 0.1;
+
+//Reaction R69 (PKA) --&gt; R86 (Sox9 prot)
+const double k_R69_R86 = 0.033;
+
+//Reaction R81 (Smad3) --&gt; R74 (PTHrP)
+const double k_R81_R74 = 0.047;
+
+//Reaction R61 (Msx2 PTM) --| R61 (Msx2 PTM)
+const double k_R61_R61 = 1.0;
+
+//Reaction R65 (Nkx3.2) --| R65 (Nkx3.2)
+const double k_R65_R65 = 0.1;
+
+//Reaction R61 (Msx2 PTM) --&gt; R60 (Msx2)
+const double k_R61_R60 = 0.0;
+
+//Reaction R45 (HDAC4) --| R57 (MEF2C PTM)
+const double k_R45_R57 = 1.0;
+
+//Reaction R56 (MEF2C) --&gt; R25 (Dlx5 prot)
+const double k_R56_R25 = 0.1;
+
+//Reaction R5 (Akt PTM) --| R5 (Akt PTM)
+const double k_R5_R5 = 1.0;
+
+//Reaction R5 (Akt PTM) --&gt; R4 (Akt)
+const double k_R5_R4 = 0.0;
+
+//Reaction R28 (Ets1) --| R28 (Ets1)
+const double k_R28_R28 = 1.0;
+
+//Reaction R64 (NFkb) --&gt; R16 (Col-II)
+const double k_R64_R16 = 0.044;
+
+//Reaction R84 (Sox9) --| R53 (Lef/Tcf PTM)
+const double k_R84_R53 = 1.0;
+
+//Reaction R79 (Runx2 prot) AND R78 (Runx2 PTM) --&gt; R77 (Runx2)
+const double k_R79_R78_R77 = 0.01;
+
+//Reaction R81 (Smad3) --| R57 (MEF2C PTM)
+const double k_R81_R57 = 1.42;
+
+//Reaction R16 (Col-II) --| R16 (Col-II)
+const double k_R16_R16 = 0.1;
+
+//Reaction R37 (FGFR3 prot) AND R36 (FGFR3 PTM) --&gt; R35 (FGFR3)
+const double k_R37_R36_R35 = 0.01;
+
+//Reaction R92 (p38) --&gt; R24 (Dlx5 PTM)
+const double k_R92_R24 = 0.637;
+
+//Reaction R69 (PKA) --&gt; R74 (PTHrP)
+const double k_R69_R74 = 0.033;
+
+//Reaction R69 (PKA) --&gt; R70 (PP2A)
+const double k_R69_R70 = 1.0;
+
+//Reaction R81 (Smad3) --&gt; R63 (Msx2 prot)
+const double k_R81_R63 = 0.142;
+
+//Reaction R76 (Ras) --&gt; R27 (ERK1/2)
+const double k_R76_R27 = 1.0;
+
+//Reaction R50 (IGF-1R prot) AND R49 (IGF-1R PTM) --&gt; R48 (IGF-1R)
+const double k_R50_R49_R48 = 0.01;
+
+//Reaction R85 (Sox9 PTM) --| R85 (Sox9 PTM)
+const double k_R85_R85 = 1.0;
+
+//Reaction R41 (GSK) --| R45 (HDAC4)
+const double k_R41_R45 = 0.667;
+
+//Reaction R21 (DC dummy must be 1) --&gt; R18 (DC canonical dummy)
+const double k_R21_R18 = 1.0;
+
+//Reaction R85 (Sox9 PTM) --&gt; R84 (Sox9)
+const double k_R85_R84 = 0.0;
+
+//Reaction R70 (PP2A) --| R5 (Akt PTM)
+const double k_R70_R5 = 0.5;
+
+//Reaction R11 (C/EBPb dummy) AND R92 (p38) --&gt; R59 (MMP13)
+const double k_R11_R92_R59 = 1.6E-4;
+
+//Reaction R52 (Lef/Tcf) --&gt; R10 (Bcatleftcfcomplex)
+const double k_R52_R10 = 0.0;
+
+//Reaction R69 (PKA) --&gt; R78 (Runx2 PTM)
+const double k_R69_R78 = 1.0;
+
+//Reaction R58 (MEF2C prot) AND R57 (MEF2C PTM) --&gt; R56 (MEF2C)
+const double k_R58_R57_R56 = 0.01;
+
+//Reaction R0 (ATF2) --| R0 (ATF2)
+const double k_R0_R0 = 1.0;
+
+//Reaction R90 (dEF-1) --| R90 (dEF-1)
+const double k_R90_R90 = 0.1;
+
+//Reaction R30 (Ets1 prot) AND R29 (Ets1 PTM) --&gt; R28 (Ets1)
+const double k_R30_R29_R28 = 0.01;
+
+//Reaction R57 (MEF2C PTM) --| R57 (MEF2C PTM)
+const double k_R57_R57 = 1.0;
+
+//Reaction R57 (MEF2C PTM) --&gt; R56 (MEF2C)
+const double k_R57_R56 = 0.0;
+
+//Reaction R77 (Runx2) --&gt; R68 (PI3K prot)
+const double k_R77_R68 = 0.1;
+
+//Reaction R88 (Wnt) --&gt; R76 (Ras)
+const double k_R88_R76 = 0.444;
+
+//Reaction R68 (PI3K prot) --| R68 (PI3K prot)
+const double k_R68_R68 = 0.1;
+
+//Reaction R25 (Dlx5 prot) AND R24 (Dlx5 PTM) --&gt; R23 (Dlx5)
+const double k_R25_R24_R23 = 0.01;
+
+//Reaction R84 (Sox9) --&gt; R16 (Col-II)
+const double k_R84_R16 = 0.044;
+
+//Reaction R48 (IGF-1R) --| R48 (IGF-1R)
+const double k_R48_R48 = 1.0;
+
+//Reaction R37 (FGFR3 prot) --| R37 (FGFR3 prot)
+const double k_R37_R37 = 0.1;
+
+//Reaction R60 (Msx2) --| R24 (Dlx5 PTM)
+const double k_R60_R24 = 1.0;
+
+//Reaction R45 (HDAC4) --| R78 (Runx2 PTM)
+const double k_R45_R78 = 0.0;
+
+//Reaction R60 (Msx2) --| R25 (Dlx5 prot)
+const double k_R60_R25 = 0.1;
+
+//Reaction R75 (R-smad) --&gt; R17 (Col-X)
+const double k_R75_R17 = 0.067;
+
+//Reaction R18 (DC canonical dummy) AND R19 (DC degradation dummy) --&gt; R91 (destruction complex)
+const double k_R18_R19_R91 = 0.01;
+
+//Reaction R41 (GSK) --| R13 (CCND1 PTM)
+const double k_R41_R13 = 0.167;
+
+//Reaction R44 (Gli2) --| R44 (Gli2)
+const double k_R44_R44 = 1.0;
+
+//Reaction R68 (PI3K prot) AND R67 (PI3K PTM) --&gt; R66 (PI3K)
+const double k_R68_R67_R66 = 0.01;
+
+//Reaction R33 (FGFR1 PTM) --| R33 (FGFR1 PTM)
+const double k_R33_R33 = 1.0;
+
+//Reaction R33 (FGFR1 PTM) --&gt; R32 (FGFR1)
+const double k_R33_R32 = 0.0;
+
+//Reaction R42 (GSK dummy) AND R27 (ERK1/2) --| R41 (GSK)
+const double k_R42_R27_R41 = 0.0087;
+
+//Reaction R80 (STAT1) --| R50 (IGF-1R prot)
+const double k_R80_R50 = 0.1;
+
+//Reaction R77 (Runx2) --| R77 (Runx2)
+const double k_R77_R77 = 1.0;
+
+//Reaction R88 (Wnt) --| R88 (Wnt)
+const double k_R88_R88 = 0.1;
+
+//Reaction R77 (Runx2) --&gt; R79 (Runx2 prot)
+const double k_R77_R79 = 0.044;
+
+//Reaction R41 (GSK) --&gt; R29 (Ets1 PTM)
+const double k_R41_R29 = 0.444;
+
+//Reaction R24 (Dlx5 PTM) --&gt; R23 (Dlx5)
+const double k_R24_R23 = 0.0;
+
+//Reaction R24 (Dlx5 PTM) --| R24 (Dlx5 PTM)
+const double k_R24_R24 = 1.0;
+
+//Reaction R81 (Smad3) --&gt; R82 (Smad7)
+const double k_R81_R82 = 0.038;
+
+//Reaction R81 (Smad3) --&gt; R85 (Sox9 PTM)
+const double k_R81_R85 = 1.42;
+
+//Reaction R56 (MEF2C) --&gt; R17 (Col-X)
+const double k_R56_R17 = 0.067;
+
+//Reaction R81 (Smad3) --| R81 (Smad3)
+const double k_R81_R81 = 1.0;
+
+//Reaction R70 (PP2A) --| R70 (PP2A)
+const double k_R70_R70 = 1.0;
+
+//Reaction R87 (TGFb) --&gt; R50 (IGF-1R prot)
+const double k_R87_R50 = 0.1;
+
+//Reaction R13 (CCND1 PTM) --| R13 (CCND1 PTM)
+const double k_R13_R13 = 1.0;
+
+//Reaction R13 (CCND1 PTM) --&gt; R12 (CCND1)
+const double k_R13_R12 = 0.0;
+
+//Reaction R27 (ERK1/2) --&gt; R3 (ATF4)
+const double k_R27_R3 = 0.58;
+
+//Reaction R52 (Lef/Tcf) --| R52 (Lef/Tcf)
+const double k_R52_R52 = 1.0;
+
+//Reaction R84 (Sox9) --&gt; R86 (Sox9 prot)
+const double k_R84_R86 = 0.033;
+
+//Reaction R30 (Ets1 prot) --| R30 (Ets1 prot)
+const double k_R30_R30 = 0.1;
+
+//Reaction R19 (DC degradation dummy) --&gt; R91 (destruction complex)
+const double k_R19_R91 = 0.0;
+
+//Reaction R83 (Smadcomplex) --| R33 (FGFR1 PTM)
+const double k_R83_R33 = 0.5;
+
+//Reaction R84 (Sox9) --| R84 (Sox9)
+const double k_R84_R84 = 1.0;
+
+//Reaction R62 (Msx2 dummy must be 1) --&gt; R61 (Msx2 PTM)
+const double k_R62_R61 = 1.0;
+
+//Reaction R84 (Sox9) --| R78 (Runx2 PTM)
+const double k_R84_R78 = 1.0;
+
+//Reaction R27 (ERK1/2) --| R19 (DC degradation dummy)
+const double k_R27_R19 = 0.87;
+
+//Reaction R39 (Frizzled - LRP 5/6) --&gt; R26 (Dsh)
+const double k_R39_R26 = 1.0;
+
+//Reaction R63 (Msx2 prot) AND R61 (Msx2 PTM) --&gt; R60 (Msx2)
+const double k_R63_R61_R60 = 0.01;
+
+//Reaction R9 (Bcat dummy value must be 1) --&gt; R7 (B-catenin)
+const double k_R9_R7 = 1.0;
+
+//Reaction R39 (Frizzled - LRP 5/6) --| R39 (Frizzled - LRP 5/6)
+const double k_R39_R39 = 1.0;
+
+//Reaction R49 (IGF-1R PTM) --&gt; R48 (IGF-1R)
+const double k_R49_R48 = 0.0;
+
+//Reaction R77 (Runx2) --&gt; R58 (MEF2C prot)
+const double k_R77_R58 = 0.067;
+
+//Reaction R49 (IGF-1R PTM) --| R49 (IGF-1R PTM)
+const double k_R49_R49 = 1.0;
+
+//Reaction R77 (Runx2) --&gt; R59 (MMP13)
+const double k_R77_R59 = 0.025;
+
+//Reaction R80 (STAT1) --| R73 (PPR prot)
+const double k_R80_R73 = 0.067;
+
+//Reaction R77 (Runx2) --&gt; R55 (Lef/Tcf prot)
+const double k_R77_R55 = 0.044;
+
+//Reaction R10 (Bcatleftcfcomplex) --&gt; R88 (Wnt)
+const double k_R10_R88 = 0.067;
+
+//Reaction R27 (ERK1/2) --| R27 (ERK1/2)
+const double k_R27_R27 = 1.0;
+
+//Reaction R46 (HIF-2a) --&gt; R59 (MMP13)
+const double k_R46_R59 = 0.025;
+
+//Reaction R77 (Runx2) --&gt; R51 (Ihh)
+const double k_R77_R51 = 0.067;
+
+//Reaction R65 (Nkx3.2) --&gt; R16 (Col-II)
+const double k_R65_R16 = 0.044;
+
+//Reaction R83 (Smadcomplex) --&gt; R51 (Ihh)
+const double k_R83_R51 = 0.067;
+
+//Reaction R27 (ERK1/2) --&gt; R29 (Ets1 PTM)
+const double k_R27_R29 = 0.58;
+
+//Reaction R3 (ATF4) --&gt; R51 (Ihh)
+const double k_R3_R51 = 0.067;
+
+//Reaction R74 (PTHrP) --| R74 (PTHrP)
+const double k_R74_R74 = 0.1;
+
+//Reaction R56 (MEF2C) --&gt; R79 (Runx2 prot)
+const double k_R56_R79 = 0.044;
+
+//Reaction R15 (CCND1 prot) AND R13 (CCND1 PTM) --&gt; R12 (CCND1)
+const double k_R15_R13_R12 = 0.01;
+
+//Reaction R17 (Col-X) --| R17 (Col-X)
+const double k_R17_R17 = 0.1;
+
+//Reaction R74 (PTHrP) --&gt; R72 (PPR PTM)
+const double k_R74_R72 = 1.0;
+
+//Reaction R4 (Akt) --| R4 (Akt)
+const double k_R4_R4 = 1.0;
+
+//Reaction R88 (Wnt) --&gt; R39 (Frizzled - LRP 5/6)
+const double k_R88_R39 = 1.0;
+
+//Reaction R80 (STAT1) --&gt; R82 (Smad7)
+const double k_R80_R82 = 0.027;
+
+//Reaction R80 (STAT1) --| R80 (STAT1)
+const double k_R80_R80 = 1.0;
+
+//Reaction R90 (dEF-1) --| R51 (Ihh)
+const double k_R90_R51 = 0.067;
+
+//Reaction R44 (Gli2) --&gt; R8 (BMP)
+const double k_R44_R8 = 0.067;
+
+//Reaction R81 (Smad3) AND R45 (HDAC4) --| R78 (Runx2 PTM)
+const double k_R81_R45_R78 = 0.014199999999999999;
+
+//Reaction R77 (Runx2) --&gt; R6 (Akt prot)
+const double k_R77_R6 = 0.1;
+
+//Reaction R4 (Akt) --&gt; R78 (Runx2 PTM)
+const double k_R4_R78 = 1.0;
+
+//Reaction R7 (B-catenin) AND R52 (Lef/Tcf) --&gt; R10 (Bcatleftcfcomplex)
+const double k_R7_R52_R10 = 0.01;
+
+//Reaction R35 (FGFR3) --&gt; R80 (STAT1)
+const double k_R35_R80 = 0.444;
+
+//Reaction R34 (FGFR1 prot) --| R34 (FGFR1 prot)
+const double k_R34_R34 = 0.1;
+
+//Reaction R84 (Sox9) --&gt; R74 (PTHrP)
+const double k_R84_R74 = 0.033;
+
+//Reaction R46 (HIF-2a) --&gt; R79 (Runx2 prot)
+const double k_R46_R79 = 0.044;
+
+//Reaction R77 (Runx2) --&gt; R34 (FGFR1 prot)
+const double k_R77_R34 = 0.1;
+
+//Reaction R84 (Sox9) --&gt; R73 (PPR prot)
+const double k_R84_R73 = 0.067;
+
+//Reaction R83 (Smadcomplex) --&gt; R25 (Dlx5 prot)
+const double k_R83_R25 = 0.1;
+
+//Reaction R83 (Smadcomplex) --&gt; R24 (Dlx5 PTM)
+const double k_R83_R24 = 1.0;
+
+//Reaction R23 (Dlx5) --| R23 (Dlx5)
+const double k_R23_R23 = 1.0;
+
+//Reaction R12 (CCND1) --| R12 (CCND1)
+const double k_R12_R12 = 1.0;
+
+//Reaction R77 (Runx2) --&gt; R31 (FGF)
+const double k_R77_R31 = 0.067;
+
+//Reaction R66 (PI3K) --&gt; R5 (Akt PTM)
+const double k_R66_R5 = 1.0;
+
+//Reaction R56 (MEF2C) --| R56 (MEF2C)
+const double k_R56_R56 = 1.0;
+
+//Reaction R45 (HDAC4) --| R45 (HDAC4)
+const double k_R45_R45 = 1.0;
+
+//Reaction R84 (Sox9) --&gt; R65 (Nkx3.2)
+const double k_R84_R65 = 0.067;
+
+//Reaction R91 (destruction complex) --| R91 (destruction complex)
+const double k_R91_R91 = 1.0;
+
+//Reaction R52 (Lef/Tcf) --&gt; R79 (Runx2 prot)
+const double k_R52_R79 = 0.044;
+
+//Reaction R89 (Wnt source) --&gt; R88 (Wnt)
+const double k_R89_R88 = 1000.0;
+
+//Reaction R35 (FGFR3) --&gt; R76 (Ras)
+const double k_R35_R76 = 0.444;
+
+//Reaction R78 (Runx2 PTM) --| R78 (Runx2 PTM)
+const double k_R78_R78 = 1.0;
+
+//Reaction R78 (Runx2 PTM) --&gt; R77 (Runx2)
+const double k_R78_R77 = 0.0;
+
+//Reaction R67 (PI3K PTM) --&gt; R66 (PI3K)
+const double k_R67_R66 = 0.0;
+
+//Reaction R67 (PI3K PTM) --| R67 (PI3K PTM)
+const double k_R67_R67 = 1.0;
+
+</declaration>
+  
+  <template>
+      
+    <name x="5" y="5">ODE_Model</name>
+      
+    <declaration>double rateR0() {
+	double R2_R1_R0_r = k_R2_R1_R0 * R1 * R2;
+	double R1_R0_r = k_R1_R0 * R1;
+	double R0_R0_r = k_R0_R0 * R0;
+	return R2_R1_R0_r + R1_R0_r - R0_R0_r;
+}
+
+double boundedRateR0() {
+	double r = rateR0();
+	if (R0 + r &gt; R0Levels) {
+		return R0Levels - R0;
+	} else if (R0 + r &lt; 0) {
+		return -R0;
+	}
+	return r;
+}
+
+double rateR1() {
+	double R92_R81_R1_r = k_R92_R81_R1 * R81 * R92;
+	double R1_R1_r = k_R1_R1 * R1;
+	double R81_R1_r = k_R81_R1 * R81;
+	return R92_R81_R1_r - R1_R1_r + R81_R1_r;
+}
+
+double boundedRateR1() {
+	double r = rateR1();
+	if (R1 + r &gt; R1Levels) {
+		return R1Levels - R1;
+	} else if (R1 + r &lt; 0) {
+		return -R1;
+	}
+	return r;
+}
+
+double rateR2() {
+	double R2_R2_r = k_R2_R2 * R2;
+	double R81_R2_r = k_R81_R2 * R81;
+	return  - R2_R2_r + R81_R2_r;
+}
+
+double boundedRateR2() {
+	double r = rateR2();
+	if (R2 + r &gt; R2Levels) {
+		return R2Levels - R2;
+	} else if (R2 + r &lt; 0) {
+		return -R2;
+	}
+	return r;
+}
+
+double rateR3() {
+	double R3_R3_r = k_R3_R3 * R3;
+	double R69_R3_r = k_R69_R3 * R69;
+	double R27_R3_r = k_R27_R3 * R27;
+	return  - R3_R3_r + R69_R3_r + R27_R3_r;
+}
+
+double boundedRateR3() {
+	double r = rateR3();
+	if (R3 + r &gt; R3Levels) {
+		return R3Levels - R3;
+	} else if (R3 + r &lt; 0) {
+		return -R3;
+	}
+	return r;
+}
+
+double rateR4() {
+	double R6_R5_R4_r = k_R6_R5_R4 * R5 * R6;
+	double R5_R4_r = k_R5_R4 * R5;
+	double R4_R4_r = k_R4_R4 * R4;
+	return R6_R5_R4_r + R5_R4_r - R4_R4_r;
+}
+
+double boundedRateR4() {
+	double r = rateR4();
+	if (R4 + r &gt; R4Levels) {
+		return R4Levels - R4;
+	} else if (R4 + r &lt; 0) {
+		return -R4;
+	}
+	return r;
+}
+
+double rateR5() {
+	double R5_R5_r = k_R5_R5 * R5;
+	double R70_R5_r = k_R70_R5 * R70;
+	double R66_R5_r = k_R66_R5 * R66;
+	return  - R5_R5_r - R70_R5_r + R66_R5_r;
+}
+
+double boundedRateR5() {
+	double r = rateR5();
+	if (R5 + r &gt; R5Levels) {
+		return R5Levels - R5;
+	} else if (R5 + r &lt; 0) {
+		return -R5;
+	}
+	return r;
+}
+
+double rateR6() {
+	double R6_R6_r = k_R6_R6 * R6;
+	double R77_R6_r = k_R77_R6 * R77;
+	return  - R6_R6_r + R77_R6_r;
+}
+
+double boundedRateR6() {
+	double r = rateR6();
+	if (R6 + r &gt; R6Levels) {
+		return R6Levels - R6;
+	} else if (R6 + r &lt; 0) {
+		return -R6;
+	}
+	return r;
+}
+
+double rateR7() {
+	double R91_R7_r = k_R91_R7 * R91;
+	double R7_R7_r = k_R7_R7 * R7;
+	double R9_R7_r = k_R9_R7 * R9;
+	return  - R91_R7_r - R7_R7_r + R9_R7_r;
+}
+
+double boundedRateR7() {
+	double r = rateR7();
+	if (R7 + r &gt; R7Levels) {
+		return R7Levels - R7;
+	} else if (R7 + r &lt; 0) {
+		return -R7;
+	}
+	return r;
+}
+
+double rateR8() {
+	double R8_R8_r = k_R8_R8 * R8;
+	double R64_R8_r = k_R64_R8 * R64;
+	double R44_R8_r = k_R44_R8 * R44;
+	return  - R8_R8_r + R64_R8_r + R44_R8_r;
+}
+
+double boundedRateR8() {
+	double r = rateR8();
+	if (R8 + r &gt; R8Levels) {
+		return R8Levels - R8;
+	} else if (R8 + r &lt; 0) {
+		return -R8;
+	}
+	return r;
+}
+
+double rateR9() {
+	return 0;
+}
+
+double boundedRateR9() {
+	return 0;
+}
+
+double rateR10() {
+	double R10_R10_r = k_R10_R10 * R10;
+	double R52_R10_r = k_R52_R10 * R52;
+	double R7_R52_R10_r = k_R7_R52_R10 * R52 * R7;
+	return  - R10_R10_r + R52_R10_r + R7_R52_R10_r;
+}
+
+double boundedRateR10() {
+	double r = rateR10();
+	if (R10 + r &gt; R10Levels) {
+		return R10Levels - R10;
+	} else if (R10 + r &lt; 0) {
+		return -R10;
+	}
+	return r;
+}
+
+double rateR11() {
+	double R46_R77_R11_r = k_R46_R77_R11 * R77 * R46;
+	double R11_R11_r = k_R11_R11 * R11;
+	double R77_R11_r = k_R77_R11 * R77;
+	return R46_R77_R11_r - R11_R11_r + R77_R11_r;
+}
+
+double boundedRateR11() {
+	double r = rateR11();
+	if (R11 + r &gt; R11Levels) {
+		return R11Levels - R11;
+	} else if (R11 + r &lt; 0) {
+		return -R11;
+	}
+	return r;
+}
+
+double rateR12() {
+	double R13_R12_r = k_R13_R12 * R13;
+	double R15_R13_R12_r = k_R15_R13_R12 * R13 * R15;
+	double R12_R12_r = k_R12_R12 * R12;
+	return R13_R12_r + R15_R13_R12_r - R12_R12_r;
+}
+
+double boundedRateR12() {
+	double r = rateR12();
+	if (R12 + r &gt; R12Levels) {
+		return R12Levels - R12;
+	} else if (R12 + r &lt; 0) {
+		return -R12;
+	}
+	return r;
+}
+
+double rateR13() {
+	double R14_R13_r = k_R14_R13 * R14;
+	double R80_R13_r = k_R80_R13 * R80;
+	double R41_R13_r = k_R41_R13 * R41;
+	double R13_R13_r = k_R13_R13 * R13;
+	return R14_R13_r - R80_R13_r - R41_R13_r - R13_R13_r;
+}
+
+double boundedRateR13() {
+	double r = rateR13();
+	if (R13 + r &gt; R13Levels) {
+		return R13Levels - R13;
+	} else if (R13 + r &lt; 0) {
+		return -R13;
+	}
+	return r;
+}
+
+double rateR14() {
+	return 0;
+}
+
+double boundedRateR14() {
+	return 0;
+}
+
+double rateR15() {
+	double R15_R15_r = k_R15_R15 * R15;
+	double R69_R15_r = k_R69_R15 * R69;
+	double R0_R15_r = k_R0_R15 * R0;
+	double R44_R15_r = k_R44_R15 * R44;
+	return  - R15_R15_r + R69_R15_r + R0_R15_r + R44_R15_r;
+}
+
+double boundedRateR15() {
+	double r = rateR15();
+	if (R15 + r &gt; R15Levels) {
+		return R15Levels - R15;
+	} else if (R15 + r &lt; 0) {
+		return -R15;
+	}
+	return r;
+}
+
+double rateR16() {
+	double R64_R16_r = k_R64_R16 * R64;
+	double R16_R16_r = k_R16_R16 * R16;
+	double R84_R16_r = k_R84_R16 * R84;
+	double R65_R16_r = k_R65_R16 * R65;
+	return R64_R16_r - R16_R16_r + R84_R16_r + R65_R16_r;
+}
+
+double boundedRateR16() {
+	double r = rateR16();
+	if (R16 + r &gt; R16Levels) {
+		return R16Levels - R16;
+	} else if (R16 + r &lt; 0) {
+		return -R16;
+	}
+	return r;
+}
+
+double rateR17() {
+	double R77_R17_r = k_R77_R17 * R77;
+	double R69_R17_r = k_R69_R17 * R69;
+	double R75_R17_r = k_R75_R17 * R75;
+	double R56_R17_r = k_R56_R17 * R56;
+	double R17_R17_r = k_R17_R17 * R17;
+	return R77_R17_r - R69_R17_r + R75_R17_r + R56_R17_r - R17_R17_r;
+}
+
+double boundedRateR17() {
+	double r = rateR17();
+	if (R17 + r &gt; R17Levels) {
+		return R17Levels - R17;
+	} else if (R17 + r &lt; 0) {
+		return -R17;
+	}
+	return r;
+}
+
+double rateR18() {
+	double R18_R18_r = k_R18_R18 * R18;
+	double R26_R18_r = k_R26_R18 * R26;
+	double R21_R18_r = k_R21_R18 * R21;
+	return  - R18_R18_r - R26_R18_r + R21_R18_r;
+}
+
+double boundedRateR18() {
+	double r = rateR18();
+	if (R18 + r &gt; R18Levels) {
+		return R18Levels - R18;
+	} else if (R18 + r &lt; 0) {
+		return -R18;
+	}
+	return r;
+}
+
+double rateR19() {
+	double R19_R19_r = k_R19_R19 * R19;
+	double R20_R19_r = k_R20_R19 * R20;
+	double R27_R19_r = k_R27_R19 * R27;
+	return  - R19_R19_r + R20_R19_r - R27_R19_r;
+}
+
+double boundedRateR19() {
+	double r = rateR19();
+	if (R19 + r &gt; R19Levels) {
+		return R19Levels - R19;
+	} else if (R19 + r &lt; 0) {
+		return -R19;
+	}
+	return r;
+}
+
+double rateR21() {
+	return 0;
+}
+
+double boundedRateR21() {
+	return 0;
+}
+
+double rateR20() {
+	return 0;
+}
+
+double boundedRateR20() {
+	return 0;
+}
+
+double rateR23() {
+	double R25_R24_R23_r = k_R25_R24_R23 * R24 * R25;
+	double R24_R23_r = k_R24_R23 * R24;
+	double R23_R23_r = k_R23_R23 * R23;
+	return R25_R24_R23_r + R24_R23_r - R23_R23_r;
+}
+
+double boundedRateR23() {
+	double r = rateR23();
+	if (R23 + r &gt; R23Levels) {
+		return R23Levels - R23;
+	} else if (R23 + r &lt; 0) {
+		return -R23;
+	}
+	return r;
+}
+
+double rateR24() {
+	double R92_R24_r = k_R92_R24 * R92;
+	double R60_R24_r = k_R60_R24 * R60;
+	double R24_R24_r = k_R24_R24 * R24;
+	double R83_R24_r = k_R83_R24 * R83;
+	return R92_R24_r - R60_R24_r - R24_R24_r + R83_R24_r;
+}
+
+double boundedRateR24() {
+	double r = rateR24();
+	if (R24 + r &gt; R24Levels) {
+		return R24Levels - R24;
+	} else if (R24 + r &lt; 0) {
+		return -R24;
+	}
+	return r;
+}
+
+double rateR25() {
+	double R81_R25_r = k_R81_R25 * R81;
+	double R25_R25_r = k_R25_R25 * R25;
+	double R56_R25_r = k_R56_R25 * R56;
+	double R60_R25_r = k_R60_R25 * R60;
+	double R83_R25_r = k_R83_R25 * R83;
+	return  - R81_R25_r - R25_R25_r + R56_R25_r - R60_R25_r + R83_R25_r;
+}
+
+double boundedRateR25() {
+	double r = rateR25();
+	if (R25 + r &gt; R25Levels) {
+		return R25Levels - R25;
+	} else if (R25 + r &lt; 0) {
+		return -R25;
+	}
+	return r;
+}
+
+double rateR26() {
+	double R26_R26_r = k_R26_R26 * R26;
+	double R75_R26_r = k_R75_R26 * R75;
+	double R39_R26_r = k_R39_R26 * R39;
+	return  - R26_R26_r - R75_R26_r + R39_R26_r;
+}
+
+double boundedRateR26() {
+	double r = rateR26();
+	if (R26 + r &gt; R26Levels) {
+		return R26Levels - R26;
+	} else if (R26 + r &lt; 0) {
+		return -R26;
+	}
+	return r;
+}
+
+double rateR27() {
+	double R70_R27_r = k_R70_R27 * R70;
+	double R76_R27_r = k_R76_R27 * R76;
+	double R27_R27_r = k_R27_R27 * R27;
+	return  - R70_R27_r + R76_R27_r - R27_R27_r;
+}
+
+double boundedRateR27() {
+	double r = rateR27();
+	if (R27 + r &gt; R27Levels) {
+		return R27Levels - R27;
+	} else if (R27 + r &lt; 0) {
+		return -R27;
+	}
+	return r;
+}
+
+double rateR28() {
+	double R29_R28_r = k_R29_R28 * R29;
+	double R28_R28_r = k_R28_R28 * R28;
+	double R30_R29_R28_r = k_R30_R29_R28 * R29 * R30;
+	return R29_R28_r - R28_R28_r + R30_R29_R28_r;
+}
+
+double boundedRateR28() {
+	double r = rateR28();
+	if (R28 + r &gt; R28Levels) {
+		return R28Levels - R28;
+	} else if (R28 + r &lt; 0) {
+		return -R28;
+	}
+	return r;
+}
+
+double rateR29() {
+	double R29_R29_r = k_R29_R29 * R29;
+	double R41_R29_r = k_R41_R29 * R41;
+	double R27_R29_r = k_R27_R29 * R27;
+	return  - R29_R29_r + R41_R29_r + R27_R29_r;
+}
+
+double boundedRateR29() {
+	double r = rateR29();
+	if (R29 + r &gt; R29Levels) {
+		return R29Levels - R29;
+	} else if (R29 + r &lt; 0) {
+		return -R29;
+	}
+	return r;
+}
+
+double rateR30() {
+	double R81_R30_r = k_R81_R30 * R81;
+	double R30_R30_r = k_R30_R30 * R30;
+	return R81_R30_r - R30_R30_r;
+}
+
+double boundedRateR30() {
+	double r = rateR30();
+	if (R30 + r &gt; R30Levels) {
+		return R30Levels - R30;
+	} else if (R30 + r &lt; 0) {
+		return -R30;
+	}
+	return r;
+}
+
+double rateR31() {
+	double R31_R31_r = k_R31_R31 * R31;
+	double R7_R31_r = k_R7_R31 * R7;
+	double R77_R31_r = k_R77_R31 * R77;
+	return  - R31_R31_r + R7_R31_r + R77_R31_r;
+}
+
+double boundedRateR31() {
+	double r = rateR31();
+	if (R31 + r &gt; R31Levels) {
+		return R31Levels - R31;
+	} else if (R31 + r &lt; 0) {
+		return -R31;
+	}
+	return r;
+}
+
+double rateR32() {
+	double R34_R33_R32_r = k_R34_R33_R32 * R33 * R34;
+	double R32_R32_r = k_R32_R32 * R32;
+	double R33_R32_r = k_R33_R32 * R33;
+	return R34_R33_R32_r - R32_R32_r + R33_R32_r;
+}
+
+double boundedRateR32() {
+	double r = rateR32();
+	if (R32 + r &gt; R32Levels) {
+		return R32Levels - R32;
+	} else if (R32 + r &lt; 0) {
+		return -R32;
+	}
+	return r;
+}
+
+double rateR33() {
+	double R31_R33_r = k_R31_R33 * R31;
+	double R33_R33_r = k_R33_R33 * R33;
+	double R83_R33_r = k_R83_R33 * R83;
+	return R31_R33_r - R33_R33_r - R83_R33_r;
+}
+
+double boundedRateR33() {
+	double r = rateR33();
+	if (R33 + r &gt; R33Levels) {
+		return R33Levels - R33;
+	} else if (R33 + r &lt; 0) {
+		return -R33;
+	}
+	return r;
+}
+
+double rateR34() {
+	double R34_R34_r = k_R34_R34 * R34;
+	double R77_R34_r = k_R77_R34 * R77;
+	return  - R34_R34_r + R77_R34_r;
+}
+
+double boundedRateR34() {
+	double r = rateR34();
+	if (R34 + r &gt; R34Levels) {
+		return R34Levels - R34;
+	} else if (R34 + r &lt; 0) {
+		return -R34;
+	}
+	return r;
+}
+
+double rateR35() {
+	double R35_R35_r = k_R35_R35 * R35;
+	double R36_R35_r = k_R36_R35 * R36;
+	double R37_R36_R35_r = k_R37_R36_R35 * R36 * R37;
+	return  - R35_R35_r + R36_R35_r + R37_R36_R35_r;
+}
+
+double boundedRateR35() {
+	double r = rateR35();
+	if (R35 + r &gt; R35Levels) {
+		return R35Levels - R35;
+	} else if (R35 + r &lt; 0) {
+		return -R35;
+	}
+	return r;
+}
+
+double rateR36() {
+	double R31_R36_r = k_R31_R36 * R31;
+	double R36_R36_r = k_R36_R36 * R36;
+	return R31_R36_r - R36_R36_r;
+}
+
+double boundedRateR36() {
+	double r = rateR36();
+	if (R36 + r &gt; R36Levels) {
+		return R36Levels - R36;
+	} else if (R36 + r &lt; 0) {
+		return -R36;
+	}
+	return r;
+}
+
+double rateR37() {
+	double R84_R37_r = k_R84_R37 * R84;
+	double R37_R37_r = k_R37_R37 * R37;
+	return R84_R37_r - R37_R37_r;
+}
+
+double boundedRateR37() {
+	double r = rateR37();
+	if (R37 + r &gt; R37Levels) {
+		return R37Levels - R37;
+	} else if (R37 + r &lt; 0) {
+		return -R37;
+	}
+	return r;
+}
+
+double rateR39() {
+	double R39_R39_r = k_R39_R39 * R39;
+	double R88_R39_r = k_R88_R39 * R88;
+	return  - R39_R39_r + R88_R39_r;
+}
+
+double boundedRateR39() {
+	double r = rateR39();
+	if (R39 + r &gt; R39Levels) {
+		return R39Levels - R39;
+	} else if (R39 + r &lt; 0) {
+		return -R39;
+	}
+	return r;
+}
+
+double rateR41() {
+	double R43_R41_r = k_R43_R41 * R43;
+	double R27_R41_r = k_R27_R41 * R27;
+	double R41_R41_r = k_R41_R41 * R41;
+	double R42_R27_R41_r = k_R42_R27_R41 * R27 * R42;
+	return R43_R41_r - R27_R41_r - R41_R41_r - R42_R27_R41_r;
+}
+
+double boundedRateR41() {
+	double r = rateR41();
+	if (R41 + r &gt; R41Levels) {
+		return R41Levels - R41;
+	} else if (R41 + r &lt; 0) {
+		return -R41;
+	}
+	return r;
+}
+
+double rateR42() {
+	double R42_R42_r = k_R42_R42 * R42;
+	double R69_R42_r = k_R69_R42 * R69;
+	double R70_R42_r = k_R70_R42 * R70;
+	return  - R42_R42_r + R69_R42_r - R70_R42_r;
+}
+
+double boundedRateR42() {
+	double r = rateR42();
+	if (R42 + r &gt; R42Levels) {
+		return R42Levels - R42;
+	} else if (R42 + r &lt; 0) {
+		return -R42;
+	}
+	return r;
+}
+
+double rateR43() {
+	return 0;
+}
+
+double boundedRateR43() {
+	return 0;
+}
+
+double rateR44() {
+	double R51_R44_r = k_R51_R44 * R51;
+	double R44_R44_r = k_R44_R44 * R44;
+	return R51_R44_r - R44_R44_r;
+}
+
+double boundedRateR44() {
+	double r = rateR44();
+	if (R44 + r &gt; R44Levels) {
+		return R44Levels - R44;
+	} else if (R44 + r &lt; 0) {
+		return -R44;
+	}
+	return r;
+}
+
+double rateR45() {
+	double R70_R45_r = k_R70_R45 * R70;
+	double R41_R45_r = k_R41_R45 * R41;
+	double R45_R45_r = k_R45_R45 * R45;
+	return R70_R45_r - R41_R45_r - R45_R45_r;
+}
+
+double boundedRateR45() {
+	double r = rateR45();
+	if (R45 + r &gt; R45Levels) {
+		return R45Levels - R45;
+	} else if (R45 + r &lt; 0) {
+		return -R45;
+	}
+	return r;
+}
+
+double rateR46() {
+	double R46_R46_r = k_R46_R46 * R46;
+	double R64_R46_r = k_R64_R46 * R64;
+	return  - R46_R46_r + R64_R46_r;
+}
+
+double boundedRateR46() {
+	double r = rateR46();
+	if (R46 + r &gt; R46Levels) {
+		return R46Levels - R46;
+	} else if (R46 + r &lt; 0) {
+		return -R46;
+	}
+	return r;
+}
+
+double rateR47() {
+	double R69_R47_r = k_R69_R47 * R69;
+	double R47_R47_r = k_R47_R47 * R47;
+	return R69_R47_r - R47_R47_r;
+}
+
+double boundedRateR47() {
+	double r = rateR47();
+	if (R47 + r &gt; R47Levels) {
+		return R47Levels - R47;
+	} else if (R47 + r &lt; 0) {
+		return -R47;
+	}
+	return r;
+}
+
+double rateR48() {
+	double R50_R49_R48_r = k_R50_R49_R48 * R49 * R50;
+	double R48_R48_r = k_R48_R48 * R48;
+	double R49_R48_r = k_R49_R48 * R49;
+	return R50_R49_R48_r - R48_R48_r + R49_R48_r;
+}
+
+double boundedRateR48() {
+	double r = rateR48();
+	if (R48 + r &gt; R48Levels) {
+		return R48Levels - R48;
+	} else if (R48 + r &lt; 0) {
+		return -R48;
+	}
+	return r;
+}
+
+double rateR49() {
+	double R47_R49_r = k_R47_R49 * R47;
+	double R49_R49_r = k_R49_R49 * R49;
+	return R47_R49_r - R49_R49_r;
+}
+
+double boundedRateR49() {
+	double r = rateR49();
+	if (R49 + r &gt; R49Levels) {
+		return R49Levels - R49;
+	} else if (R49 + r &lt; 0) {
+		return -R49;
+	}
+	return r;
+}
+
+double rateR50() {
+	double R50_R50_r = k_R50_R50 * R50;
+	double R64_R50_r = k_R64_R50 * R64;
+	double R80_R50_r = k_R80_R50 * R80;
+	double R87_R50_r = k_R87_R50 * R87;
+	return  - R50_R50_r + R64_R50_r - R80_R50_r + R87_R50_r;
+}
+
+double boundedRateR50() {
+	double r = rateR50();
+	if (R50 + r &gt; R50Levels) {
+		return R50Levels - R50;
+	} else if (R50 + r &lt; 0) {
+		return -R50;
+	}
+	return r;
+}
+
+double rateR51() {
+	double R51_R51_r = k_R51_R51 * R51;
+	double R64_R51_r = k_R64_R51 * R64;
+	double R77_R51_r = k_R77_R51 * R77;
+	double R83_R51_r = k_R83_R51 * R83;
+	double R3_R51_r = k_R3_R51 * R3;
+	double R90_R51_r = k_R90_R51 * R90;
+	return  - R51_R51_r + R64_R51_r + R77_R51_r + R83_R51_r + R3_R51_r - R90_R51_r;
+}
+
+double boundedRateR51() {
+	double r = rateR51();
+	if (R51 + r &gt; R51Levels) {
+		return R51Levels - R51;
+	} else if (R51 + r &lt; 0) {
+		return -R51;
+	}
+	return r;
+}
+
+double rateR52() {
+	double R55_R53_R52_r = k_R55_R53_R52 * R53 * R55;
+	double R53_R52_r = k_R53_R52 * R53;
+	double R52_R52_r = k_R52_R52 * R52;
+	return R55_R53_R52_r + R53_R52_r - R52_R52_r;
+}
+
+double boundedRateR52() {
+	double r = rateR52();
+	if (R52 + r &gt; R52Levels) {
+		return R52Levels - R52;
+	} else if (R52 + r &lt; 0) {
+		return -R52;
+	}
+	return r;
+}
+
+double rateR53() {
+	double R7_R53_r = k_R7_R53 * R7;
+	double R53_R53_r = k_R53_R53 * R53;
+	double R84_R53_r = k_R84_R53 * R84;
+	return R7_R53_r - R53_R53_r - R84_R53_r;
+}
+
+double boundedRateR53() {
+	double r = rateR53();
+	if (R53 + r &gt; R53Levels) {
+		return R53Levels - R53;
+	} else if (R53 + r &lt; 0) {
+		return -R53;
+	}
+	return r;
+}
+
+double rateR54() {
+	return 0;
+}
+
+double boundedRateR54() {
+	return 0;
+}
+
+double rateR55() {
+	double R55_R55_r = k_R55_R55 * R55;
+	double R7_R55_r = k_R7_R55 * R7;
+	double R54_R55_r = k_R54_R55 * R54;
+	double R77_R55_r = k_R77_R55 * R77;
+	return  - R55_R55_r + R7_R55_r + R54_R55_r + R77_R55_r;
+}
+
+double boundedRateR55() {
+	double r = rateR55();
+	if (R55 + r &gt; R55Levels) {
+		return R55Levels - R55;
+	} else if (R55 + r &lt; 0) {
+		return -R55;
+	}
+	return r;
+}
+
+double rateR56() {
+	double R58_R57_R56_r = k_R58_R57_R56 * R57 * R58;
+	double R57_R56_r = k_R57_R56 * R57;
+	double R56_R56_r = k_R56_R56 * R56;
+	return R58_R57_R56_r + R57_R56_r - R56_R56_r;
+}
+
+double boundedRateR56() {
+	double r = rateR56();
+	if (R56 + r &gt; R56Levels) {
+		return R56Levels - R56;
+	} else if (R56 + r &lt; 0) {
+		return -R56;
+	}
+	return r;
+}
+
+double rateR57() {
+	double R83_R57_r = k_R83_R57 * R83;
+	double R92_R57_r = k_R92_R57 * R92;
+	double R45_R57_r = k_R45_R57 * R45;
+	double R81_R57_r = k_R81_R57 * R81;
+	double R57_R57_r = k_R57_R57 * R57;
+	return R83_R57_r + R92_R57_r - R45_R57_r - R81_R57_r - R57_R57_r;
+}
+
+double boundedRateR57() {
+	double r = rateR57();
+	if (R57 + r &gt; R57Levels) {
+		return R57Levels - R57;
+	} else if (R57 + r &lt; 0) {
+		return -R57;
+	}
+	return r;
+}
+
+double rateR58() {
+	double R83_R58_r = k_R83_R58 * R83;
+	double R58_R58_r = k_R58_R58 * R58;
+	double R77_R58_r = k_R77_R58 * R77;
+	return R83_R58_r - R58_R58_r + R77_R58_r;
+}
+
+double boundedRateR58() {
+	double r = rateR58();
+	if (R58 + r &gt; R58Levels) {
+		return R58Levels - R58;
+	} else if (R58 + r &lt; 0) {
+		return -R58;
+	}
+	return r;
+}
+
+double rateR59() {
+	double R59_R59_r = k_R59_R59 * R59;
+	double R44_R59_r = k_R44_R59 * R44;
+	double R64_R59_r = k_R64_R59 * R64;
+	double R92_R59_r = k_R92_R59 * R92;
+	double R11_R92_R59_r = k_R11_R92_R59 * R92 * R11;
+	double R77_R59_r = k_R77_R59 * R77;
+	double R46_R59_r = k_R46_R59 * R46;
+	return  - R59_R59_r - R44_R59_r + R64_R59_r + R92_R59_r + R11_R92_R59_r + R77_R59_r + R46_R59_r;
+}
+
+double boundedRateR59() {
+	double r = rateR59();
+	if (R59 + r &gt; R59Levels) {
+		return R59Levels - R59;
+	} else if (R59 + r &lt; 0) {
+		return -R59;
+	}
+	return r;
+}
+
+double rateR60() {
+	double R60_R60_r = k_R60_R60 * R60;
+	double R61_R60_r = k_R61_R60 * R61;
+	double R63_R61_R60_r = k_R63_R61_R60 * R61 * R63;
+	return  - R60_R60_r + R61_R60_r + R63_R61_R60_r;
+}
+
+double boundedRateR60() {
+	double r = rateR60();
+	if (R60 + r &gt; R60Levels) {
+		return R60Levels - R60;
+	} else if (R60 + r &lt; 0) {
+		return -R60;
+	}
+	return r;
+}
+
+double rateR61() {
+	double R23_R61_r = k_R23_R61 * R23;
+	double R61_R61_r = k_R61_R61 * R61;
+	double R62_R61_r = k_R62_R61 * R62;
+	return  - R23_R61_r - R61_R61_r + R62_R61_r;
+}
+
+double boundedRateR61() {
+	double r = rateR61();
+	if (R61 + r &gt; R61Levels) {
+		return R61Levels - R61;
+	} else if (R61 + r &lt; 0) {
+		return -R61;
+	}
+	return r;
+}
+
+double rateR62() {
+	return 0;
+}
+
+double boundedRateR62() {
+	return 0;
+}
+
+double rateR63() {
+	double R63_R63_r = k_R63_R63 * R63;
+	double R83_R63_r = k_R83_R63 * R83;
+	double R23_R63_r = k_R23_R63 * R23;
+	double R81_R63_r = k_R81_R63 * R81;
+	return  - R63_R63_r + R83_R63_r - R23_R63_r + R81_R63_r;
+}
+
+double boundedRateR63() {
+	double r = rateR63();
+	if (R63 + r &gt; R63Levels) {
+		return R63Levels - R63;
+	} else if (R63 + r &lt; 0) {
+		return -R63;
+	}
+	return r;
+}
+
+double rateR64() {
+	double R4_R64_r = k_R4_R64 * R4;
+	double R32_R64_r = k_R32_R64 * R32;
+	double R64_R64_r = k_R64_R64 * R64;
+	return R4_R64_r + R32_R64_r - R64_R64_r;
+}
+
+double boundedRateR64() {
+	double r = rateR64();
+	if (R64 + r &gt; R64Levels) {
+		return R64Levels - R64;
+	} else if (R64 + r &lt; 0) {
+		return -R64;
+	}
+	return r;
+}
+
+double rateR65() {
+	double R71_R65_r = k_R71_R65 * R71;
+	double R65_R65_r = k_R65_R65 * R65;
+	double R84_R65_r = k_R84_R65 * R84;
+	return R71_R65_r - R65_R65_r + R84_R65_r;
+}
+
+double boundedRateR65() {
+	double r = rateR65();
+	if (R65 + r &gt; R65Levels) {
+		return R65Levels - R65;
+	} else if (R65 + r &lt; 0) {
+		return -R65;
+	}
+	return r;
+}
+
+double rateR66() {
+	double R66_R66_r = k_R66_R66 * R66;
+	double R68_R67_R66_r = k_R68_R67_R66 * R67 * R68;
+	double R67_R66_r = k_R67_R66 * R67;
+	return  - R66_R66_r + R68_R67_R66_r + R67_R66_r;
+}
+
+double boundedRateR66() {
+	double r = rateR66();
+	if (R66 + r &gt; R66Levels) {
+		return R66Levels - R66;
+	} else if (R66 + r &lt; 0) {
+		return -R66;
+	}
+	return r;
+}
+
+double rateR67() {
+	double R48_R67_r = k_R48_R67 * R48;
+	double R76_R67_r = k_R76_R67 * R76;
+	double R67_R67_r = k_R67_R67 * R67;
+	return R48_R67_r + R76_R67_r - R67_R67_r;
+}
+
+double boundedRateR67() {
+	double r = rateR67();
+	if (R67 + r &gt; R67Levels) {
+		return R67Levels - R67;
+	} else if (R67 + r &lt; 0) {
+		return -R67;
+	}
+	return r;
+}
+
+double rateR68() {
+	double R77_R68_r = k_R77_R68 * R77;
+	double R68_R68_r = k_R68_R68 * R68;
+	return R77_R68_r - R68_R68_r;
+}
+
+double boundedRateR68() {
+	double r = rateR68();
+	if (R68 + r &gt; R68Levels) {
+		return R68Levels - R68;
+	} else if (R68 + r &lt; 0) {
+		return -R68;
+	}
+	return r;
+}
+
+double rateR69() {
+	double R47_R69_r = k_R47_R69 * R47;
+	double R69_R69_r = k_R69_R69 * R69;
+	double R71_R69_r = k_R71_R69 * R71;
+	return R47_R69_r - R69_R69_r + R71_R69_r;
+}
+
+double boundedRateR69() {
+	double r = rateR69();
+	if (R69 + r &gt; R69Levels) {
+		return R69Levels - R69;
+	} else if (R69 + r &lt; 0) {
+		return -R69;
+	}
+	return r;
+}
+
+double rateR70() {
+	double R69_R70_r = k_R69_R70 * R69;
+	double R70_R70_r = k_R70_R70 * R70;
+	return R69_R70_r - R70_R70_r;
+}
+
+double boundedRateR70() {
+	double r = rateR70();
+	if (R70 + r &gt; R70Levels) {
+		return R70Levels - R70;
+	} else if (R70 + r &lt; 0) {
+		return -R70;
+	}
+	return r;
+}
+
+double rateR71() {
+	double R73_R72_R71_r = k_R73_R72_R71 * R72 * R73;
+	double R72_R71_r = k_R72_R71 * R72;
+	double R71_R71_r = k_R71_R71 * R71;
+	return R73_R72_R71_r + R72_R71_r - R71_R71_r;
+}
+
+double boundedRateR71() {
+	double r = rateR71();
+	if (R71 + r &gt; R71Levels) {
+		return R71Levels - R71;
+	} else if (R71 + r &lt; 0) {
+		return -R71;
+	}
+	return r;
+}
+
+double rateR72() {
+	double R72_R72_r = k_R72_R72 * R72;
+	double R74_R72_r = k_R74_R72 * R74;
+	return  - R72_R72_r + R74_R72_r;
+}
+
+double boundedRateR72() {
+	double r = rateR72();
+	if (R72 + r &gt; R72Levels) {
+		return R72Levels - R72;
+	} else if (R72 + r &lt; 0) {
+		return -R72;
+	}
+	return r;
+}
+
+double rateR73() {
+	double R83_R73_r = k_R83_R73 * R83;
+	double R44_R73_r = k_R44_R73 * R44;
+	double R73_R73_r = k_R73_R73 * R73;
+	double R80_R73_r = k_R80_R73 * R80;
+	double R84_R73_r = k_R84_R73 * R84;
+	return R83_R73_r + R44_R73_r - R73_R73_r - R80_R73_r + R84_R73_r;
+}
+
+double boundedRateR73() {
+	double r = rateR73();
+	if (R73 + r &gt; R73Levels) {
+		return R73Levels - R73;
+	} else if (R73 + r &lt; 0) {
+		return -R73;
+	}
+	return r;
+}
+
+double rateR74() {
+	double R44_R84_R74_r = k_R44_R84_R74 * R84 * R44;
+	double R81_R74_r = k_R81_R74 * R81;
+	double R69_R74_r = k_R69_R74 * R69;
+	double R74_R74_r = k_R74_R74 * R74;
+	double R84_R74_r = k_R84_R74 * R84;
+	return R44_R84_R74_r + R81_R74_r + R69_R74_r - R74_R74_r + R84_R74_r;
+}
+
+double boundedRateR74() {
+	double r = rateR74();
+	if (R74 + r &gt; R74Levels) {
+		return R74Levels - R74;
+	} else if (R74 + r &lt; 0) {
+		return -R74;
+	}
+	return r;
+}
+
+double rateR75() {
+	double R75_R75_r = k_R75_R75 * R75;
+	double R8_R75_r = k_R8_R75 * R8;
+	double R82_R75_r = k_R82_R75 * R82;
+	return  - R75_R75_r + R8_R75_r - R82_R75_r;
+}
+
+double boundedRateR75() {
+	double r = rateR75();
+	if (R75 + r &gt; R75Levels) {
+		return R75Levels - R75;
+	} else if (R75 + r &lt; 0) {
+		return -R75;
+	}
+	return r;
+}
+
+double rateR76() {
+	double R32_R76_r = k_R32_R76 * R32;
+	double R8_R76_r = k_R8_R76 * R8;
+	double R76_R76_r = k_R76_R76 * R76;
+	double R88_R76_r = k_R88_R76 * R88;
+	double R35_R76_r = k_R35_R76 * R35;
+	return R32_R76_r + R8_R76_r - R76_R76_r + R88_R76_r + R35_R76_r;
+}
+
+double boundedRateR76() {
+	double r = rateR76();
+	if (R76 + r &gt; R76Levels) {
+		return R76Levels - R76;
+	} else if (R76 + r &lt; 0) {
+		return -R76;
+	}
+	return r;
+}
+
+double rateR77() {
+	double R79_R78_R77_r = k_R79_R78_R77 * R78 * R79;
+	double R77_R77_r = k_R77_R77 * R77;
+	double R78_R77_r = k_R78_R77 * R78;
+	return R79_R78_R77_r - R77_R77_r + R78_R77_r;
+}
+
+double boundedRateR77() {
+	double r = rateR77();
+	if (R77 + r &gt; R77Levels) {
+		return R77Levels - R77;
+	} else if (R77 + r &lt; 0) {
+		return -R77;
+	}
+	return r;
+}
+
+double rateR78() {
+	double R12_R78_r = k_R12_R78 * R12;
+	double R60_R78_r = k_R60_R78 * R60;
+	double R23_R78_r = k_R23_R78 * R23;
+	double R27_R78_r = k_R27_R78 * R27;
+	double R69_R78_r = k_R69_R78 * R69;
+	double R45_R78_r = k_R45_R78 * R45;
+	double R84_R78_r = k_R84_R78 * R84;
+	double R81_R45_R78_r = k_R81_R45_R78 * R45 * R81;
+	double R4_R78_r = k_R4_R78 * R4;
+	double R78_R78_r = k_R78_R78 * R78;
+	return  - R12_R78_r - R60_R78_r + R23_R78_r + R27_R78_r + R69_R78_r - R45_R78_r - R84_R78_r - R81_R45_R78_r + R4_R78_r - R78_R78_r;
+}
+
+double boundedRateR78() {
+	double r = rateR78();
+	if (R78 + r &gt; R78Levels) {
+		return R78Levels - R78;
+	} else if (R78 + r &lt; 0) {
+		return -R78;
+	}
+	return r;
+}
+
+double rateR79() {
+	double R60_R79_r = k_R60_R79 * R60;
+	double R79_R79_r = k_R79_R79 * R79;
+	double R23_R79_r = k_R23_R79 * R23;
+	double R83_R65_R79_r = k_R83_R65_R79 * R65 * R83;
+	double R65_R79_r = k_R65_R79 * R65;
+	double R77_R79_r = k_R77_R79 * R77;
+	double R56_R79_r = k_R56_R79 * R56;
+	double R46_R79_r = k_R46_R79 * R46;
+	double R52_R79_r = k_R52_R79 * R52;
+	return  - R60_R79_r - R79_R79_r + R23_R79_r - R83_R65_R79_r - R65_R79_r + R77_R79_r + R56_R79_r + R46_R79_r + R52_R79_r;
+}
+
+double boundedRateR79() {
+	double r = rateR79();
+	if (R79 + r &gt; R79Levels) {
+		return R79Levels - R79;
+	} else if (R79 + r &lt; 0) {
+		return -R79;
+	}
+	return r;
+}
+
+double rateR80() {
+	double R32_R80_r = k_R32_R80 * R32;
+	double R83_R80_r = k_R83_R80 * R83;
+	double R48_R80_r = k_R48_R80 * R48;
+	double R80_R80_r = k_R80_R80 * R80;
+	double R35_R80_r = k_R35_R80 * R35;
+	return R32_R80_r - R83_R80_r + R48_R80_r - R80_R80_r + R35_R80_r;
+}
+
+double boundedRateR80() {
+	double r = rateR80();
+	if (R80 + r &gt; R80Levels) {
+		return R80Levels - R80;
+	} else if (R80 + r &lt; 0) {
+		return -R80;
+	}
+	return r;
+}
+
+double rateR81() {
+	double R12_R81_r = k_R12_R81 * R12;
+	double R87_R81_r = k_R87_R81 * R87;
+	double R82_R81_r = k_R82_R81 * R82;
+	double R27_R81_r = k_R27_R81 * R27;
+	double R81_R81_r = k_R81_R81 * R81;
+	return  - R12_R81_r + R87_R81_r - R82_R81_r - R27_R81_r - R81_R81_r;
+}
+
+double boundedRateR81() {
+	double r = rateR81();
+	if (R81 + r &gt; R81Levels) {
+		return R81Levels - R81;
+	} else if (R81 + r &lt; 0) {
+		return -R81;
+	}
+	return r;
+}
+
+double rateR82() {
+	double R83_R82_r = k_R83_R82 * R83;
+	double R64_R82_r = k_R64_R82 * R64;
+	double R82_R82_r = k_R82_R82 * R82;
+	double R81_R82_r = k_R81_R82 * R81;
+	double R80_R82_r = k_R80_R82 * R80;
+	return R83_R82_r + R64_R82_r - R82_R82_r + R81_R82_r + R80_R82_r;
+}
+
+double boundedRateR82() {
+	double r = rateR82();
+	if (R82 + r &gt; R82Levels) {
+		return R82Levels - R82;
+	} else if (R82 + r &lt; 0) {
+		return -R82;
+	}
+	return r;
+}
+
+double rateR83() {
+	double R75_R83_r = k_R75_R83 * R75;
+	double R83_R83_r = k_R83_R83 * R83;
+	double R27_R83_r = k_R27_R83 * R27;
+	return R75_R83_r - R83_R83_r - R27_R83_r;
+}
+
+double boundedRateR83() {
+	double r = rateR83();
+	if (R83 + r &gt; R83Levels) {
+		return R83Levels - R83;
+	} else if (R83 + r &lt; 0) {
+		return -R83;
+	}
+	return r;
+}
+
+double rateR84() {
+	double R86_R85_R84_r = k_R86_R85_R84 * R85 * R86;
+	double R85_R84_r = k_R85_R84 * R85;
+	double R84_R84_r = k_R84_R84 * R84;
+	return R86_R85_R84_r + R85_R84_r - R84_R84_r;
+}
+
+double boundedRateR84() {
+	double r = rateR84();
+	if (R84 + r &gt; R84Levels) {
+		return R84Levels - R84;
+	} else if (R84 + r &lt; 0) {
+		return -R84;
+	}
+	return r;
+}
+
+double rateR85() {
+	double R7_R85_r = k_R7_R85 * R7;
+	double R77_R85_r = k_R77_R85 * R77;
+	double R69_R85_r = k_R69_R85 * R69;
+	double R85_R85_r = k_R85_R85 * R85;
+	double R81_R85_r = k_R81_R85 * R81;
+	return  - R7_R85_r - R77_R85_r + R69_R85_r - R85_R85_r + R81_R85_r;
+}
+
+double boundedRateR85() {
+	double r = rateR85();
+	if (R85 + r &gt; R85Levels) {
+		return R85Levels - R85;
+	} else if (R85 + r &lt; 0) {
+		return -R85;
+	}
+	return r;
+}
+
+double rateR86() {
+	double R92_R86_r = k_R92_R86 * R92;
+	double R86_R86_r = k_R86_R86 * R86;
+	double R65_R86_r = k_R65_R86 * R65;
+	double R69_R86_r = k_R69_R86 * R69;
+	double R84_R86_r = k_R84_R86 * R84;
+	return R92_R86_r - R86_R86_r + R65_R86_r + R69_R86_r + R84_R86_r;
+}
+
+double boundedRateR86() {
+	double r = rateR86();
+	if (R86 + r &gt; R86Levels) {
+		return R86Levels - R86;
+	} else if (R86 + r &lt; 0) {
+		return -R86;
+	}
+	return r;
+}
+
+double rateR87() {
+	double R44_R87_r = k_R44_R87 * R44;
+	double R87_R87_r = k_R87_R87 * R87;
+	return R44_R87_r - R87_R87_r;
+}
+
+double boundedRateR87() {
+	double r = rateR87();
+	if (R87 + r &gt; R87Levels) {
+		return R87Levels - R87;
+	} else if (R87 + r &lt; 0) {
+		return -R87;
+	}
+	return r;
+}
+
+double rateR88() {
+	double R60_R88_r = k_R60_R88 * R60;
+	double R44_R88_r = k_R44_R88 * R44;
+	double R88_R88_r = k_R88_R88 * R88;
+	double R10_R88_r = k_R10_R88 * R10;
+	double R89_R88_r = k_R89_R88 * R89;
+	return  - R60_R88_r + R44_R88_r - R88_R88_r + R10_R88_r + R89_R88_r;
+}
+
+double boundedRateR88() {
+	double r = rateR88();
+	if (R88 + r &gt; R88Levels) {
+		return R88Levels - R88;
+	} else if (R88 + r &lt; 0) {
+		return -R88;
+	}
+	return r;
+}
+
+double rateR89() {
+	return 0;
+}
+
+double boundedRateR89() {
+	return 0;
+}
+
+double rateR90() {
+	double R28_R90_r = k_R28_R90 * R28;
+	double R64_R90_r = k_R64_R90 * R64;
+	double R90_R90_r = k_R90_R90 * R90;
+	return R28_R90_r + R64_R90_r - R90_R90_r;
+}
+
+double boundedRateR90() {
+	double r = rateR90();
+	if (R90 + r &gt; R90Levels) {
+		return R90Levels - R90;
+	} else if (R90 + r &lt; 0) {
+		return -R90;
+	}
+	return r;
+}
+
+double rateR91() {
+	double R18_R19_R91_r = k_R18_R19_R91 * R19 * R18;
+	double R19_R91_r = k_R19_R91 * R19;
+	double R91_R91_r = k_R91_R91 * R91;
+	return R18_R19_R91_r + R19_R91_r - R91_R91_r;
+}
+
+double boundedRateR91() {
+	double r = rateR91();
+	if (R91 + r &gt; R91Levels) {
+		return R91Levels - R91;
+	} else if (R91 + r &lt; 0) {
+		return -R91;
+	}
+	return r;
+}
+
+double rateR92() {
+	double R92_R92_r = k_R92_R92 * R92;
+	double R8_R92_r = k_R8_R92 * R8;
+	double R87_R92_r = k_R87_R92 * R87;
+	return  - R92_R92_r + R8_R92_r + R87_R92_r;
+}
+
+double boundedRateR92() {
+	double r = rateR92();
+	if (R92 + r &gt; R92Levels) {
+		return R92Levels - R92;
+	} else if (R92 + r &lt; 0) {
+		return -R92;
+	}
+	return r;
+}
+
+</declaration>
+      
+    <location id="id0" x="-314" y="-102">
+          
+      <label kind="invariant" x="-324" y="-85">R0' == boundedRateR0()
+&amp;&amp;
+R1' == boundedRateR1()
+&amp;&amp;
+R2' == boundedRateR2()
+&amp;&amp;
+R3' == boundedRateR3()
+&amp;&amp;
+R4' == boundedRateR4()
+&amp;&amp;
+R5' == boundedRateR5()
+&amp;&amp;
+R6' == boundedRateR6()
+&amp;&amp;
+R7' == boundedRateR7()
+&amp;&amp;
+R8' == boundedRateR8()
+&amp;&amp;
+R9' == boundedRateR9()
+&amp;&amp;
+R10' == boundedRateR10()
+&amp;&amp;
+R11' == boundedRateR11()
+&amp;&amp;
+R12' == boundedRateR12()
+&amp;&amp;
+R13' == boundedRateR13()
+&amp;&amp;
+R14' == boundedRateR14()
+&amp;&amp;
+R15' == boundedRateR15()
+&amp;&amp;
+R16' == boundedRateR16()
+&amp;&amp;
+R17' == boundedRateR17()
+&amp;&amp;
+R18' == boundedRateR18()
+&amp;&amp;
+R19' == boundedRateR19()
+&amp;&amp;
+R21' == boundedRateR21()
+&amp;&amp;
+R20' == boundedRateR20()
+&amp;&amp;
+R23' == boundedRateR23()
+&amp;&amp;
+R24' == boundedRateR24()
+&amp;&amp;
+R25' == boundedRateR25()
+&amp;&amp;
+R26' == boundedRateR26()
+&amp;&amp;
+R27' == boundedRateR27()
+&amp;&amp;
+R28' == boundedRateR28()
+&amp;&amp;
+R29' == boundedRateR29()
+&amp;&amp;
+R30' == boundedRateR30()
+&amp;&amp;
+R31' == boundedRateR31()
+&amp;&amp;
+R32' == boundedRateR32()
+&amp;&amp;
+R33' == boundedRateR33()
+&amp;&amp;
+R34' == boundedRateR34()
+&amp;&amp;
+R35' == boundedRateR35()
+&amp;&amp;
+R36' == boundedRateR36()
+&amp;&amp;
+R37' == boundedRateR37()
+&amp;&amp;
+R39' == boundedRateR39()
+&amp;&amp;
+R41' == boundedRateR41()
+&amp;&amp;
+R42' == boundedRateR42()
+&amp;&amp;
+R43' == boundedRateR43()
+&amp;&amp;
+R44' == boundedRateR44()
+&amp;&amp;
+R45' == boundedRateR45()
+&amp;&amp;
+R46' == boundedRateR46()
+&amp;&amp;
+R47' == boundedRateR47()
+&amp;&amp;
+R48' == boundedRateR48()
+&amp;&amp;
+R49' == boundedRateR49()
+&amp;&amp;
+R50' == boundedRateR50()
+&amp;&amp;
+R51' == boundedRateR51()
+&amp;&amp;
+R52' == boundedRateR52()
+&amp;&amp;
+R53' == boundedRateR53()
+&amp;&amp;
+R54' == boundedRateR54()
+&amp;&amp;
+R55' == boundedRateR55()
+&amp;&amp;
+R56' == boundedRateR56()
+&amp;&amp;
+R57' == boundedRateR57()
+&amp;&amp;
+R58' == boundedRateR58()
+&amp;&amp;
+R59' == boundedRateR59()
+&amp;&amp;
+R60' == boundedRateR60()
+&amp;&amp;
+R61' == boundedRateR61()
+&amp;&amp;
+R62' == boundedRateR62()
+&amp;&amp;
+R63' == boundedRateR63()
+&amp;&amp;
+R64' == boundedRateR64()
+&amp;&amp;
+R65' == boundedRateR65()
+&amp;&amp;
+R66' == boundedRateR66()
+&amp;&amp;
+R67' == boundedRateR67()
+&amp;&amp;
+R68' == boundedRateR68()
+&amp;&amp;
+R69' == boundedRateR69()
+&amp;&amp;
+R70' == boundedRateR70()
+&amp;&amp;
+R71' == boundedRateR71()
+&amp;&amp;
+R72' == boundedRateR72()
+&amp;&amp;
+R73' == boundedRateR73()
+&amp;&amp;
+R74' == boundedRateR74()
+&amp;&amp;
+R75' == boundedRateR75()
+&amp;&amp;
+R76' == boundedRateR76()
+&amp;&amp;
+R77' == boundedRateR77()
+&amp;&amp;
+R78' == boundedRateR78()
+&amp;&amp;
+R79' == boundedRateR79()
+&amp;&amp;
+R80' == boundedRateR80()
+&amp;&amp;
+R81' == boundedRateR81()
+&amp;&amp;
+R82' == boundedRateR82()
+&amp;&amp;
+R83' == boundedRateR83()
+&amp;&amp;
+R84' == boundedRateR84()
+&amp;&amp;
+R85' == boundedRateR85()
+&amp;&amp;
+R86' == boundedRateR86()
+&amp;&amp;
+R87' == boundedRateR87()
+&amp;&amp;
+R88' == boundedRateR88()
+&amp;&amp;
+R89' == boundedRateR89()
+&amp;&amp;
+R90' == boundedRateR90()
+&amp;&amp;
+R91' == boundedRateR91()
+&amp;&amp;
+R92' == boundedRateR92()</label>
+        
+    </location>
+      
+    <location id="id1" x="-448" y="-102">
+          
+      <committed/>
+        
+    </location>
+      
+    <init ref="id1"/>
+      
+    <transition>
+          
+      <source ref="id1"/>
+          
+      <target ref="id0"/>
+          
+      <label kind="select" x="-430" y="-118"/>
+          
+      <label kind="assignment" x="-430" y="-102">R0 = R0Init,
+R1 = R1Init,
+R2 = R2Init,
+R3 = R3Init,
+R4 = R4Init,
+R5 = R5Init,
+R6 = R6Init,
+R7 = R7Init,
+R8 = R8Init,
+R9 = R9Init,
+R10 = R10Init,
+R11 = R11Init,
+R12 = R12Init,
+R13 = R13Init,
+R14 = R14Init,
+R15 = R15Init,
+R16 = R16Init,
+R17 = R17Init,
+R18 = R18Init,
+R19 = R19Init,
+R21 = R21Init,
+R20 = R20Init,
+R23 = R23Init,
+R24 = R24Init,
+R25 = R25Init,
+R26 = R26Init,
+R27 = R27Init,
+R28 = R28Init,
+R29 = R29Init,
+R30 = R30Init,
+R31 = R31Init,
+R32 = R32Init,
+R33 = R33Init,
+R34 = R34Init,
+R35 = R35Init,
+R36 = R36Init,
+R37 = R37Init,
+R39 = R39Init,
+R41 = R41Init,
+R42 = R42Init,
+R43 = R43Init,
+R44 = R44Init,
+R45 = R45Init,
+R46 = R46Init,
+R47 = R47Init,
+R48 = R48Init,
+R49 = R49Init,
+R50 = R50Init,
+R51 = R51Init,
+R52 = R52Init,
+R53 = R53Init,
+R54 = R54Init,
+R55 = R55Init,
+R56 = R56Init,
+R57 = R57Init,
+R58 = R58Init,
+R59 = R59Init,
+R60 = R60Init,
+R61 = R61Init,
+R62 = R62Init,
+R63 = R63Init,
+R64 = R64Init,
+R65 = R65Init,
+R66 = R66Init,
+R67 = R67Init,
+R68 = R68Init,
+R69 = R69Init,
+R70 = R70Init,
+R71 = R71Init,
+R72 = R72Init,
+R73 = R73Init,
+R74 = R74Init,
+R75 = R75Init,
+R76 = R76Init,
+R77 = R77Init,
+R78 = R78Init,
+R79 = R79Init,
+R80 = R80Init,
+R81 = R81Init,
+R82 = R82Init,
+R83 = R83Init,
+R84 = R84Init,
+R85 = R85Init,
+R86 = R86Init,
+R87 = R87Init,
+R88 = R88Init,
+R89 = R89Init,
+R90 = R90Init,
+R91 = R91Init,
+R92 = R92Init</label>
+          
+      <label kind="probability" x="-430" y="-86">1</label>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+model = ODE_Model();
+
+
+system model;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=1440] { R61, R60, R63, R62, R21, R65, R20, R64, R23, R67, R66, R25, R69, R24, R68, R27, R26, R29, R28, R0, R1, R2, R3, R4, R5, R6, R7, R8, R9, R70, R72, R71, R30, R74, R73, R32, R76, R31, R75, R34, R78, R33, R77, R36, R35, R79, R37, R39, R81, R80, R83, R82, R41, R85, R84, R43, R87, R42, R86, R45, R89, R44, R88, R47, R46, R49, R48, R90, R92, R91, R50, R52, R51, R10, R54, R53, R12, R56, R11, R55, R14, R58, R13, R57, R16, R15, R59, R18, R17, R19 }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

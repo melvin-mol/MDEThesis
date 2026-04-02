@@ -1,0 +1,98 @@
+<nta>
+  
+  <declaration>
+// Place global declarations here.
+clock globalTime;
+
+//R0 = A
+clock R0;
+const int R0Init = 5;
+const int R0Levels = 5;
+
+//R1 = B
+clock R1;
+const int R1Init = 0;
+const int R1Levels = 3;
+
+//Reaction R0 (A) --&gt; R1 (B)
+const double k_R0_R1 = 0.004;
+
+</declaration>
+  
+  <template>
+      
+    <name x="5" y="5">ODE_Model</name>
+      
+    <declaration>double rateR0() {
+	return 0;
+}
+
+double boundedRateR0() {
+	return 0;
+}
+
+double rateR1() {
+	double R0_R1_r = k_R0_R1 * (R1Levels - R1) * R0;
+	return R0_R1_r;
+}
+
+double boundedRateR1() {
+	double r = rateR1();
+	if (R1 + r &gt; R1Levels) {
+		return R1Levels - R1;
+	} else if (R1 + r &lt; 0) {
+		return -R1;
+	}
+	return r;
+}
+
+</declaration>
+      
+    <location id="id0" x="-314" y="-102">
+          
+      <label kind="invariant" x="-324" y="-85">R0' == boundedRateR0()
+&amp;&amp;
+R1' == boundedRateR1()</label>
+        
+    </location>
+      
+    <location id="id1" x="-448" y="-102">
+          
+      <committed/>
+        
+    </location>
+      
+    <init ref="id1"/>
+      
+    <transition>
+          
+      <source ref="id1"/>
+          
+      <target ref="id0"/>
+          
+      <label kind="select" x="-430" y="-118"/>
+          
+      <label kind="assignment" x="-430" y="-102">R0 = R0Init,
+R1 = R1Init</label>
+          
+      <label kind="probability" x="-430" y="-86">1</label>
+        
+    </transition>
+    
+  </template>
+  
+  <system>
+model = ODE_Model();
+
+
+system model;
+
+</system>
+  
+  <queries>
+    <query>
+      <formula>simulate [&lt;=1199] { R0, R1 }</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>

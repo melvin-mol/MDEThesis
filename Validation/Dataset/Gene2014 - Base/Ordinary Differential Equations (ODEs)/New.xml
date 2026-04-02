@@ -1,0 +1,311 @@
+<nta>
+  		
+  <declaration>
+clock globalTime;
+
+clock R2;
+
+const int R2Init = 100;
+
+const int R2Levels = 100;
+
+clock R0;
+
+const int R0Init = 100;
+
+const int R0Levels = 100;
+
+clock R1;
+
+const int R1Init = 100;
+
+const int R1Levels = 100;
+
+clock R3;
+
+const int R3Init = 0;
+
+const int R3Levels = 100;
+
+clock R4;
+
+const int R4Init = 0;
+
+const int R4Levels = 100;
+
+clock R5;
+
+const int R5Init = 0;
+
+const int R5Levels = 100;
+
+clock R6;
+
+const int R6Init = 100;
+
+const int R6Levels = 100;
+
+clock R7;
+
+const int R7Init = 0;
+
+const int R7Levels = 100;
+
+clock R8;
+
+const int R8Init = 0;
+
+const int R8Levels = 100;
+
+clock R9;
+
+const int R9Init = 0;
+
+const int R9Levels = 100;
+
+clock R10;
+
+const int R10Init = 100;
+
+const int R10Levels = 100;
+
+clock R11;
+
+const int R11Init = 0;
+
+const int R11Levels = 100;
+
+const double k_R8_R7 = 0.024;
+
+const double k_R4_R3 = 2.5E-5;
+
+const double k_R5_R4 = 0.024;
+
+const double k_R7_R3 = 1.0E-4;
+
+const double k_R10_R4 = 2.0E-4;
+
+const double k_R0_R9 = 2.9999999999999997E-6;
+
+const double k_R7_R11 = 1.5E-4;
+
+const double k_R2_R3 = 2.9999999999999997E-6;
+
+const double k_R7_R9 = 8.999999999999999E-5;
+
+const double k_R4_R5 = 0.003;
+
+const double k_R7_R8 = 0.002;
+
+const double k_R6_R7 = 2.0E-4;
+
+const double k_R1_R11 = 5.0E-6;
+
+		</declaration>
+  
+  <template>
+    <name>ODE_Model</name>
+    <declaration>double rateR2() {
+	return 0;
+}
+
+double boundedRateR2() {
+	return 0;
+}
+
+double rateR0() {
+	return 0;
+}
+
+double boundedRateR0() {
+	return 0;
+}
+
+double rateR1() {
+	return 0;
+}
+
+double boundedRateR1() {
+	return 0;
+}
+
+double rateR3() {
+	double R4_R3_r = k_R4_R3*(R3Levels-R3)*R4;
+	double R7_R3_r = k_R7_R3*(R3Levels-R3)*R7;
+	double R2_R3_r = k_R2_R3*R3*R2;
+	return R4_R3_r+R7_R3_r-R2_R3_r;
+}
+
+double boundedRateR3() {
+	double r = rateR3();
+	if(R3+r &gt; R3Levels) {
+		return R3Levels - R3;
+	} 
+	else 
+		if(R3+r &lt; 0) {
+		return -R3;
+	} 
+	return r;
+}
+
+double rateR4() {
+	double R5_R4_r = k_R5_R4*R5;
+	double R10_R4_r = k_R10_R4*(R4Levels-R4)*R10;
+	return -R5_R4_r+R10_R4_r;
+}
+
+double boundedRateR4() {
+	double r = rateR4();
+	if(R4+r &gt; R4Levels) {
+		return R4Levels - R4;
+	} 
+	else 
+		if(R4+r &lt; 0) {
+		return -R4;
+	} 
+	return r;
+}
+
+double rateR5() {
+	double R4_R5_r = k_R4_R5*R4;
+	return R4_R5_r;
+}
+
+double boundedRateR5() {
+	double r = rateR5();
+	if(R5+r &gt; R5Levels) {
+		return R5Levels - R5;
+	} 
+	else 
+		if(R5+r &lt; 0) {
+		return -R5;
+	} 
+	return r;
+}
+
+double rateR6() {
+	return 0;
+}
+
+double boundedRateR6() {
+	return 0;
+}
+
+double rateR7() {
+	double R8_R7_r = k_R8_R7*R8;
+	double R6_R7_r = k_R6_R7*(R7Levels-R7)*R6;
+	return -R8_R7_r+R6_R7_r;
+}
+
+double boundedRateR7() {
+	double r = rateR7();
+	if(R7+r &gt; R7Levels) {
+		return R7Levels - R7;
+	} 
+	else 
+		if(R7+r &lt; 0) {
+		return -R7;
+	} 
+	return r;
+}
+
+double rateR8() {
+	double R7_R8_r = k_R7_R8*R7;
+	return R7_R8_r;
+}
+
+double boundedRateR8() {
+	double r = rateR8();
+	if(R8+r &gt; R8Levels) {
+		return R8Levels - R8;
+	} 
+	else 
+		if(R8+r &lt; 0) {
+		return -R8;
+	} 
+	return r;
+}
+
+double rateR9() {
+	double R0_R9_r = k_R0_R9*R9*R0;
+	double R7_R9_r = k_R7_R9*(R9Levels-R9)*R7;
+	return -R0_R9_r+R7_R9_r;
+}
+
+double boundedRateR9() {
+	double r = rateR9();
+	if(R9+r &gt; R9Levels) {
+		return R9Levels - R9;
+	} 
+	else 
+		if(R9+r &lt; 0) {
+		return -R9;
+	} 
+	return r;
+}
+
+double rateR10() {
+	return 0;
+}
+
+double boundedRateR10() {
+	return 0;
+}
+
+double rateR11() {
+	double R7_R11_r = k_R7_R11*(R11Levels-R11)*R7;
+	double R1_R11_r = k_R1_R11*R11*R1;
+	return R7_R11_r-R1_R11_r;
+}
+
+double boundedRateR11() {
+	double r = rateR11();
+	if(R11+r &gt; R11Levels) {
+		return R11Levels - R11;
+	} 
+	else 
+		if(R11+r &lt; 0) {
+		return -R11;
+	} 
+	return r;
+}
+
+</declaration>
+    <location id="id0_ODE_Model" x="-314" y="-102">
+      	
+      <name x="-324" y="-85">id0</name>
+      	
+      <label kind="invariant" x="-324" y="-85">R2' == boundedRateR2() and R0' == boundedRateR0() and R1' == boundedRateR1() and R3' == boundedRateR3() and R4' == boundedRateR4() and R5' == boundedRateR5() and R6' == boundedRateR6() and R7' == boundedRateR7() and R8' == boundedRateR8() and R9' == boundedRateR9() and R10' == boundedRateR10() and R11' == boundedRateR11()</label>
+      
+    </location>
+    
+    <location id="id1_ODE_Model" x="-448" y="-102">
+      	
+      <name x="-448" y="-102">id1</name>
+      	
+      <committed/>
+      
+    </location>
+    
+    <init ref="id1_ODE_Model"/>
+    <transition>
+      <source ref="id1_ODE_Model"/>
+      <target ref="id0_ODE_Model"/>
+      <label kind="assignment" x="-430" y="-102">R2 = R2Init, R0 = R0Init, R1 = R1Init, R3 = R3Init, R4 = R4Init, R5 = R5Init, R6 = R6Init, R7 = R7Init, R8 = R8Init, R9 = R9Init, R10 = R10Init, R11 = R11Init</label>
+      <label kind="probability" x="-430" y="-86">1</label>
+    </transition>
+  </template>
+  		
+  <system>
+model = ODE_Model();
+
+	system model;
+		</system>
+  	
+  <queries>
+    <query>
+      <formula>simulate [&lt;=14400] { R2, R10, R3, R4, R5, R11, R6, R7, R8, R9, R0, R1 } : false</formula>
+      <comment>ANIMO formula</comment>
+    </query>
+  </queries>
+</nta>
