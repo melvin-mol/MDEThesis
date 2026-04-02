@@ -2,12 +2,38 @@
 // const double_t k_{id} = {double};
 operation Uppaal!GlobalDeclarations setupReactionVariables(animo : Animo!Network): Uppaal!GlobalDeclarations {
 	for (reaction: Animo!Edge in animo.activeEdges()) {
-		self.declaration.add(dataVariableDeclaration(self.getDeclaredType("timeActivity"), reaction.id()));
+		// Ensure reaction ID is not null or empty
+		var reactionId : String = reaction.id();
+		if (reactionId == null or reactionId == "") {
+			("Warning: Reaction has null or empty ID, skipping.").println();
+			continue;
+		}
+		
+		// Get the reaction rate constant
+		var reactionK : Real = reaction.k;
+		if (reactionK == null) {
+			reactionK = 0.0;
+		}
+		
+		// Get scale factors
+		var timeScale : Real = animo.timeScaleFactor;
+		var levelScale : Real = reaction.levelsScaleFactor;
+		if (timeScale == null or timeScale == 0) {
+			timeScale = 1.0;
+		}
+		if (levelScale == null or levelScale == 0) {
+			levelScale = 1.0;
+		}
+		
+		// Calculate the scaled rate constant
+		var scaledK : Real = reactionK / (timeScale * levelScale);
+		
+		self.declaration.add(dataVariableDeclaration(self.getDeclaredType("timeActivity"), reactionId));
 		self.declaration.add(dataVariableDeclaration(
 			"CONST",
 			self.getDeclaredType("double_t"),
-			"k_" + reaction.id(), 
-			formatDouble(reaction.k / (animo.timeScaleFactor * reaction.levelsScaleFactor)))
+			"k_" + reactionId, 
+			formatDouble(scaledK))
 		);
 	}
 	return self;

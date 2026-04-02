@@ -18,11 +18,12 @@ operation Uppaal!Template setupEdges(reactant: Animo!Node, animo: Animo!Network)
 		.setupWaitingToId0_ReachingReceive()
 		.setupId0ToWaiting_ReachedSend(reactant);
 	
+	var alreadySeen = new Sequence();
 	for (reaction in animo.targetEdges(reactant)) {
 		switch (reaction.scenario) {
-			case (0): self.setupWaitingToResponding_ReachedSourceReceive_Scenario1(reaction); break;
-			case (1): self.setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction, reactant); break;
-			case (2): self.setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction, reactant); break;
+			case (0): self.setupWaitingToResponding_ReachedSourceReceive_Scenario1(reaction, reactant, alreadySeen); break;
+			case (1): self.setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction, reactant, alreadySeen); break;
+			case (2): self.setupWaitingToResponding_ReachedSourceReceive_Scenario2_3(reaction, reactant, alreadySeen); break;
 			case (3): self.setupWaitingToResponding_ReachedSourceReceive_Scenario4(reaction, animo); break;
 		}
 	}

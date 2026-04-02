@@ -1,4 +1,10 @@
 operation setupODERateExpression(reaction: Animo!Edge) {
+	// In scenario 2 the second kinetic input is _REACTANT_E2, while target is the output reactant.
+	// For scenario 0/1 target and reactant coincide, so target remains correct there.
+	var secondInput = (reaction.scenario == 2 and reaction._REACTANT_E2.isDefined())
+		? reaction._REACTANT_E2
+		: reaction.target;
+
 	if (reaction.scenario == 0) {
 		return multiplicate("k_" + reaction.id(), reaction.source.id());
 	}
@@ -7,8 +13,8 @@ operation setupODERateExpression(reaction: Animo!Edge) {
 		return multiplicate(
 			multiplicate("k_" + reaction.id(), 
 				((reaction.scenario == 1) ? (reaction.increment < 0) : reaction._REACTANT_ACT_E2)
-					? reaction.target.id()
-					: subtract(reaction.target.id() + "Levels", reaction.target.id())
+					? secondInput.id()
+					: subtract(secondInput.id() + "Levels", secondInput.id())
 			), 
 			((reaction.scenario == 1) ? true : reaction._REACTANT_ACT_E1)
 				? reaction.source.id()
@@ -18,7 +24,7 @@ operation setupODERateExpression(reaction: Animo!Edge) {
 
 	// Legacy-compatible fallback: when scenario is unexpected, use fully active source/target terms.
 	return multiplicate(
-		multiplicate("k_" + reaction.id(), reaction.target.id()),
+		multiplicate("k_" + reaction.id(), secondInput.id()),
 		reaction.source.id()
 	);
 }

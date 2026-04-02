@@ -67,7 +67,7 @@ operation Uppaal!Template setupNot_reactingToResponding_ReactedReceiveFromTarget
 	self.edge.add(edge(
 		self.location.selectOne(r | r.name = "not_reacting"),
 		self.location.selectOne(r | r.name = "responding"),
-		synchronization("receive", "reacted[" + reaction.target.channelIndex() + "]", point(-1504, y1)),
+		synchronization("receive", "reacted[" + reaction._REACTANT_E2.channelIndex() + "]", point(-1504, y1)),
 		Sequence { point(-1419, y2), point(-1853, y2) },
 		null,
 		update(assign("c", "0").expression, point(-1504, y2)),

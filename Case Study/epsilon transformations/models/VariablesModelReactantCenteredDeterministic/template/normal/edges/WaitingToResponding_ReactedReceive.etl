@@ -76,7 +76,7 @@ operation Uppaal!Template setupWaitingToResponding_ReactedReceiveFromTarget(reac
 	self.edge.add(edge(
 		self.location.selectOne(r | r.name = "waiting"),
 		self.location.selectOne(r | r.name = "responding"),
-		synchronization("receive", "reacted[" + reaction.target.channelIndex() + "]", point(-1836, y1)),
+		synchronization("receive", "reacted[" + reaction._REACTANT_E2.channelIndex() + "]", point(-1836, y1)),
 		Sequence { point(-1751, y3), point(-1853, y3) },
 		guard_(and_(greater("c", "0"), less("c", "TL")), point(-1836, y2)),
 		null,

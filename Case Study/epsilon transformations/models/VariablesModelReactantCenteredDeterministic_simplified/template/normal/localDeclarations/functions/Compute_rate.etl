@@ -4,17 +4,18 @@ operation Uppaal!LocalDeclarations setupCompute_rate(nta: Uppaal!NSTA, reactant:
 		nta.globalDeclarations.getDeclaredType("double_t"), 
 		"compute_rate"
 	);
+	var targetEdges = animo.targetEdges(reactant);
 
-	setupScenarioReactionFunctionCalls(nta, reactant, animo, function_);
-	setupScenarioReactionBoundaryRateCorrections(nta, reactant, animo, function_);	
-	setupCompute_rateReturn(reactant, animo, function_);
+	setupScenarioReactionFunctionCalls(nta, targetEdges, function_);
+	setupScenarioReactionBoundaryRateCorrections(nta, targetEdges, function_);	
+	setupCompute_rateReturn(targetEdges, function_);
 
 	self.declaration.add(function_.declaration);
 	return self;
 }
 
-operation setupScenarioReactionFunctionCalls(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
-	for (reaction: Animo!Edge in animo.targetEdges(reactant)) {		
+operation setupScenarioReactionFunctionCalls(nta: Uppaal!NSTA, targetEdges: Collection(Animo!Edge), function_: Tuple) {
+	for (reaction: Animo!Edge in targetEdges) {		
 		switch (reaction.scenario) {
 			case 0: setupScenario1FunctionCalls(nta, reaction, function_); break;
 			case 1: setupScenario2_3FunctionCalls(nta, reaction, function_); break;
@@ -24,8 +25,8 @@ operation setupScenarioReactionFunctionCalls(nta: Uppaal!NSTA, reactant: Animo!N
 	}
 }
 
-operation setupScenarioReactionBoundaryRateCorrections(nta: Uppaal!NSTA, reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
-	for (reaction: Animo!Edge in animo.targetEdges(reactant)) {		
+operation setupScenarioReactionBoundaryRateCorrections(nta: Uppaal!NSTA, targetEdges: Collection(Animo!Edge), function_: Tuple) {
+	for (reaction: Animo!Edge in targetEdges) {		
 		switch (reaction.scenario) {
 			case 0: break;
 			case 1: setupScenario2_3BoundaryRateCorrection(nta, reaction, function_); break;
@@ -35,17 +36,17 @@ operation setupScenarioReactionBoundaryRateCorrections(nta: Uppaal!NSTA, reactan
 	}
 }
 
-operation setupCompute_rateReturn(reactant: Animo!Node, animo: Animo!Network, function_: Tuple) {
-	if (animo.targetEdges(reactant).size() == 1) {
+operation setupCompute_rateReturn(targetEdges: Collection(Animo!Edge), function_: Tuple) {
+	if (targetEdges.size() == 1) {
 		function_.block.statement.add(return_(
-			animo.targetEdges(reactant).first().increment > 0
-				? animo.targetEdges(reactant).first().id() + "_r"
-				: functionCall("subtract", Sequence { "zero", animo.targetEdges(reactant).first().id() + "_r" })
+			targetEdges.first().increment > 0
+				? targetEdges.first().id() + "_r"
+				: functionCall("subtract", Sequence { "zero", targetEdges.first().id() + "_r" })
 			)
 		);
 	} else {
 		var computation = new Uppaal!LiteralExpression(text = "zero");
-		for (reaction: Animo!Edge in animo.targetEdges(reactant)) {
+		for (reaction: Animo!Edge in targetEdges) {
 			if (reaction.increment > 0) {
 				computation = functionCall("add", Sequence { computation, reaction.id() + "_r" });
 			} else {
@@ -64,7 +65,7 @@ operation setupScenario2_3BoundaryRateCorrection(nta: Uppaal!NSTA, reaction: Ani
 	var activeR2 = isR2Active(reaction);
 
 	if (reaction.target == reaction.source) {
-		rNotOutput = reaction.target;
+		rNotOutput = reaction._REACTANT_E2;
 		activityNotOutput = activeR2;
 	} else {
 		rNotOutput = reaction.source;
@@ -97,7 +98,7 @@ operation setupScenario2_3BoundaryRateCorrection(nta: Uppaal!NSTA, reaction: Ani
 					Sequence {
 						"k_" + reaction.id(),
 						functionCall("int_to_double", Sequence { r2Value }),
-						functionCall("int_to_double", Sequence { reaction.target.id() + "Levels" }),
+						functionCall("int_to_double", Sequence { reaction._REACTANT_E2.id() + "Levels" }),
 						activeR2.toString(),
 						functionCall("int_to_double", Sequence { r1Value }),
 						functionCall("int_to_double", Sequence { reaction.source.id() + "Levels" }),
@@ -152,8 +153,8 @@ operation setupScenario2_3FunctionCalls(nta: Uppaal!NSTA, reaction: Animo!Edge, 
 				"scenario2_3", 
 				Sequence {
 					"k_" + reaction.id(),
-					functionCall("int_to_double", Sequence { reaction.target.id() }),
-					functionCall("int_to_double", Sequence { reaction.target.id() + "Levels" }),
+					functionCall("int_to_double", Sequence { reaction._REACTANT_E2.id() }),
+					functionCall("int_to_double", Sequence { reaction._REACTANT_E2.id() + "Levels" }),
 					isR2Active(reaction).toString(),
 					functionCall("int_to_double", Sequence { reaction.source.id() }),
 					functionCall("int_to_double", Sequence { reaction.source.id() + "Levels" }),

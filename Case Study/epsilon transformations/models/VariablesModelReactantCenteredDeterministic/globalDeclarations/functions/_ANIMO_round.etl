@@ -1,0 +1,2 @@
+// Inharits and overrides the function _ANIMO_round. In this model this if statement is not used, so it is removed.
+operation setupIsDoubleMantissaExponentOverflowToInfiniteTime(function_: Tuple) {}

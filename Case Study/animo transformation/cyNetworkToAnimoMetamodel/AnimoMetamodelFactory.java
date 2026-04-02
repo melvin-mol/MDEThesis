@@ -146,13 +146,15 @@ public class AnimoMetamodelFactory {
 
 			Integer sourceIndex = factoryHelper.resolveReactantIndex(reactantToIndex, catalyst,
 					factoryHelper.readEntityValue(reaction, Model.Properties.REACTANT_ID_E1, null));
+			Integer reactantE2Index = factoryHelper.resolveReactantIndex(reactantToIndex, reactant,
+					factoryHelper.readEntityValue(reaction, Model.Properties.REACTANT_ID_E2, null));
 			Integer targetIndex = factoryHelper.resolveReactantIndex(reactantToIndex, outputReactant, reactant,
 					factoryHelper.readEntityValue(reaction, Model.Properties.REACTANT_ID_E2, null));
 
 			edge.setAttribute("source", factoryHelper.nodeReference(sourceIndex));
 			edge.setAttribute("target", factoryHelper.nodeReference(targetIndex));
 			edge.setAttribute("_REACTANT_E1", factoryHelper.nodeReference(sourceIndex));
-			edge.setAttribute("_REACTANT_E2", factoryHelper.nodeReference(targetIndex));
+			edge.setAttribute("_REACTANT_E2", factoryHelper.nodeReference(reactantE2Index != null ? reactantE2Index : targetIndex));
 			edge.setAttribute("_REACTANT_ACT_E1",
 					factoryHelper.readEntityValue(reaction, Model.Properties.REACTANT_IS_ACTIVE_INPUT_E1, "true"));
 			edge.setAttribute("_REACTANT_ACT_E2",
