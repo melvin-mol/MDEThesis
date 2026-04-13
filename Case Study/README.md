@@ -83,21 +83,21 @@ The rationale behind this structure:
 - **`Transformation.etl`** — the single entry point that wires all sub-modules together and defines the top-level `transformation` operation.
 - **`ExampleModel.etl`** — the root import file that exposes the transformation to the outside (equivalent to `Animo2ODE.etl`, `Animo2VariablesModelReactantCenteredDeterministic.etl`, etc. in this case study).
 
-## Builders and Implementations
+## Orchestration and Implementations
 
-Following the thesis design (Point 3), the case study separates ETL files into **builder files** and **implementation files**.
+Following the thesis design (Point 3), the case study separates ETL files into **orchestration files** and **implementation files**.
 
-- **Builder files** define what parts of the Uppaal model are constructed and in which order.
+- **Orchestration files** define what parts of the Uppaal model are constructed and in which order.
 - **Implementation files** contain the actual model-specific transformation logic for individual elements.
 
-This split is inspired by the Builder pattern: builder files orchestrate transformation flow, while implementation files perform the detailed translation steps.
+This split follows an orchestration approach: orchestration files coordinate transformation flow, while implementation files perform the detailed translation steps.
 
-In this case study, the main builder files are:
+In this case study, the main orchestration files are:
 
-- **Model entry builders:** `Animo2ODE.etl`, `Animo2VariablesModelReactantCenteredDeterministic_simplified.etl`, `Animo2VariablesModelReactantCenteredDeterministic.etl`
-- **Section builders:** `globalDeclarations/GlobalDeclarations.etl`, `template/Template.etl`, `template/*/localDeclarations/LocalDeclarations.etl`, `template/*/edges/Edges.etl`, `template/*/locations/Locations.etl`, and `system/System.etl`
+- **Model entry orchestration files:** `Animo2ODE.etl`, `Animo2VariablesModelReactantCenteredDeterministic_simplified.etl`, `Animo2VariablesModelReactantCenteredDeterministic.etl`
+- **Section orchestration files:** `globalDeclarations/GlobalDeclarations.etl`, `template/Template.etl`, `template/*/localDeclarations/LocalDeclarations.etl`, `template/*/edges/Edges.etl`, `template/*/locations/Locations.etl`, and `system/System.etl`
 
-The implementation files are organized in model-specific subdirectories and return `self` to support chaining by builders:
+The implementation files are organized in model-specific subdirectories and return `self` to support chaining by orchestration files:
 
 - `globalDeclarations/functions/`
 - `globalDeclarations/types/`
