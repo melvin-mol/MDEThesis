@@ -14,6 +14,7 @@ This repository contains the code associated with the Master's thesis titled **"
 ## Directories
 
 * **[Case Study/](Case%20Study/)** - Three reference ANIMO models converted using the new framework, demonstrating the proposed directory structure, Uppaal Code Syntax library, ETL inheritance, and the split between orchestration and implementation files.
+* **[Compare/](Compare/)** - Reproducible artifacts for comparison (character count, performance, cyclomatic complexity, and cognitive complexity), including scripts, benchmark logs, and generated report outputs.
 * **[Code Duplication Scripts/](Code%20Duplication%20Scripts/)** - Scripts used in the thesis to measure duplication in the [ANIMO](https://apps.cytoscape.org/apps/animo) codebase to identify transformation logic that can be generalized.
 * **[Validation/](Validation/)** - Reproducible comparative validation artifacts for UPPAAL XML equivalence, including the input variant networks, the Dataset of paired `Old.xml` and `New.xml` files and the `compare-equivalence.js` checker script used for RQ4.
 * **[Uppaal Code Syntax/](Uppaal%20Code%20Syntax/)** - A shared standard library for writing Uppaal ETL transformations in a more easier to read and reusable, code-like style.

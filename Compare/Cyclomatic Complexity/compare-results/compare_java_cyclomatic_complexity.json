@@ -1,0 +1,966 @@
+{
+  "generatedAt": "2026-04-06T12:42:19.930Z",
+  "script": "MDEThesis/Compare/Cyclomatic Complexity/compare-java-cyclomatic-complexity.js",
+  "scannedFiles": [
+    "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+    "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+    "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+    "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java"
+  ],
+  "notes": [
+    "Heuristic Java cyclomatic complexity for the ANIMO generator classes used in the compare chapter.",
+    "Counts ignore comments and string literals so generated UPPAAL/XML text inside append calls is not treated as Java control flow.",
+    "Base complexity is 1 per method or constructor."
+  ],
+  "overall": {
+    "fileCount": 4,
+    "unitCount": 29,
+    "totalComplexity": 359,
+    "totalDecisionPoints": 330,
+    "averageComplexityPerFile": 89.75,
+    "averageComplexityPerUnit": 12.379310344827585,
+    "maxFile": {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "unitCount": 9,
+      "totalComplexity": 140,
+      "totalDecisionPoints": 131,
+      "averageComplexityPerUnit": 15.555555555555555,
+      "maxUnit": {
+        "kind": "method",
+        "name": "appendTemplates",
+        "startLine": 866,
+        "endLine": 1567,
+        "complexity": 93,
+        "decisionPoints": 92,
+        "breakdown": {
+          "ifStatements": 26,
+          "forLoops": 11,
+          "caseBranches": 35,
+          "catchBlocks": 2,
+          "ternaryOperators": 8,
+          "logicalAnd": 7,
+          "logicalOr": 3
+        }
+      },
+      "totalsByDecision": {
+        "ifStatements": 44,
+        "forLoops": 16,
+        "caseBranches": 35,
+        "catchBlocks": 3,
+        "ternaryOperators": 12,
+        "logicalAnd": 7,
+        "logicalOr": 11,
+        "whileLoops": 3
+      },
+      "units": [
+        {
+          "kind": "method",
+          "name": "appendTemplates",
+          "startLine": 866,
+          "endLine": 1567,
+          "complexity": 93,
+          "decisionPoints": 92,
+          "breakdown": {
+            "ifStatements": 26,
+            "forLoops": 11,
+            "caseBranches": 35,
+            "catchBlocks": 2,
+            "ternaryOperators": 8,
+            "logicalAnd": 7,
+            "logicalOr": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendModel",
+          "startLine": 57,
+          "endLine": 770,
+          "complexity": 27,
+          "decisionPoints": 26,
+          "breakdown": {
+            "ifStatements": 11,
+            "forLoops": 5,
+            "whileLoops": 1,
+            "catchBlocks": 1,
+            "logicalOr": 8
+          }
+        },
+        {
+          "kind": "method",
+          "name": "getTranslatedCustomFormula",
+          "startLine": 772,
+          "endLine": 830,
+          "complexity": 7,
+          "decisionPoints": 6,
+          "breakdown": {
+            "ifStatements": 3,
+            "whileLoops": 2,
+            "ternaryOperators": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionTables",
+          "startLine": 838,
+          "endLine": 864,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ternaryOperators": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatDouble",
+          "startLine": 1598,
+          "endLine": 1613,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ifStatements": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatTime",
+          "startLine": 1588,
+          "endLine": 1596,
+          "complexity": 2,
+          "decisionPoints": 1,
+          "breakdown": {
+            "ifStatements": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactantVariables",
+          "startLine": 1573,
+          "endLine": 1586,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionProcess",
+          "startLine": 832,
+          "endLine": 836,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "getReactionName",
+          "startLine": 1569,
+          "endLine": 1571,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        }
+      ]
+    },
+    "maxUnit": {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "appendTemplates",
+      "startLine": 866,
+      "endLine": 1567,
+      "complexity": 93,
+      "decisionPoints": 92,
+      "breakdown": {
+        "ifStatements": 26,
+        "forLoops": 11,
+        "caseBranches": 35,
+        "catchBlocks": 2,
+        "ternaryOperators": 8,
+        "logicalAnd": 7,
+        "logicalOr": 3
+      }
+    },
+    "totalsByDecision": {
+      "ifStatements": 138,
+      "forLoops": 52,
+      "caseBranches": 50,
+      "catchBlocks": 8,
+      "ternaryOperators": 34,
+      "logicalAnd": 19,
+      "logicalOr": 24,
+      "whileLoops": 5
+    }
+  },
+  "files": [
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "unitCount": 9,
+      "totalComplexity": 140,
+      "totalDecisionPoints": 131,
+      "averageComplexityPerUnit": 15.555555555555555,
+      "maxUnit": {
+        "kind": "method",
+        "name": "appendTemplates",
+        "startLine": 866,
+        "endLine": 1567,
+        "complexity": 93,
+        "decisionPoints": 92,
+        "breakdown": {
+          "ifStatements": 26,
+          "forLoops": 11,
+          "caseBranches": 35,
+          "catchBlocks": 2,
+          "ternaryOperators": 8,
+          "logicalAnd": 7,
+          "logicalOr": 3
+        }
+      },
+      "totalsByDecision": {
+        "ifStatements": 44,
+        "forLoops": 16,
+        "caseBranches": 35,
+        "catchBlocks": 3,
+        "ternaryOperators": 12,
+        "logicalAnd": 7,
+        "logicalOr": 11,
+        "whileLoops": 3
+      },
+      "units": [
+        {
+          "kind": "method",
+          "name": "appendTemplates",
+          "startLine": 866,
+          "endLine": 1567,
+          "complexity": 93,
+          "decisionPoints": 92,
+          "breakdown": {
+            "ifStatements": 26,
+            "forLoops": 11,
+            "caseBranches": 35,
+            "catchBlocks": 2,
+            "ternaryOperators": 8,
+            "logicalAnd": 7,
+            "logicalOr": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendModel",
+          "startLine": 57,
+          "endLine": 770,
+          "complexity": 27,
+          "decisionPoints": 26,
+          "breakdown": {
+            "ifStatements": 11,
+            "forLoops": 5,
+            "whileLoops": 1,
+            "catchBlocks": 1,
+            "logicalOr": 8
+          }
+        },
+        {
+          "kind": "method",
+          "name": "getTranslatedCustomFormula",
+          "startLine": 772,
+          "endLine": 830,
+          "complexity": 7,
+          "decisionPoints": 6,
+          "breakdown": {
+            "ifStatements": 3,
+            "whileLoops": 2,
+            "ternaryOperators": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionTables",
+          "startLine": 838,
+          "endLine": 864,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ternaryOperators": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatDouble",
+          "startLine": 1598,
+          "endLine": 1613,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ifStatements": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatTime",
+          "startLine": 1588,
+          "endLine": 1596,
+          "complexity": 2,
+          "decisionPoints": 1,
+          "breakdown": {
+            "ifStatements": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactantVariables",
+          "startLine": 1573,
+          "endLine": 1586,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionProcess",
+          "startLine": 832,
+          "endLine": 836,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "getReactionName",
+          "startLine": 1569,
+          "endLine": 1571,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        }
+      ]
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic.java",
+      "unitCount": 8,
+      "totalComplexity": 119,
+      "totalDecisionPoints": 111,
+      "averageComplexityPerUnit": 14.875,
+      "maxUnit": {
+        "kind": "method",
+        "name": "appendTemplates",
+        "startLine": 750,
+        "endLine": 1258,
+        "complexity": 79,
+        "decisionPoints": 78,
+        "breakdown": {
+          "ifStatements": 30,
+          "forLoops": 10,
+          "caseBranches": 12,
+          "catchBlocks": 2,
+          "ternaryOperators": 9,
+          "logicalAnd": 11,
+          "logicalOr": 4
+        }
+      },
+      "totalsByDecision": {
+        "ifStatements": 45,
+        "forLoops": 15,
+        "caseBranches": 12,
+        "catchBlocks": 3,
+        "ternaryOperators": 12,
+        "logicalAnd": 11,
+        "logicalOr": 12,
+        "whileLoops": 1
+      },
+      "units": [
+        {
+          "kind": "method",
+          "name": "appendTemplates",
+          "startLine": 750,
+          "endLine": 1258,
+          "complexity": 79,
+          "decisionPoints": 78,
+          "breakdown": {
+            "ifStatements": 30,
+            "forLoops": 10,
+            "caseBranches": 12,
+            "catchBlocks": 2,
+            "ternaryOperators": 9,
+            "logicalAnd": 11,
+            "logicalOr": 4
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendModel",
+          "startLine": 33,
+          "endLine": 727,
+          "complexity": 27,
+          "decisionPoints": 26,
+          "breakdown": {
+            "ifStatements": 11,
+            "forLoops": 5,
+            "whileLoops": 1,
+            "catchBlocks": 1,
+            "logicalOr": 8
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionTables",
+          "startLine": 734,
+          "endLine": 747,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ternaryOperators": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatDouble",
+          "startLine": 1285,
+          "endLine": 1300,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ifStatements": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatTime",
+          "startLine": 1276,
+          "endLine": 1283,
+          "complexity": 2,
+          "decisionPoints": 1,
+          "breakdown": {
+            "ifStatements": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactantVariables",
+          "startLine": 1264,
+          "endLine": 1274,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionProcess",
+          "startLine": 729,
+          "endLine": 732,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "getReactionName",
+          "startLine": 1260,
+          "endLine": 1262,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        }
+      ]
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+      "fileName": "VariablesModelODE.java",
+      "unitCount": 7,
+      "totalComplexity": 50,
+      "totalDecisionPoints": 43,
+      "averageComplexityPerUnit": 7.142857142857143,
+      "maxUnit": {
+        "kind": "method",
+        "name": "appendTemplates",
+        "startLine": 127,
+        "endLine": 305,
+        "complexity": 32,
+        "decisionPoints": 31,
+        "breakdown": {
+          "ifStatements": 18,
+          "forLoops": 7,
+          "caseBranches": 3,
+          "catchBlocks": 1,
+          "ternaryOperators": 1,
+          "logicalOr": 1
+        }
+      },
+      "totalsByDecision": {
+        "ifStatements": 25,
+        "forLoops": 9,
+        "caseBranches": 3,
+        "catchBlocks": 1,
+        "ternaryOperators": 4,
+        "logicalOr": 1
+      },
+      "units": [
+        {
+          "kind": "method",
+          "name": "appendTemplates",
+          "startLine": 127,
+          "endLine": 305,
+          "complexity": 32,
+          "decisionPoints": 31,
+          "breakdown": {
+            "ifStatements": 18,
+            "forLoops": 7,
+            "caseBranches": 3,
+            "catchBlocks": 1,
+            "ternaryOperators": 1,
+            "logicalOr": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendModel",
+          "startLine": 33,
+          "endLine": 110,
+          "complexity": 6,
+          "decisionPoints": 5,
+          "breakdown": {
+            "ifStatements": 3,
+            "forLoops": 2
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactionTables",
+          "startLine": 113,
+          "endLine": 124,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ternaryOperators": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatDouble",
+          "startLine": 334,
+          "endLine": 349,
+          "complexity": 4,
+          "decisionPoints": 3,
+          "breakdown": {
+            "ifStatements": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "formatTime",
+          "startLine": 325,
+          "endLine": 332,
+          "complexity": 2,
+          "decisionPoints": 1,
+          "breakdown": {
+            "ifStatements": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactantVariables",
+          "startLine": 311,
+          "endLine": 323,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "getReactionName",
+          "startLine": 307,
+          "endLine": 309,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        }
+      ]
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java",
+      "fileName": "VariablesModelReactionCenteredTables.java",
+      "unitCount": 5,
+      "totalComplexity": 50,
+      "totalDecisionPoints": 45,
+      "averageComplexityPerUnit": 10,
+      "maxUnit": {
+        "kind": "method",
+        "name": "appendReactionProcesses",
+        "startLine": 118,
+        "endLine": 279,
+        "complexity": 28,
+        "decisionPoints": 27,
+        "breakdown": {
+          "ifStatements": 16,
+          "forLoops": 8,
+          "ternaryOperators": 3
+        }
+      },
+      "totalsByDecision": {
+        "ifStatements": 24,
+        "forLoops": 12,
+        "ternaryOperators": 6,
+        "whileLoops": 1,
+        "catchBlocks": 1,
+        "logicalAnd": 1
+      },
+      "units": [
+        {
+          "kind": "method",
+          "name": "appendReactionProcesses",
+          "startLine": 118,
+          "endLine": 279,
+          "complexity": 28,
+          "decisionPoints": 27,
+          "breakdown": {
+            "ifStatements": 16,
+            "forLoops": 8,
+            "ternaryOperators": 3
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendModel",
+          "startLine": 34,
+          "endLine": 116,
+          "complexity": 10,
+          "decisionPoints": 9,
+          "breakdown": {
+            "ifStatements": 5,
+            "forLoops": 3,
+            "whileLoops": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendTemplates",
+          "startLine": 282,
+          "endLine": 322,
+          "complexity": 10,
+          "decisionPoints": 9,
+          "breakdown": {
+            "ifStatements": 3,
+            "forLoops": 1,
+            "catchBlocks": 1,
+            "ternaryOperators": 3,
+            "logicalAnd": 1
+          }
+        },
+        {
+          "kind": "method",
+          "name": "appendReactantVariables",
+          "startLine": 332,
+          "endLine": 340,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        },
+        {
+          "kind": "method",
+          "name": "getReactionName",
+          "startLine": 324,
+          "endLine": 330,
+          "complexity": 1,
+          "decisionPoints": 0,
+          "breakdown": {}
+        }
+      ]
+    }
+  ],
+  "topUnits": [
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "appendTemplates",
+      "startLine": 866,
+      "endLine": 1567,
+      "complexity": 93,
+      "decisionPoints": 92,
+      "breakdown": {
+        "ifStatements": 26,
+        "forLoops": 11,
+        "caseBranches": 35,
+        "catchBlocks": 2,
+        "ternaryOperators": 8,
+        "logicalAnd": 7,
+        "logicalOr": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic.java",
+      "kind": "method",
+      "name": "appendTemplates",
+      "startLine": 750,
+      "endLine": 1258,
+      "complexity": 79,
+      "decisionPoints": 78,
+      "breakdown": {
+        "ifStatements": 30,
+        "forLoops": 10,
+        "caseBranches": 12,
+        "catchBlocks": 2,
+        "ternaryOperators": 9,
+        "logicalAnd": 11,
+        "logicalOr": 4
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+      "fileName": "VariablesModelODE.java",
+      "kind": "method",
+      "name": "appendTemplates",
+      "startLine": 127,
+      "endLine": 305,
+      "complexity": 32,
+      "decisionPoints": 31,
+      "breakdown": {
+        "ifStatements": 18,
+        "forLoops": 7,
+        "caseBranches": 3,
+        "catchBlocks": 1,
+        "ternaryOperators": 1,
+        "logicalOr": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java",
+      "fileName": "VariablesModelReactionCenteredTables.java",
+      "kind": "method",
+      "name": "appendReactionProcesses",
+      "startLine": 118,
+      "endLine": 279,
+      "complexity": 28,
+      "decisionPoints": 27,
+      "breakdown": {
+        "ifStatements": 16,
+        "forLoops": 8,
+        "ternaryOperators": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "appendModel",
+      "startLine": 57,
+      "endLine": 770,
+      "complexity": 27,
+      "decisionPoints": 26,
+      "breakdown": {
+        "ifStatements": 11,
+        "forLoops": 5,
+        "whileLoops": 1,
+        "catchBlocks": 1,
+        "logicalOr": 8
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic.java",
+      "kind": "method",
+      "name": "appendModel",
+      "startLine": 33,
+      "endLine": 727,
+      "complexity": 27,
+      "decisionPoints": 26,
+      "breakdown": {
+        "ifStatements": 11,
+        "forLoops": 5,
+        "whileLoops": 1,
+        "catchBlocks": 1,
+        "logicalOr": 8
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java",
+      "fileName": "VariablesModelReactionCenteredTables.java",
+      "kind": "method",
+      "name": "appendModel",
+      "startLine": 34,
+      "endLine": 116,
+      "complexity": 10,
+      "decisionPoints": 9,
+      "breakdown": {
+        "ifStatements": 5,
+        "forLoops": 3,
+        "whileLoops": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java",
+      "fileName": "VariablesModelReactionCenteredTables.java",
+      "kind": "method",
+      "name": "appendTemplates",
+      "startLine": 282,
+      "endLine": 322,
+      "complexity": 10,
+      "decisionPoints": 9,
+      "breakdown": {
+        "ifStatements": 3,
+        "forLoops": 1,
+        "catchBlocks": 1,
+        "ternaryOperators": 3,
+        "logicalAnd": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "getTranslatedCustomFormula",
+      "startLine": 772,
+      "endLine": 830,
+      "complexity": 7,
+      "decisionPoints": 6,
+      "breakdown": {
+        "ifStatements": 3,
+        "whileLoops": 2,
+        "ternaryOperators": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+      "fileName": "VariablesModelODE.java",
+      "kind": "method",
+      "name": "appendModel",
+      "startLine": 33,
+      "endLine": 110,
+      "complexity": 6,
+      "decisionPoints": 5,
+      "breakdown": {
+        "ifStatements": 3,
+        "forLoops": 2
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "appendReactionTables",
+      "startLine": 838,
+      "endLine": 864,
+      "complexity": 4,
+      "decisionPoints": 3,
+      "breakdown": {
+        "ternaryOperators": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic.java",
+      "kind": "method",
+      "name": "appendReactionTables",
+      "startLine": 734,
+      "endLine": 747,
+      "complexity": 4,
+      "decisionPoints": 3,
+      "breakdown": {
+        "ternaryOperators": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+      "fileName": "VariablesModelODE.java",
+      "kind": "method",
+      "name": "appendReactionTables",
+      "startLine": 113,
+      "endLine": 124,
+      "complexity": 4,
+      "decisionPoints": 3,
+      "breakdown": {
+        "ternaryOperators": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "formatDouble",
+      "startLine": 1598,
+      "endLine": 1613,
+      "complexity": 4,
+      "decisionPoints": 3,
+      "breakdown": {
+        "ifStatements": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic.java",
+      "kind": "method",
+      "name": "formatDouble",
+      "startLine": 1285,
+      "endLine": 1300,
+      "complexity": 4,
+      "decisionPoints": 3,
+      "breakdown": {
+        "ifStatements": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+      "fileName": "VariablesModelODE.java",
+      "kind": "method",
+      "name": "formatDouble",
+      "startLine": 334,
+      "endLine": 349,
+      "complexity": 4,
+      "decisionPoints": 3,
+      "breakdown": {
+        "ifStatements": 3
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "formatTime",
+      "startLine": 1588,
+      "endLine": 1596,
+      "complexity": 2,
+      "decisionPoints": 1,
+      "breakdown": {
+        "ifStatements": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic.java",
+      "kind": "method",
+      "name": "formatTime",
+      "startLine": 1276,
+      "endLine": 1283,
+      "complexity": 2,
+      "decisionPoints": 1,
+      "breakdown": {
+        "ifStatements": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+      "fileName": "VariablesModelODE.java",
+      "kind": "method",
+      "name": "formatTime",
+      "startLine": 325,
+      "endLine": 332,
+      "complexity": 2,
+      "decisionPoints": 1,
+      "breakdown": {
+        "ifStatements": 1
+      }
+    },
+    {
+      "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+      "fileName": "VariablesModelReactantCenteredDeterministic_simplified.java",
+      "kind": "method",
+      "name": "appendReactantVariables",
+      "startLine": 1573,
+      "endLine": 1586,
+      "complexity": 1,
+      "decisionPoints": 0,
+      "breakdown": {}
+    }
+  ]
+}

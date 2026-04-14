@@ -1,0 +1,2567 @@
+{
+  "generatedAt": "2026-04-06T08:46:16.189Z",
+  "script": "MDEThesis/Compare/Characters/compare-characters.js",
+  "notes": [
+    "The report uses two mapped ANIMO 3.5.1 portfolio baselines: one for the thesis-implemented automata and one for the Telniouk-available automata.",
+    "Thesis and Telniouk counts include the full transitive ETL import closure from the configured entry ETL files.",
+    "The report includes thesis counts with Uppaal Code Syntax included, with it excluded, and with both Uppaal Code Syntax and comment text excluded.",
+    "The deterministic thesis comparison also includes an inheritance-excluded run that omits the imported simplified closure together with Uppaal Code Syntax.",
+    "Comment exclusion removes // and /*...*/ comment text while preserving the remaining layout.",
+    "Character counts are measured on LF-normalized text for cross-platform stability."
+  ],
+  "groups": {
+    "animo3_baseline_portfolio": {
+      "label": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
+      "fileCount": 3,
+      "totals": {
+        "chars": 134324
+      },
+      "files": [
+        {
+          "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+          "chars": 13274
+        },
+        {
+          "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",
+          "chars": 63772
+        },
+        {
+          "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+          "chars": 57278
+        }
+      ]
+    },
+    "thesis_portfolio": {
+      "label": "Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax)",
+      "fileCount": 201,
+      "totals": {
+        "chars": 175137
+      },
+      "files": [
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/Animo2ODE.etl",
+          "chars": 435
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 288
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/Clocks.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/GlobalTime.etl",
+          "chars": 166
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 63
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 586
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/ReactionVariables.etl",
+          "chars": 404
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/Variables.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/instantiationList/InstantiationList.etl",
+          "chars": 33
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/instantiationList/ModelInstantiation.etl",
+          "chars": 515
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/System.etl",
+          "chars": 467
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/Edges.etl",
+          "chars": 163
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/Id1ToId0_Initialize.etl",
+          "chars": 548
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/InitializationSelections.etl",
+          "chars": 528
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/InitializationUpdates.etl",
+          "chars": 661
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/Functions.etl",
+          "chars": 62
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
+          "chars": 1621
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateFunctions.etl",
+          "chars": 2195
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/LocalDeclarations.etl",
+          "chars": 260
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Id0.etl",
+          "chars": 878
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Id1.etl",
+          "chars": 276
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Locations.etl",
+          "chars": 168
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/Template.etl",
+          "chars": 350
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl",
+          "chars": 477
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/_ANIMO_round.etl",
+          "chars": 3660
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Add.etl",
+          "chars": 4791
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Divide.etl",
+          "chars": 1934
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Functions.etl",
+          "chars": 1742
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Int_to_double.etl",
+          "chars": 3387
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Inverse.etl",
+          "chars": 1670
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Multiply.etl",
+          "chars": 1941
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Power.etl",
+          "chars": 808
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario1.etl",
+          "chars": 1133
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario2_3.etl",
+          "chars": 1766
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl",
+          "chars": 3616
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Subtract.etl",
+          "chars": 5106
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 852
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Double_t.etl",
+          "chars": 366
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Int_t.etl",
+          "chars": 223
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Time_t.etl",
+          "chars": 208
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/TimeActivity.etl",
+          "chars": 292
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Types.etl",
+          "chars": 98
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/Broadcasts.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/Reached.etl",
+          "chars": 473
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/ReachingAndDoUpdate.etl",
+          "chars": 269
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/clocks/Clocks.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/clocks/GlobalTime.etl",
+          "chars": 166
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/Consts.etl",
+          "chars": 159
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INF.etl",
+          "chars": 216
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INFINITE_TIME_DOUBLE.etl",
+          "chars": 292
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INFINITE_TIME.etl",
+          "chars": 224
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/LOWER_UNC_UPPER_UNC.etl",
+          "chars": 551
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/N_REACTANTS.etl",
+          "chars": 389
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/Zero.etl",
+          "chars": 234
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 63
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 689
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl",
+          "chars": 1215
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/Variables.etl",
+          "chars": 127
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/InitRandomInstantiation.etl",
+          "chars": 565
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/InstantiationList.etl",
+          "chars": 82
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/ReactantTemplateInstantiations.etl",
+          "chars": 1215
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/System.etl",
+          "chars": 531
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/Edges.etl",
+          "chars": 1517
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/Id0ToWaiting_ReachedSend.etl",
+          "chars": 560
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/RespondingToUpdating_UpdateAndDecideReset.etl",
+          "chars": 411
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/StartToWaiting_DoUpdateReceive.etl",
+          "chars": 460
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/UpdatingToWaiting_NoChangeGuard.etl",
+          "chars": 400
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/UpdatingToWaiting_UrgentReactionGuard.etl",
+          "chars": 506
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingReceive.etl",
+          "chars": 582
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingSend.etl",
+          "chars": 659
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+          "chars": 755
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+          "chars": 1403
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl",
+          "chars": 906
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "chars": 6167
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Decide_reset.etl",
+          "chars": 501
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Functions.etl",
+          "chars": 190
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Infinite_delay.etl",
+          "chars": 335
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Make_urgent.etl",
+          "chars": 412
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Rate_significantly_changed.etl",
+          "chars": 988
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Reach.etl",
+          "chars": 498
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Update.etl",
+          "chars": 3613
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/LocalDeclarations.etl",
+          "chars": 549
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/Basic.etl",
+          "chars": 81
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/Delta.etl",
+          "chars": 200
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/TLAndTU.etl",
+          "chars": 247
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/TotalRateAndOldRate.etl",
+          "chars": 433
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/clocks/C.etl",
+          "chars": 139
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/clocks/Clocks.etl",
+          "chars": 17
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/Variables.etl",
+          "chars": 57
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Id0.etl",
+          "chars": 274
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Locations.etl",
+          "chars": 299
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Responding.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Start.etl",
+          "chars": 365
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Updating.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Waiting.etl",
+          "chars": 361
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
+          "chars": 613
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/random/Random.etl",
+          "chars": 2632
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/Template.etl",
+          "chars": 207
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/Animo2VariablesModelReactantCenteredDeterministic.etl",
+          "chars": 769
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/_ANIMO_round.etl",
+          "chars": 198
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/EnterCrit.etl",
+          "chars": 581
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/ExitCrit.etl",
+          "chars": 862
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Functions.etl",
+          "chars": 123
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Int_to_double.etl",
+          "chars": 1964
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Inverse.etl",
+          "chars": 1779
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 959
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
+          "chars": 0
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/Basic.etl",
+          "chars": 88
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/Conta_InfAndConta_BigN.etl",
+          "chars": 286
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/CriticalSession.etl",
+          "chars": 577
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/MinCrit.etl",
+          "chars": 206
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/Broadcasts.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/Reached.etl",
+          "chars": 473
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/ReachingAndDoUpdate.etl",
+          "chars": 329
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 31
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 492
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/Variables.etl",
+          "chars": 89
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Edges.etl",
+          "chars": 1373
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Id0ToUpdating_Reacted_Send.etl",
+          "chars": 690
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
+          "chars": 3217
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/RespondingToUpdating_Receive.etl",
+          "chars": 473
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/RespondingToUpdating_Send.etl",
+          "chars": 467
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/StartToUpdating.etl",
+          "chars": 551
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdateToNot_reacting_Receive.etl",
+          "chars": 417
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdateToNot_reacting_Send.etl",
+          "chars": 411
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_NoChange_Receive.etl",
+          "chars": 458
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_NoChange_Send.etl",
+          "chars": 452
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_UrgentReaction_Receive.etl",
+          "chars": 557
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_UrgentReaction_Send.etl",
+          "chars": 551
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToId0_Reacting_Receive.etl",
+          "chars": 637
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToId0_Reacting_Send.etl",
+          "chars": 710
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+          "chars": 3369
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Can_react.etl",
+          "chars": 602
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Cant_react.etl",
+          "chars": 610
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "chars": 6882
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Functions.etl",
+          "chars": 116
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Reach.etl",
+          "chars": 492
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Update.etl",
+          "chars": 185
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/LocalDeclarations.etl",
+          "chars": 530
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Locations.etl",
+          "chars": 361
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Not_reacting.etl",
+          "chars": 291
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Responding.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Start.etl",
+          "chars": 552
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Update.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Waiting.etl",
+          "chars": 324
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
+          "chars": 623
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Edges.etl",
+          "chars": 290
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id3ToId2_DoUpdateSend.etl",
+          "chars": 327
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id4ToId5.etl",
+          "chars": 265
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id5ToId3.etl",
+          "chars": 1209
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id2Random.etl",
+          "chars": 267
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id3Random.etl",
+          "chars": 270
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id4Random.etl",
+          "chars": 285
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id5Random.etl",
+          "chars": 140
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Locations.etl",
+          "chars": 254
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/Random.etl",
+          "chars": 331
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/Template.etl",
+          "chars": 207
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Animo.etl",
+          "chars": 37
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
+          "chars": 1229
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl",
+          "chars": 1123
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "chars": 324
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/General.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/Shared Libraries.etl",
+          "chars": 107
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/ChannelVariableDeclaration.etl",
+          "chars": 967
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/ClockVariableDeclaration.etl",
+          "chars": 387
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/DataVariableDeclaration.etl",
+          "chars": 7296
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/Declaration.etl",
+          "chars": 228
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/FunctionDeclaration.etl",
+          "chars": 2586
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/Parameter.etl",
+          "chars": 2469
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/TypeDeclaration.etl",
+          "chars": 1200
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/Variable.etl",
+          "chars": 1528
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/ArithmeticExpression.etl",
+          "chars": 6206
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/CompareExpression.etl",
+          "chars": 8631
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/Expression.etl",
+          "chars": 241
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/FunctionCallExpression.etl",
+          "chars": 778
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/IncrementDecrementExpression.etl",
+          "chars": 1648
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/LogicalExpression.etl",
+          "chars": 2922
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/MinusExpression.etl",
+          "chars": 464
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/NegationExpression.etl",
+          "chars": 416
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/NSTA.etl",
+          "chars": 756
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/ExpressionStatement.etl",
+          "chars": 3283
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/IfStatement.etl",
+          "chars": 1635
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/ReturnStatement.etl",
+          "chars": 820
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/Statement.etl",
+          "chars": 118
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/WhileStatement.etl",
+          "chars": 186
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/ChanceEdge.etl",
+          "chars": 576
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/ChanceNode.etl",
+          "chars": 272
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Edge.etl",
+          "chars": 536
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Guard.etl",
+          "chars": 400
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Invariant.etl",
+          "chars": 446
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Location.etl",
+          "chars": 1197
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Point.etl",
+          "chars": 131
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Selection.etl",
+          "chars": 527
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Synchronization.etl",
+          "chars": 1176
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Template.etl",
+          "chars": 211
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Templates.etl",
+          "chars": 253
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/templates/Update.etl",
+          "chars": 449
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/types/RangeTypeSpecification.etl",
+          "chars": 403
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/types/Type.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/types/TypeType.etl",
+          "chars": 239
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/Uppaal Code Syntax.etl",
+          "chars": 188
+        }
+      ]
+    },
+    "thesis_portfolio_without_uppaal_code_syntax": {
+      "label": "Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax)",
+      "fileCount": 163,
+      "totals": {
+        "chars": 123309
+      },
+      "files": [
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/Animo2ODE.etl",
+          "chars": 435
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 288
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/Clocks.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/GlobalTime.etl",
+          "chars": 166
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 63
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 586
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/ReactionVariables.etl",
+          "chars": 404
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/Variables.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/instantiationList/InstantiationList.etl",
+          "chars": 33
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/instantiationList/ModelInstantiation.etl",
+          "chars": 515
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/System.etl",
+          "chars": 467
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/Edges.etl",
+          "chars": 163
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/Id1ToId0_Initialize.etl",
+          "chars": 548
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/InitializationSelections.etl",
+          "chars": 528
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/InitializationUpdates.etl",
+          "chars": 661
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/Functions.etl",
+          "chars": 62
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
+          "chars": 1621
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateFunctions.etl",
+          "chars": 2195
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/LocalDeclarations.etl",
+          "chars": 260
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Id0.etl",
+          "chars": 878
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Id1.etl",
+          "chars": 276
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Locations.etl",
+          "chars": 168
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/Template.etl",
+          "chars": 350
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl",
+          "chars": 477
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/_ANIMO_round.etl",
+          "chars": 3660
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Add.etl",
+          "chars": 4791
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Divide.etl",
+          "chars": 1934
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Functions.etl",
+          "chars": 1742
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Int_to_double.etl",
+          "chars": 3387
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Inverse.etl",
+          "chars": 1670
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Multiply.etl",
+          "chars": 1941
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Power.etl",
+          "chars": 808
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario1.etl",
+          "chars": 1133
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario2_3.etl",
+          "chars": 1766
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl",
+          "chars": 3616
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Subtract.etl",
+          "chars": 5106
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 852
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Double_t.etl",
+          "chars": 366
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Int_t.etl",
+          "chars": 223
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Time_t.etl",
+          "chars": 208
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/TimeActivity.etl",
+          "chars": 292
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Types.etl",
+          "chars": 98
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/Broadcasts.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/Reached.etl",
+          "chars": 473
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/ReachingAndDoUpdate.etl",
+          "chars": 269
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/clocks/Clocks.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/clocks/GlobalTime.etl",
+          "chars": 166
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/Consts.etl",
+          "chars": 159
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INF.etl",
+          "chars": 216
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INFINITE_TIME_DOUBLE.etl",
+          "chars": 292
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INFINITE_TIME.etl",
+          "chars": 224
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/LOWER_UNC_UPPER_UNC.etl",
+          "chars": 551
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/N_REACTANTS.etl",
+          "chars": 389
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/Zero.etl",
+          "chars": 234
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 63
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 689
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl",
+          "chars": 1215
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/Variables.etl",
+          "chars": 127
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/InitRandomInstantiation.etl",
+          "chars": 565
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/InstantiationList.etl",
+          "chars": 82
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/ReactantTemplateInstantiations.etl",
+          "chars": 1215
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/System.etl",
+          "chars": 531
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/Edges.etl",
+          "chars": 1517
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/Id0ToWaiting_ReachedSend.etl",
+          "chars": 560
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/RespondingToUpdating_UpdateAndDecideReset.etl",
+          "chars": 411
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/StartToWaiting_DoUpdateReceive.etl",
+          "chars": 460
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/UpdatingToWaiting_NoChangeGuard.etl",
+          "chars": 400
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/UpdatingToWaiting_UrgentReactionGuard.etl",
+          "chars": 506
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingReceive.etl",
+          "chars": 582
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingSend.etl",
+          "chars": 659
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+          "chars": 755
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+          "chars": 1403
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl",
+          "chars": 906
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "chars": 6167
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Decide_reset.etl",
+          "chars": 501
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Functions.etl",
+          "chars": 190
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Infinite_delay.etl",
+          "chars": 335
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Make_urgent.etl",
+          "chars": 412
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Rate_significantly_changed.etl",
+          "chars": 988
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Reach.etl",
+          "chars": 498
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Update.etl",
+          "chars": 3613
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/LocalDeclarations.etl",
+          "chars": 549
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/Basic.etl",
+          "chars": 81
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/Delta.etl",
+          "chars": 200
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/TLAndTU.etl",
+          "chars": 247
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/TotalRateAndOldRate.etl",
+          "chars": 433
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/clocks/C.etl",
+          "chars": 139
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/clocks/Clocks.etl",
+          "chars": 17
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/Variables.etl",
+          "chars": 57
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Id0.etl",
+          "chars": 274
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Locations.etl",
+          "chars": 299
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Responding.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Start.etl",
+          "chars": 365
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Updating.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Waiting.etl",
+          "chars": 361
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
+          "chars": 613
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/random/Random.etl",
+          "chars": 2632
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/Template.etl",
+          "chars": 207
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/Animo2VariablesModelReactantCenteredDeterministic.etl",
+          "chars": 769
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/_ANIMO_round.etl",
+          "chars": 198
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/EnterCrit.etl",
+          "chars": 581
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/ExitCrit.etl",
+          "chars": 862
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Functions.etl",
+          "chars": 123
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Int_to_double.etl",
+          "chars": 1964
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Inverse.etl",
+          "chars": 1779
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 959
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
+          "chars": 0
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/Basic.etl",
+          "chars": 88
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/Conta_InfAndConta_BigN.etl",
+          "chars": 286
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/CriticalSession.etl",
+          "chars": 577
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/MinCrit.etl",
+          "chars": 206
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/Broadcasts.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/Reached.etl",
+          "chars": 473
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/ReachingAndDoUpdate.etl",
+          "chars": 329
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 31
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 492
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/Variables.etl",
+          "chars": 89
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Edges.etl",
+          "chars": 1373
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Id0ToUpdating_Reacted_Send.etl",
+          "chars": 690
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
+          "chars": 3217
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/RespondingToUpdating_Receive.etl",
+          "chars": 473
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/RespondingToUpdating_Send.etl",
+          "chars": 467
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/StartToUpdating.etl",
+          "chars": 551
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdateToNot_reacting_Receive.etl",
+          "chars": 417
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdateToNot_reacting_Send.etl",
+          "chars": 411
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_NoChange_Receive.etl",
+          "chars": 458
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_NoChange_Send.etl",
+          "chars": 452
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_UrgentReaction_Receive.etl",
+          "chars": 557
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_UrgentReaction_Send.etl",
+          "chars": 551
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToId0_Reacting_Receive.etl",
+          "chars": 637
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToId0_Reacting_Send.etl",
+          "chars": 710
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+          "chars": 3369
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Can_react.etl",
+          "chars": 602
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Cant_react.etl",
+          "chars": 610
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "chars": 6882
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Functions.etl",
+          "chars": 116
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Reach.etl",
+          "chars": 492
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Update.etl",
+          "chars": 185
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/LocalDeclarations.etl",
+          "chars": 530
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Locations.etl",
+          "chars": 361
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Not_reacting.etl",
+          "chars": 291
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Responding.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Start.etl",
+          "chars": 552
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Update.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Waiting.etl",
+          "chars": 324
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
+          "chars": 623
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Edges.etl",
+          "chars": 290
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id3ToId2_DoUpdateSend.etl",
+          "chars": 327
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id4ToId5.etl",
+          "chars": 265
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id5ToId3.etl",
+          "chars": 1209
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id2Random.etl",
+          "chars": 267
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id3Random.etl",
+          "chars": 270
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id4Random.etl",
+          "chars": 285
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id5Random.etl",
+          "chars": 140
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Locations.etl",
+          "chars": 254
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/Random.etl",
+          "chars": 331
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/Template.etl",
+          "chars": 207
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Animo.etl",
+          "chars": 37
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
+          "chars": 1229
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl",
+          "chars": 1123
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "chars": 324
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/General.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/Shared Libraries.etl",
+          "chars": 107
+        }
+      ]
+    },
+    "thesis_portfolio_without_uppaal_code_syntax_without_comments": {
+      "label": "Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments)",
+      "fileCount": 163,
+      "totals": {
+        "chars": 110503
+      },
+      "files": [
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/Animo2ODE.etl",
+          "chars": 435
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 288
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/Clocks.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/GlobalTime.etl",
+          "chars": 146
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 63
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 490
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/groups/ReactionVariables.etl",
+          "chars": 373
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/Variables.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/instantiationList/InstantiationList.etl",
+          "chars": 33
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/instantiationList/ModelInstantiation.etl",
+          "chars": 515
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/system/System.etl",
+          "chars": 467
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/Edges.etl",
+          "chars": 163
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/Id1ToId0_Initialize.etl",
+          "chars": 548
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/InitializationSelections.etl",
+          "chars": 528
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/edges/InitializationUpdates.etl",
+          "chars": 661
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/Functions.etl",
+          "chars": 62
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
+          "chars": 1347
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateFunctions.etl",
+          "chars": 1870
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/LocalDeclarations.etl",
+          "chars": 260
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Id0.etl",
+          "chars": 878
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Id1.etl",
+          "chars": 276
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/locations/Locations.etl",
+          "chars": 168
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/Template.etl",
+          "chars": 350
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl",
+          "chars": 477
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/_ANIMO_round.etl",
+          "chars": 3005
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Add.etl",
+          "chars": 3634
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Divide.etl",
+          "chars": 1569
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Functions.etl",
+          "chars": 1418
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Int_to_double.etl",
+          "chars": 2910
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Inverse.etl",
+          "chars": 1141
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Multiply.etl",
+          "chars": 1352
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Power.etl",
+          "chars": 699
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario1.etl",
+          "chars": 936
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario2_3.etl",
+          "chars": 1428
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl",
+          "chars": 3616
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Subtract.etl",
+          "chars": 3950
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 852
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Double_t.etl",
+          "chars": 301
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Int_t.etl",
+          "chars": 177
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Time_t.etl",
+          "chars": 170
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/TimeActivity.etl",
+          "chars": 240
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Types.etl",
+          "chars": 98
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/Broadcasts.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/Reached.etl",
+          "chars": 434
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/broadcasts/ReachingAndDoUpdate.etl",
+          "chars": 231
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/clocks/Clocks.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/clocks/GlobalTime.etl",
+          "chars": 146
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/Consts.etl",
+          "chars": 159
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INF.etl",
+          "chars": 183
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INFINITE_TIME_DOUBLE.etl",
+          "chars": 239
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/INFINITE_TIME.etl",
+          "chars": 192
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/LOWER_UNC_UPPER_UNC.etl",
+          "chars": 444
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/N_REACTANTS.etl",
+          "chars": 259
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/consts/Zero.etl",
+          "chars": 202
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 63
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 574
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl",
+          "chars": 1026
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/Variables.etl",
+          "chars": 127
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/InitRandomInstantiation.etl",
+          "chars": 565
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/InstantiationList.etl",
+          "chars": 82
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/ReactantTemplateInstantiations.etl",
+          "chars": 1215
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/System.etl",
+          "chars": 531
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/Edges.etl",
+          "chars": 1517
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/Id0ToWaiting_ReachedSend.etl",
+          "chars": 462
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/RespondingToUpdating_UpdateAndDecideReset.etl",
+          "chars": 384
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/StartToWaiting_DoUpdateReceive.etl",
+          "chars": 440
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/UpdatingToWaiting_NoChangeGuard.etl",
+          "chars": 366
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/UpdatingToWaiting_UrgentReactionGuard.etl",
+          "chars": 466
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingReceive.etl",
+          "chars": 529
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingSend.etl",
+          "chars": 525
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+          "chars": 755
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+          "chars": 1403
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl",
+          "chars": 906
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "chars": 5959
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Decide_reset.etl",
+          "chars": 406
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Functions.etl",
+          "chars": 190
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Infinite_delay.etl",
+          "chars": 279
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Make_urgent.etl",
+          "chars": 360
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Rate_significantly_changed.etl",
+          "chars": 812
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Reach.etl",
+          "chars": 411
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Update.etl",
+          "chars": 2865
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/LocalDeclarations.etl",
+          "chars": 549
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/Basic.etl",
+          "chars": 81
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/Delta.etl",
+          "chars": 176
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/TLAndTU.etl",
+          "chars": 230
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/basic/TotalRateAndOldRate.etl",
+          "chars": 356
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/clocks/C.etl",
+          "chars": 128
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/clocks/Clocks.etl",
+          "chars": 17
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/variables/Variables.etl",
+          "chars": 57
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Id0.etl",
+          "chars": 274
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Locations.etl",
+          "chars": 299
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Responding.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Start.etl",
+          "chars": 365
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Updating.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/locations/Waiting.etl",
+          "chars": 361
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
+          "chars": 613
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/random/Random.etl",
+          "chars": 2632
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/Template.etl",
+          "chars": 207
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/Animo2VariablesModelReactantCenteredDeterministic.etl",
+          "chars": 475
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/_ANIMO_round.etl",
+          "chars": 83
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/EnterCrit.etl",
+          "chars": 480
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/ExitCrit.etl",
+          "chars": 689
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Functions.etl",
+          "chars": 123
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Int_to_double.etl",
+          "chars": 1679
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Inverse.etl",
+          "chars": 1250
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
+          "chars": 959
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
+          "chars": 0
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/Basic.etl",
+          "chars": 88
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/Conta_InfAndConta_BigN.etl",
+          "chars": 249
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/CriticalSession.etl",
+          "chars": 525
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/basic/MinCrit.etl",
+          "chars": 177
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/Broadcasts.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/Reached.etl",
+          "chars": 434
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/broadcasts/ReachingAndDoUpdate.etl",
+          "chars": 277
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/Groups.etl",
+          "chars": 31
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/ReactantVariables.etl",
+          "chars": 422
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/Variables.etl",
+          "chars": 89
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Edges.etl",
+          "chars": 1373
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Id0ToUpdating_Reacted_Send.etl",
+          "chars": 594
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
+          "chars": 3187
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/RespondingToUpdating_Receive.etl",
+          "chars": 446
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/RespondingToUpdating_Send.etl",
+          "chars": 440
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/StartToUpdating.etl",
+          "chars": 531
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdateToNot_reacting_Receive.etl",
+          "chars": 388
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdateToNot_reacting_Send.etl",
+          "chars": 382
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_NoChange_Receive.etl",
+          "chars": 424
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_NoChange_Send.etl",
+          "chars": 418
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_UrgentReaction_Receive.etl",
+          "chars": 517
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/UpdatingToWaiting_UrgentReaction_Send.etl",
+          "chars": 511
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToId0_Reacting_Receive.etl",
+          "chars": 583
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToId0_Reacting_Send.etl",
+          "chars": 577
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+          "chars": 3344
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Can_react.etl",
+          "chars": 470
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Cant_react.etl",
+          "chars": 477
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "chars": 6575
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Functions.etl",
+          "chars": 116
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Reach.etl",
+          "chars": 408
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Update.etl",
+          "chars": 59
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/LocalDeclarations.etl",
+          "chars": 530
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Locations.etl",
+          "chars": 361
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Not_reacting.etl",
+          "chars": 291
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Responding.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Start.etl",
+          "chars": 552
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Update.etl",
+          "chars": 287
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/locations/Waiting.etl",
+          "chars": 324
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
+          "chars": 623
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Edges.etl",
+          "chars": 290
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id3ToId2_DoUpdateSend.etl",
+          "chars": 313
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id4ToId5.etl",
+          "chars": 251
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/edges/Id5ToId3.etl",
+          "chars": 1195
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id2Random.etl",
+          "chars": 267
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id3Random.etl",
+          "chars": 270
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id4Random.etl",
+          "chars": 285
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Id5Random.etl",
+          "chars": 140
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/locations/Locations.etl",
+          "chars": 254
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/random/Random.etl",
+          "chars": 331
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/Template.etl",
+          "chars": 207
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Animo.etl",
+          "chars": 37
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
+          "chars": 1229
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl",
+          "chars": 1123
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "chars": 324
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/General.etl",
+          "chars": 26
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/Shared Libraries.etl",
+          "chars": 107
+        }
+      ]
+    },
+    "animo3_baseline_telniouk_portfolio": {
+      "label": "ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables)",
+      "fileCount": 3,
+      "totals": {
+        "chars": 131979
+      },
+      "files": [
+        {
+          "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelODE.java",
+          "chars": 13274
+        },
+        {
+          "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic.java",
+          "chars": 57278
+        },
+        {
+          "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java",
+          "chars": 61427
+        }
+      ]
+    },
+    "telniouk_portfolio": {
+      "label": "Telniouk portfolio (ETL closure for the available transformation variants)",
+      "fileCount": 5,
+      "totals": {
+        "chars": 115854
+      },
+      "files": [
+        {
+          "file": "MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalODE.etl",
+          "chars": 9567
+        },
+        {
+          "file": "MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministic.etl",
+          "chars": 37005
+        },
+        {
+          "file": "MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministicStdTexts.etl",
+          "chars": 9438
+        },
+        {
+          "file": "MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactionCenteredTables.etl",
+          "chars": 28912
+        },
+        {
+          "file": "MDEThesis/Telniouk his transformations/transformationdefinitions/StdFunctions.etl",
+          "chars": 30932
+        }
+      ]
+    }
+  },
+  "baselineComparisons": {
+    "thesis_portfolio": {
+      "baselineGroupId": "animo3_baseline_portfolio",
+      "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
+      "deltaPct": 30.38399690301063
+    },
+    "thesis_portfolio_without_uppaal_code_syntax": {
+      "baselineGroupId": "animo3_baseline_portfolio",
+      "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
+      "deltaPct": -8.200321610434472
+    },
+    "thesis_portfolio_without_uppaal_code_syntax_without_comments": {
+      "baselineGroupId": "animo3_baseline_portfolio",
+      "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
+      "deltaPct": -17.733986480450252
+    },
+    "telniouk_portfolio": {
+      "baselineGroupId": "animo3_baseline_telniouk_portfolio",
+      "baselineLabel": "ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables)",
+      "deltaPct": -12.217852840224582
+    }
+  },
+  "variantComparisons": [
+    {
+      "id": "rcs_animo3_vs_thesis",
+      "label": "Reactant-centered simplified",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 63772
+        }
+      },
+      "right": {
+        "fileCount": 119,
+        "totals": {
+          "chars": 124200
+        }
+      },
+      "deltaPct": 94.7563193878191
+    },
+    {
+      "id": "rc_animo3_vs_thesis",
+      "label": "Reactant-centered deterministic",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 57278
+        }
+      },
+      "right": {
+        "fileCount": 178,
+        "totals": {
+          "chars": 164385
+        }
+      },
+      "deltaPct": 186.99500680889696
+    },
+    {
+      "id": "ode_animo3_vs_thesis",
+      "label": "ODE",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 13274
+        }
+      },
+      "right": {
+        "fileCount": 67,
+        "totals": {
+          "chars": 65426
+        }
+      },
+      "deltaPct": 392.8883531716137
+    },
+    {
+      "id": "rcs_animo3_vs_thesis_without_uppaal_code_syntax",
+      "label": "Reactant-centered simplified",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis without Uppaal Code Syntax",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 63772
+        }
+      },
+      "right": {
+        "fileCount": 81,
+        "totals": {
+          "chars": 72372
+        }
+      },
+      "deltaPct": 13.485542244245124
+    },
+    {
+      "id": "rc_animo3_vs_thesis_without_uppaal_code_syntax",
+      "label": "Reactant-centered deterministic",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis without Uppaal Code Syntax",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 57278
+        }
+      },
+      "right": {
+        "fileCount": 140,
+        "totals": {
+          "chars": 112557
+        }
+      },
+      "deltaPct": 96.51000384091624
+    },
+    {
+      "id": "ode_animo3_vs_thesis_without_uppaal_code_syntax",
+      "label": "ODE",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis without Uppaal Code Syntax",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 13274
+        }
+      },
+      "right": {
+        "fileCount": 29,
+        "totals": {
+          "chars": 13598
+        }
+      },
+      "deltaPct": 2.440861835166491
+    },
+    {
+      "id": "rcs_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
+      "label": "Reactant-centered simplified",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis without Uppaal Code Syntax and comments",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 63772
+        }
+      },
+      "right": {
+        "fileCount": 81,
+        "totals": {
+          "chars": 63530
+        }
+      },
+      "deltaPct": -0.3794768864078279
+    },
+    {
+      "id": "rc_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
+      "label": "Reactant-centered deterministic",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis without Uppaal Code Syntax and comments",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 57278
+        }
+      },
+      "right": {
+        "fileCount": 140,
+        "totals": {
+          "chars": 100497
+        }
+      },
+      "deltaPct": 75.45479939942037
+    },
+    {
+      "id": "ode_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
+      "label": "ODE",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Thesis without Uppaal Code Syntax and comments",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 13274
+        }
+      },
+      "right": {
+        "fileCount": 29,
+        "totals": {
+          "chars": 12852
+        }
+      },
+      "deltaPct": -3.1791472050625282
+    },
+    {
+      "id": "rc_telniouk_vs_thesis",
+      "label": "Reactant-centered deterministic",
+      "leftLabel": "Telniouk",
+      "rightLabel": "Thesis",
+      "left": {
+        "fileCount": 3,
+        "totals": {
+          "chars": 77375
+        }
+      },
+      "right": {
+        "fileCount": 178,
+        "totals": {
+          "chars": 164385
+        }
+      },
+      "deltaPct": 112.4523424878837
+    },
+    {
+      "id": "ode_telniouk_vs_thesis",
+      "label": "ODE",
+      "leftLabel": "Telniouk",
+      "rightLabel": "Thesis",
+      "left": {
+        "fileCount": 2,
+        "totals": {
+          "chars": 40499
+        }
+      },
+      "right": {
+        "fileCount": 67,
+        "totals": {
+          "chars": 65426
+        }
+      },
+      "deltaPct": 61.549667893034396
+    },
+    {
+      "id": "rc_telniouk_vs_thesis_without_uppaal_code_syntax",
+      "label": "Reactant-centered deterministic",
+      "leftLabel": "Telniouk",
+      "rightLabel": "Thesis without Uppaal Code Syntax",
+      "left": {
+        "fileCount": 3,
+        "totals": {
+          "chars": 77375
+        }
+      },
+      "right": {
+        "fileCount": 140,
+        "totals": {
+          "chars": 112557
+        }
+      },
+      "deltaPct": 45.46946688206785
+    },
+    {
+      "id": "rc_telniouk_vs_thesis_without_uppaal_code_syntax_without_comments",
+      "label": "Reactant-centered deterministic",
+      "leftLabel": "Telniouk",
+      "rightLabel": "Thesis without Uppaal Code Syntax and comments",
+      "left": {
+        "fileCount": 3,
+        "totals": {
+          "chars": 77375
+        }
+      },
+      "right": {
+        "fileCount": 140,
+        "totals": {
+          "chars": 100497
+        }
+      },
+      "deltaPct": 29.88303715670436
+    },
+    {
+      "id": "rc_thesis_without_uppaal_vs_thesis_inheritance_excluded",
+      "label": "Reactant-centered deterministic inheritance saving",
+      "leftLabel": "Thesis without Uppaal Code Syntax",
+      "rightLabel": "Thesis without Uppaal Code Syntax and inherited simplified logic excluded",
+      "left": {
+        "fileCount": 140,
+        "totals": {
+          "chars": 112557
+        }
+      },
+      "right": {
+        "fileCount": 65,
+        "totals": {
+          "chars": 43031
+        }
+      },
+      "deltaPct": -61.769592295459184
+    },
+    {
+      "id": "ode_telniouk_vs_thesis_without_uppaal_code_syntax",
+      "label": "ODE",
+      "leftLabel": "Telniouk",
+      "rightLabel": "Thesis without Uppaal Code Syntax",
+      "left": {
+        "fileCount": 2,
+        "totals": {
+          "chars": 40499
+        }
+      },
+      "right": {
+        "fileCount": 29,
+        "totals": {
+          "chars": 13598
+        }
+      },
+      "deltaPct": -66.42386231758809
+    },
+    {
+      "id": "ode_telniouk_vs_thesis_without_uppaal_code_syntax_without_comments",
+      "label": "ODE",
+      "leftLabel": "Telniouk",
+      "rightLabel": "Thesis without Uppaal Code Syntax and comments",
+      "left": {
+        "fileCount": 2,
+        "totals": {
+          "chars": 40499
+        }
+      },
+      "right": {
+        "fileCount": 29,
+        "totals": {
+          "chars": 12852
+        }
+      },
+      "deltaPct": -68.26588310822488
+    },
+    {
+      "id": "rct_animo3_vs_telniouk",
+      "label": "Reaction-centered tables",
+      "leftLabel": "ANIMO 3.5.1",
+      "rightLabel": "Telniouk",
+      "left": {
+        "fileCount": 1,
+        "totals": {
+          "chars": 61427
+        }
+      },
+      "right": {
+        "fileCount": 2,
+        "totals": {
+          "chars": 59844
+        }
+      },
+      "deltaPct": -2.577042668533381
+    }
+  ]
+}
