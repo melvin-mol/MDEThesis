@@ -1,0 +1,22 @@
+[
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 18
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 34
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+      "index": 1
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+      "index": 1
+    }
+  ]
+]
