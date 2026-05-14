@@ -15,8 +15,12 @@ if (!process.argv[2]) {
 const linesAmount = parseInt(process.argv[2], 10);
 const RESULTS_DIR = path.join(__dirname, 'compare-results');
 
-const TARGET_DIR = 'fill in the target dir here';
+const TARGET_DIR = 'C:\\Dev\\School\\OU\\Master\\Afstuderen\\MDEThesis\\Case Study\\epsilon transformations';
 const EXTENSION = '.etl';
+
+function toRelativeFilePath(filePath) {
+    return path.relative(TARGET_DIR, filePath).split(path.sep).join('/');
+}
 
 function stripCommentsPreserveLines(content) {
     let result = '';
@@ -129,7 +133,7 @@ function processFile(filePath, done) {
             for (let i = 0; i < linesAmount; i++) {
                 block += normalizedLines[index + i];
             }
-            lineCollector.push({ line: block, file: filePath, index: index });
+            lineCollector.push({ line: block, file: toRelativeFilePath(filePath), index: index });
         }
 
         filesFinished++;

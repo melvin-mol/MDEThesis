@@ -16,9 +16,13 @@ if (!process.argv[2]) {
 const linesAmount = parseInt(process.argv[2], 10);
 const RESULTS_DIR = path.join(__dirname, 'compare-results');
 
-const TARGET_DIR = 'fill in the target dir here';
+const TARGET_DIR = 'C:\\Dev\\School\\OU\\Master\\Afstuderen\\MDEThesis\\Case Study\\epsilon transformations';
 const EXTENSION = '.etl';
 const EXCLUDE_DIR = 'uppaal code syntax';
+
+function toRelativeFilePath(filePath) {
+    return path.relative(TARGET_DIR, filePath).split(path.sep).join('/');
+}
 
 function shouldExclude(filePath) {
     return filePath.toLowerCase().includes(EXCLUDE_DIR.toLowerCase());
@@ -89,7 +93,7 @@ function readFilesRecursively(dir) {
                             for (let i = 0; i < linesAmount; i++) {
                                 line = line + lines[index + i];
                             }
-                            lineCollector.push({ line: line, file: fullPath, index: index });
+                            lineCollector.push({ line: line, file: toRelativeFilePath(fullPath), index: index });
                         }
 
                         process.stdout.clearLine(0);
