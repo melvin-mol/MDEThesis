@@ -15,7 +15,7 @@ if (!process.argv[2]) {
 const linesAmount = parseInt(process.argv[2], 10);
 const RESULTS_DIR = path.join(__dirname, 'compare-results');
 
-const TARGET_DIR = 'C:\\Dev\\School\\OU\\Master\\Afstuderen\\MDEThesis\\Case Study\\epsilon transformations';
+const TARGET_DIR = 'fill in the target dir here';
 const EXTENSION = '.etl';
 
 function toRelativeFilePath(filePath) {
