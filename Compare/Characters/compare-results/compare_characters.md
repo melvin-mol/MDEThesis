@@ -11,9 +11,9 @@ Counts are measured after the configured profile preprocessing. By default this 
 | Group | Files | Characters |
 |---|---:|---:|
 | ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | 3 | 134324 |
-| Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax) | 201 | 175137 |
-| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax) | 163 | 123309 |
-| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments) | 163 | 110503 |
+| Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax) | 201 | 171581 |
+| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax) | 163 | 119753 |
+| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments) | 163 | 107089 |
 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | 3 | 131979 |
 | Telniouk portfolio (ETL closure for the available transformation variants) | 5 | 115854 |
 
@@ -21,9 +21,9 @@ Counts are measured after the configured profile preprocessing. By default this 
 
 | Comparison | Characters delta |
 |---|---:|
-| Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | +30.38% |
-| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | -8.20% |
-| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | -17.73% |
+| Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | +27.74% |
+| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | -10.85% |
+| Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | -20.28% |
 | Telniouk portfolio (ETL closure for the available transformation variants) vs ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | -12.22% |
 
 ## Per-comparison character totals
@@ -31,19 +31,19 @@ Counts are measured after the configured profile preprocessing. By default this 
 | Comparison | Left files | Right files | Left chars | Right chars | Chars delta |
 |---|---:|---:|---:|---:|---:|
 | Reactant-centered simplified (ANIMO 3.5.1 -> Thesis) | 1 | 119 | 63772 | 124200 | +94.76% |
-| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis) | 1 | 178 | 57278 | 164385 | +187.00% |
+| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis) | 1 | 178 | 57278 | 160829 | +180.79% |
 | ODE (ANIMO 3.5.1 -> Thesis) | 1 | 67 | 13274 | 65426 | +392.89% |
 | Reactant-centered simplified (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax) | 1 | 81 | 63772 | 72372 | +13.49% |
-| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax) | 1 | 140 | 57278 | 112557 | +96.51% |
+| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax) | 1 | 140 | 57278 | 109001 | +90.30% |
 | ODE (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax) | 1 | 29 | 13274 | 13598 | +2.44% |
 | Reactant-centered simplified (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax and comments) | 1 | 81 | 63772 | 63530 | -0.38% |
-| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax and comments) | 1 | 140 | 57278 | 100497 | +75.45% |
+| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax and comments) | 1 | 140 | 57278 | 97083 | +69.49% |
 | ODE (ANIMO 3.5.1 -> Thesis without Uppaal Code Syntax and comments) | 1 | 29 | 13274 | 12852 | -3.18% |
-| Reactant-centered deterministic (Telniouk -> Thesis) | 3 | 178 | 77375 | 164385 | +112.45% |
+| Reactant-centered deterministic (Telniouk -> Thesis) | 3 | 178 | 77375 | 160829 | +107.86% |
 | ODE (Telniouk -> Thesis) | 2 | 67 | 40499 | 65426 | +61.55% |
-| Reactant-centered deterministic (Telniouk -> Thesis without Uppaal Code Syntax) | 3 | 140 | 77375 | 112557 | +45.47% |
-| Reactant-centered deterministic (Telniouk -> Thesis without Uppaal Code Syntax and comments) | 3 | 140 | 77375 | 100497 | +29.88% |
-| Reactant-centered deterministic inheritance saving (Thesis without Uppaal Code Syntax -> Thesis without Uppaal Code Syntax and inherited simplified logic excluded) | 140 | 65 | 112557 | 43031 | -61.77% |
+| Reactant-centered deterministic (Telniouk -> Thesis without Uppaal Code Syntax) | 3 | 140 | 77375 | 109001 | +40.87% |
+| Reactant-centered deterministic (Telniouk -> Thesis without Uppaal Code Syntax and comments) | 3 | 140 | 77375 | 97083 | +25.47% |
+| Reactant-centered deterministic inheritance saving (Thesis without Uppaal Code Syntax -> Thesis without Uppaal Code Syntax and inherited simplified logic excluded) | 140 | 65 | 109001 | 39475 | -63.78% |
 | ODE (Telniouk -> Thesis without Uppaal Code Syntax) | 2 | 29 | 40499 | 13598 | -66.42% |
 | ODE (Telniouk -> Thesis without Uppaal Code Syntax and comments) | 2 | 29 | 40499 | 12852 | -68.27% |
 | Reaction-centered tables (ANIMO 3.5.1 -> Telniouk) | 1 | 2 | 61427 | 59844 | -2.58% |

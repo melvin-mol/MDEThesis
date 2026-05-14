@@ -11,7 +11,7 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 | Group | Files | Units | Total CC | Avg/file | Avg/unit | Max unit CC |
 |---|---:|---:|---:|---:|---:|---:|
 | ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | 3 | 24 | 309 | 103.00 | 12.88 | 93 |
-| Thesis portfolio (ETL closure for the implemented case-study automata) | 201 | 320 | 658 | 3.27 | 2.06 | 15 |
+| Thesis portfolio (ETL closure for the implemented case-study automata) | 201 | 315 | 635 | 3.16 | 2.02 | 15 |
 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | 3 | 20 | 219 | 73.00 | 10.95 | 79 |
 | Telniouk portfolio (ETL closure for the available transformation variants) | 5 | 267 | 401 | 80.20 | 1.50 | 18 |
 
@@ -19,7 +19,7 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 
 | Comparison | Total CC delta | Avg/file delta | Avg/unit delta |
 |---|---:|---:|---:|
-| Thesis portfolio (ETL closure for the implemented case-study automata) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | +112.94% | -96.82% | -84.03% |
+| Thesis portfolio (ETL closure for the implemented case-study automata) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | +105.50% | -96.93% | -84.34% |
 | Telniouk portfolio (ETL closure for the available transformation variants) vs ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | +83.11% | +9.86% | -86.28% |
 
 ## Per-comparison cyclomatic totals
@@ -27,7 +27,7 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 | Comparison | Left files | Right files | Left units | Right units | Left CC | Right CC | Left avg/file | Right avg/file | Left avg/unit | Right avg/unit | Total CC delta | Avg/file delta | Avg/unit delta |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Reactant-centered simplified (ANIMO 3.5.1 -> Thesis) | 1 | 119 | 9 | 233 | 140 | 424 | 140.00 | 3.56 | 15.56 | 1.82 | +202.86% | -97.45% | -88.30% |
-| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis) | 1 | 178 | 8 | 299 | 119 | 605 | 119.00 | 3.40 | 14.88 | 2.02 | +408.40% | -97.14% | -86.40% |
+| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis) | 1 | 178 | 8 | 294 | 119 | 582 | 119.00 | 3.27 | 14.88 | 1.98 | +389.08% | -97.25% | -86.69% |
 | ODE (ANIMO 3.5.1 -> Thesis) | 1 | 67 | 7 | 169 | 50 | 267 | 50.00 | 3.99 | 7.14 | 1.58 | +434.00% | -92.03% | -77.88% |
 | Reactant-centered deterministic (ANIMO 3.5.1 -> Telniouk) | 1 | 3 | 8 | 226 | 119 | 296 | 119.00 | 98.67 | 14.88 | 1.31 | +148.74% | -17.09% | -91.20% |
 | ODE (ANIMO 3.5.1 -> Telniouk) | 1 | 2 | 7 | 174 | 50 | 211 | 50.00 | 105.50 | 7.14 | 1.21 | +322.00% | +111.00% | -83.02% |
@@ -48,15 +48,15 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 | 9 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupNot_reactingToResponding_ReactedReceive` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl` | 15 | 14 | ifStatements:5, forLoops:1, caseBranches:3, logicalAnd:5 |
 | 10 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupWaitingToResponding_ReactedReceive` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl` | 15 | 14 | ifStatements:5, forLoops:1, caseBranches:3, logicalAnd:5 |
 | 11 | Thesis portfolio (ETL closure for the implemented case-study automata) | `translateScenario4Formula` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl` | 14 | 13 | ifStatements:7, whileLoops:2, existsPredicates:1, ternaryOperators:1, logicalOr:2 |
-| 12 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl` | 13 | 12 | ifStatements:2, ternaryOperators:5, logicalAnd:4, logicalOr:1 |
-| 13 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl` | 13 | 12 | ifStatements:2, ternaryOperators:5, logicalAnd:4, logicalOr:1 |
-| 14 | Telniouk portfolio (ETL closure for the available transformation variants) | `getCompute_rateFunctionBody` | operation | `MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministic.etl` | 12 | 11 | ifStatements:5, forLoops:3, logicalOr:3 |
-| 15 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | `appendModel` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java` | 10 | 9 | ifStatements:5, forLoops:3, whileLoops:1 |
-| 16 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | `appendTemplates` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java` | 10 | 9 | ifStatements:3, forLoops:1, catchBlocks:1, ternaryOperators:3, logicalAnd:1 |
-| 17 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupODERateExpression` | operation | `MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl` | 10 | 9 | ifStatements:2, ternaryOperators:5, logicalAnd:1, logicalOr:1 |
-| 18 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupWaitingToResponding_ReachedSourceReceive_Scenario2_3` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl` | 10 | 9 | ifStatements:4, selectPredicates:4, logicalAnd:1 |
-| 19 | Telniouk portfolio (ETL closure for the available transformation variants) | `createCompute_rateScenario2_3ConditionalAssignmentThen` | operation | `MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministic.etl` | 9 | 8 | ternaryOperators:4, logicalAnd:4 |
-| 20 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupReactionVariables` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl` | 9 | 8 | ifStatements:4, forLoops:1, logicalOr:3 |
+| 12 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl` | 13 | 12 | ifStatements:2, ternaryOperators:5, logicalAnd:4, logicalOr:1 |
+| 13 | Telniouk portfolio (ETL closure for the available transformation variants) | `getCompute_rateFunctionBody` | operation | `MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministic.etl` | 12 | 11 | ifStatements:5, forLoops:3, logicalOr:3 |
+| 14 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | `appendModel` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java` | 10 | 9 | ifStatements:5, forLoops:3, whileLoops:1 |
+| 15 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | `appendTemplates` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java` | 10 | 9 | ifStatements:3, forLoops:1, catchBlocks:1, ternaryOperators:3, logicalAnd:1 |
+| 16 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupODERateExpression` | operation | `MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl` | 10 | 9 | ifStatements:2, ternaryOperators:5, logicalAnd:1, logicalOr:1 |
+| 17 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupWaitingToResponding_ReachedSourceReceive_Scenario2_3` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl` | 10 | 9 | ifStatements:4, selectPredicates:4, logicalAnd:1 |
+| 18 | Telniouk portfolio (ETL closure for the available transformation variants) | `createCompute_rateScenario2_3ConditionalAssignmentThen` | operation | `MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministic.etl` | 9 | 8 | ternaryOperators:4, logicalAnd:4 |
+| 19 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupReactionVariables` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl` | 9 | 8 | ifStatements:4, forLoops:1, logicalOr:3 |
+| 20 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupRandomTemplate` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/random/Random.etl` | 8 | 7 | ifStatements:2, forLoops:1, selectPredicates:1, ternaryOperators:3 |
 
 ## ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)
 
@@ -99,7 +99,6 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 
 | File | Units | Total CC | Decision points | Max unit CC |
 |---|---:|---:|---:|---:|
-| `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl` | 11 | 43 | 32 | 13 |
 | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl` | 10 | 42 | 32 | 13 |
 | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl` | 4 | 26 | 22 | 14 |
 | `MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/DataVariableDeclaration.etl` | 13 | 24 | 11 | 4 |
@@ -107,6 +106,7 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 | `MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/ArithmeticExpression.etl` | 23 | 23 | 0 | 1 |
 | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl` | 3 | 21 | 18 | 15 |
 | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl` | 3 | 21 | 18 | 15 |
+| `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl` | 6 | 20 | 14 | 5 |
 | `MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl` | 8 | 18 | 10 | 3 |
 | `MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl` | 7 | 18 | 11 | 4 |
 | `MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl` | 2 | 16 | 14 | 10 |
@@ -308,7 +308,6 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 | `setupNot_reactingToResponding_ReactedReceive` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl` | 1-51 | 15 | ifStatements:5, forLoops:1, caseBranches:3, logicalAnd:5 |
 | `setupWaitingToResponding_ReactedReceive` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl` | 1-60 | 15 | ifStatements:5, forLoops:1, caseBranches:3, logicalAnd:5 |
 | `translateScenario4Formula` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl` | 45-112 | 14 | ifStatements:7, whileLoops:2, existsPredicates:1, ternaryOperators:1, logicalOr:2 |
-| `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl` | 101-154 | 13 | ifStatements:2, ternaryOperators:5, logicalAnd:4, logicalOr:1 |
 | `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl` | 60-113 | 13 | ifStatements:2, ternaryOperators:5, logicalAnd:4, logicalOr:1 |
 | `setupODERateExpression` | operation | `MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl` | 1-30 | 10 | ifStatements:2, ternaryOperators:5, logicalAnd:1, logicalOr:1 |
 | `setupWaitingToResponding_ReachedSourceReceive_Scenario2_3` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl` | 1-34 | 10 | ifStatements:4, selectPredicates:4, logicalAnd:1 |
@@ -325,6 +324,7 @@ The report uses a transparent heuristic cyclomatic complexity count across the c
 | `findVariable` | operation | `MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/declarations/Variable.etl` | 29-36 | 5 | selectPredicates:2, existsPredicates:1, logicalAnd:1 |
 | `functionCall` | operation | `MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/FunctionCallExpression.etl` | 1-12 | 5 | ifStatements:2, forLoops:1, selectPredicates:1 |
 | `getDeclaredType` | operation | `MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/types/TypeType.etl` | 1-3 | 5 | selectPredicates:2, existsPredicates:1, logicalAnd:1 |
+| `setupCompute_rateReturn` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl` | 38-59 | 5 | ifStatements:2, forLoops:1, ternaryOperators:1 |
 
 ## ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables)
 

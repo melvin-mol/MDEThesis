@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-06T14:31:19.022Z",
+  "generatedAt": "2026-05-14T14:55:56.359Z",
   "script": "MDEThesis/Compare/Cognitive Complexity/compare-etl-cognitive-complexity.js",
   "notes": [
     "The report follows the same comparison split as the character-count and cyclomatic-complexity analyses: Thesis vs ANIMO 3.5.1 for the implemented automata, and ANIMO 3.5.1 vs Telniouk for the variants available in the earlier ETL work.",
@@ -8,7 +8,7 @@
   ],
   "overall": {
     "fileCount": 210,
-    "unitCount": 617,
+    "unitCount": 612,
     "topUnits": [
       {
         "group": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
@@ -282,21 +282,6 @@
       },
       {
         "group": "Thesis portfolio (ETL closure for the implemented case-study automata)",
-        "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
-        "kind": "operation",
-        "name": "setupScenario2_3BoundaryRateCorrection",
-        "startLine": 101,
-        "endLine": 154,
-        "cognitiveComplexity": 17,
-        "breakdown": {
-          "ifStatements": 2,
-          "ternaryOperators": 10,
-          "logicalAnd": 4,
-          "logicalOr": 1
-        }
-      },
-      {
-        "group": "Thesis portfolio (ETL closure for the implemented case-study automata)",
         "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl",
         "kind": "operation",
         "name": "setupWaitingToResponding_ReachedSourceReceive_Scenario4",
@@ -322,6 +307,23 @@
           "whileLoops": 2,
           "ternaryOperators": 4,
           "breakStatements": 2
+        }
+      },
+      {
+        "group": "Thesis portfolio (ETL closure for the implemented case-study automata)",
+        "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/ReactantTemplateInstantiations.etl",
+        "kind": "operation",
+        "name": "setupReactantTemplateInstantiations",
+        "startLine": 1,
+        "endLine": 25,
+        "cognitiveComplexity": 13,
+        "breakdown": {
+          "ifStatements": 2,
+          "forLoops": 1,
+          "selectPredicates": 6,
+          "existsPredicates": 2,
+          "logicalAnd": 1,
+          "continueStatements": 1
         }
       }
     ]
@@ -1159,10 +1161,10 @@
     "thesis_portfolio": {
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata)",
       "fileCount": 201,
-      "unitCount": 321,
-      "totalCognitiveComplexity": 475,
-      "averageCognitivePerFile": 2.36318407960199,
-      "averageCognitivePerUnit": 1.4797507788161994,
+      "unitCount": 316,
+      "totalCognitiveComplexity": 452,
+      "averageCognitivePerFile": 2.2487562189054726,
+      "averageCognitivePerUnit": 1.4303797468354431,
       "maxFile": {
         "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
         "fileName": "Compute_rate.etl",
@@ -1315,10 +1317,10 @@
         }
       },
       "totalsByDecision": {
-        "ifStatements": 129,
-        "ternaryOperators": 70,
-        "logicalAnd": 28,
-        "logicalOr": 13,
+        "ifStatements": 127,
+        "ternaryOperators": 56,
+        "logicalAnd": 24,
+        "logicalOr": 10,
         "forLoops": 39,
         "switchStatements": 14,
         "breakStatements": 28,
@@ -1459,153 +1461,6 @@
               "name": "setupScenario4FunctionCalls",
               "startLine": 167,
               "endLine": 177,
-              "cognitiveComplexity": 0,
-              "breakdown": {}
-            }
-          ]
-        },
-        {
-          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
-          "fileName": "Compute_rate.etl",
-          "extension": ".etl",
-          "unitCount": 11,
-          "totalCognitiveComplexity": 45,
-          "averageCognitivePerUnit": 4.090909090909091,
-          "maxUnit": {
-            "kind": "operation",
-            "name": "setupScenario2_3BoundaryRateCorrection",
-            "startLine": 101,
-            "endLine": 154,
-            "cognitiveComplexity": 17,
-            "breakdown": {
-              "ifStatements": 2,
-              "ternaryOperators": 10,
-              "logicalAnd": 4,
-              "logicalOr": 1
-            }
-          },
-          "totalsByDecision": {
-            "ifStatements": 7,
-            "ternaryOperators": 16,
-            "logicalAnd": 4,
-            "logicalOr": 3,
-            "forLoops": 5,
-            "switchStatements": 4,
-            "breakStatements": 6
-          },
-          "units": [
-            {
-              "kind": "operation",
-              "name": "setupScenario2_3BoundaryRateCorrection",
-              "startLine": 101,
-              "endLine": 154,
-              "cognitiveComplexity": 17,
-              "breakdown": {
-                "ifStatements": 2,
-                "ternaryOperators": 10,
-                "logicalAnd": 4,
-                "logicalOr": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "setupCompute_rateReturn",
-              "startLine": 79,
-              "endLine": 100,
-              "cognitiveComplexity": 8,
-              "breakdown": {
-                "ifStatements": 4,
-                "forLoops": 2,
-                "ternaryOperators": 2
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "setupScenarioReactionBoundaryRateCorrections",
-              "startLine": 69,
-              "endLine": 78,
-              "cognitiveComplexity": 6,
-              "breakdown": {
-                "forLoops": 1,
-                "switchStatements": 2,
-                "breakStatements": 3
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "setupScenarioReactionFunctionCalls",
-              "startLine": 59,
-              "endLine": 68,
-              "cognitiveComplexity": 6,
-              "breakdown": {
-                "forLoops": 1,
-                "switchStatements": 2,
-                "breakStatements": 3
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "isR1Active",
-              "startLine": 155,
-              "endLine": 160,
-              "cognitiveComplexity": 3,
-              "breakdown": {
-                "ternaryOperators": 2,
-                "logicalOr": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "isR2Active",
-              "startLine": 161,
-              "endLine": 166,
-              "cognitiveComplexity": 3,
-              "breakdown": {
-                "ternaryOperators": 2,
-                "logicalOr": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "setupComputeT",
-              "startLine": 17,
-              "endLine": 22,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "forLoops": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "setupComputeTForTargetEdge",
-              "startLine": 23,
-              "endLine": 58,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "ifStatements": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "setupCompute_rate",
-              "startLine": 1,
-              "endLine": 16,
-              "cognitiveComplexity": 0,
-              "breakdown": {}
-            },
-            {
-              "kind": "operation",
-              "name": "setupScenario1FunctionCalls",
-              "startLine": 167,
-              "endLine": 185,
-              "cognitiveComplexity": 0,
-              "breakdown": {}
-            },
-            {
-              "kind": "operation",
-              "name": "setupScenario2_3FunctionCalls",
-              "startLine": 186,
-              "endLine": 207,
               "cognitiveComplexity": 0,
               "breakdown": {}
             }
@@ -1880,6 +1735,99 @@
                 "forLoops": 1,
                 "ternaryOperators": 7
               }
+            }
+          ]
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
+          "fileName": "Compute_rate.etl",
+          "extension": ".etl",
+          "unitCount": 6,
+          "totalCognitiveComplexity": 22,
+          "averageCognitivePerUnit": 3.6666666666666665,
+          "maxUnit": {
+            "kind": "operation",
+            "name": "setupCompute_rateReturn",
+            "startLine": 79,
+            "endLine": 100,
+            "cognitiveComplexity": 8,
+            "breakdown": {
+              "ifStatements": 4,
+              "forLoops": 2,
+              "ternaryOperators": 2
+            }
+          },
+          "totalsByDecision": {
+            "ifStatements": 5,
+            "forLoops": 5,
+            "ternaryOperators": 2,
+            "switchStatements": 4,
+            "breakStatements": 6
+          },
+          "units": [
+            {
+              "kind": "operation",
+              "name": "setupCompute_rateReturn",
+              "startLine": 79,
+              "endLine": 100,
+              "cognitiveComplexity": 8,
+              "breakdown": {
+                "ifStatements": 4,
+                "forLoops": 2,
+                "ternaryOperators": 2
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "setupScenarioReactionBoundaryRateCorrections",
+              "startLine": 69,
+              "endLine": 78,
+              "cognitiveComplexity": 6,
+              "breakdown": {
+                "forLoops": 1,
+                "switchStatements": 2,
+                "breakStatements": 3
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "setupScenarioReactionFunctionCalls",
+              "startLine": 59,
+              "endLine": 68,
+              "cognitiveComplexity": 6,
+              "breakdown": {
+                "forLoops": 1,
+                "switchStatements": 2,
+                "breakStatements": 3
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "setupComputeT",
+              "startLine": 17,
+              "endLine": 22,
+              "cognitiveComplexity": 1,
+              "breakdown": {
+                "forLoops": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "setupComputeTForTargetEdge",
+              "startLine": 23,
+              "endLine": 58,
+              "cognitiveComplexity": 1,
+              "breakdown": {
+                "ifStatements": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "setupCompute_rate",
+              "startLine": 1,
+              "endLine": 16,
+              "cognitiveComplexity": 0,
+              "breakdown": {}
             }
           ]
         },
@@ -8323,21 +8271,6 @@
           }
         },
         {
-          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl",
-          "fileName": "Compute_rate.etl",
-          "kind": "operation",
-          "name": "setupScenario2_3BoundaryRateCorrection",
-          "startLine": 101,
-          "endLine": 154,
-          "cognitiveComplexity": 17,
-          "breakdown": {
-            "ifStatements": 2,
-            "ternaryOperators": 10,
-            "logicalAnd": 4,
-            "logicalOr": 1
-          }
-        },
-        {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl",
           "fileName": "WaitingToResponding_ReachedSourceReceive_Scenario4.etl",
           "kind": "operation",
@@ -8537,6 +8470,20 @@
             "forLoops": 1,
             "switchStatements": 2,
             "breakStatements": 4
+          }
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/FunctionCallExpression.etl",
+          "fileName": "FunctionCallExpression.etl",
+          "kind": "operation",
+          "name": "functionCall",
+          "startLine": 1,
+          "endLine": 12,
+          "cognitiveComplexity": 6,
+          "breakdown": {
+            "ifStatements": 4,
+            "forLoops": 1,
+            "selectPredicates": 1
           }
         }
       ]
@@ -12287,9 +12234,9 @@
     "thesis_portfolio": {
       "baselineGroupId": "animo3_thesis_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "totalDeltaPct": -35.98382749326146,
-      "averagePerFileDeltaPct": -99.04453473870541,
-      "averagePerUnitDeltaPct": -95.21374411164571
+      "totalDeltaPct": -39.083557951482476,
+      "averagePerFileDeltaPct": -99.09079937241019,
+      "averagePerUnitDeltaPct": -95.37343478112525
     },
     "telniouk_portfolio": {
       "baselineGroupId": "animo3_telniouk_baseline_portfolio",
@@ -12394,10 +12341,10 @@
       },
       "right": {
         "fileCount": 178,
-        "unitCount": 300,
-        "totalCognitiveComplexity": 429,
-        "averageCognitivePerFile": 2.4101123595505616,
-        "averageCognitivePerUnit": 1.43,
+        "unitCount": 295,
+        "totalCognitiveComplexity": 406,
+        "averageCognitivePerFile": 2.2808988764044944,
+        "averageCognitivePerUnit": 1.376271186440678,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -12415,9 +12362,9 @@
           }
         }
       },
-      "totalDeltaPct": 47.42268041237113,
-      "averagePerFileDeltaPct": -99.17178269431251,
-      "averagePerUnitDeltaPct": -96.06872852233677
+      "totalDeltaPct": 39.51890034364261,
+      "averagePerFileDeltaPct": -99.21618595312562,
+      "averagePerUnitDeltaPct": -96.21643660085037
     },
     {
       "id": "ode_animo3_vs_thesis",
@@ -12483,10 +12430,10 @@
       "rightLabel": "Thesis with inherited simplified logic excluded",
       "left": {
         "fileCount": 178,
-        "unitCount": 300,
-        "totalCognitiveComplexity": 429,
-        "averageCognitivePerFile": 2.4101123595505616,
-        "averageCognitivePerUnit": 1.43,
+        "unitCount": 295,
+        "totalCognitiveComplexity": 406,
+        "averageCognitivePerFile": 2.2808988764044944,
+        "averageCognitivePerUnit": 1.376271186440678,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -12506,10 +12453,10 @@
       },
       "right": {
         "fileCount": 103,
-        "unitCount": 215,
-        "totalCognitiveComplexity": 229,
-        "averageCognitivePerFile": 2.2233009708737863,
-        "averageCognitivePerUnit": 1.0651162790697675,
+        "unitCount": 210,
+        "totalCognitiveComplexity": 206,
+        "averageCognitivePerFile": 2,
+        "averageCognitivePerUnit": 0.9809523809523809,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -12527,9 +12474,9 @@
           }
         }
       },
-      "totalDeltaPct": -46.620046620046615,
-      "averagePerFileDeltaPct": -7.751148527847553,
-      "averagePerUnitDeltaPct": -25.516344120995278
+      "totalDeltaPct": -49.26108374384236,
+      "averagePerFileDeltaPct": -12.31527093596059,
+      "averagePerUnitDeltaPct": -28.723903354445234
     },
     {
       "id": "rc_animo3_vs_telniouk",

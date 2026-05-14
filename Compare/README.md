@@ -8,6 +8,7 @@ The goal of this folder is to make the RQ5 claims traceable and repeatable on Gi
 2. Performance
 3. Cyclomatic complexity
 4. Cognitive complexity
+5. Code duplication
 
 ## Scope and Relation to the Thesis
 
@@ -47,6 +48,16 @@ Compare/
 			compare_java_cognitive_complexity.json
 			compare_java_cognitive_complexity.md
 
+	Code Duplication/
+		etl-collector-all.js
+		etl-collector-nosyntax.js
+		etl-collector-nocomments.js
+		etl-duplication-report.js
+		compare-results/
+			duplicationDirectory_all_<N>lines.json
+			duplicationDirectory_nosyntax_<N>lines.json
+			duplicationDirectory_nocomments_<N>lines.json
+
 	Performance/
 		Performance banchmarks ANIMO 3.5.1.md
 		Performance banchmarks thesis implementation.md
@@ -70,9 +81,13 @@ node compare-java-cyclomatic-complexity.js
 node compare-etl-cyclomatic-complexity.js
 node compare-java-cognitive-complexity.js
 node compare-etl-cognitive-complexity.js
+node etl-collector-all.js <N>
+node etl-collector-nosyntax.js <N>
+node etl-collector-nocomments.js <N>
+node etl-duplication-report.js <N>
 ```
 
-Each script writes JSON and Markdown outputs to its local `compare-results/` folder.
+Each script writes outputs to its local `compare-results/` folder.
 
 ## Outputs
 
@@ -80,6 +95,7 @@ Generated files are committed to the repository for reproducibility and inspecti
 
 - Machine-readable summaries (`*.json`)
 - Human-readable reports (`*.md`)
+- Duplication block-group outputs (`duplicationDirectory_*_Nlines.json`)
 
 Performance measurements are documented as benchmark logs in:
 

@@ -16,7 +16,7 @@ For ETL/EOL, the counted constructs are grounded in the official Epsilon documen
 | Group | Files | Units | Total CogC | Avg/file | Avg/unit | Max unit CogC |
 |---|---:|---:|---:|---:|---:|---:|
 | ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | 3 | 24 | 742 | 247.33 | 30.92 | 266 |
-| Thesis portfolio (ETL closure for the implemented case-study automata) | 201 | 321 | 475 | 2.36 | 1.48 | 27 |
+| Thesis portfolio (ETL closure for the implemented case-study automata) | 201 | 316 | 452 | 2.25 | 1.43 | 27 |
 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | 3 | 20 | 520 | 173.33 | 26.00 | 245 |
 | Telniouk portfolio (ETL closure for the available transformation variants) | 5 | 267 | 224 | 44.80 | 0.84 | 33 |
 
@@ -24,7 +24,7 @@ For ETL/EOL, the counted constructs are grounded in the official Epsilon documen
 
 | Comparison | Total CogC delta | Avg/file delta | Avg/unit delta |
 |---|---:|---:|---:|
-| Thesis portfolio (ETL closure for the implemented case-study automata) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | -35.98% | -99.04% | -95.21% |
+| Thesis portfolio (ETL closure for the implemented case-study automata) vs ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | -39.08% | -99.09% | -95.37% |
 | Telniouk portfolio (ETL closure for the available transformation variants) vs ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | -56.92% | -74.15% | -96.77% |
 
 ## Per-comparison cognitive totals
@@ -32,9 +32,9 @@ For ETL/EOL, the counted constructs are grounded in the official Epsilon documen
 | Comparison | Left files | Right files | Left units | Right units | Left CogC | Right CogC | Left avg/file | Right avg/file | Left avg/unit | Right avg/unit | Total CogC delta | Avg/file delta | Avg/unit delta |
 |---|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|---:|
 | Reactant-centered simplified (ANIMO 3.5.1 -> Thesis) | 1 | 119 | 9 | 233 | 327 | 272 | 327.00 | 2.29 | 36.33 | 1.17 | -16.82% | -99.30% | -96.79% |
-| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis) | 1 | 178 | 8 | 300 | 291 | 429 | 291.00 | 2.41 | 36.38 | 1.43 | +47.42% | -99.17% | -96.07% |
+| Reactant-centered deterministic (ANIMO 3.5.1 -> Thesis) | 1 | 178 | 8 | 295 | 291 | 406 | 291.00 | 2.28 | 36.38 | 1.38 | +39.52% | -99.22% | -96.22% |
 | ODE (ANIMO 3.5.1 -> Thesis) | 1 | 67 | 7 | 169 | 124 | 118 | 124.00 | 1.76 | 17.71 | 0.70 | -4.84% | -98.58% | -96.06% |
-| Reactant-centered deterministic inheritance saving (Thesis -> Thesis with inherited simplified logic excluded) | 178 | 103 | 300 | 215 | 429 | 229 | 2.41 | 2.22 | 1.43 | 1.07 | -46.62% | -7.75% | -25.52% |
+| Reactant-centered deterministic inheritance saving (Thesis -> Thesis with inherited simplified logic excluded) | 178 | 103 | 295 | 210 | 406 | 206 | 2.28 | 2.00 | 1.38 | 0.98 | -49.26% | -12.32% | -28.72% |
 | Reactant-centered deterministic (ANIMO 3.5.1 -> Telniouk) | 1 | 3 | 8 | 226 | 291 | 90 | 291.00 | 30.00 | 36.38 | 0.40 | -69.07% | -89.69% | -98.91% |
 | ODE (ANIMO 3.5.1 -> Telniouk) | 1 | 2 | 7 | 174 | 124 | 50 | 124.00 | 25.00 | 17.71 | 0.29 | -59.68% | -79.84% | -98.38% |
 | Reaction-centered tables (ANIMO 3.5.1 -> Telniouk) | 1 | 2 | 5 | 183 | 105 | 120 | 105.00 | 60.00 | 21.00 | 0.66 | +14.29% | -42.86% | -96.88% |
@@ -60,6 +60,6 @@ For ETL/EOL, the counted constructs are grounded in the official Epsilon documen
 | 15 | Telniouk portfolio (ETL closure for the available transformation variants) | `getCompute_rateFunctionBody` | operation | `MDEThesis/Telniouk his transformations/transformationdefinitions/Animo2UppaalReactantCenteredDeterministic.etl` | 18 | ifStatements:12, forLoops:3, logicalOr:3 |
 | 16 | ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables) | `appendModel` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java` | 17 | ifStatements:10, forLoops:3, whileLoops:1, continueStatements:3 |
 | 17 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl` | 17 | ifStatements:2, ternaryOperators:10, logicalAnd:4, logicalOr:1 |
-| 18 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupScenario2_3BoundaryRateCorrection` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/localDeclarations/functions/Compute_rate.etl` | 17 | ifStatements:2, ternaryOperators:10, logicalAnd:4, logicalOr:1 |
-| 19 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupWaitingToResponding_ReachedSourceReceive_Scenario4` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl` | 17 | ifStatements:4, forLoops:2, selectPredicates:11 |
-| 20 | ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | `getTranslatedCustomFormula` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java` | 15 | ifStatements:7, whileLoops:2, ternaryOperators:4, breakStatements:2 |
+| 18 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupWaitingToResponding_ReachedSourceReceive_Scenario4` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario4.etl` | 17 | ifStatements:4, forLoops:2, selectPredicates:11 |
+| 19 | ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata) | `getTranslatedCustomFormula` | method | `animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java` | 15 | ifStatements:7, whileLoops:2, ternaryOperators:4, breakStatements:2 |
+| 20 | Thesis portfolio (ETL closure for the implemented case-study automata) | `setupReactantTemplateInstantiations` | operation | `MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/system/instantiationList/ReactantTemplateInstantiations.etl` | 13 | ifStatements:2, forLoops:1, selectPredicates:6, existsPredicates:2, logicalAnd:1, continueStatements:1 |
