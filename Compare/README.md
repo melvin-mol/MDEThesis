@@ -59,8 +59,8 @@ Compare/
 			duplicationDirectory_nocomments_<N>lines.json
 
 	Performance/
-		Performance banchmarks ANIMO 3.5.1.md
-		Performance banchmarks thesis implementation.md
+		Performance benchmarks ANIMO 3.5.1.md
+		Performance benchmarks thesis implementation.md
 		Code/
 			AnimoTransformer.java
 		Input models/
@@ -99,8 +99,8 @@ Generated files are committed to the repository for reproducibility and inspecti
 
 Performance measurements are documented as benchmark logs in:
 
-- `Performance/Performance banchmarks ANIMO 3.5.1.md`
-- `Performance/Performance banchmarks thesis implementation.md`
+- `Performance/Performance benchmarks ANIMO 3.5.1.md`
+- `Performance/Performance benchmarks thesis implementation.md`
 
 ## Notes and Limitations
 
