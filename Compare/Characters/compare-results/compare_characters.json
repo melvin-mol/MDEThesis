@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14T14:55:39.264Z",
+  "generatedAt": "2026-06-06T13:13:05.282Z",
   "script": "MDEThesis/Compare/Characters/compare-characters.js",
   "notes": [
     "The report uses two mapped ANIMO 3.5.1 portfolio baselines: one for the thesis-implemented automata and one for the Telniouk-available automata.",
@@ -35,7 +35,7 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax)",
       "fileCount": 201,
       "totals": {
-        "chars": 171581
+        "chars": 171564
       },
       "files": [
         {
@@ -460,7 +460,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 959
+          "chars": 942
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
@@ -848,7 +848,7 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax)",
       "fileCount": 163,
       "totals": {
-        "chars": 119753
+        "chars": 119736
       },
       "files": [
         {
@@ -1273,7 +1273,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 959
+          "chars": 942
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
@@ -1509,7 +1509,7 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments)",
       "fileCount": 163,
       "totals": {
-        "chars": 107089
+        "chars": 107072
       },
       "files": [
         {
@@ -1934,7 +1934,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 959
+          "chars": 942
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
@@ -2221,17 +2221,17 @@
     "thesis_portfolio": {
       "baselineGroupId": "animo3_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "deltaPct": 27.73666656740419
+      "deltaPct": 27.72401060123284
     },
     "thesis_portfolio_without_uppaal_code_syntax": {
       "baselineGroupId": "animo3_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "deltaPct": -10.847651946040916
+      "deltaPct": -10.860307912212262
     },
     "thesis_portfolio_without_uppaal_code_syntax_without_comments": {
       "baselineGroupId": "animo3_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "deltaPct": -20.275602275096034
+      "deltaPct": -20.288258241267386
     },
     "telniouk_portfolio": {
       "baselineGroupId": "animo3_baseline_telniouk_portfolio",
@@ -2273,10 +2273,10 @@
       "right": {
         "fileCount": 178,
         "totals": {
-          "chars": 160829
+          "chars": 160812
         }
       },
-      "deltaPct": 180.78668947938127
+      "deltaPct": 180.75700967212543
     },
     {
       "id": "ode_animo3_vs_thesis",
@@ -2330,10 +2330,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 109001
+          "chars": 108984
         }
       },
-      "deltaPct": 90.30168651140053
+      "deltaPct": 90.2720067041447
     },
     {
       "id": "ode_animo3_vs_thesis_without_uppaal_code_syntax",
@@ -2387,10 +2387,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 97083
+          "chars": 97066
         }
       },
-      "deltaPct": 69.49439575404169
+      "deltaPct": 69.46471594678584
     },
     {
       "id": "ode_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2425,10 +2425,10 @@
       "right": {
         "fileCount": 178,
         "totals": {
-          "chars": 160829
+          "chars": 160812
         }
       },
-      "deltaPct": 107.85654281098547
+      "deltaPct": 107.8345718901454
     },
     {
       "id": "ode_telniouk_vs_thesis",
@@ -2463,10 +2463,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 109001
+          "chars": 108984
         }
       },
-      "deltaPct": 40.873667205169625
+      "deltaPct": 40.85169628432956
     },
     {
       "id": "rc_telniouk_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2482,10 +2482,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 97083
+          "chars": 97066
         }
       },
-      "deltaPct": 25.470759289176094
+      "deltaPct": 25.44878836833603
     },
     {
       "id": "rc_thesis_without_uppaal_vs_thesis_inheritance_excluded",
@@ -2495,16 +2495,16 @@
       "left": {
         "fileCount": 140,
         "totals": {
-          "chars": 109001
+          "chars": 108984
         }
       },
       "right": {
         "fileCount": 65,
         "totals": {
-          "chars": 39475
+          "chars": 39458
         }
       },
-      "deltaPct": -63.784735919853944
+      "deltaPct": -63.79468545841591
     },
     {
       "id": "ode_telniouk_vs_thesis_without_uppaal_code_syntax",

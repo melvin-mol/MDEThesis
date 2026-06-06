@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-04-06T12:42:19.930Z",
+  "generatedAt": "2026-06-06T13:13:12.917Z",
   "script": "MDEThesis/Compare/Cyclomatic Complexity/compare-java-cyclomatic-complexity.js",
   "scannedFiles": [
     "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactantCenteredDeterministic_simplified.java",

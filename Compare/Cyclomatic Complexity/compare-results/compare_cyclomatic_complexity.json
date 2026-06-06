@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14T14:55:54.203Z",
+  "generatedAt": "2026-06-06T13:13:12.604Z",
   "script": "MDEThesis/Compare/Cyclomatic Complexity/compare-etl-cyclomatic-complexity.js",
   "notes": [
     "The report follows the same comparison split as the character-count analysis: Thesis vs ANIMO 3.5.1 for the implemented automata, and ANIMO 3.5.1 vs Telniouk for the variants available in the earlier ETL work.",
@@ -7556,7 +7556,7 @@
             "kind": "operation",
             "name": "setupGlobalDeclations",
             "startLine": 4,
-            "endLine": 39,
+            "endLine": 38,
             "complexity": 1,
             "decisionPoints": 0,
             "breakdown": {}
@@ -7567,7 +7567,7 @@
               "kind": "operation",
               "name": "setupGlobalDeclations",
               "startLine": 4,
-              "endLine": 39,
+              "endLine": 38,
               "complexity": 1,
               "decisionPoints": 0,
               "breakdown": {}

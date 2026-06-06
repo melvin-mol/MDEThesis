@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-05-14T14:55:56.359Z",
+  "generatedAt": "2026-06-06T13:13:17.937Z",
   "script": "MDEThesis/Compare/Cognitive Complexity/compare-etl-cognitive-complexity.js",
   "notes": [
     "The report follows the same comparison split as the character-count and cyclomatic-complexity analyses: Thesis vs ANIMO 3.5.1 for the implemented automata, and ANIMO 3.5.1 vs Telniouk for the variants available in the earlier ETL work.",
@@ -6304,7 +6304,7 @@
             "kind": "operation",
             "name": "setupGlobalDeclations",
             "startLine": 4,
-            "endLine": 39,
+            "endLine": 38,
             "cognitiveComplexity": 0,
             "breakdown": {}
           },
@@ -6314,7 +6314,7 @@
               "kind": "operation",
               "name": "setupGlobalDeclations",
               "startLine": 4,
-              "endLine": 39,
+              "endLine": 38,
               "cognitiveComplexity": 0,
               "breakdown": {}
             }
