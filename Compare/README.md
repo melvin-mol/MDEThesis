@@ -2,7 +2,7 @@
 
 This directory contains the reproducibility artifacts for the RQ5 comparison in the thesis: scripts, benchmark logs, input models, and generated comparison outputs.
 
-The goal of this folder is to make the RQ5 claims traceable and repeatable on GitHub. It covers four comparison dimensions:
+The goal of this folder is to make the RQ5 claims traceable and repeatable on GitHub. It covers five comparison dimensions:
 
 1. Character count
 2. Performance
