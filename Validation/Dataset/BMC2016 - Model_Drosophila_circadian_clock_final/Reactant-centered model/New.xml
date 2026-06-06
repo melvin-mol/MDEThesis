@@ -519,27 +519,6 @@ double_t multiply(double_t a, double_t b) {
 	return r;
 }
 
-double_t divide(double_t a, double_t b) {
-	double_t r;
-	if(b.b == 0) {
-		return INFINITE_TIME_DOUBLE;
-	} 
-	r.b = a.b*1000/b.b;
-	r.e = a.e-b.e-3;
-	if(r.b == 0) {
-		return r;
-	} 
-	while(r.b &lt; 9999 and r.b &gt; -9999) {
-		r.b = r.b*10;
-		r.e = r.e-1;
-	}
-	while(r.b &gt; 9999 or r.b &lt; -9999) {
-		r.b = r.b/10;
-		r.e = r.e+1;
-	}
-	return r;
-}
-
 int conta_inf = 0, conta_bigN = 0;
 
 double_t inverse(double_t a) {

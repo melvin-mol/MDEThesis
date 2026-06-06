@@ -112,7 +112,6 @@ The following differences are ignored because the research method classifies the
 The research method documents a small set of extra allowed differences only for the non-simplified deterministic variant:
 
 - `round` replaced by `_ANIMO_round`
-- presence of the helper `divide(...)` function required by `_ANIMO_round`
 - `TL` / `TU` written as `tL` / `tU`
 - presence of the `int_t` type declaration required by `_ANIMO_round`
 - `<declaration>` absent in one file and present-but-empty in the other

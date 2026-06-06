@@ -26,7 +26,6 @@ operation Uppaal!NSTA setupGlobalDeclations(animo : Animo!Network): Uppaal!NSTA 
 		.setupSubtractFunction()
 		.setupAddFunction()
 		.setupMultiplyFunction()
-		.setupDivide()
 		.setupConta_InfAndConta_BigN()
 		.setupInverse()
 		.setupPower()

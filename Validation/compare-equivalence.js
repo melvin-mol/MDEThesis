@@ -121,12 +121,7 @@ function normalizeDeclarationForCompare(str, isNonSimplified) {
 
     if (isNonSimplified) {
         // RQ4 non-simplified-only allowances:
-        // divide(...), int_t, TL/TU versus tL/tU, and round versus _ANIMO_round.
-        // The non-simplified deterministic variant may contain an extra divide helper.
-        // Ignore the whole declaration unit when it defines divide(...), regardless of nested braces.
-        if (/\b(?:int_t|time_t|int|double|double_t|float)\s+divide\s*\(/.test(t)) {
-            return '';
-        }
+        // int_t, TL/TU versus tL/tU, and round versus _ANIMO_round.
         t = t.replace(/\bTL\b/g, 'tL');
         t = t.replace(/\bTU\b/g, 'tU');
         t = t.replace(/\bround\s*\(/g, '_ANIMO_round(');
@@ -134,8 +129,6 @@ function normalizeDeclarationForCompare(str, isNonSimplified) {
         // Only documented for non-simplified deterministic variant.
         t = t.replace(/\btypedef\s+int\s+int_t\s*;/g, ' ');
         t = t.replace(/\btypedef\s+int\s*\[[^\]]*\]\s*int_t\s*;/g, ' ');
-        t = t.replace(/\b(?:int_t|time_t|int|double|double_t|float)\s+divide\s*\([^)]*\)\s*\{[\s\S]*?\}/g, ' ');
-        t = t.replace(/\b(?:int_t|time_t|int|double|double_t|float)\s+divide\s*\([^)]*\)\s*/g, ' ');
     }
 
     // Ignore braces and normalize whitespace/operator spacing.
