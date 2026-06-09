@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T13:13:17.937Z",
+  "generatedAt": "2026-06-09T18:04:34.655Z",
   "script": "MDEThesis/Compare/Cognitive Complexity/compare-etl-cognitive-complexity.js",
   "notes": [
     "The report follows the same comparison split as the character-count and cyclomatic-complexity analyses: Thesis vs ANIMO 3.5.1 for the implemented automata, and ANIMO 3.5.1 vs Telniouk for the variants available in the earlier ETL work.",
@@ -1162,9 +1162,9 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata)",
       "fileCount": 201,
       "unitCount": 316,
-      "totalCognitiveComplexity": 452,
-      "averageCognitivePerFile": 2.2487562189054726,
-      "averageCognitivePerUnit": 1.4303797468354431,
+      "totalCognitiveComplexity": 461,
+      "averageCognitivePerFile": 2.2935323383084576,
+      "averageCognitivePerUnit": 1.4588607594936709,
       "maxFile": {
         "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
         "fileName": "Compute_rate.etl",
@@ -1317,18 +1317,18 @@
         }
       },
       "totalsByDecision": {
-        "ifStatements": 127,
-        "ternaryOperators": 56,
-        "logicalAnd": 24,
-        "logicalOr": 10,
+        "ifStatements": 130,
+        "ternaryOperators": 57,
+        "logicalAnd": 28,
+        "logicalOr": 11,
         "forLoops": 39,
         "switchStatements": 14,
         "breakStatements": 28,
         "whileLoops": 4,
         "existsPredicates": 9,
         "selectPredicates": 132,
-        "continueStatements": 5,
-        "sortByTransforms": 4
+        "sortByTransforms": 4,
+        "continueStatements": 5
       },
       "files": [
         {
@@ -1910,6 +1910,121 @@
           ]
         },
         {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
+          "fileName": "Edge.etl",
+          "extension": ".etl",
+          "unitCount": 8,
+          "totalCognitiveComplexity": 14,
+          "averageCognitivePerUnit": 1.75,
+          "maxUnit": {
+            "kind": "operation",
+            "name": "activeSortedEdges",
+            "startLine": 5,
+            "endLine": 9,
+            "cognitiveComplexity": 3,
+            "breakdown": {
+              "selectPredicates": 1,
+              "sortByTransforms": 1,
+              "ternaryOperators": 1
+            }
+          },
+          "totalsByDecision": {
+            "selectPredicates": 7,
+            "sortByTransforms": 2,
+            "ternaryOperators": 2,
+            "logicalAnd": 2,
+            "ifStatements": 1
+          },
+          "units": [
+            {
+              "kind": "operation",
+              "name": "activeSortedEdges",
+              "startLine": 5,
+              "endLine": 9,
+              "cognitiveComplexity": 3,
+              "breakdown": {
+                "selectPredicates": 1,
+                "sortByTransforms": 1,
+                "ternaryOperators": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "sortedTargetEdges",
+              "startLine": 15,
+              "endLine": 19,
+              "cognitiveComplexity": 3,
+              "breakdown": {
+                "selectPredicates": 1,
+                "sortByTransforms": 1,
+                "ternaryOperators": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "edgesWithCustomScenario",
+              "startLine": 30,
+              "endLine": 34,
+              "cognitiveComplexity": 2,
+              "breakdown": {
+                "selectPredicates": 1,
+                "logicalAnd": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "id",
+              "startLine": 35,
+              "endLine": 42,
+              "cognitiveComplexity": 2,
+              "breakdown": {
+                "ifStatements": 1,
+                "logicalAnd": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "activeEdges",
+              "startLine": 1,
+              "endLine": 4,
+              "cognitiveComplexity": 1,
+              "breakdown": {
+                "selectPredicates": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "activeSortedTargetEdges",
+              "startLine": 10,
+              "endLine": 14,
+              "cognitiveComplexity": 1,
+              "breakdown": {
+                "selectPredicates": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "activeTargetEdges",
+              "startLine": 20,
+              "endLine": 24,
+              "cognitiveComplexity": 1,
+              "breakdown": {
+                "selectPredicates": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "targetEdges",
+              "startLine": 25,
+              "endLine": 29,
+              "cognitiveComplexity": 1,
+              "breakdown": {
+                "selectPredicates": 1
+              }
+            }
+          ]
+        },
+        {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl",
           "fileName": "ReactionVariables.etl",
           "extension": ".etl",
@@ -2043,18 +2158,18 @@
               "name": "activeSortedNodes",
               "startLine": 5,
               "endLine": 11,
-              "cognitiveComplexity": 3,
+              "cognitiveComplexity": 4,
               "breakdown": {
                 "selectPredicates": 1,
                 "sortByTransforms": 1,
-                "ternaryOperators": 1
+                "ternaryOperators": 2
               }
             },
             {
               "kind": "operation",
               "name": "isFirstOutputAutomatonTemplate",
-              "startLine": 31,
-              "endLine": 36,
+              "startLine": 35,
+              "endLine": 40,
               "cognitiveComplexity": 2,
               "breakdown": {
                 "selectPredicates": 1,
@@ -2074,8 +2189,8 @@
             {
               "kind": "operation",
               "name": "areThereRandomInitials",
-              "startLine": 27,
-              "endLine": 30,
+              "startLine": 30,
+              "endLine": 34,
               "cognitiveComplexity": 1,
               "breakdown": {
                 "existsPredicates": 1
@@ -2083,132 +2198,19 @@
             },
             {
               "kind": "operation",
-              "name": "channelIndex",
-              "startLine": 23,
-              "endLine": 26,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "ternaryOperators": 1
-              }
-            },
-            {
-              "kind": "operation",
               "name": "id",
               "startLine": 19,
-              "endLine": 22,
+              "endLine": 23,
               "cognitiveComplexity": 1,
               "breakdown": {
                 "ternaryOperators": 1
               }
-            }
-          ]
-        },
-        {
-          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
-          "fileName": "Edge.etl",
-          "extension": ".etl",
-          "unitCount": 8,
-          "totalCognitiveComplexity": 12,
-          "averageCognitivePerUnit": 1.5,
-          "maxUnit": {
-            "kind": "operation",
-            "name": "activeSortedEdges",
-            "startLine": 5,
-            "endLine": 9,
-            "cognitiveComplexity": 3,
-            "breakdown": {
-              "selectPredicates": 1,
-              "sortByTransforms": 1,
-              "ternaryOperators": 1
-            }
-          },
-          "totalsByDecision": {
-            "selectPredicates": 7,
-            "sortByTransforms": 2,
-            "ternaryOperators": 2,
-            "logicalAnd": 1
-          },
-          "units": [
-            {
-              "kind": "operation",
-              "name": "activeSortedEdges",
-              "startLine": 5,
-              "endLine": 9,
-              "cognitiveComplexity": 3,
-              "breakdown": {
-                "selectPredicates": 1,
-                "sortByTransforms": 1,
-                "ternaryOperators": 1
-              }
             },
             {
               "kind": "operation",
-              "name": "sortedTargetEdges",
-              "startLine": 15,
-              "endLine": 19,
-              "cognitiveComplexity": 3,
-              "breakdown": {
-                "selectPredicates": 1,
-                "sortByTransforms": 1,
-                "ternaryOperators": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "edgesWithCustomScenario",
-              "startLine": 30,
-              "endLine": 34,
-              "cognitiveComplexity": 2,
-              "breakdown": {
-                "selectPredicates": 1,
-                "logicalAnd": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "activeEdges",
-              "startLine": 1,
-              "endLine": 4,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "selectPredicates": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "activeSortedTargetEdges",
-              "startLine": 10,
-              "endLine": 14,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "selectPredicates": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "activeTargetEdges",
-              "startLine": 20,
-              "endLine": 24,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "selectPredicates": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "targetEdges",
-              "startLine": 25,
+              "name": "channelIndex",
+              "startLine": 24,
               "endLine": 29,
-              "cognitiveComplexity": 1,
-              "breakdown": {
-                "selectPredicates": 1
-              }
-            },
-            {
-              "kind": "operation",
-              "name": "id",
-              "startLine": 35,
-              "endLine": 38,
               "cognitiveComplexity": 0,
               "breakdown": {}
             }
@@ -2398,6 +2400,48 @@
               "endLine": 110,
               "cognitiveComplexity": 0,
               "breakdown": {}
+            }
+          ]
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "fileName": "FormatDouble.etl",
+          "extension": ".etl",
+          "unitCount": 1,
+          "totalCognitiveComplexity": 10,
+          "averageCognitivePerUnit": 10,
+          "maxUnit": {
+            "kind": "operation",
+            "name": "formatDouble",
+            "startLine": 1,
+            "endLine": 32,
+            "cognitiveComplexity": 10,
+            "breakdown": {
+              "ifStatements": 5,
+              "ternaryOperators": 1,
+              "logicalAnd": 3,
+              "logicalOr": 1
+            }
+          },
+          "totalsByDecision": {
+            "ifStatements": 5,
+            "ternaryOperators": 1,
+            "logicalAnd": 3,
+            "logicalOr": 1
+          },
+          "units": [
+            {
+              "kind": "operation",
+              "name": "formatDouble",
+              "startLine": 1,
+              "endLine": 32,
+              "cognitiveComplexity": 10,
+              "breakdown": {
+                "ifStatements": 5,
+                "ternaryOperators": 1,
+                "logicalAnd": 3,
+                "logicalOr": 1
+              }
             }
           ]
         },
@@ -3123,39 +3167,6 @@
               "breakdown": {
                 "selectPredicates": 2,
                 "ternaryOperators": 1
-              }
-            }
-          ]
-        },
-        {
-          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
-          "fileName": "FormatDouble.etl",
-          "extension": ".etl",
-          "unitCount": 1,
-          "totalCognitiveComplexity": 3,
-          "averageCognitivePerUnit": 3,
-          "maxUnit": {
-            "kind": "operation",
-            "name": "formatDouble",
-            "startLine": 1,
-            "endLine": 15,
-            "cognitiveComplexity": 3,
-            "breakdown": {
-              "ifStatements": 3
-            }
-          },
-          "totalsByDecision": {
-            "ifStatements": 3
-          },
-          "units": [
-            {
-              "kind": "operation",
-              "name": "formatDouble",
-              "startLine": 1,
-              "endLine": 15,
-              "cognitiveComplexity": 3,
-              "breakdown": {
-                "ifStatements": 3
               }
             }
           ]
@@ -4639,7 +4650,7 @@
           "averageCognitivePerUnit": 0,
           "maxUnit": {
             "kind": "operation",
-            "name": "setupGlobalDeclations",
+            "name": "setupGlobalDeclarations",
             "startLine": 2,
             "endLine": 10,
             "cognitiveComplexity": 0,
@@ -4649,7 +4660,7 @@
           "units": [
             {
               "kind": "operation",
-              "name": "setupGlobalDeclations",
+              "name": "setupGlobalDeclarations",
               "startLine": 2,
               "endLine": 10,
               "cognitiveComplexity": 0,
@@ -5244,7 +5255,7 @@
           "averageCognitivePerUnit": 0,
           "maxUnit": {
             "kind": "operation",
-            "name": "setupGlobalDeclations",
+            "name": "setupGlobalDeclarations",
             "startLine": 4,
             "endLine": 35,
             "cognitiveComplexity": 0,
@@ -5254,7 +5265,7 @@
           "units": [
             {
               "kind": "operation",
-              "name": "setupGlobalDeclations",
+              "name": "setupGlobalDeclarations",
               "startLine": 4,
               "endLine": 35,
               "cognitiveComplexity": 0,
@@ -6302,7 +6313,7 @@
           "averageCognitivePerUnit": 0,
           "maxUnit": {
             "kind": "operation",
-            "name": "setupGlobalDeclations",
+            "name": "setupGlobalDeclarations",
             "startLine": 4,
             "endLine": 38,
             "cognitiveComplexity": 0,
@@ -6312,7 +6323,7 @@
           "units": [
             {
               "kind": "operation",
-              "name": "setupGlobalDeclations",
+              "name": "setupGlobalDeclarations",
               "startLine": 4,
               "endLine": 38,
               "cognitiveComplexity": 0,
@@ -8347,6 +8358,21 @@
           }
         },
         {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "fileName": "FormatDouble.etl",
+          "kind": "operation",
+          "name": "formatDouble",
+          "startLine": 1,
+          "endLine": 32,
+          "cognitiveComplexity": 10,
+          "breakdown": {
+            "ifStatements": 5,
+            "ternaryOperators": 1,
+            "logicalAnd": 3,
+            "logicalOr": 1
+          }
+        },
+        {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
           "fileName": "RateExpressions.etl",
           "kind": "operation",
@@ -8470,20 +8496,6 @@
             "forLoops": 1,
             "switchStatements": 2,
             "breakStatements": 4
-          }
-        },
-        {
-          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/FunctionCallExpression.etl",
-          "fileName": "FunctionCallExpression.etl",
-          "kind": "operation",
-          "name": "functionCall",
-          "startLine": 1,
-          "endLine": 12,
-          "cognitiveComplexity": 6,
-          "breakdown": {
-            "ifStatements": 4,
-            "forLoops": 1,
-            "selectPredicates": 1
           }
         }
       ]
@@ -12234,9 +12246,9 @@
     "thesis_portfolio": {
       "baselineGroupId": "animo3_thesis_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "totalDeltaPct": -39.083557951482476,
-      "averagePerFileDeltaPct": -99.09079937241019,
-      "averagePerUnitDeltaPct": -95.37343478112525
+      "totalDeltaPct": -37.870619946091644,
+      "averagePerFileDeltaPct": -99.07269582009091,
+      "averagePerUnitDeltaPct": -95.2813129072981
     },
     "telniouk_portfolio": {
       "baselineGroupId": "animo3_telniouk_baseline_portfolio",
@@ -12282,9 +12294,9 @@
       "right": {
         "fileCount": 119,
         "unitCount": 233,
-        "totalCognitiveComplexity": 272,
-        "averageCognitivePerFile": 2.2857142857142856,
-        "averageCognitivePerUnit": 1.167381974248927,
+        "totalCognitiveComplexity": 281,
+        "averageCognitivePerFile": 2.361344537815126,
+        "averageCognitivePerUnit": 1.206008583690987,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl",
           "fileName": "Scenario4.etl",
@@ -12303,9 +12315,9 @@
           }
         }
       },
-      "totalDeltaPct": -16.819571865443425,
-      "averagePerFileDeltaPct": -99.30100480559196,
-      "averagePerUnitDeltaPct": -96.78702208922314
+      "totalDeltaPct": -14.067278287461773,
+      "averagePerFileDeltaPct": -99.27787628812993,
+      "averagePerUnitDeltaPct": -96.68071032011655
     },
     {
       "id": "rc_animo3_vs_thesis",
@@ -12342,9 +12354,9 @@
       "right": {
         "fileCount": 178,
         "unitCount": 295,
-        "totalCognitiveComplexity": 406,
-        "averageCognitivePerFile": 2.2808988764044944,
-        "averageCognitivePerUnit": 1.376271186440678,
+        "totalCognitiveComplexity": 415,
+        "averageCognitivePerFile": 2.331460674157303,
+        "averageCognitivePerUnit": 1.4067796610169492,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -12362,9 +12374,9 @@
           }
         }
       },
-      "totalDeltaPct": 39.51890034364261,
-      "averagePerFileDeltaPct": -99.21618595312562,
-      "averagePerUnitDeltaPct": -96.21643660085037
+      "totalDeltaPct": 42.61168384879725,
+      "averagePerFileDeltaPct": -99.19881076489439,
+      "averagePerUnitDeltaPct": -96.13256450579534
     },
     {
       "id": "ode_animo3_vs_thesis",
@@ -12400,9 +12412,9 @@
       "right": {
         "fileCount": 67,
         "unitCount": 169,
-        "totalCognitiveComplexity": 118,
-        "averageCognitivePerFile": 1.7611940298507462,
-        "averageCognitivePerUnit": 0.6982248520710059,
+        "totalCognitiveComplexity": 127,
+        "averageCognitivePerFile": 1.8955223880597014,
+        "averageCognitivePerUnit": 0.7514792899408284,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
           "fileName": "RateExpressions.etl",
@@ -12419,9 +12431,9 @@
           }
         }
       },
-      "totalDeltaPct": -4.838709677419355,
-      "averagePerFileDeltaPct": -98.57968223399133,
-      "averagePerUnitDeltaPct": -96.05840809314753
+      "totalDeltaPct": 2.4193548387096775,
+      "averagePerFileDeltaPct": -98.47135291285508,
+      "averagePerUnitDeltaPct": -95.75777820194695
     },
     {
       "id": "rc_thesis_vs_thesis_inheritance_excluded",
@@ -12431,9 +12443,9 @@
       "left": {
         "fileCount": 178,
         "unitCount": 295,
-        "totalCognitiveComplexity": 406,
-        "averageCognitivePerFile": 2.2808988764044944,
-        "averageCognitivePerUnit": 1.376271186440678,
+        "totalCognitiveComplexity": 415,
+        "averageCognitivePerFile": 2.331460674157303,
+        "averageCognitivePerUnit": 1.4067796610169492,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -12454,9 +12466,9 @@
       "right": {
         "fileCount": 103,
         "unitCount": 210,
-        "totalCognitiveComplexity": 206,
-        "averageCognitivePerFile": 2,
-        "averageCognitivePerUnit": 0.9809523809523809,
+        "totalCognitiveComplexity": 215,
+        "averageCognitivePerFile": 2.087378640776699,
+        "averageCognitivePerUnit": 1.0238095238095237,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -12474,9 +12486,9 @@
           }
         }
       },
-      "totalDeltaPct": -49.26108374384236,
-      "averagePerFileDeltaPct": -12.31527093596059,
-      "averagePerUnitDeltaPct": -28.723903354445234
+      "totalDeltaPct": -48.19277108433735,
+      "averagePerFileDeltaPct": -10.469060708854832,
+      "averagePerUnitDeltaPct": -27.223178427997713
     },
     {
       "id": "rc_animo3_vs_telniouk",

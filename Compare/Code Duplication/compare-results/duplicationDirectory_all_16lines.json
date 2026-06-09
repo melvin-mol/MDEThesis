@@ -11,16 +11,6 @@
   ],
   [
     {
-      "file": "shared libraries/uppaal code syntax/statements/ExpressionStatement.etl",
-      "index": 37
-    },
-    {
-      "file": "shared libraries/uppaal code syntax/statements/ExpressionStatement.etl",
-      "index": 56
-    }
-  ],
-  [
-    {
       "file": "models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Inverse.etl",
       "index": 0
     },
@@ -57,16 +47,6 @@
     {
       "file": "models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Inverse.etl",
       "index": 3
-    }
-  ],
-  [
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Inverse.etl",
-      "index": 4
-    },
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Inverse.etl",
-      "index": 4
     }
   ],
   [
@@ -201,32 +181,12 @@
   ],
   [
     {
-      "file": "models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/Inverse.etl",
-      "index": 33
-    },
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Inverse.etl",
-      "index": 32
-    }
-  ],
-  [
-    {
       "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
       "index": 0
     },
     {
       "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
       "index": 0
-    }
-  ],
-  [
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
-      "index": 1
-    },
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
-      "index": 1
     }
   ],
   [
@@ -331,42 +291,12 @@
   ],
   [
     {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Add.etl",
-      "index": 102
-    },
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Subtract.etl",
-      "index": 110
-    }
-  ],
-  [
-    {
       "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
       "index": 20
     },
     {
       "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
       "index": 37
-    }
-  ],
-  [
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
-      "index": 21
-    },
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
-      "index": 38
-    }
-  ],
-  [
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
-      "index": 1
-    },
-    {
-      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
-      "index": 1
     }
   ]
 ]

@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T13:13:05.282Z",
+  "generatedAt": "2026-06-09T18:04:20.309Z",
   "script": "MDEThesis/Compare/Characters/compare-characters.js",
   "notes": [
     "The report uses two mapped ANIMO 3.5.1 portfolio baselines: one for the thesis-implemented automata and one for the Telniouk-available automata.",
@@ -35,16 +35,16 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata, including Uppaal Code Syntax)",
       "fileCount": 201,
       "totals": {
-        "chars": 171564
+        "chars": 172487
       },
       "files": [
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/Animo2ODE.etl",
-          "chars": 435
+          "chars": 437
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 288
+          "chars": 290
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/Clocks.etl",
@@ -132,7 +132,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl",
-          "chars": 477
+          "chars": 479
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/_ANIMO_round.etl",
@@ -184,7 +184,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 852
+          "chars": 854
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Double_t.etl",
@@ -260,7 +260,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactantVariables.etl",
-          "chars": 689
+          "chars": 690
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl",
@@ -312,11 +312,11 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingReceive.etl",
-          "chars": 582
+          "chars": 583
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingSend.etl",
-          "chars": 659
+          "chars": 660
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
@@ -432,7 +432,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/Animo2VariablesModelReactantCenteredDeterministic.etl",
-          "chars": 769
+          "chars": 771
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/_ANIMO_round.etl",
@@ -460,7 +460,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 942
+          "chars": 944
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
@@ -500,7 +500,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/ReactantVariables.etl",
-          "chars": 492
+          "chars": 493
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/Variables.etl",
@@ -672,15 +672,15 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
-          "chars": 1229
+          "chars": 1404
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl",
-          "chars": 1123
+          "chars": 1218
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
-          "chars": 324
+          "chars": 979
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/General.etl",
@@ -724,7 +724,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/ArithmeticExpression.etl",
-          "chars": 6206
+          "chars": 6208
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/expressions/CompareExpression.etl",
@@ -760,7 +760,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/ExpressionStatement.etl",
-          "chars": 3283
+          "chars": 3263
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/uppaal code syntax/statements/IfStatement.etl",
@@ -848,16 +848,16 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax)",
       "fileCount": 163,
       "totals": {
-        "chars": 119736
+        "chars": 120677
       },
       "files": [
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/Animo2ODE.etl",
-          "chars": 435
+          "chars": 437
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 288
+          "chars": 290
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/Clocks.etl",
@@ -945,7 +945,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl",
-          "chars": 477
+          "chars": 479
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/_ANIMO_round.etl",
@@ -997,7 +997,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 852
+          "chars": 854
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Double_t.etl",
@@ -1073,7 +1073,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactantVariables.etl",
-          "chars": 689
+          "chars": 690
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/variables/groups/ReactionVariables.etl",
@@ -1125,11 +1125,11 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingReceive.etl",
-          "chars": 582
+          "chars": 583
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToId0_ReachingSend.etl",
-          "chars": 659
+          "chars": 660
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
@@ -1245,7 +1245,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/Animo2VariablesModelReactantCenteredDeterministic.etl",
-          "chars": 769
+          "chars": 771
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/_ANIMO_round.etl",
@@ -1273,7 +1273,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 942
+          "chars": 944
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
@@ -1313,7 +1313,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/groups/ReactantVariables.etl",
-          "chars": 492
+          "chars": 493
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/variables/Variables.etl",
@@ -1485,15 +1485,15 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
-          "chars": 1229
+          "chars": 1404
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl",
-          "chars": 1123
+          "chars": 1218
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
-          "chars": 324
+          "chars": 979
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/General.etl",
@@ -1509,16 +1509,16 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata, excluding Uppaal Code Syntax and comments)",
       "fileCount": 163,
       "totals": {
-        "chars": 107072
+        "chars": 107575
       },
       "files": [
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/Animo2ODE.etl",
-          "chars": 435
+          "chars": 437
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 288
+          "chars": 290
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/globalDeclarations/variables/clocks/Clocks.etl",
@@ -1606,7 +1606,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/Animo2VariablesModelReactantCenteredDeterministic_simplified.etl",
-          "chars": 477
+          "chars": 479
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/_ANIMO_round.etl",
@@ -1658,7 +1658,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 852
+          "chars": 854
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/types/Double_t.etl",
@@ -1906,7 +1906,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/Animo2VariablesModelReactantCenteredDeterministic.etl",
-          "chars": 475
+          "chars": 477
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/functions/_ANIMO_round.etl",
@@ -1934,7 +1934,7 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/GlobalDeclarations.etl",
-          "chars": 942
+          "chars": 944
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/globalDeclarations/types/Types.etl",
@@ -2146,15 +2146,15 @@
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Edge.etl",
-          "chars": 1229
+          "chars": 1404
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/animo/Node.etl",
-          "chars": 1123
+          "chars": 1218
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
-          "chars": 324
+          "chars": 545
         },
         {
           "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/General.etl",
@@ -2221,17 +2221,17 @@
     "thesis_portfolio": {
       "baselineGroupId": "animo3_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "deltaPct": 27.72401060123284
+      "deltaPct": 28.411155117477144
     },
     "thesis_portfolio_without_uppaal_code_syntax": {
       "baselineGroupId": "animo3_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "deltaPct": -10.860307912212262
+      "deltaPct": -10.159762961198297
     },
     "thesis_portfolio_without_uppaal_code_syntax_without_comments": {
       "baselineGroupId": "animo3_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "deltaPct": -20.288258241267386
+      "deltaPct": -19.91379053631518
     },
     "telniouk_portfolio": {
       "baselineGroupId": "animo3_baseline_telniouk_portfolio",
@@ -2254,10 +2254,10 @@
       "right": {
         "fileCount": 119,
         "totals": {
-          "chars": 124200
+          "chars": 125114
         }
       },
-      "deltaPct": 94.7563193878191
+      "deltaPct": 96.18955027284701
     },
     {
       "id": "rc_animo3_vs_thesis",
@@ -2273,10 +2273,10 @@
       "right": {
         "fileCount": 178,
         "totals": {
-          "chars": 160812
+          "chars": 161731
         }
       },
-      "deltaPct": 180.75700967212543
+      "deltaPct": 182.36146513495584
     },
     {
       "id": "ode_animo3_vs_thesis",
@@ -2292,10 +2292,10 @@
       "right": {
         "fileCount": 67,
         "totals": {
-          "chars": 65426
+          "chars": 66337
         }
       },
-      "deltaPct": 392.8883531716137
+      "deltaPct": 399.75139370197377
     },
     {
       "id": "rcs_animo3_vs_thesis_without_uppaal_code_syntax",
@@ -2311,10 +2311,10 @@
       "right": {
         "fileCount": 81,
         "totals": {
-          "chars": 72372
+          "chars": 73304
         }
       },
-      "deltaPct": 13.485542244245124
+      "deltaPct": 14.946998682807502
     },
     {
       "id": "rc_animo3_vs_thesis_without_uppaal_code_syntax",
@@ -2330,10 +2330,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 108984
+          "chars": 109921
         }
       },
-      "deltaPct": 90.2720067041447
+      "deltaPct": 91.907887845246
     },
     {
       "id": "ode_animo3_vs_thesis_without_uppaal_code_syntax",
@@ -2349,10 +2349,10 @@
       "right": {
         "fileCount": 29,
         "totals": {
-          "chars": 13598
+          "chars": 14527
         }
       },
-      "deltaPct": 2.440861835166491
+      "deltaPct": 9.43950580081362
     },
     {
       "id": "rcs_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2368,10 +2368,10 @@
       "right": {
         "fileCount": 81,
         "totals": {
-          "chars": 63530
+          "chars": 64025
         }
       },
-      "deltaPct": -0.3794768864078279
+      "deltaPct": 0.3967258357900019
     },
     {
       "id": "rc_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2387,10 +2387,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 97066
+          "chars": 97565
         }
       },
-      "deltaPct": 69.46471594678584
+      "deltaPct": 70.33590558329551
     },
     {
       "id": "ode_animo3_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2406,10 +2406,10 @@
       "right": {
         "fileCount": 29,
         "totals": {
-          "chars": 12852
+          "chars": 13347
         }
       },
-      "deltaPct": -3.1791472050625282
+      "deltaPct": 0.5499472653307217
     },
     {
       "id": "rc_telniouk_vs_thesis",
@@ -2425,10 +2425,10 @@
       "right": {
         "fileCount": 178,
         "totals": {
-          "chars": 160812
+          "chars": 161731
         }
       },
-      "deltaPct": 107.8345718901454
+      "deltaPct": 109.02229402261712
     },
     {
       "id": "ode_telniouk_vs_thesis",
@@ -2444,10 +2444,10 @@
       "right": {
         "fileCount": 67,
         "totals": {
-          "chars": 65426
+          "chars": 66337
         }
       },
-      "deltaPct": 61.549667893034396
+      "deltaPct": 63.799106150769155
     },
     {
       "id": "rc_telniouk_vs_thesis_without_uppaal_code_syntax",
@@ -2463,10 +2463,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 108984
+          "chars": 109921
         }
       },
-      "deltaPct": 40.85169628432956
+      "deltaPct": 42.0626817447496
     },
     {
       "id": "rc_telniouk_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2482,10 +2482,10 @@
       "right": {
         "fileCount": 140,
         "totals": {
-          "chars": 97066
+          "chars": 97565
         }
       },
-      "deltaPct": 25.44878836833603
+      "deltaPct": 26.093699515347335
     },
     {
       "id": "rc_thesis_without_uppaal_vs_thesis_inheritance_excluded",
@@ -2495,16 +2495,16 @@
       "left": {
         "fileCount": 140,
         "totals": {
-          "chars": 108984
+          "chars": 109921
         }
       },
       "right": {
         "fileCount": 65,
         "totals": {
-          "chars": 39458
+          "chars": 40388
         }
       },
-      "deltaPct": -63.79468545841591
+      "deltaPct": -63.257248387478285
     },
     {
       "id": "ode_telniouk_vs_thesis_without_uppaal_code_syntax",
@@ -2520,10 +2520,10 @@
       "right": {
         "fileCount": 29,
         "totals": {
-          "chars": 13598
+          "chars": 14527
         }
       },
-      "deltaPct": -66.42386231758809
+      "deltaPct": -64.12997851798809
     },
     {
       "id": "ode_telniouk_vs_thesis_without_uppaal_code_syntax_without_comments",
@@ -2539,10 +2539,10 @@
       "right": {
         "fileCount": 29,
         "totals": {
-          "chars": 12852
+          "chars": 13347
         }
       },
-      "deltaPct": -68.26588310822488
+      "deltaPct": -67.04363070693104
     },
     {
       "id": "rct_animo3_vs_telniouk",

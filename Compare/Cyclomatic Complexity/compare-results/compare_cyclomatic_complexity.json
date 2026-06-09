@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-06-06T13:13:12.604Z",
+  "generatedAt": "2026-06-09T18:04:28.443Z",
   "script": "MDEThesis/Compare/Cyclomatic Complexity/compare-etl-cyclomatic-complexity.js",
   "notes": [
     "The report follows the same comparison split as the character-count analysis: Thesis vs ANIMO 3.5.1 for the implemented automata, and ANIMO 3.5.1 vs Telniouk for the variants available in the earlier ETL work.",
@@ -225,6 +225,22 @@
         }
       },
       {
+        "group": "Thesis portfolio (ETL closure for the implemented case-study automata)",
+        "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+        "kind": "operation",
+        "name": "formatDouble",
+        "startLine": 1,
+        "endLine": 32,
+        "complexity": 11,
+        "decisionPoints": 10,
+        "breakdown": {
+          "ifStatements": 5,
+          "ternaryOperators": 1,
+          "logicalAnd": 3,
+          "logicalOr": 1
+        }
+      },
+      {
         "group": "ANIMO 3.5.1 Telniouk-mapped baseline portfolio (Java implementations for deterministic, ODE, and reaction-centered tables)",
         "file": "animo3/src/main/java/animo/core/analyser/uppaal/VariablesModelReactionCenteredTables.java",
         "kind": "method",
@@ -314,22 +330,6 @@
           "ifStatements": 4,
           "forLoops": 1,
           "logicalOr": 3
-        }
-      },
-      {
-        "group": "Thesis portfolio (ETL closure for the implemented case-study automata)",
-        "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/random/Random.etl",
-        "kind": "operation",
-        "name": "setupRandomTemplate",
-        "startLine": 1,
-        "endLine": 62,
-        "complexity": 8,
-        "decisionPoints": 7,
-        "breakdown": {
-          "ifStatements": 2,
-          "forLoops": 1,
-          "selectPredicates": 1,
-          "ternaryOperators": 3
         }
       }
     ]
@@ -1187,10 +1187,10 @@
       "label": "Thesis portfolio (ETL closure for the implemented case-study automata)",
       "fileCount": 201,
       "unitCount": 315,
-      "totalComplexity": 635,
-      "totalDecisionPoints": 320,
-      "averageComplexityPerFile": 3.1592039800995027,
-      "averageComplexityPerUnit": 2.015873015873016,
+      "totalComplexity": 644,
+      "totalDecisionPoints": 329,
+      "averageComplexityPerFile": 3.2039800995024876,
+      "averageComplexityPerUnit": 2.0444444444444443,
       "maxFile": {
         "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
         "fileName": "Compute_rate.etl",
@@ -1352,10 +1352,10 @@
         }
       },
       "totalsByDecision": {
-        "ifStatements": 75,
-        "ternaryOperators": 37,
-        "logicalAnd": 24,
-        "logicalOr": 10,
+        "ifStatements": 78,
+        "ternaryOperators": 38,
+        "logicalAnd": 28,
+        "logicalOr": 11,
         "forLoops": 33,
         "caseBranches": 24,
         "whileLoops": 4,
@@ -2459,9 +2459,9 @@
           "fileName": "Edge.etl",
           "extension": ".etl",
           "unitCount": 8,
-          "totalComplexity": 18,
-          "totalDecisionPoints": 10,
-          "averageComplexityPerUnit": 2.25,
+          "totalComplexity": 20,
+          "totalDecisionPoints": 12,
+          "averageComplexityPerUnit": 2.5,
           "maxUnit": {
             "kind": "operation",
             "name": "activeSortedEdges",
@@ -2477,7 +2477,8 @@
           "totalsByDecision": {
             "selectPredicates": 7,
             "ternaryOperators": 2,
-            "logicalAnd": 1
+            "logicalAnd": 2,
+            "ifStatements": 1
           },
           "units": [
             {
@@ -2501,6 +2502,18 @@
               "decisionPoints": 2,
               "breakdown": {
                 "selectPredicates": 1,
+                "logicalAnd": 1
+              }
+            },
+            {
+              "kind": "operation",
+              "name": "id",
+              "startLine": 35,
+              "endLine": 42,
+              "complexity": 3,
+              "decisionPoints": 2,
+              "breakdown": {
+                "ifStatements": 1,
                 "logicalAnd": 1
               }
             },
@@ -2559,15 +2572,6 @@
               "breakdown": {
                 "selectPredicates": 1
               }
-            },
-            {
-              "kind": "operation",
-              "name": "id",
-              "startLine": 35,
-              "endLine": 38,
-              "complexity": 1,
-              "decisionPoints": 0,
-              "breakdown": {}
             }
           ]
         },
@@ -2615,18 +2619,18 @@
               "name": "activeSortedNodes",
               "startLine": 5,
               "endLine": 11,
-              "complexity": 3,
-              "decisionPoints": 2,
+              "complexity": 4,
+              "decisionPoints": 3,
               "breakdown": {
                 "selectPredicates": 1,
-                "ternaryOperators": 1
+                "ternaryOperators": 2
               }
             },
             {
               "kind": "operation",
               "name": "isFirstOutputAutomatonTemplate",
-              "startLine": 31,
-              "endLine": 36,
+              "startLine": 35,
+              "endLine": 40,
               "complexity": 3,
               "decisionPoints": 2,
               "breakdown": {
@@ -2648,8 +2652,8 @@
             {
               "kind": "operation",
               "name": "areThereRandomInitials",
-              "startLine": 27,
-              "endLine": 30,
+              "startLine": 30,
+              "endLine": 34,
               "complexity": 2,
               "decisionPoints": 1,
               "breakdown": {
@@ -2658,9 +2662,9 @@
             },
             {
               "kind": "operation",
-              "name": "channelIndex",
-              "startLine": 23,
-              "endLine": 26,
+              "name": "id",
+              "startLine": 19,
+              "endLine": 23,
               "complexity": 2,
               "decisionPoints": 1,
               "breakdown": {
@@ -2669,14 +2673,12 @@
             },
             {
               "kind": "operation",
-              "name": "id",
-              "startLine": 19,
-              "endLine": 22,
-              "complexity": 2,
-              "decisionPoints": 1,
-              "breakdown": {
-                "ternaryOperators": 1
-              }
+              "name": "channelIndex",
+              "startLine": 24,
+              "endLine": 29,
+              "complexity": 1,
+              "decisionPoints": 0,
+              "breakdown": {}
             }
           ]
         },
@@ -2735,6 +2737,51 @@
                 "ifStatements": 1,
                 "forLoops": 1,
                 "ternaryOperators": 3
+              }
+            }
+          ]
+        },
+        {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "fileName": "FormatDouble.etl",
+          "extension": ".etl",
+          "unitCount": 1,
+          "totalComplexity": 11,
+          "totalDecisionPoints": 10,
+          "averageComplexityPerUnit": 11,
+          "maxUnit": {
+            "kind": "operation",
+            "name": "formatDouble",
+            "startLine": 1,
+            "endLine": 32,
+            "complexity": 11,
+            "decisionPoints": 10,
+            "breakdown": {
+              "ifStatements": 5,
+              "ternaryOperators": 1,
+              "logicalAnd": 3,
+              "logicalOr": 1
+            }
+          },
+          "totalsByDecision": {
+            "ifStatements": 5,
+            "ternaryOperators": 1,
+            "logicalAnd": 3,
+            "logicalOr": 1
+          },
+          "units": [
+            {
+              "kind": "operation",
+              "name": "formatDouble",
+              "startLine": 1,
+              "endLine": 32,
+              "complexity": 11,
+              "decisionPoints": 10,
+              "breakdown": {
+                "ifStatements": 5,
+                "ternaryOperators": 1,
+                "logicalAnd": 3,
+                "logicalOr": 1
               }
             }
           ]
@@ -4026,42 +4073,6 @@
                 "ifStatements": 1,
                 "forLoops": 1,
                 "selectPredicates": 1
-              }
-            }
-          ]
-        },
-        {
-          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
-          "fileName": "FormatDouble.etl",
-          "extension": ".etl",
-          "unitCount": 1,
-          "totalComplexity": 4,
-          "totalDecisionPoints": 3,
-          "averageComplexityPerUnit": 4,
-          "maxUnit": {
-            "kind": "operation",
-            "name": "formatDouble",
-            "startLine": 1,
-            "endLine": 15,
-            "complexity": 4,
-            "decisionPoints": 3,
-            "breakdown": {
-              "ifStatements": 3
-            }
-          },
-          "totalsByDecision": {
-            "ifStatements": 3
-          },
-          "units": [
-            {
-              "kind": "operation",
-              "name": "formatDouble",
-              "startLine": 1,
-              "endLine": 15,
-              "complexity": 4,
-              "decisionPoints": 3,
-              "breakdown": {
-                "ifStatements": 3
               }
             }
           ]
@@ -6054,7 +6065,7 @@
           "averageComplexityPerUnit": 1,
           "maxUnit": {
             "kind": "operation",
-            "name": "setupGlobalDeclations",
+            "name": "setupGlobalDeclarations",
             "startLine": 2,
             "endLine": 10,
             "complexity": 1,
@@ -6065,7 +6076,7 @@
           "units": [
             {
               "kind": "operation",
-              "name": "setupGlobalDeclations",
+              "name": "setupGlobalDeclarations",
               "startLine": 2,
               "endLine": 10,
               "complexity": 1,
@@ -6534,7 +6545,7 @@
           "averageComplexityPerUnit": 1,
           "maxUnit": {
             "kind": "operation",
-            "name": "setupGlobalDeclations",
+            "name": "setupGlobalDeclarations",
             "startLine": 4,
             "endLine": 35,
             "complexity": 1,
@@ -6545,7 +6556,7 @@
           "units": [
             {
               "kind": "operation",
-              "name": "setupGlobalDeclations",
+              "name": "setupGlobalDeclarations",
               "startLine": 4,
               "endLine": 35,
               "complexity": 1,
@@ -7554,7 +7565,7 @@
           "averageComplexityPerUnit": 1,
           "maxUnit": {
             "kind": "operation",
-            "name": "setupGlobalDeclations",
+            "name": "setupGlobalDeclarations",
             "startLine": 4,
             "endLine": 38,
             "complexity": 1,
@@ -7565,7 +7576,7 @@
           "units": [
             {
               "kind": "operation",
-              "name": "setupGlobalDeclations",
+              "name": "setupGlobalDeclarations",
               "startLine": 4,
               "endLine": 38,
               "complexity": 1,
@@ -8926,6 +8937,22 @@
           }
         },
         {
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "fileName": "FormatDouble.etl",
+          "kind": "operation",
+          "name": "formatDouble",
+          "startLine": 1,
+          "endLine": 32,
+          "complexity": 11,
+          "decisionPoints": 10,
+          "breakdown": {
+            "ifStatements": 5,
+            "ternaryOperators": 1,
+            "logicalAnd": 3,
+            "logicalOr": 1
+          }
+        },
+        {
           "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
           "fileName": "RateExpressions.etl",
           "kind": "operation",
@@ -9148,21 +9175,6 @@
             "selectPredicates": 2,
             "existsPredicates": 1,
             "logicalAnd": 1
-          }
-        },
-        {
-          "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/localDeclarations/functions/Compute_rate.etl",
-          "fileName": "Compute_rate.etl",
-          "kind": "operation",
-          "name": "setupCompute_rateReturn",
-          "startLine": 38,
-          "endLine": 59,
-          "complexity": 5,
-          "decisionPoints": 4,
-          "breakdown": {
-            "ifStatements": 2,
-            "forLoops": 1,
-            "ternaryOperators": 1
           }
         }
       ]
@@ -14406,9 +14418,9 @@
     "thesis_portfolio": {
       "baselineGroupId": "animo3_thesis_baseline_portfolio",
       "baselineLabel": "ANIMO 3.5.1 baseline portfolio (Java implementations for the three implemented automata)",
-      "totalDeltaPct": 105.50161812297733,
-      "averagePerFileDeltaPct": -96.93281166980631,
-      "averagePerUnitDeltaPct": -84.34273385729696
+      "totalDeltaPct": 108.41423948220066,
+      "averagePerFileDeltaPct": -96.88933970922089,
+      "averagePerUnitDeltaPct": -84.12081984897519
     },
     "telniouk_portfolio": {
       "baselineGroupId": "animo3_telniouk_baseline_portfolio",
@@ -14453,9 +14465,9 @@
       "right": {
         "fileCount": 119,
         "unitCount": 233,
-        "totalComplexity": 424,
-        "averageComplexityPerFile": 3.563025210084034,
-        "averageComplexityPerUnit": 1.8197424892703862,
+        "totalComplexity": 433,
+        "averageComplexityPerFile": 3.638655462184874,
+        "averageComplexityPerUnit": 1.8583690987124464,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic_simplified/globalDeclarations/functions/Scenario4.etl",
           "fileName": "Scenario4.etl",
@@ -14474,9 +14486,9 @@
           }
         }
       },
-      "totalDeltaPct": 202.85714285714283,
-      "averagePerFileDeltaPct": -97.45498199279713,
-      "averagePerUnitDeltaPct": -88.30165542611896
+      "totalDeltaPct": 209.2857142857143,
+      "averagePerFileDeltaPct": -97.40096038415366,
+      "averagePerUnitDeltaPct": -88.05334150827714
     },
     {
       "id": "rc_animo3_vs_thesis",
@@ -14512,9 +14524,9 @@
       "right": {
         "fileCount": 178,
         "unitCount": 294,
-        "totalComplexity": 582,
-        "averageComplexityPerFile": 3.269662921348315,
-        "averageComplexityPerUnit": 1.9795918367346939,
+        "totalComplexity": 591,
+        "averageComplexityPerFile": 3.3202247191011236,
+        "averageComplexityPerUnit": 2.010204081632653,
         "maxUnit": {
           "file": "MDEThesis/Case Study/epsilon transformations/models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
           "fileName": "Not_reactingToResponding_ReactedReceive.etl",
@@ -14532,9 +14544,9 @@
           }
         }
       },
-      "totalDeltaPct": 389.07563025210084,
-      "averagePerFileDeltaPct": -97.2523840997073,
-      "averagePerUnitDeltaPct": -86.69181958497686
+      "totalDeltaPct": 396.6386554621849,
+      "averagePerFileDeltaPct": -97.20989519403267,
+      "averagePerUnitDeltaPct": -86.48602298062083
     },
     {
       "id": "ode_animo3_vs_thesis",
@@ -14569,29 +14581,29 @@
       "right": {
         "fileCount": 67,
         "unitCount": 169,
-        "totalComplexity": 267,
-        "averageComplexityPerFile": 3.985074626865672,
-        "averageComplexityPerUnit": 1.5798816568047338,
+        "totalComplexity": 276,
+        "averageComplexityPerFile": 4.119402985074627,
+        "averageComplexityPerUnit": 1.6331360946745561,
         "maxUnit": {
-          "file": "MDEThesis/Case Study/epsilon transformations/models/ODE/template/localDeclarations/functions/RateExpressions.etl",
-          "fileName": "RateExpressions.etl",
+          "file": "MDEThesis/Case Study/epsilon transformations/shared libraries/general/FormatDouble.etl",
+          "fileName": "FormatDouble.etl",
           "kind": "operation",
-          "name": "setupODERateExpression",
+          "name": "formatDouble",
           "startLine": 1,
-          "endLine": 30,
-          "complexity": 10,
-          "decisionPoints": 9,
+          "endLine": 32,
+          "complexity": 11,
+          "decisionPoints": 10,
           "breakdown": {
-            "ifStatements": 2,
-            "ternaryOperators": 5,
-            "logicalAnd": 1,
+            "ifStatements": 5,
+            "ternaryOperators": 1,
+            "logicalAnd": 3,
             "logicalOr": 1
           }
         }
       },
-      "totalDeltaPct": 434,
-      "averagePerFileDeltaPct": -92.02985074626865,
-      "averagePerUnitDeltaPct": -77.88165680473374
+      "totalDeltaPct": 451.99999999999994,
+      "averagePerFileDeltaPct": -91.76119402985074,
+      "averagePerUnitDeltaPct": -77.13609467455622
     },
     {
       "id": "rc_animo3_vs_telniouk",

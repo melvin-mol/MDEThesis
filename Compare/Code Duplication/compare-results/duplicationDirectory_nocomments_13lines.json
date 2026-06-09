@@ -1,0 +1,102 @@
+[
+  [
+    {
+      "file": "shared libraries/uppaal code syntax/statements/ExpressionStatement.etl",
+      "index": 32
+    },
+    {
+      "file": "shared libraries/uppaal code syntax/statements/ExpressionStatement.etl",
+      "index": 48
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
+      "index": 0
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
+      "index": 0
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/Normal.etl",
+      "index": 1
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/Normal.etl",
+      "index": 1
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
+      "index": 16
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/Not_reactingToResponding_ReactedReceive.etl",
+      "index": 30
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 18
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 34
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 19
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 35
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 20
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic/template/normal/edges/WaitingToResponding_ReactedReceive.etl",
+      "index": 36
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+      "index": 1
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+      "index": 1
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+      "index": 2
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+      "index": 2
+    }
+  ],
+  [
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario1.etl",
+      "index": 3
+    },
+    {
+      "file": "models/VariablesModelReactantCenteredDeterministic_simplified/template/normal/edges/WaitingToResponding_ReachedSourceReceive_Scenario2_3.etl",
+      "index": 3
+    }
+  ]
+]
