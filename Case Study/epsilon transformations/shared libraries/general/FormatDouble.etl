@@ -1,13 +1,30 @@
 operation formatDouble(d) : String {
-	var e : Integer = Math.round(Math.log10(d)) - 3;
-	var b : Integer = Math.round(d * Math.pow(10, -e));
-	if (b < 10) {
+	// Keep zero explicit for parity with the legacy Java StringBuilder generators.
+	// In Java, formatDouble(0) ends up as {0, -6} through implicit Math/log10(0)
+	// overflow/cast behavior. The old code does not spell this out, but it does
+	// produce that result. Epsilon should not rely on matching the same edge-case
+	// numeric semantics, so we guard zero directly to keep generation stable.
+	if (d == 0 or d == null) {
+		return "{0, -6}";
+	}
+	
+	// Handle negative values by taking absolute value
+	var isNegative : Boolean = d < 0;
+	var absD : Real = isNegative ? -d : d;
+	
+	var e : Integer = Math.round(Math.log10(absD)) - 3;
+	var b : Integer = Math.round(absD * Math.pow(10, -e));
+	if (isNegative) {
+		b = -b;
+	}
+	
+	if (b < 10 and b > -10) {
 		b = b * 1000;
 		e = e - 3;
-	} else if (b < 100) {
+	} else if (b < 100 and b > -100) {
 		b = b * 100;
 		e = e - 2;
-	} else if (b < 1000) {
+	} else if (b < 1000 and b > -1000) {
 		b = b * 10;
 		e = e - 1;
 	}

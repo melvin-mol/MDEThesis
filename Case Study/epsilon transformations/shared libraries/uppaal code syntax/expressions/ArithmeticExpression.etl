@@ -70,8 +70,8 @@ operation multiplicate(firstLiteral: String, secondLiteral: String): Uppaal!Arit
 	return arithmetic;
 }
 
-operation multiplicate(firstLiteral: String, secondExpresion: Uppaal!Expression): Uppaal!ArithmeticExpression {
-	var arithmetic = createArithmetic(firstLiteral, secondExpresion);
+operation multiplicate(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ArithmeticExpression {
+	var arithmetic = createArithmetic(firstLiteral, secondExpression);
 	arithmetic.operator = Uppaal!ArithmeticOperator#MULTIPLICATE;
 	return arithmetic;
 }

@@ -76,16 +76,16 @@ operation Uppaal!LocalDeclarations setupUpdate(animo: Animo!Network): Uppaal!Loc
 	// 		if (TL < 1) {
 	//			TL = 1;
 	//		}
-	var tlLessThen1 = if_(less("TL", "1"));
-	function_.block.statement.get(3).thenStatement.statement.add(tlLessThen1);
-	tlLessThen1.thenStatement.statement.add(assign("TL", "1"));
+	var tlLessThan1 = if_(less("TL", "1"));
+	function_.block.statement.get(3).thenStatement.statement.add(tlLessThan1);
+	tlLessThan1.thenStatement.statement.add(assign("TL", "1"));
 	
 	//		if (TU < 1) {
 	//			TU = 1;
 	//		}
-	var tuLessThen1 = if_(less("TU", "1"));
-	function_.block.statement.get(3).thenStatement.statement.add(tuLessThen1);
-	tuLessThen1.thenStatement.statement.add(assign("TU", "1"));
+	var tuLessThan1 = if_(less("TU", "1"));
+	function_.block.statement.get(3).thenStatement.statement.add(tuLessThan1);
+	tuLessThan1.thenStatement.statement.add(assign("TU", "1"));
 	
 	// } else {
 	// 		TL = INFINITE_TIME;

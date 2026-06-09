@@ -6,7 +6,7 @@ operation Animo!Network activeNodes(): Collection(Animo!Node) {
 @cached
 operation Animo!Network activeSortedNodes(): Collection(Animo!Node) {
 	return self.nodes.select(r | r.enabled).sortBy(r |
-		r.id.isDefined() ? r.id : r.index
+		r.name.isDefined() ? r.name : (r.id.isDefined() ? r.id : r.index)
 	);
 }
 
@@ -17,14 +17,18 @@ operation Animo!Network activeNameSortedNodes(): Collection(Animo!Node) {
 	);
 }
 
+@cached
 operation Animo!Node id(): String {
 	return "R" + (self.id.isDefined() ? self.id : self.index);
 }
 
+@cached
 operation Animo!Node channelIndex(): String {
-	return (self.id.isDefined() ? self.id : self.index).toString();
+	var sortedNodes = self.eContainer().activeSortedNodes();
+	return sortedNodes.indexOf(self).toString();
 }
 
+@cached
 operation Animo!Network areThereRandomInitials(): Boolean {
 	return self.nodes.exists(node | node.randomInitialConcentration);
 }

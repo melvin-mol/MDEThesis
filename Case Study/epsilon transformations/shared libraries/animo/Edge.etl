@@ -33,6 +33,10 @@ operation Animo!Network edgesWithCustomScenario(): Collection(Animo!Edge) {
 	return self.edges.select(r | r.enabled and r.scenario == 3);
 }
 
+@cached
 operation Animo!Edge id(): String {
+	if (self._REACTANT_E2 != null and self._REACTANT_E2.id() != self.target.id()) {
+		return self.source.id() + "_" + self._REACTANT_E2.id() + "_" + self.target.id();
+	}
 	return self.source.id() + "_" + self.target.id();
 }

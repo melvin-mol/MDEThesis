@@ -1,5 +1,5 @@
 operation Uppaal!Template setupWaitingToId0_ReachingSend(): Uppaal!Template {
-	// All automata reaching in a given instant will eact together: one will be
+	// All automata reaching in a given instant will react together: one will be
 	// chosen as "output", while the others will do the "input"
 	self.edge.add(edge(
 		self.location.selectOne(r | r.name = "waiting"),

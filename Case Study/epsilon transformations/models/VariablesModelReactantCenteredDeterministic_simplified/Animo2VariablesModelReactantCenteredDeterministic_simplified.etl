@@ -12,7 +12,7 @@ operation transformation(animo: Animo!Network, uppaal: Uppaal!NSTA) {
 
 	uppaal
 		.setupBuiltInTypes()
-		.setupGlobalDeclations(animo)
+		.setupGlobalDeclarations(animo)
 		.setupTemplate(animo)
 		.setupSystem(animo);
 }

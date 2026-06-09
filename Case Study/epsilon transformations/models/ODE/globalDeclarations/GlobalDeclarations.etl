@@ -1,6 +1,6 @@
 import "variables/Variables.etl";
 
-operation Uppaal!NSTA setupGlobalDeclations(animo : Animo!Network): Uppaal!NSTA {
+operation Uppaal!NSTA setupGlobalDeclarations(animo : Animo!Network): Uppaal!NSTA {
 	self.globalDeclarations = 
 		new Uppaal!GlobalDeclarations()
 		.setupGlobalTime()

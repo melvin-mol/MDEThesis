@@ -1,22 +1,22 @@
 operation assign(firstLiteral: String, secondLiteral: String): Uppaal!ExpressionStatement {
-	var expressionStatememet = new Uppaal!ExpressionStatement();
-	expressionStatememet.expression = new Uppaal!AssignmentExpression();
-	expressionStatememet.expression.operator = Uppaal!AssignmentOperator#EQUAL;
-	expressionStatememet.expression.firstExpr = new Uppaal!LiteralExpression();
-	expressionStatememet.expression.firstExpr.text = firstLiteral;
-	expressionStatememet.expression.secondExpr = new Uppaal!LiteralExpression();
-	expressionStatememet.expression.secondExpr.text = secondLiteral;
-	return expressionStatememet;
+	var expressionStatement = new Uppaal!ExpressionStatement();
+	expressionStatement.expression = new Uppaal!AssignmentExpression();
+	expressionStatement.expression.operator = Uppaal!AssignmentOperator#EQUAL;
+	expressionStatement.expression.firstExpr = new Uppaal!LiteralExpression();
+	expressionStatement.expression.firstExpr.text = firstLiteral;
+	expressionStatement.expression.secondExpr = new Uppaal!LiteralExpression();
+	expressionStatement.expression.secondExpr.text = secondLiteral;
+	return expressionStatement;
 }
 
 operation assign(firstLiteral: String, secondExpression: Uppaal!Expression): Uppaal!ExpressionStatement {
-	var expressionStatememet = new Uppaal!ExpressionStatement();
-	expressionStatememet.expression = new Uppaal!AssignmentExpression();
-	expressionStatememet.expression.operator = Uppaal!AssignmentOperator#EQUAL;
-	expressionStatememet.expression.firstExpr = new Uppaal!LiteralExpression();
-	expressionStatememet.expression.firstExpr.text = firstLiteral;
-	expressionStatememet.expression.secondExpr = secondExpression;
-	return expressionStatememet;
+	var expressionStatement = new Uppaal!ExpressionStatement();
+	expressionStatement.expression = new Uppaal!AssignmentExpression();
+	expressionStatement.expression.operator = Uppaal!AssignmentOperator#EQUAL;
+	expressionStatement.expression.firstExpr = new Uppaal!LiteralExpression();
+	expressionStatement.expression.firstExpr.text = firstLiteral;
+	expressionStatement.expression.secondExpr = secondExpression;
+	return expressionStatement;
 }
 
 operation assign(firstLiteral: String, secondLiteral: String, thirdLiteral: String): Uppaal!ExpressionStatement {
@@ -31,7 +31,7 @@ operation assign(firstLiteral: String, secondLiteral: String, thirdLiteral: Stri
 }
 
 operation assign(variableNames: Sequence(String), valueLiteral: String): Uppaal!ExpressionStatement {
-	var expressionStatememet = new Uppaal!ExpressionStatement();
+	var expressionStatement = new Uppaal!ExpressionStatement();
 	var nestedExpression = new Uppaal!LiteralExpression();
 	nestedExpression.text = valueLiteral;
 
@@ -46,12 +46,12 @@ operation assign(variableNames: Sequence(String), valueLiteral: String): Uppaal!
 		i = i - 1;
 	}
 
-	expressionStatememet.expression = nestedExpression;
-	return expressionStatememet;
+	expressionStatement.expression = nestedExpression;
+	return expressionStatement;
 }
 
 operation assign(variableNames: Sequence(String), valueExpression: Uppaal!Expression): Uppaal!ExpressionStatement {
-	var expressionStatememet = new Uppaal!ExpressionStatement();
+	var expressionStatement = new Uppaal!ExpressionStatement();
 	var nestedExpression = valueExpression;
 
 	var i = variableNames.size();
@@ -59,18 +59,18 @@ operation assign(variableNames: Sequence(String), valueExpression: Uppaal!Expres
 		var assignment = new Uppaal!AssignmentExpression();
 		assignment.operator = Uppaal!AssignmentOperator#EQUAL;
 		assignment.firstExpr = new Uppaal!LiteralExpression();
-		assignment.firstExpr.text = variableName;
-		assignment.secondExpr = variableNames.at(i - 1);
+		assignment.firstExpr.text = variableNames.at(i - 1);
+		assignment.secondExpr = nestedExpression;
 		nestedExpression = assignment;
 		i = i - 1;
 	}
 
-	expressionStatememet.expression = nestedExpression;
-	return expressionStatememet;
+	expressionStatement.expression = nestedExpression;
+	return expressionStatement;
 }
 
 operation statement(expression: Uppaal!Expression): Uppaal!ExpressionStatement {
-	var expressionStatememet = new Uppaal!ExpressionStatement();
-	expressionStatememet.expression = expression;
-	return expressionStatememet;
+	var expressionStatement = new Uppaal!ExpressionStatement();
+	expressionStatement.expression = expression;
+	return expressionStatement;
 }
